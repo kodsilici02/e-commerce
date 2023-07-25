@@ -22,8 +22,10 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/vue-fontawesome": "^3.0.3",
+    "@pinia/nuxt": "^0.4.11",
     "@vueuse/core": "^10.2.1",
     "@vueuse/motion": "^2.0.0",
+    "pinia": "^2.1.4",
     "v-wave": "^1.5.1",
     "vue-typical": "^2.1.0"
   }

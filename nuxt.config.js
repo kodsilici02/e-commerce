@@ -9,6 +9,9 @@ export default defineNuxtConfig({
     }
   },
   css: ['@/assets/css/main.css', '@fortawesome/fontawesome-svg-core/styles.css'],
-  modules: ['@vueuse/motion/nuxt'],
+  modules: ['@vueuse/motion/nuxt', '@pinia/nuxt'],
+  imports: {
+    dirs: ['stores']
+  },
   plugins: ['~/plugins/fontawesome.client.js']
 });

@@ -1,6 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  --text-color: #fcfcfc;
+  --background: #3d3962;
+  --primary: #943bd8;
+  --secondary: #4470da;
+  --accent: #a66ced;
+}
+
 ::-webkit-scrollbar {
   width: 5px;
 }

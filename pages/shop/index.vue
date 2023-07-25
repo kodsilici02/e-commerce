@@ -1,17 +1,27 @@
 <template>
   <div class="w-full flex">
     <ShoppingFilter></ShoppingFilter>
-    <div class="flex-1 flex flex-wrap items-start justify-start bg-green-300] mt-1 p-1">
+
+    <div class="flex-1 flex flex-wrap items-start justify-start bg-green-300] mt-1 p-1" style="color: var(--text-color)">
       <div
         v-for="item in items"
-        class="h-[400px] basis-1/4 flex p-2 transition-transform duration-500 cursor-pointer hover:scale-[1.02] relative">
-        <div class="h-full w-full bg-cyan-200 rounded-lg flex flex-col">
-          <div class="absolute top-3 right-4">
-            <div class="flex gap-1 items-center text-lg">
+        class="h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-500 cursor-pointer hover:scale-[1.02]">
+        <div class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative">
+          <div class="absolute top-0 left-0 w-full h-full purchase-layer rounded-lg transition-[background-color] duration-500 z-[2]">
+            <div class="w-full h-full flex justify-center items-center">
+              <div
+                class="w-36 h-10 bg-slate-400 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base sm:text-lg"
+                style="border-radius: 35px">
+                Purchase Now
+              </div>
+            </div>
+          </div>
+          <div class="absolute top-1 right-4">
+            <div class="flex gap-1 items-center sm:text-lg">
               <ClientOnly><font-awesome :icon="['fas', 'dollar-sign']" /></ClientOnly>5000
             </div>
           </div>
-          <div class="text-2xl h-14 w-full flex justify-center items-center font-code-next px-2 mt-4">Iphone 14 Pro</div>
+          <div class="text-lg sm:text-2xl h-14 w-full flex justify-center items-center font-code-next px-2 mt-4">Iphone 14 Pro</div>
           <div
             class="flex-1 p-2"
             style="
@@ -34,7 +44,7 @@
                 height="20"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#000000"
+                stroke="#fcfcfc"
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round">
@@ -52,7 +62,32 @@
 <script setup>
 import { ref } from 'vue';
 
-const items = ref(['a']);
+const items = ref(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']);
 </script>
 
-<style scoped></style>
+<style scoped>
+.item-background {
+  background-color: #6a6bcf;
+}
+.purchase-layer {
+  background-color: #6a6ccf00;
+}
+.item-background:hover .purchase-layer {
+  background-color: #6a6ccfa0;
+}
+
+.purchase-button {
+  opacity: 0;
+  background-color: #3bc1e2;
+}
+.purchase-button:hover {
+  background-color: #64d2ed;
+}
+.purchase-button:active {
+  transition: background-color 0s ease;
+  background-color: #648bed;
+}
+.item-background:hover .purchase-button {
+  opacity: 1;
+}
+</style>

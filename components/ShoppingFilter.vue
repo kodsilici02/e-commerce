@@ -1,5 +1,10 @@
 <template>
-  <div class="w-52 sticky top-28 left-0 overflow-y-auto filter-box-shadow" style="height: calc(100dvh - 7rem)">
+  <Transition name="sidebar_space">
+    <ShoppingFilterSpace v-if="isFilterSidebarOpen"></ShoppingFilterSpace>
+  </Transition>
+  <div
+    class="w-52 fixed top-0 left-0 z-[1000] sm:sticky sm:top-28 overflow-y-auto filter-box-shadow filter-height bg-black sm:bg-transparent transition-transform duration-200"
+    :class="{ ' translate-x-[-105%]': !isFilterSidebarOpen && isWindowSmall }">
     <div class="flex flex-col gap-2 text-white">
       <div class="w-full h-14 text-2xl flex justify-center items-center mb-2">Filters</div>
       <div v-for="(category, index) in categories" class="flex flex-col justify-center items-center">
@@ -46,12 +51,33 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch, onMounted } from 'vue';
+import { useFilterSidebarStore } from '@/stores/sidebar.js';
+const store = useFilterSidebarStore();
+const { filterSidebarOpen } = useFilterSidebarStore();
 
 const categories = ref([
   { name: 'Category One', categoryOpen: false, subCategory: ['SubCategory One', 'SubCategory Two', 'SubCategory Three'] },
   { name: 'Category Two', categoryOpen: false, subCategory: ['SubCategory One', 'SubCategory Two'] }
 ]);
+const isFilterSidebarOpen = ref(filterSidebarOpen);
+const isWindowSmall = ref(false);
+watch(
+  () => store.filterSidebarOpen,
+  newState => {
+    isFilterSidebarOpen.value = newState;
+  }
+);
+
+onMounted(() => {
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 640) {
+      isWindowSmall.value = true;
+    } else {
+      isWindowSmall.value = false;
+    }
+  });
+});
 
 const sub_category = ref();
 
@@ -84,10 +110,30 @@ function filteredSubCategories(index) {
 </script>
 
 <style scoped>
+.sidebar_space-enter-from,
+.sidebar_space-leave-to {
+  opacity: 0;
+}
+.sidebar_space-enter-to,
+.sidebar_space-leave-from {
+  opacity: 1;
+}
+.sidebar_space-enter-active,
+.sidebar_space-leave-active {
+  transition: all 0.2s ease-in-out;
+}
 .filter-background {
   background: linear-gradient(0deg, rgb(29, 32, 63) 0%, rgb(29, 32, 63) 100%);
 }
 .filter-box-shadow {
   box-shadow: rgba(0, 0, 0, 0.1) -3px -3px 6px 1px inset;
+}
+.filter-height {
+  height: calc(100vh - 7rem);
+}
+@media only screen and (max-width: 640px) {
+  .filter-height {
+    height: 100%;
+  }
 }
 </style>

@@ -53,13 +53,19 @@
         </div>
       </div>
     </div>
-    <div class="w-full flex justify-center items-center text-4xl font-yolk text-[aliceblue] h-28 reverse-background purple-background">
+    <div
+      class="w-full flex justify-center items-center text-4xl font-yolk text-[aliceblue] h-28 reverse-background purple-background px-4 text-center">
       Everything You are Looking For is Here
     </div>
     <div
-      class="w-full flex justify-center items-center text-xl font-fester left-0 sticky top-16 h-12 z-[100] purple-background"
-      style="color: rgba(192, 200, 200, 0.7); background-color: rgb(57, 102, 215); box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.6)">
-      Home
+      class="w-full grid grid-cols-5 text-xl font-fester left-0 sticky top-16 h-12 z-[100] purple-background px-3"
+      style="color: rgb(255, 255, 255); background-color: rgb(57, 102, 215); box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.6)">
+      <div class="h-full col-span-1 flex justify-start items-center gap-1">
+        <div class="flex gap-1 items-center cursor-pointer sm:hidden" @click="toggleFilterSidebar()">
+          <ClientOnly><font-awesome :icon="['fas', 'filter']" /></ClientOnly>Filters
+        </div>
+      </div>
+      <div class="h-full col-span-3 flex justify-center items-center">Home</div>
     </div>
 
     <div class="w-full px-3">
@@ -73,6 +79,12 @@
 <script setup>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { ref, onMounted } from 'vue';
+import { useFilterSidebarStore } from '@/stores/sidebar.js';
+const store = useFilterSidebarStore();
+function toggleFilterSidebar() {
+  store.toggleSidebar();
+  console.log(store.filterSidebarOpen);
+}
 
 const isShoppingListOpen = ref(false);
 function openShoppingList() {
@@ -100,10 +112,10 @@ function toggleSidebar() {
 
 <style scoped>
 .purple-background {
-  background: linear-gradient(90deg, rgba(29, 32, 63, 1) 0%, rgba(29, 32, 63, 1) 100%);
+  background: linear-gradient(90deg, #6a6bcf 0%, #7677af 100%);
 }
 .reverse-background.purple-background {
-  background: linear-gradient(90deg, rgb(58, 49, 134) 0%, rgba(29, 32, 63, 1) 100%);
+  background: linear-gradient(90deg, #9f76cd 0%, #9e62db 100%);
 }
 .modal-Transition-enter-from,
 .modal-Transition-leave-to {

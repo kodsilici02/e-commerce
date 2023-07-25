@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="fixed w-full h-full z-[-1]"
-    style="background: linear-gradient(55deg, rgba(150, 120, 154, 1) 0%, rgb(71, 29, 126) 100%)"></div>
+  <div class="fixed w-full h-full z-[-1]" style="background-color: var(--background)"></div>
   <NuxtPage></NuxtPage>
 </template>
 <script setup>

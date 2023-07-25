@@ -17,7 +17,8 @@ import {
   faChevronDown,
   faBatteryFull,
   faDollarSign,
-  faMemory
+  faMemory,
+  faFilter
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
@@ -40,7 +41,8 @@ library.add(
   faBatteryFull,
   faDollarSign,
   faMemory,
-  size
+  size,
+  faFilter
 );
 
 // This is important, we are going to let Nuxt worry about the CSS
