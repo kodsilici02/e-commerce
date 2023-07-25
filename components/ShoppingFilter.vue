@@ -70,14 +70,16 @@ watch(
 );
 
 onMounted(() => {
-  window.addEventListener('resize', () => {
-    if (window.innerWidth <= 640) {
-      isWindowSmall.value = true;
-    } else {
-      isWindowSmall.value = false;
-    }
-  });
+  toggleWindowSize();
+  window.addEventListener('resize', toggleWindowSize());
 });
+function toggleWindowSize() {
+  if (window.innerWidth <= 640) {
+    isWindowSmall.value = true;
+  } else {
+    isWindowSmall.value = false;
+  }
+}
 
 const sub_category = ref();
 
