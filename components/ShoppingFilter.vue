@@ -3,7 +3,7 @@
     <ShoppingFilterSpace v-if="isFilterSidebarOpen"></ShoppingFilterSpace>
   </Transition>
   <div
-    class="w-52 fixed top-0 left-0 z-[1000] sm:sticky sm:top-28 overflow-y-auto filter-box-shadow filter-height bg-black sm:bg-transparent transition-transform duration-200"
+    class="w-52 fixed top-0 left-0 z-[1000] md:sticky md:top-28 overflow-y-auto filter-box-shadow filter-height bg-[#6a6bcf] md:bg-transparent transition-transform duration-200"
     :class="{ ' translate-x-[-105%]': !isFilterSidebarOpen && isWindowSmall }">
     <div class="flex flex-col gap-2 text-white">
       <div class="w-full h-14 text-2xl flex justify-center items-center mb-2">Filters</div>
@@ -70,16 +70,19 @@ watch(
 );
 
 onMounted(() => {
-  toggleWindowSize();
-  window.addEventListener('resize', toggleWindowSize());
-});
-function toggleWindowSize() {
-  if (window.innerWidth <= 640) {
+  if (window.innerWidth <= 768) {
     isWindowSmall.value = true;
   } else {
     isWindowSmall.value = false;
   }
-}
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 768) {
+      isWindowSmall.value = true;
+    } else {
+      isWindowSmall.value = false;
+    }
+  });
+});
 
 const sub_category = ref();
 
@@ -133,7 +136,7 @@ function filteredSubCategories(index) {
 .filter-height {
   height: calc(100vh - 7rem);
 }
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 768px) {
   .filter-height {
     height: 100%;
   }

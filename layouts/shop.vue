@@ -9,26 +9,26 @@
     </Transition>
 
     <!--Topbar shadow-->
-    <div class="fixed top-0 left-0 w-full h-16" style="box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.6)"></div>
+    <div class="fixed top-0 left-0 w-full h-12 md:h-16" style="box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.6)"></div>
     <!--TopBar-->
-    <div class="sticky top-0 left-0 w-full h-16 flex justify-between p-3 gap-2 flex-grow-0 z-[999] purple-background">
+    <div class="sticky top-0 left-0 w-full h-12 md:h-16 flex justify-between p-3 gap-2 flex-grow-0 z-[999] purple-background sm:text-2xl">
       <div class="h-full flex items-center flex-1 justify-start">
         <ClientOnly>
-          <font-awesome :icon="['fas', 'bars']" class="text-white cursor-pointer" size="xl" @click="toggleSidebar"></font-awesome
+          <font-awesome :icon="['fas', 'bars']" class="text-white cursor-pointer" @click="toggleSidebar"></font-awesome
         ></ClientOnly>
       </div>
       <div class="h-full flex items-center justify-center flex-1">
         <SearchBar></SearchBar>
       </div>
-      <div class="h-full flex gap-4 items-center flex-1 justify-end">
-        <div class="h-full cursor-pointer">
-          <ClientOnly><font-awesome :icon="['fas', 'circle-user']" size="2xl" class="text-[aliceblue]" /></ClientOnly>
+      <div class="h-full flex gap-3 md:gap-4 items-center flex-1 justify-end">
+        <div class="h-full cursor-pointer flex items-center">
+          <ClientOnly><font-awesome :icon="['fas', 'circle-user']" class="text-[aliceblue]" /></ClientOnly>
         </div>
         <div
           class="relative h-full flex items-center cursor-pointer z-[999]"
           @mouseenter="openNotifications"
           @mouseleave="closeNotifications">
-          <ClientOnly><font-awesome :icon="['fas', 'bell']" size="xl" class="text-[aliceblue]" /></ClientOnly>
+          <ClientOnly><font-awesome :icon="['fas', 'bell']" class="text-[aliceblue]" /></ClientOnly>
           <div
             class="absolute top-[-5px] right-[-5px] w-4 h-4 bg-slate-500 rounded-full text-xs flex justify-center items-center text-white">
             1
@@ -40,7 +40,7 @@
           </div>
         </div>
         <div class="relative h-full flex items-center cursor-pointer" @mouseenter="openShoppingList" @mouseleave="closeShoppingList">
-          <ClientOnly><font-awesome :icon="['fas', 'basket-shopping']" size="xl" class="text-[aliceblue]" /></ClientOnly>
+          <ClientOnly><font-awesome :icon="['fas', 'basket-shopping']" class="text-[aliceblue]" /></ClientOnly>
           <div
             class="absolute top-[-5px] right-[-5px] w-4 h-4 bg-slate-500 rounded-full text-xs flex justify-center items-center text-white">
             1
@@ -54,14 +54,14 @@
       </div>
     </div>
     <div
-      class="w-full flex justify-center items-center text-4xl font-yolk text-[aliceblue] h-28 reverse-background purple-background px-4 text-center">
+      class="w-full flex justify-center items-center text-base lg:text-4xl font-yolk text-[aliceblue] h-16 md:h-28 reverse-background purple-background px-4 text-center">
       Everything You are Looking For is Here
     </div>
     <div
-      class="w-full grid grid-cols-5 text-xl font-fester left-0 sticky top-16 h-12 z-[100] purple-background px-3"
+      class="w-full grid grid-cols-5 text-base md:text-xl font-fester left-0 sticky top-12 md:top-16 h-12 z-[100] purple-background px-3"
       style="color: rgb(255, 255, 255); background-color: rgb(57, 102, 215); box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.6)">
       <div class="h-full col-span-1 flex justify-start items-center gap-1">
-        <div class="flex gap-1 items-center cursor-pointer sm:hidden" @click="toggleFilterSidebar()">
+        <div class="flex gap-1 items-center cursor-pointer md:hidden" @click="toggleFilterSidebar()">
           <ClientOnly><font-awesome :icon="['fas', 'filter']" /></ClientOnly>Filters
         </div>
       </div>

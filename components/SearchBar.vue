@@ -19,7 +19,6 @@ const search_box = ref();
 const search_input = ref();
 
 function searchBoxOpen() {
-  console.log('open');
   search_box.value.classList.add('active');
   search_input.value.classList.add('active');
   search_btn.value.classList.add('active');
@@ -44,6 +43,7 @@ function searchBoxClose() {
 .search-box.active {
   width: 300px;
 }
+
 .search-box input {
   height: 100%;
   width: 100%;
@@ -103,5 +103,24 @@ function searchBoxClose() {
 .search-box .cancel-btn.active {
   right: -25px;
   transform: translateY(-50%) rotate(360deg);
+}
+
+@media only screen and (max-width: 768px) {
+  .search-box.active {
+    width: 150px;
+  }
+  .search-box {
+    width: 35px;
+    height: 35px;
+  }
+  .search-box .search-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 17px;
+  }
+  .search-box .search-btn.active {
+    --search-btn-radius: 32px;
+    font-size: 17px;
+  }
 }
 </style>
