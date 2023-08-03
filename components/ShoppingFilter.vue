@@ -61,7 +61,7 @@ const categories = ref([
   { name: 'Category Two', categoryOpen: false, subCategory: ['SubCategory One', 'SubCategory Two'] }
 ]);
 const isFilterSidebarOpen = ref(filterSidebarOpen);
-const isWindowSmall = ref(false);
+const isWindowSmall = ref(true);
 watch(
   () => store.filterSidebarOpen,
   newState => {

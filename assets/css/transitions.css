@@ -1,0 +1,47 @@
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+
+.rotate-enter-active,
+.rotate-leave-active {
+  transition: all 10s;
+}
+.rotate-enter-from,
+.rotate-leave-to {
+  opacity: 0;
+  transform: rotate3d(1, 1, 1, 15deg);
+}
+
+.component_space-enter-from,
+.component_space-leave-to {
+  opacity: 0;
+}
+.component_space-enter-to,
+.component_space-leave-from {
+  opacity: 1;
+}
+.component_space-enter-active,
+.component_space-leave-active {
+  transition: all 0.2s ease-in-out;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+  transform: translateY(200px);
+}
+.modal-enter-to,
+.modal-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+.modal-enter-active,
+.modal-leave-active {
+  transition: all 0.2s ease-in-out;
+}

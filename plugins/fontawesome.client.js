@@ -18,7 +18,19 @@ import {
   faBatteryFull,
   faDollarSign,
   faMemory,
-  faFilter
+  faFilter,
+  faCompactDisc,
+  faMicrochip,
+  faBoltLightning,
+  faCircleCheck,
+  faStopwatch,
+  faCamera,
+  faCalendar,
+  faCalendarDays,
+  faLocation,
+  faLocationDot,
+  faMap,
+  faCircle
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
@@ -42,7 +54,17 @@ library.add(
   faDollarSign,
   faMemory,
   size,
-  faFilter
+  faFilter,
+  faCompactDisc,
+  faMicrochip,
+  faBoltLightning,
+  faCircleCheck,
+  faStopwatch,
+  faCamera,
+  faCalendarDays,
+  faLocationDot,
+  faMap,
+  faCircle
 );
 
 // This is important, we are going to let Nuxt worry about the CSS

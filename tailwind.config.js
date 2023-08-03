@@ -5,10 +5,11 @@ export const content = [
   './pages/**/*.vue',
   './plugins/**/*.{js,ts}',
   './nuxt.config.{js,ts}',
-  './app.vue'
+  './app.vue',
+  './node_modules/flowbite/**/*.{js,ts}'
 ];
 export const darkMode = 'class';
 export const theme = {
   extend: {}
 };
-export const plugins = [];
+export const plugins = ['flowbite/plugin'];

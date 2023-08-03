@@ -1,6 +1,10 @@
 <template>
-  <div class="fixed w-full h-full z-[-1]" style="background-color: var(--background)"></div>
-  <NuxtPage></NuxtPage>
+  <div>
+    <div class="fixed w-full h-full z-[-1]" style="background-color: var(--background)"></div>
+    <NuxtLayout name="shop">
+      <NuxtPage></NuxtPage>
+    </NuxtLayout>
+  </div>
 </template>
 <script setup>
 import '@/assets/css/fonts.css';

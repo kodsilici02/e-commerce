@@ -8,10 +8,13 @@ export default defineNuxtConfig({
       autoprefixer: {}
     }
   },
-  css: ['@/assets/css/main.css', '@fortawesome/fontawesome-svg-core/styles.css'],
+  build: {
+    transpile: ['gsap']
+  },
+  css: ['@/assets/css/main.css', '@fortawesome/fontawesome-svg-core/styles.css', '@/assets/css/transitions.css'],
   modules: ['@vueuse/motion/nuxt', '@pinia/nuxt'],
   imports: {
     dirs: ['stores']
   },
-  plugins: ['~/plugins/fontawesome.client.js']
+  plugins: ['~/plugins/fontawesome.client.js', '@/plugins/chartjs.client.js']
 });

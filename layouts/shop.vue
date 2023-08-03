@@ -4,8 +4,8 @@
     <Transition name="sidebar">
       <SideBar v-if="sidebar_Open"></SideBar>
     </Transition>
-    <Transition name="sidebar_space">
-      <SideBarSpace v-if="sidebar_Open" @toggleSideBar="toggleSidebar"></SideBarSpace>
+    <Transition name="component_space">
+      <SideBarSpace v-if="sidebar_Open" @toggleComponent="toggleSidebar"></SideBarSpace>
     </Transition>
 
     <!--Topbar shadow-->
@@ -61,7 +61,7 @@
       class="w-full grid grid-cols-5 text-base md:text-xl font-fester left-0 sticky top-12 md:top-16 h-12 z-[100] purple-background px-3"
       style="color: rgb(255, 255, 255); background-color: rgb(57, 102, 215); box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.6)">
       <div class="h-full col-span-1 flex justify-start items-center gap-1">
-        <div class="flex gap-1 items-center cursor-pointer md:hidden" @click="toggleFilterSidebar()">
+        <div v-if="$route.fullPath == '/shop'" class="flex gap-1 items-center cursor-pointer md:hidden" @click="toggleFilterSidebar()">
           <ClientOnly><font-awesome :icon="['fas', 'filter']" /></ClientOnly>Filters
         </div>
       </div>
@@ -80,6 +80,9 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { ref, onMounted } from 'vue';
 import { useFilterSidebarStore } from '@/stores/sidebar.js';
+
+const router = useRouter();
+
 const store = useFilterSidebarStore();
 function toggleFilterSidebar() {
   store.toggleSidebar();
@@ -140,19 +143,6 @@ function toggleSidebar() {
 }
 .sidebar-enter-active,
 .sidebar-leave-active {
-  transition: all 0.2s ease-in-out;
-}
-
-.sidebar_space-enter-from,
-.sidebar_space-leave-to {
-  opacity: 0;
-}
-.sidebar_space-enter-to,
-.sidebar_space-leave-from {
-  opacity: 1;
-}
-.sidebar_space-enter-active,
-.sidebar_space-leave-active {
   transition: all 0.2s ease-in-out;
 }
 </style>
