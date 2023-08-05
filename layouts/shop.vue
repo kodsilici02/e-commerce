@@ -30,8 +30,9 @@
           @mouseleave="closeNotifications">
           <ClientOnly><font-awesome :icon="['fas', 'bell']" class="text-[aliceblue]" /></ClientOnly>
           <div
-            class="absolute top-[-5px] right-[-5px] w-4 h-4 bg-slate-500 rounded-full text-xs flex justify-center items-center text-white">
-            1
+            class="absolute top-[-5px] right-[-5px] w-4 h-4 rounded-full text-xs flex justify-center items-center text-white"
+            style="background-color: var(--secondary-light)">
+            0
           </div>
           <div class="absolute top-10 right-0">
             <Transition name="modal-Transition">
@@ -40,10 +41,13 @@
           </div>
         </div>
         <div class="relative h-full flex items-center cursor-pointer" @mouseenter="openShoppingList" @mouseleave="closeShoppingList">
-          <ClientOnly><font-awesome :icon="['fas', 'basket-shopping']" class="text-[aliceblue]" /></ClientOnly>
+          <NuxtLink to="/cart"
+            ><ClientOnly><font-awesome :icon="['fas', 'basket-shopping']" class="text-[aliceblue]" /></ClientOnly
+          ></NuxtLink>
           <div
-            class="absolute top-[-5px] right-[-5px] w-4 h-4 bg-slate-500 rounded-full text-xs flex justify-center items-center text-white">
-            1
+            class="absolute top-[-5px] right-[-5px] w-4 h-4 rounded-full text-xs flex justify-center items-center text-white"
+            style="background-color: var(--secondary-light)">
+            0
           </div>
           <div class="absolute top-10 right-0">
             <Transition name="modal-Transition">
@@ -82,8 +86,6 @@ import { ref, onMounted } from 'vue';
 import { useFilterSidebarStore } from '@/stores/sidebar.js';
 
 const route = useRoute();
-
-console.log(route.fullPath);
 
 const store = useFilterSidebarStore();
 function toggleFilterSidebar() {
