@@ -2,7 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
+body {
+  --text-color: #212121;
+  --text-white: aliceblue;
+  --text-gray: rgb(161, 161, 161);
+  --background: #f0f0f0;
+  --primary: #6a6bcf;
+  --secondary: #4470da;
+  --secondary-light: #6d92e7;
+  --accent: #a66ced;
+}
+.dark-mode body {
   --text-color: aliceblue;
   --background: #3d3962;
   --primary: #943bd8;

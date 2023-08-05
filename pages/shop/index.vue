@@ -1,7 +1,7 @@
 <template>
   <div class="w-full flex">
     <ShoppingFilter></ShoppingFilter>
-    <div class="flex-1 flex flex-wrap items-start justify-start bg-green-300] mt-1 p-1" style="color: var(--text-color)">
+    <div class="flex-1 flex flex-wrap items-start justify-start bg-green-300] mt-1 p-1" style="color: var(--text-white)">
       <div
         v-for="(item, index) in items"
         ref="box"
@@ -42,7 +42,7 @@
               <ClientOnly><font-awesome :icon="['fas', 'memory']" /></ClientOnly>128gb
             </div>
             <div class="flex gap-1 items-center">
-              <ScreenSizeIcon :height="20" :width="20"></ScreenSizeIcon>
+              <ScreenSizeIcon :height="20" :width="20" :color="'aliceblue'"></ScreenSizeIcon>
               6.7 Inc
             </div>
           </div>
@@ -89,7 +89,7 @@ function deneme(index) {
 
 <style scoped>
 .item-background {
-  background-color: #6a6bcf;
+  background-color: var(--primary);
 }
 .purchase-layer {
   background-color: #6a6ccf00;

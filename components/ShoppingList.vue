@@ -1,5 +1,5 @@
 <template>
-  <div class="p-3 w-52 relative rounded-md" style="color: var(--text-color); background-color: var(--secondary-light)">
+  <div class="p-3 w-52 relative rounded-md" style="color: var(--text-white); background-color: var(--secondary-light)">
     <div
       class="absolute right-[1px] top-[-7px]"
       style="

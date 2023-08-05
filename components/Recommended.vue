@@ -7,7 +7,9 @@
       @wheel="handleMouseWheel"
       style="scroll-behavior: smooth">
       <div v-for="(item, index) in items" :key="index" class="flex-box rounded-xl relative item-background cursor-pointer">
-        <div class="absolute top-0 left-0 w-full h-full purchase-layer transition-all duration-500 z-[2]">
+        <div
+          class="z-[2] absolute top-0 left-0 w-full h-full purchase-background transition-all duration-500 rounded-xl pointer-events-none"></div>
+        <div class="absolute top-0 left-0 w-full h-full purchase-layer transition-all duration-500 z-[2] rounded-xl">
           <div class="w-full h-full flex justify-center items-center">
             <NuxtLink to="/shop/name">
               <div
@@ -19,7 +21,10 @@
             </NuxtLink>
           </div>
         </div>
-        <img class="w-full h-full object-cover object-center" src="https://www.pngmart.com/files/13/Apple-Airpods-PNG-Image.png" />
+        <img
+          class="w-full h-full object-cover object-center"
+          src="https://www.pngmart.com/files/13/Apple-Airpods-PNG-Image.png"
+          loading="lazy" />
       </div>
     </div>
   </div>
@@ -60,10 +65,16 @@ function handleMouseWheel(event) {
   opacity: 0;
 }
 .item-background {
-  background-color: #6a6bcf;
+  background-color: var(--secondary);
+}
+.purchase-background {
+  opacity: 0;
+}
+.item-background:hover .purchase-background {
+  background-color: var(--secondary);
+  opacity: 0.5;
 }
 .item-background:hover .purchase-layer {
-  background-color: #6a6ccfa0;
   opacity: 1;
 }
 .purchase-button {

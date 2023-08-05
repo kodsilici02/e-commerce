@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-auto">
+  <div class="w-full h-auto" style="color: var(--text-white)">
     <!--SideBar-->
     <Transition name="sidebar">
       <SideBar v-if="sidebar_Open"></SideBar>
@@ -13,24 +13,22 @@
     <!--TopBar-->
     <div class="sticky top-0 left-0 w-full h-12 md:h-16 flex justify-between p-3 gap-2 flex-grow-0 z-[999] purple-background sm:text-2xl">
       <div class="h-full flex items-center flex-1 justify-start">
-        <ClientOnly>
-          <font-awesome :icon="['fas', 'bars']" class="text-white cursor-pointer" @click="toggleSidebar"></font-awesome
-        ></ClientOnly>
+        <ClientOnly> <font-awesome :icon="['fas', 'bars']" class="cursor-pointer" @click="toggleSidebar"></font-awesome></ClientOnly>
       </div>
       <div class="h-full flex items-center justify-center flex-1">
         <SearchBar></SearchBar>
       </div>
       <div class="h-full flex gap-3 md:gap-4 items-center flex-1 justify-end">
         <div class="h-full cursor-pointer flex items-center">
-          <ClientOnly><font-awesome :icon="['fas', 'circle-user']" class="text-[aliceblue]" /></ClientOnly>
+          <ClientOnly><font-awesome :icon="['fas', 'circle-user']" class="" /></ClientOnly>
         </div>
         <div
           class="relative h-full flex items-center cursor-pointer z-[999]"
           @mouseenter="openNotifications"
           @mouseleave="closeNotifications">
-          <ClientOnly><font-awesome :icon="['fas', 'bell']" class="text-[aliceblue]" /></ClientOnly>
+          <ClientOnly><font-awesome :icon="['fas', 'bell']" class="" /></ClientOnly>
           <div
-            class="absolute top-[-5px] right-[-5px] w-4 h-4 rounded-full text-xs flex justify-center items-center text-white"
+            class="absolute top-[-5px] right-[-5px] w-4 h-4 rounded-full text-xs flex justify-center items-center"
             style="background-color: var(--secondary-light)">
             0
           </div>
@@ -42,10 +40,10 @@
         </div>
         <div class="relative h-full flex items-center cursor-pointer" @mouseenter="openShoppingList" @mouseleave="closeShoppingList">
           <NuxtLink to="/cart"
-            ><ClientOnly><font-awesome :icon="['fas', 'basket-shopping']" class="text-[aliceblue]" /></ClientOnly
+            ><ClientOnly><font-awesome :icon="['fas', 'basket-shopping']" class="" /></ClientOnly
           ></NuxtLink>
           <div
-            class="absolute top-[-5px] right-[-5px] w-4 h-4 rounded-full text-xs flex justify-center items-center text-white"
+            class="absolute top-[-5px] right-[-5px] w-4 h-4 rounded-full text-xs flex justify-center items-center"
             style="background-color: var(--secondary-light)">
             0
           </div>
@@ -58,7 +56,7 @@
       </div>
     </div>
     <div
-      class="w-full flex justify-center items-center text-base lg:text-4xl font-yolk text-[aliceblue] h-16 md:h-28 reverse-background purple-background px-4 text-center">
+      class="w-full flex justify-center items-center text-base lg:text-4xl font-yolk h-16 md:h-28 reverse-background purple-background px-4 text-center">
       Everything You are Looking For is Here
     </div>
     <div
@@ -119,10 +117,10 @@ function toggleSidebar() {
 
 <style scoped>
 .purple-background {
-  background: linear-gradient(90deg, #6a6bcf 0%, #7677af 100%);
+  background: linear-gradient(90deg, var(--secondary) 0%, var(--secondary-light) 100%);
 }
 .reverse-background.purple-background {
-  background: linear-gradient(90deg, #9f76cd 0%, #9e62db 100%);
+  background: linear-gradient(90deg, var(--secondary-light) 0%, var(--secondary) 100%);
 }
 .modal-Transition-enter-from,
 .modal-Transition-leave-to {

@@ -21,7 +21,7 @@ const props = defineProps({
   width: Number,
   color: {
     type: String,
-    default: '#fcfcfc'
+    default: '#212121'
   }
 });
 </script>

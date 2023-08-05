@@ -19,7 +19,7 @@
           <div
             v-for="(info, index) in generalInfo"
             class="flex text-xs text-center lg:text-base basis-1/4 xl:basis-1/6 flex-col items-center justify-center">
-            <div class="flex gap- items-center justify-center">
+            <div class="flex gap-1 items-center justify-center">
               <ResolutionIcon v-if="info.resolution"></ResolutionIcon>
               <ScreenSizeIcon v-if="info.exceptional" :color="'#e4e4e4d9'" :width="20"></ScreenSizeIcon>
               <ClientOnly v-else><font-awesome :icon="info.icon"></font-awesome></ClientOnly>
@@ -33,7 +33,7 @@
         <div class="w-full flex flex-wrap gap-1 mt-2">
           <div class="w-full flex flex-col">
             <div class="text-lg font-bold">Memory Options</div>
-            <div class="w-full flex gap-1 mt-2">
+            <div class="w-full flex gap-1 mt-2" style="color: var(--text-white)">
               <div class="p-2 px-3 rounded-lg cursor-pointer options-button transition-colors duration-200">128 GB</div>
               <div class="p-2 px-3 rounded-lg cursor-pointer options-button transition-colors duration-200">256 GB</div>
               <div class="p-2 px-3 rounded-lg cursor-pointer options-button transition-colors duration-200">512 GB</div>
@@ -44,16 +44,16 @@
             <div class="text-lg font-bold mt-2">Color Options</div>
             <div class="w-full flex gap-1 mt-2">
               <div
-                class="w-10 h-10 rounded-full cursor-pointer color-button transition-colors duration-200"
+                class="w-10 h-10 rounded-full cursor-pointer color-button transition-colors duration-200 border border-black"
                 style="background-color: #f4e8cf"></div>
               <div
-                class="w-10 h-10 rounded-full cursor-pointer color-button transition-colors duration-200"
+                class="w-10 h-10 rounded-full cursor-pointer color-button transition-colors duration-200 border border-black"
                 style="background-color: #f1f3f2"></div>
               <div
-                class="w-10 h-10 rounded-full cursor-pointer color-button transition-colors duration-200"
+                class="w-10 h-10 rounded-full cursor-pointer color-button transition-colors duration-200 border border-black"
                 style="background-color: #6c6376"></div>
               <div
-                class="w-10 h-10 rounded-full cursor-pointer color-button transition-colors duration-200"
+                class="w-10 h-10 rounded-full cursor-pointer color-button transition-colors duration-200 border border-black"
                 style="background-color: #504f4d"></div>
             </div>
           </div>
@@ -80,7 +80,7 @@
       </div>
       <!--Rest of the Content-->
 
-      <div class="bg-white w-full h-20"></div>
+      <div class="w-full h-20"></div>
     </div>
     <!--SideNav-->
     <div
@@ -100,9 +100,7 @@
         <div class="w-full flex items-center gap-x-1 text-lg font-bold">
           <ClientOnly><font-awesome :icon="['fas', 'location-dot']" /></ClientOnly>Delivery Location
         </div>
-        <div class="cursor-pointer w-full transition-colors duration-200 hover:text-[rgba(255,255,255,0.64)]" @click="toggleLocationModal">
-          Select a Location
-        </div>
+        <div class="cursor-pointer w-full location-button" @click="toggleLocationModal">Select a Location</div>
       </div>
       <div class="w-full flex flex-col gap-2 items-center justify-center">
         <div class=""></div>
@@ -214,5 +212,12 @@ function toggleLocationModal() {
 }
 .options-button:hover {
   background-color: var(--secondary-light);
+}
+.location-button {
+  transition: color 0.2s ease;
+  color: var(--text-color);
+}
+.location-button:hover {
+  color: var(--secondary);
 }
 </style>

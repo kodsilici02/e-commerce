@@ -4,12 +4,13 @@
   </Transition>
   <div
     class="w-52 fixed top-0 left-0 z-[1000] md:sticky md:top-28 overflow-y-auto filter-box-shadow filter-height bg-[#6a6bcf] md:bg-transparent transition-transform duration-200"
-    :class="{ ' translate-x-[-105%]': !isFilterSidebarOpen && isWindowSmall }">
-    <div class="flex flex-col gap-2 text-white">
+    :class="{ ' translate-x-[-105%]': !isFilterSidebarOpen && isWindowSmall }"
+    style="color: var(--text-color)">
+    <div class="flex flex-col gap-2">
       <div class="w-full h-14 text-2xl flex justify-center items-center mb-2">Filters</div>
       <div v-for="(category, index) in categories" class="flex flex-col justify-center items-center">
         <button
-          class="w-full flex justify-center items-center gap-2 text-xl cursor-pointer transition-all duration-300 hover:text-[#bfbfbf]"
+          class="w-full flex justify-center items-center gap-2 text-xl cursor-pointer transition-all duration-300 category-button"
           @click="openCategory(index)">
           {{ category.name }}
           <ClientOnly>
@@ -22,18 +23,18 @@
         </button>
         <div class="w-full overflow-hidden transition-all duration-300 mt-1" style="max-height: 0" ref="sub_category">
           <div class="sub-category">
-            <div class="mr-[3px] py-2" style="color: rgb(222, 222, 222); background-color: rgba(0, 0, 0, 0.1)">
+            <div class="mr-[3px] py-2" style="color: var(--text-color); background-color: rgba(0, 0, 0, 0.1)">
               <div class="w-full px-3">
                 <div class="field field_v2">
                   <input
                     id="last-name"
-                    class="field__input text-white"
+                    class="field__input"
                     v-model="categoryInputValues[index]"
                     placeholder="Type"
                     @input="filterCategory(index)"
                     autocomplete="off" />
                   <span class="field__label-wrap" aria-hidden="true">
-                    <span class="field__label text-white">Search in Category</span>
+                    <span class="field__label">Search in Category</span>
                   </span>
                 </div>
               </div>
@@ -140,5 +141,12 @@ function filteredSubCategories(index) {
   .filter-height {
     height: 100%;
   }
+}
+
+.category-button {
+  color: var(--text-color);
+}
+.category-button:hover {
+  color: var(--secondary);
 }
 </style>
