@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 html {
-  --text-color: #fcfcfc;
+  --text-color: aliceblue;
   --background: #3d3962;
   --primary: #943bd8;
   --secondary: #4470da;
   --secondary-light: #6d92e7;
-
   --accent: #a66ced;
 }
 
 ::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
 /* Track */
@@ -24,9 +24,15 @@ html {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;
+  border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(190, 190, 190);
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  background: #888;
+  border-radius: 10px;
 }

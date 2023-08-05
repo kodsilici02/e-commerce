@@ -15,7 +15,9 @@ const testData = {
   datasets: [
     {
       data: [30, 40, 60, 20, 5],
-      backgroundColor: ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED']
+      backgroundColor: ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED'],
+      borderColor: '#fcfcfc', // Change the line color to black
+      color: '#fcfcfc' // Change the data point and label color to black
     }
   ]
 };
@@ -27,14 +29,22 @@ const chartOptions = {
       display: true,
       title: {
         display: true,
-        text: 'Month'
+        text: 'Month',
+        color: '#fcfcfc' // Change the x-axis label color to black
+      },
+      ticks: {
+        color: '#fcfcfc' // Change the x-axis tick color to black
       }
     },
     y: {
       display: true,
       title: {
         display: true,
-        text: 'Value'
+        text: 'Value',
+        color: '#fcfcfc' // Change the y-axis label color to black
+      },
+      ticks: {
+        color: '#fcfcfc' // Change the y-axis tick color to black
       }
     }
   }

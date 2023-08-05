@@ -81,7 +81,9 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { ref, onMounted } from 'vue';
 import { useFilterSidebarStore } from '@/stores/sidebar.js';
 
-const router = useRouter();
+const route = useRoute();
+
+console.log(route.fullPath);
 
 const store = useFilterSidebarStore();
 function toggleFilterSidebar() {

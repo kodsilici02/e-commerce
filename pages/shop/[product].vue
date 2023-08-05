@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex h-[200vh] p-2 gap-2">
+  <div class="w-full flex p-2 gap-2" style="color: var(--text-color)">
     <div class="flex-1 flex flex-wrap p-2 gap-2">
       <div class="hidden lg:flex flex-col gap-2 h-[70vh]">
         <div v-for="(image, index) in images" class="flex-1 w-40 cursor-pointer" @click="changeImage(image)">
@@ -7,20 +7,19 @@
         </div>
       </div>
       <!--Actual Image-->
-      <div class="basis-1/2 lg:basis-1/3 h-[70vh] p-5 flex">
+      <div class="w-full md:basis-1/3 h-[70vh] p-5 flex">
         <Transition name="page" mode="out-in"
           ><img class="w-full h-full object-center object-cover" :key="activeImage" :src="activeImage"
         /></Transition>
       </div>
-      <div
-        class="flex-1 flex flex-wrap content-start items-center justify-center gap-x-4 gap-y-3 text-[aliceblue] font-code-next font-bold">
+      <div class="flex-1 flex flex-wrap content-start items-center justify-center gap-x-4 gap-y-3 font-code-next font-bold">
         <div class="w-full justify-center flex text-2xl">Iphone 14 Pro</div>
         <!--General Info-->
         <div class="w-full flex flex-wrap gap-x-4 gap-y-3 border-b-2 pb-4 items-center justify-center">
           <div
             v-for="(info, index) in generalInfo"
-            class="flex text-xs text-center lg:text-base xl:basis-1/6 flex-col items-center justify-center">
-            <div class="flex gap-1 text-[#e4e4e4] items-center justify-center">
+            class="flex text-xs text-center lg:text-base basis-1/4 xl:basis-1/6 flex-col items-center justify-center">
+            <div class="flex gap- items-center justify-center">
               <ResolutionIcon v-if="info.resolution"></ResolutionIcon>
               <ScreenSizeIcon v-if="info.exceptional" :color="'#e4e4e4d9'" :width="20"></ScreenSizeIcon>
               <ClientOnly v-else><font-awesome :icon="info.icon"></font-awesome></ClientOnly>
@@ -69,17 +68,25 @@
           </div>
         </div>
       </div>
-
-      <div class="w-full flex flex-col">
-        <div class="text-[aliceblue]">Price History</div>
+      <!--VueChart-->
+      <div class="w-full flex flex-col mt-10">
+        <div class="">Price History</div>
         <VueChart></VueChart>
       </div>
+      <!--Recommendeds-->
+      <div class="w-full mt-10">
+        <div class="flex text-2xl w-full">Recommended</div>
+        <Recommended></Recommended>
+      </div>
+      <!--Rest of the Content-->
+
       <div class="bg-white w-full h-20"></div>
     </div>
+    <!--SideNav-->
     <div
-      class="w-0 hidden lg:flex lg:flex-col lg:w-64 sticky left-0 top-28 p-3 text-[aliceblue] gap-3"
+      class="w-0 hidden lg:flex lg:flex-col lg:w-64 sticky left-0 top-28 p-3 gap-3"
       style="height: calc(100vh - 7.55rem); box-shadow: rgba(0, 0, 0, 0.1) 3px 3px 8px 0px inset">
-      <div class="text-[aliceblue] text-2xl flex items-center gap-1">
+      <div class="text-2xl flex items-center gap-1">
         <ClientOnly><font-awesome :icon="['fas', 'dollar-sign']" /></ClientOnly>
         <div>999</div>
       </div>
