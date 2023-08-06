@@ -4,12 +4,8 @@ export const useAuthStore = defineStore({
   id: 'auth',
   state: () => {
     return {
-      filterSidebarOpen: false
+      adresses: ['']
     };
   },
-  actions: {
-    toggleSidebar() {
-      this.filterSidebarOpen = !this.filterSidebarOpen;
-    }
-  }
+  actions: {}
 });

@@ -8,6 +8,19 @@
         class="flex-1 flex flex-wrap items-start justify-start mt-1 p-1"
         style="color: var(--text-white)"
         @before-leave="itemLeave">
+        <div class="w-full h-full relative" :key="'aaaa'">
+          <client-only>
+            <Transition name="fade">
+              <div v-if="filteredItems.length == 0" class="w-full flex flex-col items-center justify-center">
+                <Vue3Lottie
+                  :height="500"
+                  animationLink="https://lottie.host/25a75051-6b06-44b2-a75d-037f747f83c2/p6eHupD7HS.json"
+                  :autoPlay="true" />
+                <div class="text-2xl" style="color: var(--text-color)">There is no product with the features you are looking for</div>
+              </div></Transition
+            >
+          </client-only>
+        </div>
         <div
           v-for="(item, index) in filteredItems"
           :key="item.name"
