@@ -4,12 +4,16 @@ export const useFilterSidebarStore = defineStore({
   id: 'filterSidebar',
   state: () => {
     return {
-      filterSidebarOpen: false
+      filterSidebarOpen: false,
+      orderSidebarOpen: false
     };
   },
   actions: {
     toggleSidebar() {
       this.filterSidebarOpen = !this.filterSidebarOpen;
+    },
+    toggleOrderSidebar() {
+      this.orderSidebarOpen = !this.orderSidebarOpen;
     }
   }
 });

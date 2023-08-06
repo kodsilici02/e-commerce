@@ -68,6 +68,12 @@
         </div>
       </div>
       <div class="h-full col-span-3 flex justify-center items-center">Home</div>
+      <div
+        v-if="$route.fullPath == '/shop/' + route.params.product"
+        class="flex gap-1 items-center justify-end cursor-pointer md:hidden"
+        @click="toggleOrderSidebar()">
+        <ClientOnly><font-awesome :icon="['fas', 'cart-shopping']" /></ClientOnly>Order
+      </div>
     </div>
 
     <div class="w-full px-3">
@@ -88,7 +94,10 @@ const route = useRoute();
 const store = useFilterSidebarStore();
 function toggleFilterSidebar() {
   store.toggleSidebar();
-  console.log(store.filterSidebarOpen);
+}
+
+function toggleOrderSidebar() {
+  store.toggleOrderSidebar();
 }
 
 const isShoppingListOpen = ref(false);

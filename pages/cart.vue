@@ -13,8 +13,8 @@
     <div class="w-full flex justify-center">
       <NuxtLink to="/shop"
         ><div
-          class="w-36 h-10 bg-slate-400 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg cursor-pointer"
-          style="border-radius: 35px">
+          class="w-36 h-10 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg cursor-pointer"
+          style="border-radius: 35px; color: var(--text-white)">
           Start Shopping
         </div></NuxtLink
       >

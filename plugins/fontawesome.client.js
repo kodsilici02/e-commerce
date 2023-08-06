@@ -53,7 +53,6 @@ library.add(
   faBatteryFull,
   faDollarSign,
   faMemory,
-  size,
   faFilter,
   faCompactDisc,
   faMicrochip,

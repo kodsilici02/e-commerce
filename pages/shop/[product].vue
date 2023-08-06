@@ -21,7 +21,7 @@
             class="flex text-xs text-center lg:text-base basis-1/4 xl:basis-1/6 flex-col items-center justify-center">
             <div class="flex gap-1 items-center justify-center">
               <ResolutionIcon v-if="info.resolution"></ResolutionIcon>
-              <ScreenSizeIcon v-if="info.exceptional" :color="'#e4e4e4d9'" :width="20"></ScreenSizeIcon>
+              <ScreenSizeIcon v-if="info.exceptional" :width="20"></ScreenSizeIcon>
               <ClientOnly v-else><font-awesome :icon="info.icon"></font-awesome></ClientOnly>
               {{ info.name }}
             </div>
@@ -83,29 +83,7 @@
       <div class="w-full h-20"></div>
     </div>
     <!--SideNav-->
-    <div
-      class="w-0 hidden lg:flex lg:flex-col lg:w-64 sticky left-0 top-28 p-3 gap-3"
-      style="height: calc(100vh - 7.55rem); box-shadow: rgba(0, 0, 0, 0.1) 3px 3px 8px 0px inset">
-      <div class="text-2xl flex items-center gap-1">
-        <ClientOnly><font-awesome :icon="['fas', 'dollar-sign']" /></ClientOnly>
-        <div>999</div>
-      </div>
-      <div class="w-full flex flex-wrap items-center gap-x-1">
-        <div class="w-full flex items-center gap-x-1 text-lg font-bold">
-          <ClientOnly><font-awesome :icon="['fas', 'calendar-days']" /></ClientOnly>Delivery Date
-        </div>
-        <div class="w-full">{{ getDate() }}</div>
-      </div>
-      <div class="w-full flex flex-wrap items-center gap-x-1">
-        <div class="w-full flex items-center gap-x-1 text-lg font-bold">
-          <ClientOnly><font-awesome :icon="['fas', 'location-dot']" /></ClientOnly>Delivery Location
-        </div>
-        <div class="cursor-pointer w-full location-button" @click="toggleLocationModal">Select a Location</div>
-      </div>
-      <div class="w-full flex flex-col gap-2 items-center justify-center">
-        <div class=""></div>
-      </div>
-    </div>
+    <OrderSidenav @toggleLocationModal="toggleLocationModal"></OrderSidenav>
     <Transition name="modal"> <SelectLocation v-if="isLocationModalOpen" @toggleModal="toggleLocationModal"></SelectLocation></Transition>
     <Transition name="component_space">
       <SideBarSpace v-if="isLocationModalOpen" @toggleComponent="toggleLocationModal"></SideBarSpace>
@@ -117,7 +95,6 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import gsap from 'gsap';
-import { addDays, format } from 'date-fns';
 let timeline;
 
 const aboutTexts = [
@@ -188,12 +165,6 @@ const enterAnimation = () => {
   timeline = gsap.timeline({});
   timeline.from(photo.value, { opacity: 0, scale: '0.5', duration: 1 });
 };
-function getDate() {
-  const currentDate = new Date();
-  const newDate = addDays(currentDate, 2);
-  const formattedDate = format(newDate, 'EEEE, MMMM do'); // Output: Monday, August 14th
-  return formattedDate;
-}
 
 // onMounted(() => {
 //   enterAnimation();
@@ -212,12 +183,5 @@ function toggleLocationModal() {
 }
 .options-button:hover {
   background-color: var(--secondary-light);
-}
-.location-button {
-  transition: color 0.2s ease;
-  color: var(--text-color);
-}
-.location-button:hover {
-  color: var(--secondary);
 }
 </style>

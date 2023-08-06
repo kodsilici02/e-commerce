@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="w-full" style="color: var(--text-white)">
     <div
       class="w-full flex gap-2 overflow-x-auto p-2"
       ref="scrollContainer"
@@ -13,7 +13,7 @@
           <div class="w-full h-full flex justify-center items-center">
             <NuxtLink to="/shop/name">
               <div
-                class="w-36 h-10 bg-slate-400 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg"
+                class="w-36 h-10 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg"
                 style="border-radius: 35px"
                 @click="deneme(index)">
                 Inspect
