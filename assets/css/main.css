@@ -11,6 +11,8 @@ body {
   --secondary: #4470da;
   --secondary-light: #6d92e7;
   --accent: #a66ced;
+  --danger: red;
+  --success: rgb(14, 154, 14);
 }
 .dark-mode body {
   --text-color: aliceblue;

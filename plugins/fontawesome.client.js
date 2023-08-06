@@ -30,7 +30,8 @@ import {
   faLocation,
   faLocationDot,
   faMap,
-  faCircle
+  faCircle,
+  faXmark
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
@@ -63,7 +64,8 @@ library.add(
   faCalendarDays,
   faLocationDot,
   faMap,
-  faCircle
+  faCircle,
+  faXmark
 );
 
 // This is important, we are going to let Nuxt worry about the CSS
