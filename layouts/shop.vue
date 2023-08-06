@@ -11,7 +11,7 @@
     <!--Topbar shadow-->
     <div class="fixed top-0 left-0 w-full h-12 md:h-16" style="box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.6)"></div>
     <!--TopBar-->
-    <div class="sticky top-0 left-0 w-full h-12 md:h-16 flex justify-between p-3 gap-2 flex-grow-0 z-[999] purple-background sm:text-2xl">
+    <div class="sticky top-0 left-0 w-full h-12 md:h-16 flex justify-between p-3 gap-2 flex-grow-0 z-[1000] purple-background sm:text-2xl">
       <div class="h-full flex items-center flex-1 justify-start">
         <ClientOnly> <font-awesome :icon="['fas', 'bars']" class="cursor-pointer" @click="toggleSidebar"></font-awesome></ClientOnly>
       </div>

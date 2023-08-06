@@ -60,7 +60,7 @@
                       @click="excludeSubCategoryFilter(subCategory)"></font-awesome
                   ></ClientOnly>
                 </div>
-                <div class="flex-1 text-center" :style="{ color: toggleColor(subCategory) }">
+                <div class="flex-1 text-center transition-colors duration-200" :style="{ color: toggleColor(subCategory) }">
                   {{ subCategory }}
                 </div>
                 <div class="flex-1 flex justify-center items-center">

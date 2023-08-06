@@ -2,11 +2,15 @@
   <div class="w-full flex">
     <ShoppingFilter @update-filters="applyFilters"></ShoppingFilter>
     <div class="flex-1 flex flex-wrap items-start justify-start bg-green-300] mt-1 p-1" style="color: var(--text-white)">
-      <TransitionGroup name="list">
+      <TransitionGroup
+        name="list"
+        tag="div"
+        class="flex-1 flex flex-wrap items-start justify-start mt-1 p-1"
+        style="color: var(--text-white)"
+        @before-leave="itemLeave">
         <div
           v-for="(item, index) in filteredItems"
-          ref="box"
-          :key="index"
+          :key="item.name"
           class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-500 cursor-pointer hover:scale-[1.02] overflow-hidden">
           <div class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative">
             <div class="absolute top-0 left-0 w-full h-full purchase-layer rounded-lg transition-[background-color] duration-500 z-[2]">
@@ -130,10 +134,14 @@ function deneme(index) {
 //     next();
 //   });
 // });
+
+function itemLeave(el) {
+  el.style.setProperty('--width', `${el.offsetWidth}px`);
+}
 </script>
 
 <style scoped>
-.list-move, /* apply transition to moving elements */
+.list-move,
 .list-enter-active,
 .list-leave-active {
   transition: all 0.5s ease;
@@ -144,12 +152,16 @@ function deneme(index) {
   opacity: 0;
   transform: translateY(-100%);
 }
-
-/* ensure leaving items are taken out of layout flow so that moving
-   animations can be calculated correctly. */
 .list-leave-active {
+  --width: 380px;
+  width: var(--width);
   position: absolute;
 }
+
+.list-enter-active {
+  position: relative;
+}
+
 .item-background {
   background-color: var(--primary);
 }

@@ -22,7 +22,7 @@
             <div class="flex gap-1 items-center justify-center">
               <ResolutionIcon v-if="info.resolution"></ResolutionIcon>
               <ScreenSizeIcon v-if="info.exceptional" :width="20"></ScreenSizeIcon>
-              <ClientOnly v-else><font-awesome :icon="info.icon"></font-awesome></ClientOnly>
+              <ClientOnly v-if="info.icon"><font-awesome :icon="info.icon"></font-awesome></ClientOnly>
               {{ info.name }}
             </div>
             <ClientOnly v-if="info.checkIcon"><font-awesome :icon="['fa', 'circle-check']"></font-awesome></ClientOnly>
@@ -84,6 +84,7 @@
     </div>
     <!--SideNav-->
     <OrderSidenav @toggleLocationModal="toggleLocationModal"></OrderSidenav>
+    <!--Modals-->
     <Transition name="modal"> <SelectLocation v-if="isLocationModalOpen" @toggleModal="toggleLocationModal"></SelectLocation></Transition>
     <Transition name="component_space">
       <SideBarSpace v-if="isLocationModalOpen" @toggleComponent="toggleLocationModal"></SideBarSpace>
