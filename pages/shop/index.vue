@@ -1,7 +1,11 @@
 <template>
   <div class="w-full flex">
-    <ShoppingFilter @update-filters="applyFilters"></ShoppingFilter>
-    <div class="flex-1 flex flex-wrap items-start justify-start bg-green-300] mt-1 p-1" style="color: var(--text-white)">
+    <div id="sidebar">
+      <SidebarContainer>
+        <SidebarShoppingFilter @update-filters="applyFilters"></SidebarShoppingFilter>
+      </SidebarContainer>
+    </div>
+    <div id="content" class="flex-1 flex flex-wrap items-start justify-start bg-green-300] mt-1 p-1" style="color: var(--text-white)">
       <TransitionGroup
         name="list"
         tag="div"
@@ -9,33 +13,34 @@
         style="color: var(--text-white)"
         @before-leave="itemLeave">
         <div class="w-full h-full relative" :key="'aaaa'">
-          <client-only>
-            <Transition name="fade">
-              <div v-if="filteredItems.length == 0" class="w-full flex flex-col items-center justify-center">
-                <Vue3Lottie
-                  :height="500"
-                  animationLink="https://lottie.host/25a75051-6b06-44b2-a75d-037f747f83c2/p6eHupD7HS.json"
-                  :autoPlay="true" />
-                <div class="text-2xl" style="color: var(--text-color)">There is no product with the features you are looking for</div>
-              </div></Transition
-            >
-          </client-only>
+          <Transition name="fade">
+            <div v-if="filteredItems.length == 0" class="w-full flex flex-col items-center justify-center">
+              <Vue3Lottie
+                ref="lottie"
+                :height="500"
+                animationLink="https://lottie.host/25a75051-6b06-44b2-a75d-037f747f83c2/p6eHupD7HS.json"
+                :autoPlay="true"
+                :loop="true"
+                direction="alternate" />
+              <div class="text-2xl" style="color: var(--text-color)">There is no product with the features you are looking for</div>
+            </div></Transition
+          >
         </div>
         <div
           v-for="(item, index) in filteredItems"
           :key="item.name"
           class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-500 cursor-pointer hover:scale-[1.02] overflow-hidden">
-          <div class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative">
+          <NuxtLink
+            :to="'/shop/' + convertName(item.name)"
+            class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative">
             <div class="absolute top-0 left-0 w-full h-full purchase-layer rounded-lg transition-[background-color] duration-500 z-[2]">
               <div class="w-full h-full flex justify-center items-center">
-                <NuxtLink :to="'/shop/' + convertName(item.name)">
-                  <div
-                    class="w-36 h-10 bg-slate-400 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg"
-                    style="border-radius: 35px"
-                    @click="deneme(index)">
-                    Purchase Now
-                  </div>
-                </NuxtLink>
+                <div
+                  class="w-36 h-10 bg-slate-400 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg"
+                  style="border-radius: 35px"
+                  @click="deneme(index)">
+                  Purchase Now
+                </div>
               </div>
             </div>
             <div class="absolute top-1 right-4">
@@ -57,11 +62,11 @@
                 <ClientOnly><font-awesome :icon="['fas', 'compact-disc']" /></ClientOnly>{{ item.memory }}
               </div>
               <div class="flex gap-1 items-center">
-                <ScreenSizeIcon :height="20" :width="20" :color="'aliceblue'"></ScreenSizeIcon>
+                <IconsScreenSize :height="20" :width="20" :color="'aliceblue'"></IconsScreenSize>
                 6.7 Inc
               </div>
             </div>
-          </div>
+          </NuxtLink>
         </div>
       </TransitionGroup>
     </div>
@@ -69,8 +74,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import gsap from 'gsap';
+import { ref, onMounted, watch } from 'vue';
+import pageTransition from '@/transitions/shopPage.js';
+
+definePageMeta({
+  pageTransition: pageTransition
+});
+
 const router = useRouter();
 let timeline;
 
@@ -95,16 +105,11 @@ const items = ref([
 
 const filteredItems = ref(items.value);
 function applyFilters(filters) {
-  // Filter items based on the 'price' filter
   const { min, max } = filters.price;
   let filteredItemsTemp = items.value.filter(item => item.price >= min && item.price <= max);
-
-  // Filter items based on selected subcategories
   if (filters.brands.include) {
-    // If 'include' is true, show only the selected brands
     filteredItemsTemp = filteredItemsTemp.filter(item => filters.brands.brands.includes(item.brand));
   } else if (filters.brands.include === false) {
-    // If 'include' is false, remove the selected brands from the list
     filteredItemsTemp = filteredItemsTemp.filter(item => !filters.brands.brands.includes(item.brand));
   }
 
@@ -120,33 +125,6 @@ function applyFilters(filters) {
 function convertName(name) {
   return name.toLowerCase().replace(/ /g, '-');
 }
-
-const box = ref();
-let animationPromiseResolve;
-const animationPromise = new Promise(resolve => {
-  animationPromiseResolve = resolve;
-});
-function leaveAnimation(index) {
-  timeline = gsap.timeline({
-    onComplete: () => {
-      animationPromiseResolve();
-    }
-  });
-  const photoElement = box.value[index];
-  const top = photoElement.getBoundingClientRect().top;
-  const left = photoElement.getBoundingClientRect().left;
-  console.log(top, left);
-  timeline.fromTo(photoElement, { position: 'fixed', top: top, left: left }, { position: 'fixed', top: 360, left: 205, duration: 1 });
-}
-function deneme(index) {
-  //leaveAnimation(index);
-}
-
-// router.beforeEach((to, from, next) => {
-//   animationPromise.then(() => {
-//     next();
-//   });
-// });
 
 function itemLeave(el) {
   el.style.setProperty('--width', `${el.offsetWidth}px`);

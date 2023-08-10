@@ -61,3 +61,18 @@
   top: 0;
   left: 0;
 }
+
+.slide-up-enter-from,
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+.slide-up-enter-to,
+.slide-up-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.4s ease-in-out;
+}

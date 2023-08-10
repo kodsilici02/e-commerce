@@ -1,16 +1,18 @@
 <template>
   <div class="w-full flex p-2 gap-2" style="color: var(--text-color)">
     <div class="flex-1 flex flex-wrap p-2 gap-2">
-      <div class="hidden lg:flex flex-col gap-2 h-[70vh]">
-        <div v-for="(image, index) in images" class="flex-1 w-40 cursor-pointer" @click="changeImage(image)">
-          <img class="w-full h-full object-center object-cover" :src="image" />
+      <div class="flex w-full lg:basis-2/4">
+        <div class="hidden lg:flex flex-col gap-2 h-[70vh]">
+          <div v-for="(image, index) in images" class="flex-1 w-40 cursor-pointer" @click="changeImage(image)">
+            <img class="w-full h-full object-center object-cover" :src="image" />
+          </div>
         </div>
-      </div>
-      <!--Actual Image-->
-      <div class="w-full md:basis-1/3 h-[70vh] p-5 flex">
-        <Transition name="page" mode="out-in"
-          ><img class="w-full h-full object-center object-cover" :key="activeImage" :src="activeImage"
-        /></Transition>
+        <!--Actual Image-->
+        <div class="flex-1 h-[70vh] p-5 flex">
+          <Transition name="slide-up" mode="out-in"
+            ><img class="w-full h-full object-center object-cover" :key="activeImage" :src="activeImage"
+          /></Transition>
+        </div>
       </div>
       <div class="flex-1 flex flex-wrap content-start items-center justify-center gap-x-4 gap-y-3 font-code-next font-bold">
         <div class="w-full justify-center flex text-2xl">Iphone 14 Pro</div>
@@ -20,8 +22,8 @@
             v-for="(info, index) in generalInfo"
             class="flex text-xs text-center lg:text-base basis-1/4 xl:basis-1/6 flex-col items-center justify-center">
             <div class="flex gap-1 items-center justify-center">
-              <ResolutionIcon v-if="info.resolution"></ResolutionIcon>
-              <ScreenSizeIcon v-if="info.exceptional" :width="20"></ScreenSizeIcon>
+              <IconsResolution v-if="info.resolution"></IconsResolution>
+              <IconsScreenSize v-if="info.exceptional" :width="20"></IconsScreenSize>
               <ClientOnly v-if="info.icon"><font-awesome :icon="info.icon"></font-awesome></ClientOnly>
               {{ info.name }}
             </div>
@@ -83,11 +85,13 @@
       <div class="w-full h-20"></div>
     </div>
     <!--SideNav-->
-    <OrderSidenav @toggleLocationModal="toggleLocationModal"></OrderSidenav>
+    <SidebarOrderSidebar @toggleLocationModal="toggleLocationModal"></SidebarOrderSidebar>
     <!--Modals-->
-    <Transition name="modal"> <SelectLocation v-if="isLocationModalOpen" @toggleModal="toggleLocationModal"></SelectLocation></Transition>
+    <Transition name="modal">
+      <SelectLocation v-if="isLocationModalOpen" @toggleModal="toggleLocationModal"></SelectLocation>
+    </Transition>
     <Transition name="component_space">
-      <SideBarSpace v-if="isLocationModalOpen" @toggleComponent="toggleLocationModal"></SideBarSpace>
+      <SideBarSpace v-if="isLocationModalOpen" @handleClick="toggleLocationModal"></SideBarSpace>
     </Transition>
   </div>
 </template>
@@ -95,6 +99,12 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import pageTransition from '@/transitions/shopPage.js';
+
+definePageMeta({
+  pageTransition: pageTransition
+});
+
 import gsap from 'gsap';
 let timeline;
 
@@ -159,18 +169,6 @@ const activeImage = ref(images.value[0]);
 function changeImage(image) {
   activeImage.value = image;
 }
-
-const photo = ref();
-
-const enterAnimation = () => {
-  timeline = gsap.timeline({});
-  timeline.from(photo.value, { opacity: 0, scale: '0.5', duration: 1 });
-};
-
-// onMounted(() => {
-//   enterAnimation();
-//   console.log(photo.value.getBoundingClientRect().top, photo.value.getBoundingClientRect().left);
-// });
 
 const isLocationModalOpen = ref(false);
 function toggleLocationModal() {

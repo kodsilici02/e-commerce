@@ -1,5 +1,7 @@
 <template>
-  <div class="fixed w-full h-full top-0 left-0 z-[1001] flex justify-center items-center pointer-events-none">
+  <div
+    class="fixed w-full h-full top-0 left-0 z-[1001] flex justify-center items-center pointer-events-none"
+    style="color: var(--text-color)">
     <div class="w-[500px] h-[300px] max-h-[500px] bg-white rounded-xl z-[1001] pointer-events-auto overflow-auto">
       <div class="flex flex-col">
         <div class="w-full h-16 bg-gray-300 text-xl items-center flex pl-3 gap-2">
@@ -18,7 +20,6 @@
         <div class="w-full pl-3 pb-3 flex">
           <div class="text-[#5080da] transition-colors duration-300 hover:text-[#81a5e8] cursor-pointer">Manage your locations</div>
         </div>
-        <!--Additional Content goes here-->
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="search-box" ref="search_box">
-    <input type="text" ref="search_input" placeholder="Type to Search.." />
+    <input type="text" style="color: var(--text-color)" ref="search_input" v-model="inputValue" placeholder="Type to Search.." />
     <div class="search-btn flex items-center justify-center" @click="searchBoxOpen" ref="search_btn">
       <ClientOnly><font-awesome :icon="['fas', 'search']"></font-awesome></ClientOnly>
     </div>
@@ -11,7 +11,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
+
+const emits = defineEmits(['updateValue']);
+
+const inputValue = ref('');
 
 const search_btn = ref();
 const cancel_btn = ref();
@@ -25,12 +29,14 @@ function searchBoxOpen() {
   cancel_btn.value.classList.add('active');
 }
 function searchBoxClose() {
-  console.log('close');
   search_box.value.classList.remove('active');
   search_input.value.classList.remove('active');
   search_btn.value.classList.remove('active');
   cancel_btn.value.classList.remove('active');
 }
+watchEffect(() => {
+  emits('updateValue', inputValue.value);
+});
 </script>
 
 <style scoped>

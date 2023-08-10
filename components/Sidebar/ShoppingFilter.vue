@@ -1,11 +1,5 @@
 <template>
-  <Transition name="sidebar_space">
-    <ShoppingFilterSpace v-if="isFilterSidebarOpen"></ShoppingFilterSpace>
-  </Transition>
-  <div
-    class="w-52 fixed top-0 left-0 z-[1000] md:sticky md:top-28 overflow-y-auto filter-box-shadow filter-height bg-[#6a6bcf] md:bg-transparent transition-transform duration-200"
-    :class="{ ' translate-x-[-105%]': !isFilterSidebarOpen && isWindowSmall }"
-    style="color: var(--text-color)">
+  <div class="w-full h-full">
     <div class="flex flex-col gap-2">
       <div class="w-full h-14 text-2xl flex justify-center items-center mb-2">Filters</div>
       <div class="w-full flex justify-center text-xl">Price Range</div>
@@ -83,9 +77,6 @@
 
 <script setup>
 import { ref, watch, onMounted } from 'vue';
-import { useFilterSidebarStore } from '@/stores/sidebar.js';
-
-const deneme = true;
 
 const emits = defineEmits(['update-filters']);
 
@@ -161,9 +152,6 @@ function excludeSubCategoryFilter(subCategory) {
   }
 }
 
-const store = useFilterSidebarStore();
-const { filterSidebarOpen } = useFilterSidebarStore();
-
 const sliderMin = ref(65);
 const sliderMax = ref(3000);
 
@@ -171,29 +159,6 @@ const categories = ref([
   { name: 'Brands', categoryOpen: false, subCategory: ['Iphone', 'Samsung', 'Xiaomi'] },
   { name: 'Category Two', categoryOpen: false, subCategory: ['SubCategory One', 'SubCategory Two'] }
 ]);
-const isFilterSidebarOpen = ref(filterSidebarOpen);
-const isWindowSmall = ref(true);
-watch(
-  () => store.filterSidebarOpen,
-  newState => {
-    isFilterSidebarOpen.value = newState;
-  }
-);
-
-onMounted(() => {
-  if (window.innerWidth <= 768) {
-    isWindowSmall.value = true;
-  } else {
-    isWindowSmall.value = false;
-  }
-  window.addEventListener('resize', () => {
-    if (window.innerWidth <= 768) {
-      isWindowSmall.value = true;
-    } else {
-      isWindowSmall.value = false;
-    }
-  });
-});
 
 const sub_category = ref();
 
@@ -223,37 +188,9 @@ function filterCategory(index) {
 function filteredSubCategories(index) {
   return categories.value[index].filteredSubCategories || categories.value[index].subCategory;
 }
-//filter options
 </script>
 
 <style scoped>
-.sidebar_space-enter-from,
-.sidebar_space-leave-to {
-  opacity: 0;
-}
-.sidebar_space-enter-to,
-.sidebar_space-leave-from {
-  opacity: 1;
-}
-.sidebar_space-enter-active,
-.sidebar_space-leave-active {
-  transition: all 0.2s ease-in-out;
-}
-.filter-background {
-  background: linear-gradient(0deg, rgb(29, 32, 63) 0%, rgb(29, 32, 63) 100%);
-}
-.filter-box-shadow {
-  box-shadow: rgba(0, 0, 0, 0.1) -3px -3px 6px 1px inset;
-}
-.filter-height {
-  height: calc(100vh - 7rem);
-}
-@media only screen and (max-width: 768px) {
-  .filter-height {
-    height: 100%;
-  }
-}
-
 .category-button {
   color: var(--text-color);
 }

@@ -1,9 +1,5 @@
 <template>
-  <div class="w-full h-[100vh] flex flex-wrap">
-    <div class="w-full h-20 bg-green-400"><NuxtLink to="/deneme">deneme</NuxtLink></div>
-    <div class="basis-1/4 h-full bg-red-500"></div>
-    <div class="flex-1 bg-cyan-400"></div>
-  </div>
+  <div class="w-full h-[100vh] flex flex-wrap"></div>
 </template>
 
 <script setup>

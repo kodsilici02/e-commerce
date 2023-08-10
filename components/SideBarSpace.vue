@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="fixed w-full h-full z-[1000] top-0 left-0 cursor-pointer"
-    style="background-color: rgba(0, 0, 0, 0.4)"
-    @click="$emit('toggleComponent')"></div>
+  <div class="fixed top-0 left-0 w-full h-full z-[1000]" style="background-color: rgba(0, 0, 0, 0.4)" @click="$emit('handleClick')"></div>
 </template>
 
 <script setup></script>

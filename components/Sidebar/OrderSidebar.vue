@@ -1,9 +1,9 @@
 <template>
   <Transition name="component_space">
-    <SideBarSpace @toggleComponent="toggleOrderSidebar" v-if="isOrderSidebarOpen"></SideBarSpace>
+    <SideBarSpace @handleClick="toggleOrderSidebar" v-if="isOrderSidebarOpen"></SideBarSpace>
   </Transition>
   <div
-    class="w-52 fixed top-0 p-2 right-0 z-[999] md:sticky md:top-28 overflow-y-auto filter-height md:bg-transparent transition-transform duration-200"
+    class="w-52 fixed top-0 p-2 right-0 z-[1000] md:z-[998] md:sticky md:top-28 overflow-y-auto filter-height md:bg-transparent transition-transform duration-200"
     :class="{ ' translate-x-[110%]': !isOrderSidebarOpen && isWindowSmall }"
     style="box-shadow: rgba(0, 0, 0, 0.1) 3px 3px 8px 0px inset">
     <div class="text-2xl flex items-center gap-1">
@@ -30,12 +30,12 @@
 
 <script setup>
 import { ref, watch, onMounted } from 'vue';
-import { useFilterSidebarStore } from '@/stores/sidebar.js';
+import { useSidebarStore } from '@/stores/sidebar.js';
 
 const emits = defineEmits(['toggleLocationModal']);
 
-const store = useFilterSidebarStore();
-const { orderSidebarOpen } = useFilterSidebarStore();
+const store = useSidebarStore();
+const { orderSidebarOpen } = useSidebarStore();
 import { addDays, format } from 'date-fns';
 
 const isOrderSidebarOpen = ref(orderSidebarOpen);
@@ -93,12 +93,12 @@ function toggleModal() {
 @media only screen and (max-width: 768px) {
   .filter-height {
     height: 100%;
-    color: var(--text-white);
-    background-color: var(--secondary);
+    color: var(--text-color);
+    background-color: var(--background);
   }
   .location-button {
     transition: color 0.2s ease;
-    color: var(--text-white);
+    color: var(--text-secondary);
   }
   .location-button:hover {
     color: var(--secondary-light);

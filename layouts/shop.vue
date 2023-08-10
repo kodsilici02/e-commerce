@@ -5,22 +5,24 @@
       <SideBar v-if="sidebar_Open"></SideBar>
     </Transition>
     <Transition name="component_space">
-      <SideBarSpace v-if="sidebar_Open" @toggleComponent="toggleSidebar"></SideBarSpace>
+      <SideBarSpace v-if="sidebar_Open" @handleClick="toggleSidebar"></SideBarSpace>
     </Transition>
 
     <!--Topbar shadow-->
     <div class="fixed top-0 left-0 w-full h-12 md:h-16" style="box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.6)"></div>
     <!--TopBar-->
-    <div class="sticky top-0 left-0 w-full h-12 md:h-16 flex justify-between p-3 gap-2 flex-grow-0 z-[1000] purple-background sm:text-2xl">
+    <div class="sticky top-0 left-0 w-full h-12 md:h-16 flex justify-between p-3 gap-2 flex-grow-0 z-[999] purple-background sm:text-2xl">
       <div class="h-full flex items-center flex-1 justify-start">
         <ClientOnly> <font-awesome :icon="['fas', 'bars']" class="cursor-pointer" @click="toggleSidebar"></font-awesome></ClientOnly>
       </div>
       <div class="h-full flex items-center justify-center flex-1">
-        <SearchBar></SearchBar>
+        <SearchBar @updateValue="updateSearchValue"></SearchBar>
       </div>
       <div class="h-full flex gap-3 md:gap-4 items-center flex-1 justify-end">
         <div class="h-full cursor-pointer flex items-center">
-          <ClientOnly><font-awesome :icon="['fas', 'circle-user']" class="" /></ClientOnly>
+          <NuxtLink to="/homeprofile">
+            <ClientOnly><font-awesome :icon="['fas', 'circle-user']" class="" /></ClientOnly>
+          </NuxtLink>
         </div>
         <div
           class="relative h-full flex items-center cursor-pointer z-[999]"
@@ -63,7 +65,7 @@
       class="w-full grid grid-cols-5 text-base md:text-xl font-fester left-0 sticky top-12 md:top-16 h-12 z-[100] purple-background px-3"
       style="color: rgb(255, 255, 255); background-color: rgb(57, 102, 215); box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.6)">
       <div class="h-full col-span-1 flex justify-start items-center gap-1">
-        <div v-if="$route.fullPath == '/shop'" class="flex gap-1 items-center cursor-pointer md:hidden" @click="toggleFilterSidebar()">
+        <div v-if="showSidenavButton()" class="flex gap-1 items-center cursor-pointer md:hidden" @click="toggleFilterSidebar()">
           <ClientOnly><font-awesome :icon="['fas', 'filter']" /></ClientOnly>Filters
         </div>
       </div>
@@ -87,11 +89,19 @@
 <script setup>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { ref, onMounted } from 'vue';
-import { useFilterSidebarStore } from '@/stores/sidebar.js';
+import { useSidebarStore } from '@/stores/sidebar.js';
 
 const route = useRoute();
 
-const store = useFilterSidebarStore();
+const sideNavButtonRoutes = ['/shop', '/profile'];
+function showSidenavButton() {
+  if (sideNavButtonRoutes.includes(route.fullPath)) {
+    return true;
+  }
+}
+
+const store = useSidebarStore();
+
 function toggleFilterSidebar() {
   store.toggleSidebar();
 }
@@ -122,6 +132,9 @@ const sidebar_Open = ref(false);
 function toggleSidebar() {
   sidebar_Open.value = !sidebar_Open.value;
 }
+
+//Search Bar updates
+function updateSearchValue(value) {}
 </script>
 
 <style scoped>

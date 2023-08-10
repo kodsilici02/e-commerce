@@ -1,16 +1,16 @@
 import { defineStore } from 'pinia';
 
-export const useFilterSidebarStore = defineStore({
+export const useSidebarStore = defineStore({
   id: 'filterSidebar',
   state: () => {
     return {
-      filterSidebarOpen: false,
+      SideBarOpen: false,
       orderSidebarOpen: false
     };
   },
   actions: {
     toggleSidebar() {
-      this.filterSidebarOpen = !this.filterSidebarOpen;
+      this.SideBarOpen = !this.SideBarOpen;
     },
     toggleOrderSidebar() {
       this.orderSidebarOpen = !this.orderSidebarOpen;
