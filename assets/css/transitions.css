@@ -76,3 +76,17 @@
 .slide-up-leave-active {
   transition: all 0.4s ease-in-out;
 }
+.text-move,
+.text-enter-active,
+.text-leave-active {
+  transition: all 0.5s ease;
+}
+
+.text-enter-from,
+.text-leave-to {
+  opacity: 0;
+  transform: translateY(100%);
+}
+.text-leave-active {
+  position: absolute;
+}

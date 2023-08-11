@@ -1,7 +1,7 @@
 <template>
   <div class="w-full flex p-2 gap-2" style="color: var(--text-color)">
     <div class="flex-1 flex flex-wrap p-2 gap-2">
-      <div class="flex w-full lg:basis-2/4">
+      <div class="flex w-full lg:basis-2/4" id="images">
         <div class="hidden lg:flex flex-col gap-2 h-[70vh]">
           <div v-for="(image, index) in images" class="flex-1 w-40 cursor-pointer" @click="changeImage(image)">
             <img class="w-full h-full object-center object-cover" :src="image" />
@@ -99,11 +99,11 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import pageTransition from '@/transitions/shopPage.js';
+import pageTransition from '@/transitions/productPage.js';
 
-definePageMeta({
+/* definePageMeta({
   pageTransition: pageTransition
-});
+}); */
 
 import gsap from 'gsap';
 let timeline;

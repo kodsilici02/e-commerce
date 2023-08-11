@@ -1,6 +1,6 @@
 <template>
   <div class="w-full flex">
-    <SidebarContainer> </SidebarContainer>
+    <SidebarContainer><SidebarSettingsSidebar></SidebarSettingsSidebar> </SidebarContainer>
     <div class="flex-1 p-1">
       <NuxtPage></NuxtPage>
     </div>

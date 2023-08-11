@@ -28,7 +28,9 @@
           class="relative h-full flex items-center cursor-pointer z-[999]"
           @mouseenter="openNotifications"
           @mouseleave="closeNotifications">
-          <ClientOnly><font-awesome :icon="['fas', 'bell']" class="" /></ClientOnly>
+          <NuxtLink to="/notifications">
+            <ClientOnly><font-awesome :icon="['fas', 'bell']" class="" /></ClientOnly>
+          </NuxtLink>
           <div
             class="absolute top-[-5px] right-[-5px] w-4 h-4 rounded-full text-xs flex justify-center items-center"
             style="background-color: var(--secondary-light)">
@@ -69,7 +71,16 @@
           <ClientOnly><font-awesome :icon="['fas', 'filter']" /></ClientOnly>Filters
         </div>
       </div>
-      <div class="h-full col-span-3 flex justify-center items-center">Home</div>
+      <TransitionGroup name="text" tag="div" class="h-full col-span-3 flex gap-1 justify-center items-center font-yolk relative">
+        <NuxtLink
+          :to="segment.link"
+          v-for="(segment, index) in breadcrumbSegments"
+          :key="segment.name"
+          class="h-full col-span-1 flex justify-start items-center gap-1">
+          {{ segment.name }}
+          <span v-if="index !== breadcrumbSegments.length - 1"> > </span>
+        </NuxtLink>
+      </TransitionGroup>
       <div
         v-if="$route.fullPath == '/shop/' + route.params.product"
         class="flex gap-1 items-center justify-end cursor-pointer md:hidden"
@@ -87,11 +98,39 @@
 </template>
 
 <script setup>
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { ref, onMounted } from 'vue';
+import VTypical from 'vue-typical';
+import { ref, onMounted, watchEffect, nextTick } from 'vue';
 import { useSidebarStore } from '@/stores/sidebar.js';
 
 const route = useRoute();
+const router = useRouter();
+
+const breadcrumbSegments = ref([]);
+
+onMounted(() => {
+  updateBreadcrumb();
+});
+watch(
+  () => route.fullPath,
+  () => {
+    updateBreadcrumb();
+  }
+);
+function updateBreadcrumb() {
+  const pathSegments = route.fullPath.split('/').filter(segment => segment !== '');
+  breadcrumbSegments.value = [
+    {
+      name: 'Home',
+      link: '/'
+    },
+    ...pathSegments.map((segment, index) => {
+      return {
+        name: segment,
+        link: '/' + pathSegments.slice(0, index + 1).join('/')
+      };
+    })
+  ];
+}
 
 const sideNavButtonRoutes = ['/shop', '/profile'];
 function showSidenavButton() {
