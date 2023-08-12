@@ -31,7 +31,7 @@
           :key="item.name"
           class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-500 cursor-pointer hover:scale-[1.02] overflow-hidden">
           <NuxtLink
-            :to="'/shop/' + $route.params.category + '/' + convertName(item.name)"
+            :to="'/shop/' + $route.params.category + '/' + useNuxtApp().$convertName(item.name)"
             class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative">
             <div class="absolute top-0 left-0 w-full h-full purchase-layer rounded-lg transition-[background-color] duration-500 z-[2]">
               <div class="w-full h-full flex justify-center items-center">
@@ -121,11 +121,6 @@ function applyFilters(filters) {
   // Update the filteredItems value
   filteredItems.value = filteredItemsTemp;
 }
-
-function convertName(name) {
-  return name.toLowerCase().replace(/ /g, '-');
-}
-
 function itemLeave(el) {
   el.style.setProperty('--width', `${el.offsetWidth}px`);
 }

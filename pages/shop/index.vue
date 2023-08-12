@@ -1,12 +1,12 @@
 <template>
-  <div class="w-full flex flex-wrap gap-2 p-2" style="color: var(--text-white)">
+  <div class="w-full flex flex-wrap gap-2 p-2 px-56" style="color: var(--text-white)">
     <div class="w-full flex flex-wrap">
       <div
         v-for="(item, index) in items"
         :key="item.name"
-        class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-500 cursor-pointer hover:scale-[1.02] overflow-hidden">
+        class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/4 flex p-2 transition-transform duration-500 cursor-pointer hover:scale-[1.02] overflow-hidden">
         <NuxtLink
-          :to="'/shop/' + convertName(item.name)"
+          :to="'/shop/' + useNuxtApp().$convertName(item.name)"
           class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative">
           <div class="absolute top-0 left-0 w-full h-full purchase-layer rounded-lg transition-[background-color] duration-500 z-[2]">
             <div class="w-full h-full flex justify-center items-center">
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="w-full h-auto flex flex-wrap">
-      <div class="basis-1/3">
+      <div class="basis-1/2">
         <Carousel></Carousel>
       </div>
     </div>
@@ -47,7 +47,7 @@ const items = ref([
     img: 'https://i02.appmifile.com/images/2019/05/30/20a32b67-2f14-4f9c-8af6-3c4c8ec6b5dc.png'
   },
   {
-    name: 'Xiaomi 13 Pro',
+    name: ' Computers',
     img: 'https://cdn.imgbin.com/14/20/0/imgbin-computer-cases-housings-laptop-gaming-computer-desktop-computers-lenovo-laptop-q7tZ6atcsVF6T51fWFfMPNeHw.jpg'
   },
   {
@@ -55,10 +55,6 @@ const items = ref([
     img: 'https://www.o2.co.uk/documents/456036/456101/android-tablets-foreground-270121.png/982e99a1-ee83-1c52-3fb7-b83d9ae071c7?t=1615795505763'
   }
 ]);
-
-function convertName(name) {
-  return name.toLowerCase().replace(/ /g, '-');
-}
 </script>
 
 <style scoped>

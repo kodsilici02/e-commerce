@@ -22,5 +22,5 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['stores']
   },
-  plugins: ['~/plugins/fontawesome.client.js', '@/plugins/chartjs.client.js']
+  plugins: ['~/plugins/fontawesome.client.js', '@/plugins/chartjs.client.js', '@/plugins/convertName.js']
 });

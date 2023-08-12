@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full h-[400px] flex flex-wrap relative p-2 overflow-hidden" style="color: var(--text-color)">
+  <div class="w-full h-[400px] flex flex-wrap relative p-2 overflow-hidden items-center justify-center" style="color: var(--text-color)">
     <Transition :name="transition" mode="out-in">
-      <img :key="activeImage" class="object-center object-contain w-full h-full" :src="images[activeImage]" />
+      <img :key="activeImage" class="object-center object-contain w-[85%] h-[85%]" :src="images[activeImage].link" />
     </Transition>
     <div class="absolute top-0 left-0 w-full h-full flex justify-between items-center">
       <div
@@ -9,7 +9,20 @@
         @click="previous()">
         <ClientOnly><font-awesome :icon="['fas', 'chevron-left']"></font-awesome></ClientOnly>
       </div>
-      <div class="bg-green-500 flex-1"></div>
+      <NuxtLink
+        :to="'/shop/' + useNuxtApp().$convertName(images[activeImage].name)"
+        class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative">
+        <div class="absolute top-0 left-0 w-full h-full purchase-layer rounded-lg transition-[background-color] duration-500">
+          <div class="w-full h-full flex justify-center items-center">
+            <div
+              class="w-36 h-10 bg-slate-400 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg"
+              style="border-radius: 35px"
+              @click="deneme(index)">
+              Inspect
+            </div>
+          </div>
+        </div>
+      </NuxtLink>
       <div
         class="w-10 h-10 rounded-full button-background flex justify-center items-center cursor-pointer transition-colors duration-200"
         @click="next()">
@@ -29,10 +42,18 @@
 <script setup>
 import { ref, watch, watchEffect } from 'vue';
 const images = [
-  'https://www.vhv.rs/dpng/d/330-3303605_led-gaming-mouse-krom-nxkromkane-rgb-black-hd.png',
-  'https://www.pngall.com/wp-content/uploads/5/Gaming-Headset-PNG-HD-Image-1.png',
-  'https://www.pngall.com/wp-content/uploads/5/Gaming-Headset-PNG-HD-Image-1.png',
-  'https://www.pngall.com/wp-content/uploads/5/Gaming-Headset-PNG-HD-Image-1.png'
+  {
+    name: 'Anan',
+    link: 'https://www.vhv.rs/dpng/d/330-3303605_led-gaming-mouse-krom-nxkromkane-rgb-black-hd.png'
+  },
+  {
+    name: 'Anan',
+    link: 'https://www.pngall.com/wp-content/uploads/5/Gaming-Headset-PNG-HD-Image-1.png'
+  },
+  {
+    name: 'Anan',
+    link: 'https://www.pngall.com/wp-content/uploads/5/Gaming-Headset-PNG-HD-Image-1.png'
+  }
 ];
 const activeImage = ref(0);
 
@@ -120,5 +141,26 @@ watch(activeImage, () => {
 }
 .indicators:hover {
   background-color: rgb(191, 191, 191);
+}
+.purchase-layer {
+  background-color: #6a6ccf00;
+}
+.item-background:hover .purchase-layer {
+  background-color: #ffffffb4;
+}
+
+.purchase-button {
+  opacity: 0;
+  background-color: #3bc1e2;
+}
+.purchase-button:hover {
+  background-color: #64d2ed;
+}
+.purchase-button:active {
+  transition: background-color 0s ease;
+  background-color: #648bed;
+}
+.item-background:hover .purchase-button {
+  opacity: 1;
 }
 </style>
