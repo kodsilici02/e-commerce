@@ -4,6 +4,9 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page', mode: 'out-in' }
   },
+  routeRules: {
+    '/settings': { redirect: '/settings/orders' }
+  },
   buildModules: ['@nuxtjs/tailwindcss'],
   postcss: {
     plugins: {

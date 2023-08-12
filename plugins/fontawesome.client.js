@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library, config } from '@fortawesome/fontawesome-svg-core';
-import { size } from 'assets/icons/size';
 import {
   faCircleUser,
   faClock,
@@ -34,7 +33,9 @@ import {
   faXmark,
   faCreditCard,
   faEnvelope,
-  faPhone
+  faPhone,
+  faChevronLeft,
+  faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
@@ -54,6 +55,8 @@ library.add(
   faTimes,
   faBars,
   faChevronDown,
+  faChevronLeft,
+  faChevronRight,
   faBatteryFull,
   faDollarSign,
   faMemory,

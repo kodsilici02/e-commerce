@@ -89,7 +89,7 @@
       </div>
     </div>
 
-    <div class="w-full px-3">
+    <div class="w-full px-3 overflow-x-hidden">
       <div class="w-full px-1" style="box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5) inset">
         <slot></slot>
       </div>
