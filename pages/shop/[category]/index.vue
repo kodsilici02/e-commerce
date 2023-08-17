@@ -28,17 +28,17 @@
         </div>
         <div
           v-for="(item, index) in filteredItems"
+          @click="deneme($event, index, item.img)"
           :key="item.name"
           class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-500 cursor-pointer hover:scale-[1.02] overflow-hidden">
           <NuxtLink
-            :to="'/shop/' + $route.params.category + '/' + useNuxtApp().$convertName(item.name)"
+            :to="'/shop/' + $route.params.category + '/' + convertName(item.name)"
             class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative">
             <div class="absolute top-0 left-0 w-full h-full purchase-layer rounded-lg transition-[background-color] duration-500 z-[2]">
               <div class="w-full h-full flex justify-center items-center">
                 <div
                   class="w-36 h-10 bg-slate-400 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg"
-                  style="border-radius: 35px"
-                  @click="deneme(index)">
+                  style="border-radius: 35px">
                   Purchase Now
                 </div>
               </div>
@@ -49,10 +49,13 @@
               </div>
             </div>
             <div class="text-lg md:text-2xl h-14 w-full flex justify-center items-center font-code-next px-2 mt-4">{{ item.name }}</div>
-            <div
-              class="flex-1 p-2"
-              :style="{ 'background-image': `url(${item.img})` }"
-              style="background-size: contain; background-repeat: no-repeat; background-position: center"></div>
+            <div class="flex-1 p-2 overflow-hidden">
+              <img
+                :key="item.name"
+                :src="item.img"
+                :class="{ image: item.img == products.hero_image }"
+                class="w-full h-full object-contain object-center image-selector" />
+            </div>
             <div
               class="h-12 w-full font-code-next text-xs md:text-base font-bold flex flex-wrap px-2 justify-center items-center gap-2 sm:gap-x-3 mb-2">
               <div class="flex gap-1 items-center">
@@ -75,33 +78,17 @@
 
 <script setup>
 import { ref, onMounted, watch } from 'vue';
-import pageTransition from '@/transitions/shopPage.js';
+import { useProductStore } from '@/stores/products.js';
 
-definePageMeta({
-  pageTransition: pageTransition
-});
-
+const products = useProductStore();
 const router = useRouter();
-let timeline;
+function deneme(event, index, image) {
+  products.hero_image = image;
+  const img = document.querySelectorAll('.image-selector')[index];
+  img.classList.add('image');
+}
 
-const items = ref([
-  { name: 'Iphone 14 Pro', brand: 'Iphone', price: 999, memory: 128, img: '../../assets/deneme.png' },
-  {
-    name: 'Samsung Galaxy S22',
-    brand: 'Samsung',
-
-    price: 600,
-    memory: 64,
-    img: 'https://cdn.vatanbilgisayar.com/images/Lp/samsung-s22/images/gallery-base-pink-gold/front.png'
-  },
-  {
-    name: 'Xiaomi 13 Pro',
-    brand: 'Xiaomi',
-    price: 1500,
-    memory: 512,
-    img: 'https://resim.epey.com/839868/m_xiaomi-13-pro-2.png'
-  }
-]);
+const items = ref(products.items);
 
 const filteredItems = ref(items.value);
 function applyFilters(filters) {
@@ -121,12 +108,21 @@ function applyFilters(filters) {
   // Update the filteredItems value
   filteredItems.value = filteredItemsTemp;
 }
+
+function convertName(name) {
+  return name.toLowerCase().replace(/ /g, '-');
+}
+
 function itemLeave(el) {
   el.style.setProperty('--width', `${el.offsetWidth}px`);
 }
 </script>
 
 <style scoped>
+.image {
+  view-transition-name: image;
+  contain: paint;
+}
 .list-move,
 .list-enter-active,
 .list-leave-active {

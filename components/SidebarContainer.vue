@@ -1,10 +1,16 @@
 <template>
   <Transition name="sidebar_space">
-    <SideBarSpace @handleClick="toggleFilter" v-if="isFilterSidebarOpen"></SideBarSpace>
+    <SideBarSpace @handleClick="toggleFilter" v-if="isSidebarOpen && isWindowSmall"></SideBarSpace>
   </Transition>
   <div
+    v-if="isSidebarOpen && isWindowSmall"
     class="w-72 md:w-52 fixed top-0 left-0 z-[1000] md:sticky md:top-28 overflow-y-auto filter-box-shadow filter-height background-color transition-transform duration-200"
-    :class="{ ' translate-x-[-105%]': !isFilterSidebarOpen && isWindowSmall }"
+    style="color: var(--text-color)">
+    <slot></slot>
+  </div>
+  <div
+    v-if="!isWindowSmall"
+    class="w-72 md:w-52 fixed top-0 left-0 z-[1000] md:sticky md:top-28 overflow-y-auto filter-box-shadow filter-height background-color transition-transform duration-200"
     style="color: var(--text-color)">
     <slot></slot>
   </div>
@@ -21,30 +27,22 @@ function toggleFilter() {
   store.toggleSidebar();
 }
 
-const isFilterSidebarOpen = ref(SideBarOpen);
+const isSidebarOpen = ref(SideBarOpen);
 watch(
   () => store.SideBarOpen,
   newState => {
-    isFilterSidebarOpen.value = newState;
+    isSidebarOpen.value = newState;
   }
 );
 
-const isWindowSmall = ref(true);
-onMounted(() => {
-  if (window.innerWidth <= 768) {
-    isWindowSmall.value = true;
-  } else {
-    isWindowSmall.value = false;
+const isWindowSmall = ref(store.isWindowSmall);
+watch(
+  () => store.isWindowSmall,
+  newState => {
+    isWindowSmall.value = newState;
+    console.log(newState);
   }
-  window.addEventListener('resize', () => {
-    if (window.innerWidth <= 768) {
-      isWindowSmall.value = true;
-    } else {
-      isWindowSmall.value = false;
-      store.filterSidebarOpen = false;
-    }
-  });
-});
+);
 
 //filter options
 </script>

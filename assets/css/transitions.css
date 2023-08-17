@@ -85,7 +85,7 @@
 .text-enter-from,
 .text-leave-to {
   opacity: 0;
-  transform: translateY(100%);
+  transform: translateX(100%);
 }
 .text-leave-active {
   position: absolute;

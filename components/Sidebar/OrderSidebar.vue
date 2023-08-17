@@ -47,18 +47,18 @@ watch(
   }
 );
 
-onMounted(() => {
+function calculateWindowSize() {
   if (window.innerWidth <= 768) {
     isWindowSmall.value = true;
   } else {
     isWindowSmall.value = false;
   }
+}
+
+onMounted(() => {
+  calculateWindowSize();
   window.addEventListener('resize', () => {
-    if (window.innerWidth <= 768) {
-      isWindowSmall.value = true;
-    } else {
-      isWindowSmall.value = false;
-    }
+    calculateWindowSize();
   });
 });
 

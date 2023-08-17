@@ -22,7 +22,6 @@ body {
   --secondary-light: #6d92e7;
   --accent: #a66ced;
 }
-
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;

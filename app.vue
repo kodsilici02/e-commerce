@@ -9,6 +9,29 @@
 <script setup>
 import '@/assets/css/fonts.css';
 import '@/assets/css/input.css';
+import '@/assets/css/view-transition.css';
+import { useSidebarStore } from '@/stores/sidebar.js';
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  document.startViewTransition();
+});
+
+const store = useSidebarStore();
+
+function calculateWindowSize() {
+  if (window.innerWidth <= 768) {
+    store.WindowSmall();
+  } else {
+    store.WindowNotSmall();
+  }
+}
+onMounted(() => {
+  calculateWindowSize();
+  window.addEventListener('resize', () => {
+    calculateWindowSize();
+  });
+});
 </script>
 <style>
 .font_1 {

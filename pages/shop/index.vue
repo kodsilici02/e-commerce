@@ -40,15 +40,15 @@ import { ref } from 'vue';
 const items = ref([
   {
     name: 'Phones',
-    img: 'https://png.pngitem.com/pimgs/s/509-5092096_offering-high-quality-mobile-repair-service-main-image.png'
+    img: 'https://cdn.discordapp.com/attachments/1122596168870936686/1141662584655847424/509-5092096_offering-high-quality-mobile-repair-service-main-image-removebg-preview.png'
   },
   {
     name: 'Laptops',
-    img: 'https://i02.appmifile.com/images/2019/05/30/20a32b67-2f14-4f9c-8af6-3c4c8ec6b5dc.png'
+    img: 'https://cdn.discordapp.com/attachments/1122596168870936686/1141662585322741840/20a32b67-2f14-4f9c-8af6-3c4c8ec6b5dc-removebg-preview.png'
   },
   {
-    name: ' Computers',
-    img: 'https://cdn.imgbin.com/14/20/0/imgbin-computer-cases-housings-laptop-gaming-computer-desktop-computers-lenovo-laptop-q7tZ6atcsVF6T51fWFfMPNeHw.jpg'
+    name: 'Computers',
+    img: 'https://media.discordapp.net/attachments/1122596168870936686/1141662584966230086/imgbin-computer-cases-housings-laptop-gaming-computer-desktop-computers-lenovo-laptop-q7tZ6atcsVF6T51fWFfMPNeHw-removebg-preview.png'
   },
   {
     name: 'Tablets',

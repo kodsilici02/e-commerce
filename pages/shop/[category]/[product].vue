@@ -10,7 +10,7 @@
         <!--Actual Image-->
         <div class="flex-1 h-[70vh] p-5 flex">
           <Transition name="slide-up" mode="out-in"
-            ><img class="w-full h-full object-center object-cover" :key="activeImage" :src="activeImage"
+            ><img class="w-full h-full object-center object-contain image" :key="activeImage" :src="activeImage"
           /></Transition>
         </div>
       </div>
@@ -98,15 +98,13 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import pageTransition from '@/transitions/productPage.js';
+import { useRouter, useRoute } from 'vue-router';
+import { useProductStore } from '@/stores/products.js';
 
-/* definePageMeta({
-  pageTransition: pageTransition
-}); */
+const route = useRoute();
 
-import gsap from 'gsap';
-let timeline;
+const products = useProductStore();
+const image_url = products.getImageByName(route.params.product);
 
 const aboutTexts = [
   '6.1 inch Super Retina XDR display with Always On and ProMotion',
@@ -160,6 +158,7 @@ const generalInfo = [
   }
 ];
 const images = ref([
+  image_url,
   '../../assets/deneme.png',
   'https://netrinoimages.s3.eu-west-2.amazonaws.com/2022/12/08/1373191/426752/iphone_14_pro_max_3d_model_c4d_max_obj_fbx_ma_lwo_3ds_3dm_stl_4402727_o.png',
   'https://w7.pngwing.com/pngs/961/642/png-transparent-iphone-14-pro.png'
@@ -177,6 +176,10 @@ function toggleLocationModal() {
 </script>
 
 <style scoped>
+.image {
+  view-transition-name: image;
+  contain: paint;
+}
 .options-button {
   background-color: var(--secondary);
 }

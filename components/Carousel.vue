@@ -5,7 +5,7 @@
     </Transition>
     <div class="absolute top-0 left-0 w-full h-full flex justify-between items-center">
       <div
-        class="w-10 h-10 rounded-full button-background flex justify-center items-center cursor-pointer transition-colors duration-200"
+        class="w-10 h-10 p-6 rounded-full button-background flex justify-center items-center cursor-pointer transition-colors duration-200"
         @click="previous()">
         <ClientOnly><font-awesome :icon="['fas', 'chevron-left']"></font-awesome></ClientOnly>
       </div>
@@ -24,7 +24,7 @@
         </div>
       </NuxtLink>
       <div
-        class="w-10 h-10 rounded-full button-background flex justify-center items-center cursor-pointer transition-colors duration-200"
+        class="w-10 h-10 p-6 rounded-full button-background flex justify-center items-center cursor-pointer transition-colors duration-200"
         @click="next()">
         <ClientOnly><font-awesome :icon="['fas', 'chevron-right']"></font-awesome></ClientOnly>
       </div>
