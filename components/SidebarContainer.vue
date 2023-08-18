@@ -2,18 +2,22 @@
   <Transition name="sidebar_space">
     <SideBarSpace @handleClick="toggleFilter" v-if="isSidebarOpen && isWindowSmall"></SideBarSpace>
   </Transition>
-  <div
-    v-if="isSidebarOpen && isWindowSmall"
-    class="w-72 md:w-52 fixed top-0 left-0 z-[1000] md:sticky md:top-28 overflow-y-auto filter-box-shadow filter-height background-color transition-transform duration-200"
-    style="color: var(--text-color)">
-    <slot></slot>
-  </div>
-  <div
-    v-if="!isWindowSmall"
-    class="w-72 md:w-52 fixed top-0 left-0 z-[1000] md:sticky md:top-28 overflow-y-auto filter-box-shadow filter-height background-color transition-transform duration-200"
-    style="color: var(--text-color)">
-    <slot></slot>
-  </div>
+  <Transition name="slide-right">
+    <div
+      v-if="isSidebarOpen && isWindowSmall"
+      class="w-72 md:w-52 fixed top-0 left-0 z-[1000] md:sticky md:top-28 overflow-y-auto filter-box-shadow filter-height background-color transition-transform duration-200"
+      style="color: var(--text-color)">
+      <slot></slot>
+    </div>
+  </Transition>
+  <Transition name="slide-right">
+    <div
+      v-if="!isWindowSmall"
+      class="w-72 md:w-52 fixed top-0 left-0 z-[1000] md:sticky md:top-28 overflow-y-auto filter-box-shadow filter-height background-color transition-transform duration-200"
+      style="color: var(--text-color)">
+      <slot></slot>
+    </div>
+  </Transition>
 </template>
 
 <script setup>
@@ -48,6 +52,19 @@ watch(
 </script>
 
 <style scoped>
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: all 0.15s ease-in-out;
+}
+.slide-right-enter-from,
+.slide-right-leave-to {
+  transform: translateX(-100%);
+}
+.slide-right-enter-to,
+.slide-right-leave-from {
+  transform: translateX(0);
+}
+
 .background-color {
   background-color: transparent;
 }

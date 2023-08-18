@@ -157,7 +157,7 @@ const sliderMax = ref(3000);
 
 const categories = ref([
   { name: 'Brands', categoryOpen: false, subCategory: ['Iphone', 'Samsung', 'Xiaomi'] },
-  { name: 'Category Two', categoryOpen: false, subCategory: ['SubCategory One', 'SubCategory Two'] }
+  { name: 'Category Two', categoryOpen: false, subCategory: [' One', ' Two'] }
 ]);
 
 const sub_category = ref();

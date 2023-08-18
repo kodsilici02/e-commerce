@@ -11,9 +11,6 @@ export default defineNuxtConfig({
     viewTransition: true
   },
 
-  routeRules: {
-    '/settings': { redirect: '/settings/orders' }
-  },
   buildModules: ['@nuxtjs/tailwindcss'],
   postcss: {
     plugins: {

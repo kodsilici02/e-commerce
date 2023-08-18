@@ -8,9 +8,9 @@
           </div>
         </div>
         <!--Actual Image-->
-        <div class="flex-1 h-[70vh] p-5 flex">
+        <div class="flex-1 h-[70vh] flex justify-center items-center">
           <Transition name="slide-up" mode="out-in"
-            ><img class="w-full h-full object-center object-contain image" :key="activeImage" :src="activeImage"
+            ><img class="object-center object-contain image" :key="activeImage" :src="activeImage"
           /></Transition>
         </div>
       </div>
@@ -177,7 +177,7 @@ function toggleLocationModal() {
 
 <style scoped>
 .image {
-  view-transition-name: image;
+  view-transition-name: view-image;
   contain: paint;
 }
 .options-button {
