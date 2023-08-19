@@ -35,7 +35,9 @@ import {
   faEnvelope,
   faPhone,
   faChevronLeft,
-  faChevronRight
+  faChevronRight,
+  faGears,
+  faHome
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
@@ -74,7 +76,9 @@ library.add(
   faXmark,
   faCreditCard,
   faEnvelope,
-  faPhone
+  faPhone,
+  faGears,
+  faHome
 );
 
 // This is important, we are going to let Nuxt worry about the CSS

@@ -61,7 +61,7 @@
       </div>
     </div>
     <div
-      class="w-full flex justify-center items-center text-base lg:text-4xl font-yolk h-16 md:h-28 reverse-background purple-background px-4 text-center main-header-2">
+      class="w-full flex z-[97] justify-center items-center text-base lg:text-4xl font-yolk h-16 md:h-28 reverse-background purple-background px-4 text-center main-header-2">
       Everything You are Looking For is Here
     </div>
     <div

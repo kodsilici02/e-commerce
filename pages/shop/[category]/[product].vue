@@ -8,7 +8,7 @@
           </div>
         </div>
         <!--Actual Image-->
-        <div class="flex-1 h-[70vh] flex justify-center items-center">
+        <div class="flex-1 h-[70vh] flex justify-center items-center z-0">
           <Transition name="slide-up" mode="out-in"
             ><img class="object-center object-contain image" :key="activeImage" :src="activeImage"
           /></Transition>
