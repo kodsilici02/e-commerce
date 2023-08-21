@@ -49,11 +49,11 @@
       </button>
       <div
         v-if="route.subRoutes"
-        class="w-full overflow-hidden transition-all duration-300 mt-1 sub-category-container"
+        class="w-full overflow-hidden transition-all duration-300 mt-1 sub-category-container rounded-xl"
         style="max-height: 0"
         ref="sub_category">
         <div class="sub-category">
-          <div class="mr-[3px] py-2" style="background-color: rgba(0, 0, 0, 0.1)">
+          <div class="mr-[3px] py-2" style="background-color: rgba(67, 67, 67, 0.4)">
             <div v-for="(child, subCatindex) in route.subRoutes" class="w-full flex gap-1 justify-center text-base h-8 items-center">
               <NuxtLink :to="child.link" class="flex-1 text-center text-lg transition-colors duration-200 cursor-pointer child-route">
                 {{ child.name }}
@@ -104,7 +104,35 @@ const routes = ref([
   {
     name: 'Settings',
     link: '/settings',
-    icon: ['fas', 'gears']
+
+    icon: ['fas', 'gears'],
+    subRoutesOpen: false,
+    subRoutes: [
+      {
+        name: 'Orders',
+        link: '/settings/orders'
+      },
+      {
+        name: 'Account',
+        link: '/settings/account'
+      },
+      {
+        name: 'Adresses',
+        link: '/settings/adresses'
+      },
+      {
+        name: 'Payment',
+        link: '/settings/payment'
+      },
+      {
+        name: 'Message Center',
+        link: '/settings/message-center'
+      },
+      {
+        name: 'Contact Us',
+        link: '/settings/contact'
+      }
+    ]
   }
 ]);
 function capitalizeFirstLetterFromPath(path) {

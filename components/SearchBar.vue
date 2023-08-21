@@ -1,10 +1,10 @@
 <template>
   <div class="search-box" ref="search_box">
-    <input type="text" style="color: var(--text-color)" ref="search_input" v-model="inputValue" placeholder="Type to Search.." />
+    <input type="text" style="color: var(--text-color)" ref="search_input" v-model="inputValue" :placeholder="placeholder" />
     <div class="search-btn flex items-center justify-center" @click="searchBoxOpen" ref="search_btn">
       <ClientOnly><font-awesome :icon="['fas', 'search']"></font-awesome></ClientOnly>
     </div>
-    <div class="cancel-btn" ref="cancel_btn" @click="searchBoxClose">
+    <div class="cancel-btn" :style="{ color: cancel_btn_color }" ref="cancel_btn" @click="searchBoxClose">
       <ClientOnly> <font-awesome :icon="['fas', 'times']"></font-awesome></ClientOnly>
     </div>
   </div>
@@ -14,6 +14,16 @@
 import { ref, watchEffect } from 'vue';
 
 const emits = defineEmits(['updateValue']);
+const props = defineProps({
+  placeholder: {
+    type: String,
+    default: 'Type to Search..'
+  },
+  cancel_btn_color: {
+    type: String,
+    default: '#fff'
+  }
+});
 
 const inputValue = ref('');
 
@@ -83,7 +93,7 @@ watchEffect(() => {
   transition: all 0.5s cubic-bezier(0.68, -0.25, 0.265, 1.25);
 }
 .search-box .search-btn:hover {
-  background-color: rgb(215, 199, 219);
+  background-color: rgb(199, 207, 219);
 }
 .search-box .search-btn.active {
   --search-btn-radius: 40px;
@@ -101,7 +111,7 @@ watchEffect(() => {
   top: 50%;
   right: 0px;
   transform: translateY(-50%);
-  color: #fff;
+
   font-size: 25px;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.68, -0.25, 0.265, 1.25);

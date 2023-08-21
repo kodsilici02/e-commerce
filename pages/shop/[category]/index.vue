@@ -80,9 +80,10 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useProductStore } from '@/stores/products.js';
+import { useRoute } from 'vue-router';
 
 const products = useProductStore();
-const router = useRouter();
+const route = useRoute();
 function deneme(event, index, image) {
   products.hero_image = image;
   const img = document.querySelectorAll('.image-selector')[index];

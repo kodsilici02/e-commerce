@@ -1,11 +1,9 @@
 <template>
   <div>
-    <NuxtPage></NuxtPage>
+    <NuxtPage :keepalive="{}"></NuxtPage>
   </div>
 </template>
 
-<script setup>
-import transitionConfig from '@/transitions/transitionConfig';
-</script>
+<script setup></script>
 
 <style scoped></style>

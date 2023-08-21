@@ -37,6 +37,9 @@
 
 <script setup>
 import { ref } from 'vue';
+definePageMeta({
+  keepalive: false
+});
 const items = ref([
   {
     name: 'Phones',
