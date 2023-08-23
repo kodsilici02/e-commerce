@@ -61,17 +61,21 @@
       </div>
     </div>
     <div
+      v-if="route.fullPath == '/'"
       class="w-full flex z-[97] justify-center items-center text-base lg:text-4xl font-yolk h-16 md:h-28 reverse-background purple-background px-4 text-center main-header-2">
       Everything You are Looking For is Here
     </div>
     <div
-      class="w-full grid grid-cols-5 text-base md:text-xl font-fester left-0 sticky top-12 md:top-16 h-12 z-[100] purple-background px-3 main-header-3"
+      class="w-full grid grid-cols-5 text-xs md:text-xl font-fester left-0 sticky top-12 md:top-16 h-12 z-[100] purple-background px-3 main-header-3"
       style="color: rgb(255, 255, 255); background-color: rgb(57, 102, 215); box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.6)">
       <div class="h-full col-span-1 flex justify-start items-center gap-1">
-        <div v-if="showSidenavButton()" class="flex gap-1 items-center cursor-pointer md:hidden" @click="toggleFilterSidebar()">
-          <ClientOnly><font-awesome :icon="['fas', 'filter']" /></ClientOnly>Filters
-        </div>
+        <Transition name="fade">
+          <div v-if="sideNavButtonState" class="flex gap-1 items-center cursor-pointer md:hidden" @click="toggleFilterSidebar()">
+            <ClientOnly><font-awesome :icon="['fas', 'filter']" /></ClientOnly>Filters
+          </div>
+        </Transition>
       </div>
+
       <TransitionGroup name="text" tag="div" class="h-full col-span-3 flex gap-1 justify-center items-center font-yolk relative">
         <NuxtLink
           :to="segment.link"
@@ -82,12 +86,14 @@
           <span v-if="index !== breadcrumbSegments.length - 1"> > </span>
         </NuxtLink>
       </TransitionGroup>
-      <div
-        v-if="$route.fullPath == '/shop/' + route.params.category + '/' + route.params.product"
-        class="flex gap-1 items-center justify-end cursor-pointer md:hidden"
-        @click="toggleOrderSidebar()">
-        <ClientOnly><font-awesome :icon="['fas', 'cart-shopping']" /></ClientOnly>Order
-      </div>
+      <Transition name="fade">
+        <div
+          v-if="$route.fullPath == '/shop/' + route.params.category + '/' + route.params.product"
+          class="flex gap-1 items-center justify-end cursor-pointer md:hidden"
+          @click="toggleOrderSidebar()">
+          <ClientOnly><font-awesome :icon="['fas', 'cart-shopping']" /></ClientOnly>Order
+        </div>
+      </Transition>
     </div>
 
     <div class="w-full px-3">
@@ -134,11 +140,19 @@ function updateBreadcrumb() {
 }
 
 const sideNavButtonRoutes = ['/shop', '/profile', '/shop/' + route.params.category];
-function showSidenavButton() {
-  if (sideNavButtonRoutes.includes(route.fullPath)) {
-    return true;
+const sideNavButtonState = ref();
+router.beforeEach((to, from) => {
+  if (sideNavButtonRoutes.includes(to.fullPath)) {
+    sideNavButtonState.value = true;
+  } else {
+    sideNavButtonState.value = false;
   }
-}
+});
+onMounted(() => {
+  if (sideNavButtonRoutes.includes(route.fullPath)) {
+    sideNavButtonState.value = true;
+  }
+});
 
 const store = useSidebarStore();
 

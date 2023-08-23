@@ -11,28 +11,11 @@
     </div>
     <div class="w-full text-xl font-yolk flex justify-center">Your Cart is Empty</div>
     <div class="w-full flex justify-center">
-      <NuxtLink to="/shop"
-        ><div
-          class="w-36 h-10 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg cursor-pointer"
-          style="border-radius: 35px; color: var(--text-white)">
-          Start Shopping
-        </div></NuxtLink
-      >
+      <NavigateButton :to="'/shop'" :text="'Start Shopping'"></NavigateButton>
     </div>
   </div>
 </template>
 
 <script setup></script>
 
-<style scoped>
-.purchase-button {
-  background-color: #3bc1e2;
-}
-.purchase-button:hover {
-  background-color: #64d2ed;
-}
-.purchase-button:active {
-  transition: background-color 0s ease;
-  background-color: #648bed;
-}
-</style>
+<style scoped></style>

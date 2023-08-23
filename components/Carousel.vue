@@ -95,40 +95,6 @@ watch(activeImage, () => {
 </script>
 
 <style scoped>
-.left-enter-active,
-.left-leave-active {
-  transition: all 0.4s ease-in-out;
-}
-.left-enter-from {
-  transform: translateX(-100%);
-}
-.left-enter-to {
-  transform: translateX(0);
-}
-.left-leave-from {
-  transform: translateX(0);
-}
-.left-leave-to {
-  transform: translateX(100%);
-}
-
-.right-enter-active,
-.right-leave-active {
-  transition: all 0.4s ease-in-out;
-}
-.right-enter-from {
-  transform: translateX(100%);
-}
-.right-enter-to {
-  transform: translateX(0);
-}
-.right-leave-from {
-  transform: translateX(0);
-}
-.right-leave-to {
-  transform: translateX(-100%);
-}
-
 .button-background {
   background-color: rgba(100, 100, 100, 0.3);
 }

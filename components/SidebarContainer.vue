@@ -6,7 +6,7 @@
     <div
       v-if="isSidebarOpen && isWindowSmall"
       class="w-72 md:w-52 fixed top-0 left-0 z-[1000] md:sticky md:top-28 overflow-y-auto filter-box-shadow filter-height background-color transition-transform duration-200"
-      style="color: var(--text-color)">
+      style="color: var(--text-color); view-transition-name: sidebar-transition">
       <slot></slot>
     </div>
   </Transition>
@@ -14,7 +14,7 @@
     <div
       v-if="!isWindowSmall"
       class="w-72 md:w-52 fixed top-0 left-0 z-[1000] md:sticky md:top-28 overflow-y-auto filter-box-shadow filter-height background-color transition-transform duration-200"
-      style="color: var(--text-color)">
+      style="color: var(--text-color); view-transition-name: sidebar-transition">
       <slot></slot>
     </div>
   </Transition>
@@ -44,7 +44,6 @@ watch(
   () => store.isWindowSmall,
   newState => {
     isWindowSmall.value = newState;
-    console.log(newState);
   }
 );
 
