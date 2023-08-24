@@ -29,7 +29,6 @@
         <div
           v-for="(item, index) in filteredItems"
           @click="deneme($event, index, item.img)"
-          @mouseenter="deneme($event, index, item.img)"
           :key="item.name"
           class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-200 cursor-pointer hover:scale-[1.02] overflow-hidden">
           <NuxtLink
@@ -49,16 +48,15 @@
                 <ClientOnly><font-awesome :icon="['fas', 'dollar-sign']" /></ClientOnly>{{ item.price }}
               </div>
             </div>
-            <div class="text-lg md:text-2xl h-14 w-full flex justify-center items-center font-code-next px-2 mt-4">{{ item.name }}</div>
+            <div class="text-lg md:text-2xl h-14 w-full flex justify-center items-center px-2 mt-4">{{ item.name }}</div>
             <div class="flex-1 flex justify-center overflow-hidden">
               <img
                 :key="item.name"
                 :src="item.img"
-                :class="{ image: item.img == products.hero_image }"
+                :class="{ image: item.img == hero_image }"
                 class="object-contain object-center image-selector" />
             </div>
-            <div
-              class="h-12 w-full font-code-next text-xs md:text-base font-bold flex flex-wrap px-2 justify-center items-center gap-2 sm:gap-x-3 mb-2">
+            <div class="h-12 w-full text-xs md:text-base font-bold flex flex-wrap px-2 justify-center items-center gap-2 sm:gap-x-3 mb-2">
               <div class="flex gap-1 items-center">
                 <ClientOnly><font-awesome :icon="['fas', 'battery-full']" /></ClientOnly>3200mAh
               </div>
@@ -88,8 +86,16 @@ const products = useProductStore();
 const route = useRoute();
 const router = useRouter();
 
+const hero_image = ref(products.hero_image);
+
+onMounted(() => {
+  setTimeout(() => {
+    hero_image.value = '';
+  }, 0);
+});
+
 function deneme(event, index, image) {
-  products.hero_image = image;
+  hero_image.value = image;
   const img = document.querySelectorAll('.image-selector')[index];
   img.classList.add('image');
 }

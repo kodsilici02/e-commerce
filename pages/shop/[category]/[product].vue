@@ -10,7 +10,7 @@
         <!--Actual Image-->
         <div class="flex-1 h-[70vh] flex justify-center items-center z-0">
           <Transition name="slide-up" mode="out-in"
-            ><img class="object-center object-contain image" :key="activeImage" :src="activeImage"
+            ><img class="object-center object-contain image actual-image" :key="activeImage" :src="activeImage"
           /></Transition>
         </div>
       </div>
@@ -100,16 +100,23 @@
 import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useProductStore } from '@/stores/products.js';
-definePageMeta({
-  keepalive: false
-});
 
 const route = useRoute();
+const router = useRouter();
 
+router.beforeEach((to, from, next) => {
+  if (to.fullPath == '/shop/' + route.params.category) {
+    document.querySelector('.actual-image').classList.add('image');
+  }
+  next();
+});
 const products = useProductStore();
 const image_url = products.getImageByName(route.params.product);
 onMounted(() => {
   products.hero_image = image_url;
+  setTimeout(() => {
+    document.querySelector('.actual-image').classList.remove('image');
+  }, 10);
 });
 
 const aboutTexts = [
