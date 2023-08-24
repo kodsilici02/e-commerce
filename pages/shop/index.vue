@@ -12,8 +12,7 @@
             <div class="w-full h-full flex justify-center items-center">
               <div
                 class="w-36 h-10 bg-slate-400 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg"
-                style="border-radius: 35px"
-                @click="deneme(index)">
+                style="border-radius: 35px">
                 Inspect
               </div>
             </div>

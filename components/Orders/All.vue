@@ -27,7 +27,9 @@
         </div>
         <div class="h-full w-[2px] bg-black absolute z-0 top-0"></div>
       </div>
-      <div class="w-full mt-2">Orders in {{ item.date }}</div>
+      <div class="w-full mt-2 flex">
+        <div class="cursor-pointer date transition-colors duration-300" @click="toggleCategory(index)">Orders in {{ item.date }}</div>
+      </div>
       <div class="w-full flex flex-wrap gap-1 overflow-hidden transition-all duration-200" ref="container">
         <div class="w-full flex flex-wrap gap-1 item-container">
           <NuxtLink
@@ -70,6 +72,7 @@
 
 <script setup>
 import { useOrderImage } from '@/stores/orders.js';
+const deneme = false;
 const orderImage = useOrderImage();
 const items = ref([
   {
@@ -113,5 +116,8 @@ function addClass(index, image) {
 }
 .item-background:hover {
   background-color: var(--background-hover);
+}
+.date:hover {
+  color: var(--secondary);
 }
 </style>

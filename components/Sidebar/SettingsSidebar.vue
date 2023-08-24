@@ -47,7 +47,7 @@ const items = [
 </script>
 
 <style scoped>
-.router-link-exact-active {
+.router-link-active {
   color: var(--secondary);
 }
 .link-items:hover {

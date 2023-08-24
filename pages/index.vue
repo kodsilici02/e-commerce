@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-[100vh]" style="color: var(--text-color)">
-    <v-typical :steps="item" :wrapper="h2"></v-typical>
+    <v-typical :steps="item"></v-typical>
     <button @click="deneme">Deneme</button>
   </div>
 </template>

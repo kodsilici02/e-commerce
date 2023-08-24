@@ -2,7 +2,7 @@
   <div class="w-full flex">
     <div id="sidebar">
       <SidebarContainer>
-        <SidebarShoppingFilter @update-filters="applyFilters"></SidebarShoppingFilter>
+        <SidebarShoppingFilter></SidebarShoppingFilter>
       </SidebarContainer>
     </div>
     <div id="content" class="flex-1 flex flex-wrap items-start justify-start bg-green-300] mt-1 p-1" style="color: var(--text-white)">
@@ -78,12 +78,16 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, watchEffect } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import { useProductStore } from '@/stores/products.js';
-import { useRoute } from 'vue-router';
+import { useFilterStore } from '@/stores/filters';
+const filterStore = useFilterStore();
 
 const products = useProductStore();
 const route = useRoute();
+const router = useRouter();
+
 function deneme(event, index, image) {
   products.hero_image = image;
   const img = document.querySelectorAll('.image-selector')[index];
@@ -93,19 +97,25 @@ function deneme(event, index, image) {
 const items = ref(products.items);
 
 const filteredItems = ref(items.value);
-function applyFilters(filters) {
-  const { min, max } = filters.price;
-  let filteredItemsTemp = items.value.filter(item => item.price >= min && item.price <= max);
+watchEffect(() => {
+  applyFilters();
+});
+
+onMounted(() => {
+  applyFilters();
+});
+
+function applyFilters() {
+  const filters = filterStore.filters;
+
+  // Apply filtering logic using the updated filters object
+  // For example:
+  let filteredItemsTemp = items.value.filter(item => item.price >= filters.price.min && item.price <= filters.price.max);
   if (filters.brands.include) {
     filteredItemsTemp = filteredItemsTemp.filter(item => filters.brands.brands.includes(item.brand));
   } else if (filters.brands.include === false) {
     filteredItemsTemp = filteredItemsTemp.filter(item => !filters.brands.brands.includes(item.brand));
   }
-
-  // Apply other filters here, such as brand or category
-  // if (filters.brand) {
-  //   filteredItemsTemp = filteredItemsTemp.filter(item => item.brand === filters.brand);
-  // }
 
   // Update the filteredItems value
   filteredItems.value = filteredItemsTemp;

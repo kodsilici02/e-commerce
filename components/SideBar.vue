@@ -1,13 +1,10 @@
 <template>
-  <div
-    class="fixed w-80 h-full bg-gray-900 z-[1001] flex flex-wrap p-2 gap-2 content-start"
-    style="color: var(--text-white); view-transition-name: sidebar">
+  <div class="fixed w-80 h-full bg-gray-900 z-[1001] flex flex-wrap p-2 gap-2 content-start sidebar" style="color: var(--text-white)">
     <div v-for="(route, index) in routes" class="w-full flex flex-col justify-center items-center" ref="route_items">
       <NuxtLink
         v-if="!route.subRoutes"
         :to="route.link"
-        class="w-full flex justify-center items-center gap-2 text-xl cursor-pointer transition-all duration-300 category-button"
-        @click="toggleCategory($event, index)">
+        class="w-full flex justify-center items-center gap-2 text-xl cursor-pointer transition-all duration-300 category-button">
         <div class="flex basis-1/2 items-center justify-between gap-2">
           <div class="flex-1 flex justify-start items-center">
             <ClientOnly>
@@ -157,6 +154,9 @@ function toggleCategory(event, index) {
 </script>
 
 <style scoped>
+.sidebar {
+  view-transition-name: main-sidenav;
+}
 .router-link-active {
   color: var(--secondary);
 }

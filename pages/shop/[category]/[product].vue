@@ -108,6 +108,9 @@ const route = useRoute();
 
 const products = useProductStore();
 const image_url = products.getImageByName(route.params.product);
+onMounted(() => {
+  products.hero_image = image_url;
+});
 
 const aboutTexts = [
   '6.1 inch Super Retina XDR display with Always On and ProMotion',

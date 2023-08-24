@@ -4,13 +4,7 @@
       <div class="w-full h-14 text-2xl flex justify-center items-center mb-2">Filters</div>
       <div class="w-full flex justify-center text-xl">Price Range</div>
       <div class="w-full p-2">
-        <RangeSlider
-          :min="65"
-          :max="3000"
-          v-model:min-value="sliderMin"
-          v-model:max-value="sliderMax"
-          @update:minValue="updateFilterOptions"
-          @update:maxValue="updateFilterOptions"></RangeSlider>
+        <RangeSlider :min="65" :max="3000" v-model:min-value="sliderMin" v-model:max-value="sliderMax"></RangeSlider>
       </div>
       <div v-for="(category, index) in categories" class="flex flex-col justify-center items-center">
         <button
@@ -76,31 +70,18 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue';
+import { ref, watch, onMounted, watchEffect } from 'vue';
+import { useFilterStore } from '@/stores/filters';
+const filterStore = useFilterStore();
 
 const emits = defineEmits(['update-filters']);
 
-function updateFilterOptions() {
-  // Create the filter options object
-  const filters = {
-    price: {
-      min: sliderMin.value,
-      max: sliderMax.value
-    },
-    brands: {
-      include: subCategoriesFilterType.value,
-      brands: selectedSubCategories.value
-    }
-  };
+const sliderMin = ref(filterStore.filters.price.min);
+const sliderMax = ref(filterStore.filters.price.max);
 
-  // Emit the filters object to the parent component (index.vue)
+const subCategoriesFilterType = ref(filterStore.filters.brands.include);
 
-  emits('update-filters', filters);
-}
-
-const subCategoriesFilterType = ref(null);
-
-const selectedSubCategories = ref([]);
+const selectedSubCategories = ref(filterStore.filters.brands.brands);
 
 function toggleColor(subCategory) {
   if (subCategoriesFilterType.value && checkSubCategory(subCategory)) {
@@ -152,9 +133,6 @@ function excludeSubCategoryFilter(subCategory) {
   }
 }
 
-const sliderMin = ref(65);
-const sliderMax = ref(3000);
-
 const categories = ref([
   { name: 'Brands', categoryOpen: false, subCategory: ['Iphone', 'Samsung', 'Xiaomi'] },
   { name: 'Category Two', categoryOpen: false, subCategory: [' One', ' Two'] }
@@ -188,6 +166,21 @@ function filterCategory(index) {
 function filteredSubCategories(index) {
   return categories.value[index].filteredSubCategories || categories.value[index].subCategory;
 }
+
+watchEffect(() => {
+  // Create the filter options object
+  const filters = {
+    price: {
+      min: sliderMin.value,
+      max: sliderMax.value
+    },
+    brands: {
+      include: subCategoriesFilterType.value,
+      brands: selectedSubCategories.value
+    }
+  };
+  filterStore.updateFilters(filters);
+});
 </script>
 
 <style scoped>

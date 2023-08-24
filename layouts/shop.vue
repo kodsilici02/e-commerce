@@ -198,9 +198,6 @@ function updateSearchValue(value) {}
 .main-header-1 {
   view-transition-name: main-header-1;
 }
-.main-header-2 {
-  view-transition-name: main-header-2;
-}
 .main-header-3 {
   view-transition-name: main-header-3;
 }

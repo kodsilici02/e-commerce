@@ -57,6 +57,7 @@
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.3s ease-in-out;
+  position: absolute;
 }
 
 .slide-up-enter-from,
