@@ -45,3 +45,7 @@
   animation: none;
   mix-blend-mode: normal;
 }
+::view-transition-old(main-sidenav),
+::view-transition-new(main-sidenav) {
+  z-index: 1100;
+}

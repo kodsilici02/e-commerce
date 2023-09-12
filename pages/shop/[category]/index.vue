@@ -2,7 +2,7 @@
   <div class="w-full flex">
     <div id="sidebar">
       <SidebarContainer>
-        <SidebarShoppingFilter></SidebarShoppingFilter>
+        <SidebarShoppingFilters></SidebarShoppingFilters>
       </SidebarContainer>
     </div>
     <div id="content" class="flex-1 flex flex-wrap items-start justify-start bg-green-300] mt-1 p-1" style="color: var(--text-white)">
@@ -58,14 +58,14 @@
             </div>
             <div class="h-12 w-full text-xs md:text-base font-bold flex flex-wrap px-2 justify-center items-center gap-2 sm:gap-x-3 mb-2">
               <div class="flex gap-1 items-center">
-                <ClientOnly><font-awesome :icon="['fas', 'battery-full']" /></ClientOnly>3200mAh
+                <ClientOnly><font-awesome :icon="['fas', 'battery-full']" /></ClientOnly>{{ item.battery }} mAh
               </div>
               <div class="flex gap-1 items-center">
-                <ClientOnly><font-awesome :icon="['fas', 'compact-disc']" /></ClientOnly>{{ item.memory }}
+                <ClientOnly><font-awesome :icon="['fas', 'compact-disc']" /></ClientOnly>{{ item.memory[0] }} GB
               </div>
               <div class="flex gap-1 items-center">
                 <IconsScreenSize :height="20" :width="20" :color="'aliceblue'"></IconsScreenSize>
-                6.7 Inc
+                {{ item.screensize }} Inch
               </div>
             </div>
           </NuxtLink>
@@ -79,12 +79,18 @@
 import { ref, onMounted, watch, watchEffect } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useProductStore } from '@/stores/products.js';
-import { useFilterStore } from '@/stores/filters';
-const filterStore = useFilterStore();
+import { useFilterOptions } from '@/stores/filterOptions';
+import { storeToRefs } from 'pinia';
+import { phones2 } from '@/assets/deneme2.js';
 
-const products = useProductStore();
 const route = useRoute();
 const router = useRouter();
+
+const filterOptions = storeToRefs(useFilterOptions());
+function findOptions() {
+  return filterOptions.options.value.find(item => item.name == route.params.category).filters;
+}
+const products = useProductStore();
 
 const hero_image = ref(products.hero_image);
 
@@ -100,33 +106,57 @@ function deneme(event, index, image) {
   img.classList.add('image');
 }
 
-const items = ref(products.items);
+const items = ref(phones2);
 
-const filteredItems = ref(items.value);
-watchEffect(() => {
-  applyFilters();
+//sakın buraya dokunma
+const filteredItems = computed(() => {
+  const clonedItems = [...items.value];
+  const categoryFilters = findOptions();
+
+  categoryFilters.forEach(filter => {
+    if (filter.rangeSlider) {
+      const filterType = filter.type;
+      const minValue = filter.currentMin;
+      const maxValue = filter.currentMax;
+      clonedItems.forEach(item => {
+        const itemValue = item.details.find(detail => detail.type === filterType)?.value;
+        if (itemValue < minValue || itemValue > maxValue) {
+          const index = clonedItems.indexOf(item);
+          if (index !== -1) {
+            clonedItems.splice(index, 1);
+          }
+        }
+      });
+    } else if (filter.selectedCategories.length > 0) {
+      const selectedValues = filter.selectedCategories;
+      clonedItems.forEach(item => {
+        const itemFeatures = item.details.filter(detail => detail.type === filter.type);
+        if (filter.include) {
+          itemFeatures.forEach(itemFeature => {
+            if (!selectedValues.includes(itemFeature.value)) {
+              const index = clonedItems.indexOf(item);
+              if (index !== -1) {
+                clonedItems.splice(index, 1);
+              }
+            }
+          });
+        } else {
+          selectedValues.forEach(selectedValue => {
+            const matchingItemFeature = itemFeatures.find(itemFeature => itemFeature.value === selectedValue);
+            if (matchingItemFeature) {
+              const index = clonedItems.indexOf(item);
+              if (index !== -1) {
+                clonedItems.splice(index, 1);
+              }
+            }
+          });
+        }
+      });
+    }
+  });
+
+  return clonedItems;
 });
-
-onMounted(() => {
-  applyFilters();
-});
-
-function applyFilters() {
-  const filters = filterStore.filters;
-
-  // Apply filtering logic using the updated filters object
-  // For example:
-  let filteredItemsTemp = items.value.filter(item => item.price >= filters.price.min && item.price <= filters.price.max);
-  if (filters.brands.include) {
-    filteredItemsTemp = filteredItemsTemp.filter(item => filters.brands.brands.includes(item.brand));
-  } else if (filters.brands.include === false) {
-    filteredItemsTemp = filteredItemsTemp.filter(item => !filters.brands.brands.includes(item.brand));
-  }
-
-  // Update the filteredItems value
-  filteredItems.value = filteredItemsTemp;
-}
-
 function convertName(name) {
   return name.toLowerCase().replace(/ /g, '-');
 }

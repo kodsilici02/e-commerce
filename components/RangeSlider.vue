@@ -1,8 +1,8 @@
 <template>
   <div ref="slider" class="custom-slider minmax w-full">
     <div class="minmax-indicator"></div>
-    <input ref="inputMin" type="range" name="min" id="min" :min="min" :max="max" :value="minValue" :step="step" @input="onInput" />
-    <input ref="inputMax" type="range" name="max" id="max" :min="min" :max="max" :value="maxValue" :step="step" @input="onInput" />
+    <input ref="inputMin" type="range" name="min" id="min" :min="min" :max="max" :value="sliderMinValue" :step="step" @input="onInput" />
+    <input ref="inputMax" type="range" name="max" id="max" :min="min" :max="max" :value="sliderMaxValue" :step="step" @input="onInput" />
   </div>
   <div class="minmax-inputs">
     <input type="number" class="bg-transparent" :max="max" :min="min" :step="step" v-model="sliderMinValue" />
@@ -12,7 +12,6 @@
 
 <script setup>
 import { computed, ref, watchEffect } from 'vue';
-
 // define component props for the slider component
 const { min, max, step, minValue, maxValue } = defineProps({
   min: {
@@ -27,18 +26,12 @@ const { min, max, step, minValue, maxValue } = defineProps({
     type: Number,
     default: 1
   },
-  minValue: {
-    type: Number,
-    default: 50
-  },
-  maxValue: {
-    type: Number,
-    default: 80
-  }
+  minValue: Number,
+  maxValue: Number
 });
 
 // define emits for the slider component
-const emit = defineEmits(['update:minValue', 'update:maxValue']);
+const emit = defineEmits(['update']);
 
 // define refs for the slider element and the slider values
 const slider = ref(null);
@@ -68,8 +61,7 @@ const setCSSProps = (left, right) => {
 watchEffect(() => {
   if (slider.value) {
     // emit slidet values when updated
-    emit('update:minValue', sliderMinValue.value);
-    emit('update:maxValue', sliderMaxValue.value);
+    emit('update', { min: sliderMinValue.value, max: sliderMaxValue.value });
 
     // calculate values in percentages
     const leftPercent = getPercent(sliderMinValue.value, min, max);
