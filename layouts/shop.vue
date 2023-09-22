@@ -96,8 +96,8 @@
       </Transition>
     </div>
 
-    <div class="w-full px-3">
-      <div class="w-full px-1" style="box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5) inset">
+    <div class="w-full px-3 flex flex-wrap" style="min-height: calc(100vh - 112px)">
+      <div class="w-full flex-1 px-1" style="box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5) inset">
         <slot></slot>
       </div>
     </div>

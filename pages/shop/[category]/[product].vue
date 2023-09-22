@@ -111,7 +111,7 @@ router.beforeEach((to, from, next) => {
   next();
 });
 const products = useProductStore();
-const image_url = products.getImageByName(route.params.product);
+const image_url = 'https://www.kvk.com/images/Product/23092022151344_ip14promdeeppurple.png';
 onMounted(() => {
   products.hero_image = image_url;
   setTimeout(() => {

@@ -30,6 +30,7 @@
           v-for="(item, index) in filteredItems"
           @click="deneme($event, index, item.img)"
           :key="item.name"
+          ref="element"
           class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-200 cursor-pointer hover:scale-[1.02] overflow-hidden">
           <NuxtLink
             :to="'/shop/' + $route.params.category + '/' + convertName(item.name)"

@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full flex justify-center p-3" style="color: var(--text-color)">
-    <div class="w-[75%] flex flex-wrap">
-      <div class="w-full flex flex-wrap">
+  <div class="w-full h-full flex justify-center p-3" style="color: var(--text-color)">
+    <div class="w-[75%] h-full flex flex-wrap items-center">
+      <div class="w-full flex flex-wrap content-start">
         <NuxtLink
           :to="'/settings/' + item.to"
           v-for="(item, index) in items"

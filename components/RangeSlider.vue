@@ -24,7 +24,7 @@
             }
           }
         "
-        @onInput="value => (sliderMinValue = value)"></NumberInput>
+        @onInput="value => changeMin(value)"></NumberInput>
       <div class="flex-1 flex justify-center items-center text-xl font-bold">{{ unit }}</div>
       <NumberInput
         :value="sliderMaxValue"
@@ -44,12 +44,7 @@
             }
           }
         "
-        @onInput="
-          value => {
-            console.log(value);
-            sliderMaxValue = value;
-          }
-        "></NumberInput>
+        @onInput="value => changeMax(value)"></NumberInput>
     </div>
   </div>
 </template>
@@ -85,6 +80,13 @@ const inputMin = ref(null);
 const inputMax = ref(null);
 const sliderMinValue = ref(minValue);
 const sliderMaxValue = ref(maxValue);
+function changeMax(value) {
+  sliderMaxValue.value = value;
+}
+function changeMin(value) {
+  sliderMinValue.value = value;
+}
+
 // function to get the percentage of a value between the min and max values
 const getPercent = (value, min, max) => {
   return ((value - min) / (max - min)) * 100;

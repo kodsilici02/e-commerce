@@ -6,7 +6,14 @@
       <div :key="'key1'" class="num-icon" @click="increase">
         <ClientOnly><font-awesome :icon="['fas', 'chevron-up']"></font-awesome></ClientOnly>
       </div>
-      <input class="num-input" :key="'key2'" :min="min" :max="max" :value="reactiveValue" @focusout="onInput($event)" type="number" />
+      <input
+        class="num-input"
+        :key="'key2'"
+        :min="props.min"
+        :max="props.max"
+        :value="props.value"
+        @focusout="onInput($event)"
+        type="number" />
       <div :key="'key3'" class="num-icon" @click="decrease">
         <ClientOnly> <font-awesome :icon="['fas', 'chevron-down']"></font-awesome> </ClientOnly>
       </div>
@@ -15,7 +22,7 @@
 </template>
 
 <script setup>
-const { min, max, value } = defineProps({
+const props = defineProps({
   min: {
     type: Number,
     default: 0
@@ -31,22 +38,23 @@ const { min, max, value } = defineProps({
   }
 });
 
-const reactiveValue = ref(value);
+const reactiveValue = ref(props.value);
 
 const emits = defineEmits(['increase', 'decrease', 'onInput']);
 
 function onInput(event) {
-  reactiveValue.value = parseInt(event.target.value);
-  if (reactiveValue.value == '') {
-    reactiveValue.value = min;
+  let tempValue = parseInt(event.target.value);
+  if (tempValue == '') {
+    tempValue = props.min;
   }
-  if (reactiveValue.value < min) {
-    reactiveValue.value = min;
+  if (tempValue < props.min) {
+    tempValue = props.min;
   }
-  if (reactiveValue.value > max) {
-    reactiveValue.value = max;
+  if (tempValue > props.max) {
+    tempValue = props.max;
   }
-  emits('onInput', reactiveValue.value);
+  reactiveValue.value = tempValue;
+  emits('onInput', tempValue);
 }
 
 function increase() {
@@ -59,24 +67,6 @@ function decrease() {
 </script>
 
 <style scoped>
-.list-move,
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease;
-}
-
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-}
-.list-leave-active {
-  position: absolute;
-}
-
-.list-enter-active {
-  position: relative;
-}
-
 .num-input::-webkit-inner-spin-button,
 .num-input::-webkit-outer-spin-button {
   -webkit-appearance: none;

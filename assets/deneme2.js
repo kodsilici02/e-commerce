@@ -1,7 +1,7 @@
 export const phones2 = [
   {
-    name: 'IPhone 14 Pro',
-    brand: 'Iphone',
+    name: 'Samsung Galaxy S22',
+    brand: 'Samsung',
     price: 1099,
     screensize: 6.7,
     memory: [128, 256, 512],
@@ -33,12 +33,12 @@ export const phones2 = [
       {
         type: 'brand',
         string: true,
-        value: 'Iphone'
+        value: 'Samsung'
       },
       {
         type: 'ram',
         number: true,
-        value: 128
+        value: 64
       },
       {
         type: 'fast_charge',
@@ -50,6 +50,7 @@ export const phones2 = [
   {
     name: 'IPhone 14 Pro',
     brand: 'Iphone',
+    img: 'https://www.kvk.com/images/Product/23092022151344_ip14promdeeppurple.png',
     price: 1099,
     screensize: 6.7,
     memory: [128, 256, 512],
