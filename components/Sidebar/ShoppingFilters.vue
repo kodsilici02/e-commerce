@@ -1,20 +1,21 @@
 <template>
   <div v-if="categories" class="w-full h-full">
-    <div class="flex flex-col gap-2">
-      <div class="w-full h-14 text-2xl flex justify-center items-center mb-2">Filters</div>
+    <div class="flex flex-col gap-1">
+      <div class="w-full h-14 text-2xl flex justify-center items-center">Filters</div>
       <div v-for="(category, index) in categories" class="flex flex-col justify-center items-center">
-        <div v-if="category.rangeSlider" class="w-full flex flex-wrap gap-2" ref="sub_category">
+        <div v-if="category.rangeSlider" class="w-full flex flex-wrap" ref="sub_category">
           <div class="w-full flex justify-center text-xl">{{ category.name }}</div>
-          <div class="w-full p-2">
+          <div class="w-full px-2">
             <RangeSlider
               :max="category.max"
               :min="category.min"
               :minValue="category.currentMin"
               :maxValue="category.currentMax"
+              :unit="category.unit"
               @update="sliderValues => updateSlider(category.type, sliderValues)"></RangeSlider>
           </div>
         </div>
-        <div v-else class="flex flex-col justify-center items-center">
+        <div v-else class="flex flex-col justify-center items-center w-full">
           <button
             class="w-full flex justify-center items-center gap-2 text-xl cursor-pointer transition-all duration-300 category-button"
             @click="toggleCategory(category.type)">
@@ -31,8 +32,8 @@
             class="w-full overflow-hidden transition-all duration-300 mt-1"
             :style="{ 'max-height': computeCategory(category.type, index) }"
             ref="sub_category">
-            <div class="sub-category">
-              <div class="mr-[3px] py-2" style="color: var(--text-color); background-color: rgba(0, 0, 0, 0.1)">
+            <div class="sub-category p-2 md:p-1">
+              <div class="mr-[3px] py-2 overflow-hidden rounded-xl" style="color: var(--text-color); background-color: rgba(0, 0, 0, 0.1)">
                 <div class="w-full px-3">
                   <div class="field field_v2">
                     <input id="last-name" class="field__input" placeholder="Type" @input="filterCategory(index)" autocomplete="off" />

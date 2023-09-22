@@ -110,53 +110,46 @@ const items = ref(phones2);
 
 //sakın buraya dokunma
 const filteredItems = computed(() => {
-  const clonedItems = [...items.value];
   const categoryFilters = findOptions();
-
-  categoryFilters.forEach(filter => {
-    if (filter.rangeSlider) {
-      const filterType = filter.type;
-      const minValue = filter.currentMin;
-      const maxValue = filter.currentMax;
-      clonedItems.forEach(item => {
-        const itemValue = item.details.find(detail => detail.type === filterType)?.value;
-        if (itemValue < minValue || itemValue > maxValue) {
-          const index = clonedItems.indexOf(item);
-          if (index !== -1) {
-            clonedItems.splice(index, 1);
-          }
-        }
-      });
-    } else if (filter.selectedCategories.length > 0) {
-      const selectedValues = filter.selectedCategories;
-      clonedItems.forEach(item => {
-        const itemFeatures = item.details.filter(detail => detail.type === filter.type);
-        if (filter.include) {
-          itemFeatures.forEach(itemFeature => {
-            if (!selectedValues.includes(itemFeature.value)) {
-              const index = clonedItems.indexOf(item);
-              if (index !== -1) {
-                clonedItems.splice(index, 1);
-              }
-            }
-          });
-        } else {
-          selectedValues.forEach(selectedValue => {
-            const matchingItemFeature = itemFeatures.find(itemFeature => itemFeature.value === selectedValue);
-            if (matchingItemFeature) {
-              const index = clonedItems.indexOf(item);
-              if (index !== -1) {
-                clonedItems.splice(index, 1);
-              }
-            }
-          });
-        }
-      });
-    }
+  const clonedItems = items.value.filter(item => {
+    let details = item.details;
+    return checkFilter(details, categoryFilters);
   });
-
   return clonedItems;
 });
+//buraya da dokunma
+function checkFilter(details, filters) {
+  let conditionArray = [];
+  details.forEach(detail => {
+    let option = filters.find(filter => filter.type == detail.type);
+    if (option.rangeSlider) {
+      if (detail.value >= option.currentMin && detail.value <= option.currentMax) {
+        conditionArray.push(true);
+      } else {
+        conditionArray.push(false);
+      }
+    } else if (option.selectedCategories.length > 0) {
+      if (option.include) {
+        if (option.selectedCategories.includes(detail.value)) {
+          conditionArray.push(true);
+        } else {
+          conditionArray.push(false);
+        }
+      } else {
+        if (option.selectedCategories.includes(detail.value)) {
+          conditionArray.push(false);
+        } else {
+          conditionArray.push(true);
+        }
+      }
+    }
+  });
+  if (conditionArray.includes(false)) {
+    return false;
+  } else {
+    return true;
+  }
+}
 function convertName(name) {
   return name.toLowerCase().replace(/ /g, '-');
 }

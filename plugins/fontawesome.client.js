@@ -37,7 +37,8 @@ import {
   faChevronLeft,
   faChevronRight,
   faGears,
-  faHome
+  faHome,
+  faChevronUp
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
@@ -57,6 +58,7 @@ library.add(
   faTimes,
   faBars,
   faChevronDown,
+  faChevronUp,
   faChevronLeft,
   faChevronRight,
   faBatteryFull,

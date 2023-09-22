@@ -1,19 +1,64 @@
 <template>
-  <div ref="slider" class="custom-slider minmax w-full">
-    <div class="minmax-indicator"></div>
-    <input ref="inputMin" type="range" name="min" id="min" :min="min" :max="max" :value="sliderMinValue" :step="step" @input="onInput" />
-    <input ref="inputMax" type="range" name="max" id="max" :min="min" :max="max" :value="sliderMaxValue" :step="step" @input="onInput" />
-  </div>
-  <div class="minmax-inputs">
-    <input type="number" class="bg-transparent" :max="max" :min="min" :step="step" v-model="sliderMinValue" />
-    <input type="number" class="bg-transparent" :max="max" :min="min" :step="step" v-model="sliderMaxValue" />
+  <div class="w-full flex flex-wrap">
+    <div ref="slider" class="custom-slider minmax w-full">
+      <div class="minmax-indicator"></div>
+      <input ref="inputMin" type="range" name="min" id="min" :min="min" :max="max" :value="sliderMinValue" :step="step" @input="onInput" />
+      <input ref="inputMax" type="range" name="max" id="max" :min="min" :max="max" :value="sliderMaxValue" :step="step" @input="onInput" />
+    </div>
+    <div class="w-full flex justify-between items-center">
+      <NumberInput
+        :value="sliderMinValue"
+        :max="sliderMaxValue"
+        :min="min"
+        @increase="
+          () => {
+            if (sliderMinValue < max) {
+              sliderMinValue++;
+            }
+          }
+        "
+        @decrease="
+          () => {
+            if (sliderMinValue > min) {
+              sliderMinValue--;
+            }
+          }
+        "
+        @onInput="value => (sliderMinValue = value)"></NumberInput>
+      <div class="flex-1 flex justify-center items-center text-xl font-bold">{{ unit }}</div>
+      <NumberInput
+        :value="sliderMaxValue"
+        :max="max"
+        :min="sliderMinValue"
+        @increase="
+          () => {
+            if (sliderMaxValue < max) {
+              sliderMaxValue++;
+            }
+          }
+        "
+        @decrease="
+          () => {
+            if (sliderMaxValue > min) {
+              sliderMaxValue--;
+            }
+          }
+        "
+        @onInput="
+          value => {
+            console.log(value);
+            sliderMaxValue = value;
+          }
+        "></NumberInput>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { computed, ref, watchEffect } from 'vue';
+
 // define component props for the slider component
-const { min, max, step, minValue, maxValue } = defineProps({
+const { min, max, step, minValue, maxValue, unit } = defineProps({
   min: {
     type: Number,
     default: 0
@@ -26,6 +71,7 @@ const { min, max, step, minValue, maxValue } = defineProps({
     type: Number,
     default: 1
   },
+  unit: String,
   minValue: Number,
   maxValue: Number
 });
@@ -39,7 +85,6 @@ const inputMin = ref(null);
 const inputMax = ref(null);
 const sliderMinValue = ref(minValue);
 const sliderMaxValue = ref(maxValue);
-
 // function to get the percentage of a value between the min and max values
 const getPercent = (value, min, max) => {
   return ((value - min) / (max - min)) * 100;
@@ -202,9 +247,5 @@ const onInput = ({ target }) => {
 .minmax-inputs {
   display: flex;
   justify-content: space-between;
-}
-
-.minmax-inputs input {
-  width: 50px;
 }
 </style>

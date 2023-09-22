@@ -1,11 +1,13 @@
 <template>
-  <div class="w-full h-[400px] flex flex-wrap relative p-2 overflow-hidden items-center justify-center" style="color: var(--text-color)">
+  <div
+    class="w-full h-[200px] lg:h-[300px] flex flex-wrap relative p-2 overflow-hidden items-center justify-center"
+    style="color: var(--text-color)">
     <Transition :name="transition" mode="out-in">
       <img :key="activeImage" class="object-center object-contain w-[85%] h-[85%]" :src="images[activeImage].link" />
     </Transition>
     <div class="absolute top-0 left-0 w-full h-full flex justify-between items-center">
       <div
-        class="w-10 h-10 p-6 rounded-full button-background flex justify-center items-center cursor-pointer transition-colors duration-200"
+        class="h-6 w-6 p-3 sm:p-4 lg:p-5 rounded-full button-background flex justify-center items-center cursor-pointer transition-colors duration-200"
         @click="previous()">
         <ClientOnly><font-awesome :icon="['fas', 'chevron-left']"></font-awesome></ClientOnly>
       </div>
@@ -24,7 +26,7 @@
         </div>
       </NuxtLink>
       <div
-        class="w-10 h-10 p-6 rounded-full button-background flex justify-center items-center cursor-pointer transition-colors duration-200"
+        class="h-6 w-6 p-3 sm:p-4 lg:p-5 rounded-full button-background flex justify-center items-center cursor-pointer transition-colors duration-200"
         @click="next()">
         <ClientOnly><font-awesome :icon="['fas', 'chevron-right']"></font-awesome></ClientOnly>
       </div>
@@ -33,7 +35,7 @@
       <div
         v-for="(item, index) in images"
         @click="switchItem(index)"
-        class="w-5 h-5 rounded-full indicators cursor-pointer transition-colors duration-200"
+        class="w-3 h-3 rounded-full indicators cursor-pointer transition-colors duration-200"
         :style="{ background: activeImage === index ? 'var(--primary)' : '' }"></div>
     </div>
   </div>

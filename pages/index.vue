@@ -1,32 +1,93 @@
 <template>
   <div class="w-full h-[100vh]" style="color: var(--text-color)">
-    <button @click="deneme2">deneme</button>
-    <div>{{ store.deneme }}</div>
     <v-typical :steps="item"></v-typical>
     <button @click="deneme">Deneme</button>
+    <transition-group
+      name="list"
+      tag="div"
+      class="m-[0.5em] text-black flex w-[3em] border border-black rounded-[2em] justify-between items-center flex-col transition duration-300"
+      style="border-color: var(--text-color)">
+      <div v-if="computeMax" class="num-icon" @click="increase"><font-awesome :icon="['fas', 'chevron-up']"></font-awesome></div>
+      <input class="num-input" :min="min" :max="max" v-model="value" type="number" />
+      <div v-if="computeMin" class="num-icon" @click="decrease"><font-awesome :icon="['fas', 'chevron-down']"></font-awesome></div>
+    </transition-group>
   </div>
 </template>
 
 <script setup>
 import { onMounted } from 'vue';
 import VTypical from 'vue-typical';
-import { useDeneme } from '@/stores/deneme';
-import { storeToRefs } from 'pinia';
-const store = storeToRefs(useDeneme());
-watch(store.deneme, newValue => {
-  console.log(newValue);
-});
-
-function deneme2() {
-  console.log(store.deneme.value);
-  store.deneme.value = store.deneme.value + 1;
-}
 
 const item = ref(['Hello', 1000, 'Hello World !', 500, 'Hello World ! 👋', 1000]);
+const min = 0;
+const max = 10;
+
+const computeMax = computed(() => {
+  return value.value < max;
+});
+const computeMin = computed(() => {
+  return value.value > min;
+});
 
 function deneme() {
   item.value = ['he', 1000];
 }
+
+const value = ref(1);
+
+function increase() {
+  let deneme = value.value + 1;
+  if (deneme <= max) {
+    value.value++;
+  }
+}
+
+function decrease() {
+  let deneme = value.value - 1;
+  if (deneme >= min) {
+    value.value--;
+  }
+}
 </script>
 
-<style scoped></style>
+<style scoped>
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+}
+.list-leave-active {
+  position: absolute;
+}
+
+.list-enter-active {
+  position: relative;
+}
+
+.num-input::-webkit-inner-spin-button,
+.num-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.num-input {
+  font-size: 1.2em;
+  text-align: center;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-weight: bold;
+  width: 100%;
+}
+.num-input:focus {
+  outline: none;
+}
+.num-icon {
+  font-size: 1.2em;
+  cursor: pointer;
+}
+</style>

@@ -1,10 +1,10 @@
 <template>
-  <div class="w-full flex flex-wrap gap-2 p-2 px-56" style="color: var(--text-white)">
-    <div class="w-full flex flex-wrap">
+  <div class="w-full flex flex-wrap gap-2 p-2 sm:px-10" style="color: var(--text-white)">
+    <div class="w-full justify-center flex flex-wrap">
       <div
-        v-for="(item, index) in items"
+        v-for="item in items"
         :key="item.name"
-        class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/4 flex p-2 transition-transform duration-500 cursor-pointer hover:scale-[1.02] overflow-hidden">
+        class="h-[200px] md:h-[250px] lg:h-[400px] basis-1/3 lg:basis-1/4 flex p-1 transition-transform duration-500 cursor-pointer hover:scale-[1.02] overflow-hidden">
         <NuxtLink
           :to="'/shop/' + useNuxtApp().$convertName(item.name)"
           class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative">
@@ -57,23 +57,6 @@ const items = ref([
 </script>
 
 <style scoped>
-.flex-box {
-  flex: 0 0 100px;
-  height: 100px;
-}
-@media only screen and (min-width: 768px) {
-  .flex-box {
-    flex: 0 0 200px;
-    height: 200px;
-  }
-}
-@media only screen and (min-width: 1024px) {
-  .flex-box {
-    flex: 0 0 400px;
-    height: 400px;
-  }
-}
-
 .item-background {
   background-color: var(--primary);
 }
