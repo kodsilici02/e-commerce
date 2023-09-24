@@ -5,16 +5,18 @@
   <Transition name="slide-right">
     <div
       v-if="isSidebarOpen && isWindowSmall"
+      ref="sidebar"
       class="w-72 md:w-52 fixed top-0 left-0 z-[1000] md:sticky md:top-28 overflow-y-auto filter-box-shadow filter-height background-color transition-transform duration-200"
-      style="color: var(--text-color); view-transition-name: sidebar-transition">
+      style="color: var(--text-color)">
       <slot></slot>
     </div>
   </Transition>
   <Transition name="slide-right">
     <div
       v-if="!isWindowSmall"
+      ref="sidebar"
       class="w-72 md:w-52 fixed top-0 left-0 z-[1000] md:sticky md:top-28 overflow-y-auto filter-box-shadow filter-height background-color transition-transform duration-200"
-      style="color: var(--text-color); view-transition-name: sidebar-transition">
+      style="color: var(--text-color)">
       <slot></slot>
     </div>
   </Transition>
@@ -23,6 +25,8 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue';
 import { useSidebarStore } from '@/stores/sidebar.js';
+
+const sidebar = ref();
 
 const store = useSidebarStore();
 const { SideBarOpen } = useSidebarStore();
@@ -51,6 +55,9 @@ watch(
 </script>
 
 <style scoped>
+.view-transition {
+  view-transition-name: sidebar-transition;
+}
 .slide-right-enter-active,
 .slide-right-leave-active {
   transition: all 0.15s ease-in-out;

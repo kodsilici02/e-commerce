@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full flex content-start items-center" style="color: var(--text-color)">
-    <div class="w-full flex flex-wrap mb-12">
+    <div class="w-full flex flex-wrap mb-12 gap-3">
       <div class="w-full flex justify-center">
         <client-only>
           <Vue3Lottie

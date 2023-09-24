@@ -12,15 +12,23 @@
         :min="min"
         @increase="
           () => {
-            if (sliderMinValue < max) {
-              sliderMinValue++;
+            if (sliderMinValue < sliderMaxValue) {
+              if (isFloat(sliderMinValue)) {
+                sliderMinValue = parseFloat((sliderMinValue + step).toFixed(1));
+              } else {
+                sliderMinValue = sliderMinValue + step;
+              }
             }
           }
         "
         @decrease="
           () => {
             if (sliderMinValue > min) {
-              sliderMinValue--;
+              if (isFloat(sliderMinValue)) {
+                sliderMinValue = parseFloat((sliderMinValue - step).toFixed(1));
+              } else {
+                sliderMinValue = sliderMinValue - step;
+              }
             }
           }
         "
@@ -33,14 +41,22 @@
         @increase="
           () => {
             if (sliderMaxValue < max) {
-              sliderMaxValue++;
+              if (isFloat(sliderMaxValue)) {
+                sliderMaxValue = parseFloat((sliderMaxValue + step).toFixed(1));
+              } else {
+                sliderMaxValue = sliderMaxValue + step;
+              }
             }
           }
         "
         @decrease="
           () => {
-            if (sliderMaxValue > min) {
-              sliderMaxValue--;
+            if (sliderMaxValue > sliderMinValue) {
+              if (isFloat(sliderMaxValue)) {
+                sliderMaxValue = parseFloat((sliderMaxValue - step).toFixed(1));
+              } else {
+                sliderMaxValue = sliderMaxValue - step;
+              }
             }
           }
         "
@@ -70,6 +86,10 @@ const { min, max, step, minValue, maxValue, unit } = defineProps({
   minValue: Number,
   maxValue: Number
 });
+
+function isFloat(number) {
+  return Number(number) === number && number % 1 !== 0;
+}
 
 // define emits for the slider component
 const emit = defineEmits(['update']);

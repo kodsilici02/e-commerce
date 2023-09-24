@@ -1,10 +1,10 @@
 <template>
   <div v-if="categories" class="w-full h-full">
-    <div class="flex flex-col gap-1">
+    <div class="flex flex-col gap-3">
       <div class="w-full h-14 text-2xl flex justify-center items-center">Filters</div>
       <div v-for="(category, index) in categories" class="flex flex-col justify-center items-center">
         <div v-if="category.rangeSlider" class="w-full flex flex-wrap" ref="sub_category">
-          <div class="w-full flex justify-center text-xl">{{ category.name }}</div>
+          <div class="w-full flex justify-center text-center text-lg font-bold">{{ category.name }}</div>
           <div class="w-full px-2">
             <RangeSlider
               :max="category.max"
@@ -12,12 +12,13 @@
               :minValue="category.currentMin"
               :maxValue="category.currentMax"
               :unit="category.unit"
+              :step="category.step"
               @update="sliderValues => updateSlider(category.type, sliderValues)"></RangeSlider>
           </div>
         </div>
         <div v-else class="flex flex-col justify-center items-center w-full">
           <button
-            class="w-full flex justify-center items-center gap-2 text-xl cursor-pointer transition-all duration-300 category-button"
+            class="w-full flex justify-center items-center gap-2 text-lg font-bold cursor-pointer transition-all duration-300 category-button"
             @click="toggleCategory(category.type)">
             {{ category.name }}
             <ClientOnly>
@@ -46,13 +47,11 @@
                   v-for="(subCategory, subCatindex) in category.subCategory"
                   class="w-full flex gap-1 justify-center text-base h-8 items-center">
                   <div class="flex-1 flex justify-center items-center">
-                    <ClientOnly
-                      ><font-awesome
-                        :icon="['fas', 'xmark']"
-                        class="cursor-pointer"
-                        style="color: var(--danger)"
-                        @click="excludeSubCategoryFilter(category.type, subCategory.value)"></font-awesome
-                    ></ClientOnly>
+                    <button @click="excludeSubCategoryFilter(category.type, subCategory.value)">
+                      <ClientOnly
+                        ><font-awesome :icon="['fas', 'xmark']" class="cursor-pointer" style="color: var(--danger)"></font-awesome
+                      ></ClientOnly>
+                    </button>
                   </div>
                   <div
                     class="flex-1 text-center transition-colors duration-200"
@@ -60,13 +59,11 @@
                     {{ subCategory.name }}
                   </div>
                   <div class="flex-1 flex justify-center items-center">
-                    <ClientOnly
-                      ><font-awesome
-                        :icon="['fas', 'check']"
-                        class="cursor-pointer"
-                        style="color: var(--success)"
-                        @click="includeSubCategoryFilter(category.type, subCategory.value)"></font-awesome
-                    ></ClientOnly>
+                    <button @click="includeSubCategoryFilter(category.type, subCategory.value)">
+                      <ClientOnly
+                        ><font-awesome :icon="['fas', 'check']" class="cursor-pointer" style="color: var(--success)"></font-awesome
+                      ></ClientOnly>
+                    </button>
                   </div>
                 </div>
               </div>

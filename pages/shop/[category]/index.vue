@@ -28,7 +28,8 @@
         </div>
         <div
           v-for="(item, index) in filteredItems"
-          @click="deneme($event, index, item.img)"
+          @pointerenter="onMouseenter(item.img)"
+          @pointerleave="onMouseleave()"
           :key="item.name"
           ref="element"
           class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-200 cursor-pointer hover:scale-[1.02] overflow-hidden">
@@ -101,10 +102,15 @@ onMounted(() => {
   }, 0);
 });
 
-function deneme(event, index, image) {
+function onMouseenter(image) {
   hero_image.value = image;
-  const img = document.querySelectorAll('.image-selector')[index];
+  let img = event.target.querySelector('.image-selector');
   img.classList.add('image');
+}
+function onMouseleave() {
+  hero_image.value = '';
+  let img = event.target.querySelector('.image-selector');
+  img.classList.remove('image');
 }
 
 const items = ref(phones2);

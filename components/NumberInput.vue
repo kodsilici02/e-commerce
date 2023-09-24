@@ -3,9 +3,9 @@
     <div
       class="m-[0.2em] text-black flex w-[3em] border border-black rounded-[2.4em] justify-between items-center flex-col transition duration-300"
       style="border-color: var(--text-color)">
-      <div :key="'key1'" class="num-icon" @click="increase">
+      <button :key="'key1'" class="num-icon" @click="increase">
         <ClientOnly><font-awesome :icon="['fas', 'chevron-up']"></font-awesome></ClientOnly>
-      </div>
+      </button>
       <input
         class="num-input"
         :key="'key2'"
@@ -14,9 +14,9 @@
         :value="props.value"
         @focusout="onInput($event)"
         type="number" />
-      <div :key="'key3'" class="num-icon" @click="decrease">
+      <button :key="'key3'" class="num-icon" @click="decrease">
         <ClientOnly> <font-awesome :icon="['fas', 'chevron-down']"></font-awesome> </ClientOnly>
-      </div>
+      </button>
     </div>
   </div>
 </template>
