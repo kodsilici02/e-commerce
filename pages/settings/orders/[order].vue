@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-52 flex flex-wrap gap-2 p-4" style="color: var(--text-color)">
     <div class="basis-1/4 flex justify-center items-center">
-      <img :src="image_url" class="object-center object-contain image" />
+      <img :src="image_url" class="object-center object-contain image" ref="image_element" />
     </div>
     <div class="basis-1/2 relative flex h-fit items-center">
       <div class="h-[13px] w-[13px] rounded-full thumb transition-colors duration-200" style="background-color: var(--secondary)">
@@ -25,18 +25,25 @@
 
 <script setup>
 import gsap from 'gsap';
-import { useRoute } from 'vue-router';
 import { useProductStore } from '@/stores/products.js';
 import { useOrderImage } from '@/stores/orders.js';
+import { useRoute, useRouter, onBeforeRouteLeave } from 'vue-router';
 
 const route = useRoute();
+const router = useRouter();
 
 const order_image_state = useOrderImage();
 const products = useProductStore();
 const image_url = products.getImageByName(route.params.order);
+const image_element = ref();
 
 onMounted(() => {
   order_image_state.hero_image = image_url;
+});
+onBeforeRouteLeave((to, from) => {
+  if (to.fullPath != '/settings/orders') {
+    image_element.value.classList.remove('image');
+  }
 });
 
 const states = ref([

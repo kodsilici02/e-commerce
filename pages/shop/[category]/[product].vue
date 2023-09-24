@@ -2,9 +2,11 @@
   <div class="w-full flex p-2 gap-2" style="color: var(--text-color)">
     <div class="flex-1 flex flex-wrap p-2 gap-2">
       <div class="flex w-full lg:basis-2/4" id="images">
-        <div class="hidden lg:flex flex-col gap-2 h-[70vh]">
+        <div class="hidden lg:flex flex-col gap-2 h-[70vh] overflow-hidden">
           <div v-for="(image, index) in images" class="flex-1 w-40 cursor-pointer" @click="changeImage(image)">
-            <img class="w-full h-full object-center object-cover" :src="image" />
+            <div class="w-full h-full">
+              <img class="w-full h-full object-center object-contain" :src="image" />
+            </div>
           </div>
         </div>
         <!--Actual Image-->
@@ -46,16 +48,16 @@
             <div class="text-lg font-bold mt-2">Color Options</div>
             <div class="w-full flex gap-1 mt-2">
               <div
-                class="w-10 h-10 rounded-full cursor-pointer color-button transition-colors duration-200 border border-black"
+                class="w-10 h-10 rounded-full cursor-pointer color-button duration-200 border border-black"
                 style="background-color: #f4e8cf"></div>
               <div
-                class="w-10 h-10 rounded-full cursor-pointer color-button transition-colors duration-200 border border-black"
+                class="w-10 h-10 rounded-full cursor-pointer color-button duration-200 border border-black"
                 style="background-color: #f1f3f2"></div>
               <div
-                class="w-10 h-10 rounded-full cursor-pointer color-button transition-colors duration-200 border border-black"
+                class="w-10 h-10 rounded-full cursor-pointer color-button duration-200 border border-black"
                 style="background-color: #6c6376"></div>
               <div
-                class="w-10 h-10 rounded-full cursor-pointer color-button transition-colors duration-200 border border-black"
+                class="w-10 h-10 rounded-full cursor-pointer color-button duration-200 border border-black"
                 style="background-color: #504f4d"></div>
             </div>
           </div>
@@ -173,8 +175,8 @@ const generalInfo = [
 const images = ref([
   image_url,
   '../../assets/deneme.png',
-  'https://netrinoimages.s3.eu-west-2.amazonaws.com/2022/12/08/1373191/426752/iphone_14_pro_max_3d_model_c4d_max_obj_fbx_ma_lwo_3ds_3dm_stl_4402727_o.png',
-  'https://w7.pngwing.com/pngs/961/642/png-transparent-iphone-14-pro.png'
+  'https://store.ite.net/wp-content/uploads/2022/11/iPhone_14_Pro_Max_Deep_Purple_PDP_Image_Position-2__en-US.png',
+  'https://w7.pngwing.com/pngs/60/414/png-transparent-iphone-14.png'
 ]);
 const activeImage = ref(images.value[0]);
 
@@ -198,5 +200,11 @@ function toggleLocationModal() {
 }
 .options-button:hover {
   background-color: var(--secondary-light);
+}
+.color-button {
+  transition: all 0.2s ease-in-out;
+}
+.color-button:hover {
+  transform: translateY(-6px);
 }
 </style>
