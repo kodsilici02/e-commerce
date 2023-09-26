@@ -17,9 +17,34 @@ export const useFilterOptions = defineStore({
               { name: 'Xiaomi', value: 'Xiaomi' }
             ],
             selectedCategories: [],
+            filter_text: '',
             include: null
           },
           { name: 'Price ', type: 'price', currentMin: 65, currentMax: 3000, min: 65, max: 3000, rangeSlider: true, unit: '$' },
+          { name: 'Ram ', type: 'ram', currentMin: 2, currentMax: 128, min: 2, max: 128, step: 1, rangeSlider: true, unit: 'gb' },
+          { name: 'Memory ', type: 'memory', currentMin: 1, currentMax: 1024, min: 1, max: 1024, step: 1, rangeSlider: true, unit: 'gb' },
+          {
+            name: 'Release Date ',
+            type: 'release_date',
+            currentMin: 2009,
+            currentMax: 2023,
+            min: 2009,
+            max: 2023,
+            step: 1,
+            rangeSlider: true,
+            unit: 'year'
+          },
+          {
+            name: 'Battery',
+            type: 'battery',
+            currentMin: 500,
+            currentMax: 15000,
+            min: 500,
+            max: 15000,
+            step: 1,
+            rangeSlider: true,
+            unit: 'mAh'
+          },
           {
             name: 'Screen Size',
             type: 'screen_size',
@@ -31,19 +56,29 @@ export const useFilterOptions = defineStore({
             rangeSlider: true,
             unit: 'inch'
           },
-
-          { name: 'Ram ', type: 'ram', currentMin: 2, currentMax: 128, min: 2, max: 128, step: 1, rangeSlider: true, unit: 'gb' },
-          { name: 'Memory ', type: 'memory', currentMin: 1, currentMax: 1024, min: 1, max: 1024, step: 1, rangeSlider: true, unit: 'gb' },
           {
-            name: 'Battery',
-            type: 'battery',
-            currentMin: 500,
-            currentMax: 15000,
-            min: 500,
-            max: 15000,
-            step: 1,
-            rangeSlider: true,
-            unit: 'mAh'
+            name: 'Screen Technology',
+            type: 'screen_technology',
+            categoryOpen: false,
+            subCategory: [
+              { name: 'Super LCD 5 ', value: 'Super LCD 5 ' },
+              { name: 'Dynamic AMOLED ', value: 'Dynamic AMOLED ' },
+              { name: 'Super AMOLED ', value: 'Super AMOLED ' },
+              { name: 'AMOLED ', value: 'AMOLED ' },
+              { name: 'OLED ', value: 'OLED ' },
+              { name: 'P-OLED ', value: 'P-OLED ' },
+              { name: 'IPS LCD ', value: 'IPS LCD ' },
+              { name: 'PLS ', value: 'PLS ' },
+              { name: 'Super LCD ', value: 'Super LCD ' },
+              { name: 'Super LCD 2 ', value: 'Super LCD 2 ' },
+              { name: 'Super LCD 3 ', value: 'Super LCD 3 ' },
+              { name: 'Super LCD 6 ', value: 'Super LCD 6 ' },
+              { name: 'TFT LCD ', value: 'TFT LCD ' }
+            ],
+            selectedCategories: [],
+            filter_text: '',
+
+            include: null
           },
           {
             name: 'Camera Resolution',
@@ -76,6 +111,7 @@ export const useFilterOptions = defineStore({
               { name: '5G', value: 5 }
             ],
             selectedCategories: [],
+            filter_text: '',
             include: null
           },
 
@@ -88,6 +124,7 @@ export const useFilterOptions = defineStore({
               { name: 'No', value: false }
             ],
             selectedCategories: [],
+            filter_text: '',
             include: null
           }
         ]

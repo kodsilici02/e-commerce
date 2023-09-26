@@ -3,8 +3,8 @@
     <div class="flex flex-col gap-3">
       <div class="w-full h-14 text-2xl flex justify-center items-center">Filters</div>
       <div v-for="(category, index) in categories" class="flex flex-col justify-center items-center">
-        <div v-if="category.rangeSlider" class="w-full flex flex-wrap" ref="sub_category">
-          <div class="w-full flex justify-center text-center text-lg font-bold">{{ category.name }}</div>
+        <div v-if="category.rangeSlider" class="w-full flex flex-wrap">
+          <div ref="sub_category" class="w-full flex justify-center text-center text-lg font-bold">{{ category.name }}</div>
           <div class="w-full px-2">
             <RangeSlider
               :max="category.max"
@@ -31,21 +31,28 @@
           </button>
           <div
             class="w-full overflow-hidden transition-all duration-300 mt-1"
-            :style="{ 'max-height': computeCategory(category.type, index) }"
+            :style="{ 'max-height': category.categoryOpen ? findHeight(category.type) : '0px' }"
             ref="sub_category">
             <div class="sub-category p-2 md:p-1">
-              <div class="mr-[3px] py-2 overflow-hidden rounded-xl" style="color: var(--text-color); background-color: rgba(0, 0, 0, 0.1)">
-                <div class="w-full px-3">
+              <div
+                class="mr-[3px] overflow-y-auto rounded-xl"
+                style="color: var(--text-color); background-color: rgba(0, 0, 0, 0.1); max-height: 400px">
+                <div class="w-full px-3 sticky top-0 left-0" style="background-color: rgb(216, 216, 216)">
                   <div class="field field_v2">
-                    <input id="last-name" class="field__input" placeholder="Type" @input="filterCategory(index)" autocomplete="off" />
+                    <input
+                      id="last-name"
+                      class="field__input"
+                      placeholder="Type"
+                      autocomplete="off"
+                      @input="deneme(category.type, index)" />
                     <span class="field__label-wrap" aria-hidden="true">
                       <span class="field__label">Search in Category</span>
                     </span>
                   </div>
                 </div>
                 <div
-                  v-for="(subCategory, subCatindex) in category.subCategory"
-                  class="w-full flex gap-1 justify-center text-base h-8 items-center">
+                  v-for="(subCategory, subCatindex) in filteredCategory(category.subCategory, category.type)"
+                  class="w-full flex gap-1 justify-center text-base items-center">
                   <div class="flex-1 flex justify-center items-center">
                     <button @click="excludeSubCategoryFilter(category.type, subCategory.value)">
                       <ClientOnly
@@ -54,7 +61,7 @@
                     </button>
                   </div>
                   <div
-                    class="flex-1 text-center transition-colors duration-200"
+                    class="flex-1 text-center transition-colors duration-200 text-sm"
                     :style="{ color: toggleColor(category.type, subCategory.value) }">
                     {{ subCategory.name }}
                   </div>
@@ -76,7 +83,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, watchEffect } from 'vue';
+import { ref, watch, onMounted, watchEffect, computed } from 'vue';
 import { useFilterOptions } from '@/stores/filterOptions.js';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
@@ -85,6 +92,21 @@ const route = useRoute();
 
 const store = storeToRefs(useFilterOptions());
 const categories = ref(findOptions());
+
+function filteredCategory(options, type) {
+  let text = findCategory(type).filter_text.toLowerCase();
+
+  return options.filter(option => option.name.toLowerCase().includes(text));
+}
+const sub_category = ref([]);
+
+function deneme(type, index) {
+  changeHeight(type, index);
+  findCategory(type).filter_text = event.target.value;
+}
+function findCategory(type) {
+  return categories.value.find(option => option.type == type);
+}
 
 function findOptions() {
   return store.options.value.find(item => item.name == route.params.category).filters;
@@ -96,7 +118,7 @@ function updateSlider(type, values) {
 }
 
 function toggleColor(type, value) {
-  let category = categories.value.find(option => option.type == type);
+  let category = findCategory(type);
   if (category.include == true && category.selectedCategories.includes(value)) {
     return 'var(--success)';
   } else if (category.include == null) return 'var(--text-color)';
@@ -107,7 +129,7 @@ function toggleColor(type, value) {
 
 //include and exclude don't touch it
 function includeSubCategoryFilter(type, subCategory) {
-  var category = categories.value.find(option => option.type == type);
+  var category = findCategory(type);
   if (category.include != true) {
     category.include = true;
     category.selectedCategories = [];
@@ -133,12 +155,12 @@ function includeSubCategoryFilter(type, subCategory) {
       category.selectedCategories.push(subCategory);
     }
   }
-  categories.value.find(option => option.type == type).include = category.include;
-  categories.value.find(option => option.type == type).selectedCategories = category.selectedCategories;
+  findCategory(type).include = category.include;
+  findCategory(type).selectedCategories = category.selectedCategories;
 }
 
 function excludeSubCategoryFilter(type, subCategory) {
-  var category = categories.value.find(option => option.type == type);
+  var category = findCategory(type);
   if (category.include != false) {
     category.include = false;
     category.selectedCategories = [];
@@ -160,27 +182,41 @@ function excludeSubCategoryFilter(type, subCategory) {
       category.selectedCategories.push(subCategory);
     }
   }
-  categories.value.find(option => option.type == type).include = category.include;
-  categories.value.find(option => option.type == type).selectedCategories = category.selectedCategories;
+  findCategory(type).include = category.include;
+  findCategory(type).selectedCategories = category.selectedCategories;
 }
-
-const sub_category = ref([]);
 
 function toggleCategory(type) {
-  categories.value.find(option => option.type == type).categoryOpen = !categories.value.find(option => option.type == type).categoryOpen;
+  findCategory(type).categoryOpen = !findCategory(type).categoryOpen;
 }
 
-function computeCategory(type, index) {
-  let open = categories.value.find(option => option.type == type).categoryOpen;
-  const element = sub_category.value[index];
-  if (element) {
-    const height = element.querySelectorAll('.sub-category')[0].offsetHeight;
-    if (open) {
-      return height + 'px';
-    } else {
-      return 0;
-    }
+const heights = ref([]);
+function pushCategoryHeight(type, index) {
+  let element = sub_category.value[index];
+  let height = element.querySelector('.sub-category');
+  if (height) {
+    let item = {
+      name: type,
+      height: height.offsetHeight
+    };
+    heights.value.push(item);
   }
+}
+
+onMounted(() => {
+  categories.value.forEach((category, index) => {
+    pushCategoryHeight(category.type, index);
+  });
+});
+
+function findHeight(type) {
+  let object = heights.value.find(item => item.name == type);
+  return toRaw(object.height) + 12 + 'px';
+}
+function changeHeight(type, index) {
+  let element = sub_category.value[index];
+  let height = element.querySelector('.sub-category').offsetHeight;
+  heights.value.find(item => item.name == type).height = height + 12;
 }
 </script>
 
