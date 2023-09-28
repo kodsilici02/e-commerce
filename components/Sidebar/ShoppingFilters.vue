@@ -30,12 +30,12 @@
             </ClientOnly>
           </button>
           <div
-            class="w-full overflow-hidden transition-all duration-300 mt-1"
-            :style="{ 'max-height': category.categoryOpen ? findHeight(category.type) : '0px' }"
+            class="w-full overflow-hidden transition-all duration-300"
+            :style="{ 'max-height': category.categoryOpen ? computeHeight(index) : '0px' }"
             ref="sub_category">
             <div class="sub-category p-2 md:p-1">
               <div
-                class="mr-[3px] overflow-y-auto rounded-xl"
+                class="mr-[3px] flex flex-col gap-1 overflow-y-auto rounded-xl"
                 style="color: var(--text-color); background-color: rgba(0, 0, 0, 0.1); max-height: 400px">
                 <div class="w-full px-3 sticky top-0 left-0" style="background-color: rgb(216, 216, 216)">
                   <div class="field field_v2">
@@ -50,29 +50,32 @@
                     </span>
                   </div>
                 </div>
-                <div
-                  v-for="(subCategory, subCatindex) in filteredCategory(category.subCategory, category.type)"
-                  class="w-full flex gap-1 justify-center text-base items-center">
-                  <div class="flex-1 flex justify-center items-center">
-                    <button @click="excludeSubCategoryFilter(category.type, subCategory.value)">
-                      <ClientOnly
-                        ><font-awesome :icon="['fas', 'xmark']" class="cursor-pointer" style="color: var(--danger)"></font-awesome
-                      ></ClientOnly>
-                    </button>
-                  </div>
+                <TransitionGroup name="list" tag="div" class="w-full flex flex-col overflow-x-hidden">
                   <div
-                    class="flex-1 text-center transition-colors duration-200 text-sm"
-                    :style="{ color: toggleColor(category.type, subCategory.value) }">
-                    {{ subCategory.name }}
+                    v-for="(subCategory, subCatindex) in filteredCategory(category.subCategory, category.type)"
+                    :key="subCategory.name"
+                    class="w-full flex gap-1 justify-center text-base items-center">
+                    <div class="flex-1 flex justify-center items-center">
+                      <button @click="excludeSubCategoryFilter(category.type, subCategory.value)">
+                        <ClientOnly
+                          ><font-awesome :icon="['fas', 'xmark']" class="cursor-pointer" style="color: var(--danger)"></font-awesome
+                        ></ClientOnly>
+                      </button>
+                    </div>
+                    <div
+                      class="flex-1 text-center transition-colors duration-200 text-sm"
+                      :style="{ color: toggleColor(category.type, subCategory.value) }">
+                      {{ subCategory.name }}
+                    </div>
+                    <div class="flex-1 flex justify-center items-center">
+                      <button @click="includeSubCategoryFilter(category.type, subCategory.value)">
+                        <ClientOnly
+                          ><font-awesome :icon="['fas', 'check']" class="cursor-pointer" style="color: var(--success)"></font-awesome
+                        ></ClientOnly>
+                      </button>
+                    </div>
                   </div>
-                  <div class="flex-1 flex justify-center items-center">
-                    <button @click="includeSubCategoryFilter(category.type, subCategory.value)">
-                      <ClientOnly
-                        ><font-awesome :icon="['fas', 'check']" class="cursor-pointer" style="color: var(--success)"></font-awesome
-                      ></ClientOnly>
-                    </button>
-                  </div>
-                </div>
+                </TransitionGroup>
               </div>
             </div>
           </div>
@@ -95,13 +98,15 @@ const categories = ref(findOptions());
 
 function filteredCategory(options, type) {
   let text = findCategory(type).filter_text.toLowerCase();
+  if (text) {
+    return options.filter(option => option.name.toLowerCase().includes(text));
+  }
 
-  return options.filter(option => option.name.toLowerCase().includes(text));
+  return options;
 }
 const sub_category = ref([]);
 
 function deneme(type, index) {
-  changeHeight(type, index);
   findCategory(type).filter_text = event.target.value;
 }
 function findCategory(type) {
@@ -190,37 +195,34 @@ function toggleCategory(type) {
   findCategory(type).categoryOpen = !findCategory(type).categoryOpen;
 }
 
-const heights = ref([]);
-function pushCategoryHeight(type, index) {
-  let element = sub_category.value[index];
-  let height = element.querySelector('.sub-category');
-  if (height) {
-    let item = {
-      name: type,
-      height: height.offsetHeight
-    };
-    heights.value.push(item);
-  }
-}
-
-onMounted(() => {
-  categories.value.forEach((category, index) => {
-    pushCategoryHeight(category.type, index);
-  });
-});
-
-function findHeight(type) {
-  let object = heights.value.find(item => item.name == type);
-  return toRaw(object.height) + 12 + 'px';
-}
-function changeHeight(type, index) {
+function computeHeight(index) {
   let element = sub_category.value[index];
   let height = element.querySelector('.sub-category').offsetHeight;
-  heights.value.find(item => item.name == type).height = height + 12;
+  if (height > 400) {
+    height = 400;
+  }
+  return height + 12 + 'px';
 }
 </script>
 
 <style scoped>
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
+}
 .category-button {
   color: var(--text-color);
 }
