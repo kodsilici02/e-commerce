@@ -3,26 +3,28 @@
     <div class="flex-1 flex flex-wrap p-2 gap-2">
       <div class="flex w-full lg:basis-2/4" id="images">
         <div class="hidden lg:flex flex-col gap-2 h-[70vh] overflow-hidden">
-          <div v-for="(image, index) in images" class="flex-1 w-40 cursor-pointer" @click="changeImage(image)">
+          <div v-for="(image, index) in images" class="flex-1 w-40 cursor-pointer" @click="changeImage(image, index)">
             <div class="w-full h-full">
               <img class="w-full h-full object-center object-contain" :src="image" />
             </div>
           </div>
         </div>
         <!--Actual Image-->
-        <div class="flex-1 h-[70vh] flex justify-center items-center z-0">
-          <Transition name="slide-up" mode="out-in"
-            ><img class="object-center object-contain image actual-image" :key="activeImage" :src="activeImage"
-          /></Transition>
+        <div class="flex-1 h-[40vh] lg:h-[70vh] overflow-hidden flex justify-center items-center z-0">
+          <div class="h-full overflow-hidden">
+            <Transition :name="transitionName" mode="out-in"
+              ><img class="h-full w-full object-center object-contain image actual-image" :key="activeImage" :src="activeImage"
+            /></Transition>
+          </div>
         </div>
       </div>
       <div class="flex-1 flex flex-wrap content-start items-center justify-center gap-x-4 gap-y-3 font-code-next font-bold">
         <div class="w-full justify-center flex text-2xl">Iphone 14 Pro</div>
         <!--General Info-->
-        <div class="w-full flex flex-wrap gap-x-4 gap-y-3 border-b-2 pb-4 items-center justify-center">
+        <div class="w-full flex flex-wrap gap-y-3 border-b-2 pb-4 items-center justify-center">
           <div
             v-for="(info, index) in generalInfo"
-            class="flex text-xs text-center lg:text-base basis-1/4 xl:basis-1/6 flex-col items-center justify-center">
+            class="flex text-xs text-center lg:text-base basis-1/4 flex-col items-center justify-center">
             <div class="flex gap-1 items-center justify-center">
               <IconsResolution v-if="info.resolution"></IconsResolution>
               <IconsScreenSize v-if="info.exceptional" :width="20"></IconsScreenSize>
@@ -37,7 +39,7 @@
         <div class="w-full flex flex-wrap gap-1 mt-2">
           <div class="w-full flex flex-col">
             <div class="text-lg font-bold">Memory Options</div>
-            <div class="w-full flex gap-1 mt-2" style="color: var(--text-white)">
+            <div class="w-full text-xs lg:text-base flex gap-1 mt-2" style="color: var(--text-white)">
               <div class="p-2 px-3 rounded-lg cursor-pointer options-button transition-colors duration-200">128 GB</div>
               <div class="p-2 px-3 rounded-lg cursor-pointer options-button transition-colors duration-200">256 GB</div>
               <div class="p-2 px-3 rounded-lg cursor-pointer options-button transition-colors duration-200">512 GB</div>
@@ -63,8 +65,8 @@
           </div>
           <div class="w-full flex-1 flex flex-col">
             <div class="text-lg font-bold mt-2">About</div>
-            <div class="flex flex-col gap-1 mt-2">
-              <div v-for="text in aboutTexts">
+            <div class="flex flex-col gap-1 mt-2 text-xs lg:text-base">
+              <div v-for="text in product.about">
                 <ClientOnly><font-awesome style="color: var(--secondary-light)" :icon="['fa', 'circle']"></font-awesome></ClientOnly>
                 {{ text }}
               </div>
@@ -102,9 +104,13 @@
 import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useProductStore } from '@/stores/products.js';
+import getProduct from '@/plugins/getProduct';
 
 const route = useRoute();
 const router = useRouter();
+
+const product = getProduct(route.params.product);
+console.log(product.about);
 
 router.beforeEach((to, from, next) => {
   if (to.fullPath == '/shop/' + route.params.category) {
@@ -120,15 +126,6 @@ onMounted(() => {
     document.querySelector('.actual-image').classList.remove('image');
   }, 10);
 });
-
-const aboutTexts = [
-  '6.1 inch Super Retina XDR display with Always On and ProMotion',
-  'Dynamic Island, a magical way to experience your iPhone',
-  '48MP Main camera with up to 4x the resolution',
-  'Cinematic mode shooting 4K Dolby Vision at up to 30 frames per second',
-  'Motion mode for smooth, jitter-free videos',
-  'All-day battery life and up to 23 hours of video playback'
-];
 
 const generalInfo = [
   {
@@ -179,9 +176,17 @@ const images = ref([
   'https://w7.pngwing.com/pngs/60/414/png-transparent-iphone-14.png'
 ]);
 const activeImage = ref(images.value[0]);
+const activeImageIndex = ref(0);
+const transitionName = ref('up');
 
-function changeImage(image) {
+function changeImage(image, index) {
   activeImage.value = image;
+  if (index > activeImageIndex.value) {
+    transitionName.value = 'down';
+  } else {
+    transitionName.value = 'up';
+  }
+  activeImageIndex.value = index;
 }
 
 const isLocationModalOpen = ref(false);

@@ -121,3 +121,37 @@
 .right-leave-to {
   transform: translateX(-100%);
 }
+
+.up-enter-active,
+.up-leave-active {
+  transition: all 0.4s ease-in-out;
+}
+.up-enter-from {
+  transform: translateY(-100%);
+}
+.up-enter-to {
+  transform: translateY(0);
+}
+.up-leave-from {
+  transform: translateY(0);
+}
+.up-leave-to {
+  transform: translateY(100%);
+}
+
+.down-enter-active,
+.down-leave-active {
+  transition: all 0.4s ease-in-out;
+}
+.down-enter-from {
+  transform: translateY(100%);
+}
+.down-enter-to {
+  transform: translateY(0);
+}
+.down-leave-from {
+  transform: translateY(0);
+}
+.down-leave-to {
+  transform: translateY(-100%);
+}

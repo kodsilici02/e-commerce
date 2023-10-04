@@ -2,15 +2,11 @@
   <div class="w-full h-[100vh]" style="color: var(--text-color)">
     <v-typical :steps="item"></v-typical>
     <button @click="deneme">Deneme</button>
-    <transition-group
-      name="list"
-      tag="div"
-      class="m-[0.5em] text-black flex w-[3em] border border-black rounded-[2em] justify-between items-center flex-col transition duration-300"
-      style="border-color: var(--text-color)">
-      <div v-if="computeMax" class="num-icon" @click="increase"><font-awesome :icon="['fas', 'chevron-up']"></font-awesome></div>
-      <input class="num-input" :min="min" :max="max" v-model="value" type="number" />
-      <div v-if="computeMin" class="num-icon" @click="decrease"><font-awesome :icon="['fas', 'chevron-down']"></font-awesome></div>
-    </transition-group>
+    <div class="w-36">
+      <category :category-icon="['fas', 'shopping-cart']" :back-ground-color="'rgba(150, 67, 67, 0.4)'">
+        <div class="h-52 w-full bg-red-500"></div>
+      </category>
+    </div>
   </div>
 </template>
 
@@ -21,13 +17,6 @@ import VTypical from 'vue-typical';
 const item = ref(['Hello', 1000, 'Hello World !', 500, 'Hello World ! 👋', 1000]);
 const min = 0;
 const max = 10;
-
-const computeMax = computed(() => {
-  return value.value < max;
-});
-const computeMin = computed(() => {
-  return value.value > min;
-});
 
 function deneme() {
   item.value = ['he', 1000];

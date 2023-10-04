@@ -17,12 +17,14 @@
             <div v-if="filteredItems.length == 0" class="w-full flex flex-col items-center justify-center">
               <Vue3Lottie
                 ref="lottie"
-                :height="500"
+                :height="480"
                 animationLink="https://lottie.host/25a75051-6b06-44b2-a75d-037f747f83c2/p6eHupD7HS.json"
                 :autoPlay="true"
                 :loop="true"
                 direction="alternate" />
-              <div class="text-2xl" style="color: var(--text-color)">There is no product with the features you are looking for</div>
+              <div class="text-xl md:text-2xl font-bold text-center" style="color: var(--text-color)">
+                There is no product with the features you are looking for
+              </div>
             </div></Transition
           >
         </div>
@@ -46,11 +48,11 @@
               </div>
             </div>
             <div class="absolute top-1 right-4">
-              <div class="flex gap-1 items-center md:text-lg">
+              <div class="flex gap-1 items-center text-xs sm:text-lg">
                 <ClientOnly><font-awesome :icon="['fas', 'dollar-sign']" /></ClientOnly>{{ item.price }}
               </div>
             </div>
-            <div class="text-lg md:text-2xl h-14 w-full flex justify-center items-center px-2 mt-4">{{ item.name }}</div>
+            <div class="text-xs sm:text-2xl text-center h-14 w-full flex justify-center items-center px-2 mt-4">{{ item.name }}</div>
             <div class="flex-1 flex justify-center overflow-hidden">
               <img
                 :key="item.name"
@@ -58,7 +60,8 @@
                 :class="{ image: item.img == hero_image }"
                 class="object-contain object-center image-selector" />
             </div>
-            <div class="h-12 w-full text-xs md:text-base font-bold flex flex-wrap px-2 justify-center items-center gap-2 sm:gap-x-3 mb-2">
+            <div
+              class="h-12 w-full text-xs md:text-base font-bold flex flex-wrap px-2 justify-center items-center gap-1 md:gap-2 sm:gap-x-3 mb-2">
               <div class="flex gap-1 items-center">
                 <ClientOnly><font-awesome :icon="['fas', 'battery-full']" /></ClientOnly>{{ item.battery }} mAh
               </div>
@@ -83,7 +86,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { useProductStore } from '@/stores/products.js';
 import { useFilterOptions } from '@/stores/filterOptions';
 import { storeToRefs } from 'pinia';
-import { phones2 } from '@/assets/deneme2.js';
+import { phones } from '@/assets/deneme.js';
 
 const route = useRoute();
 const router = useRouter();
@@ -113,7 +116,7 @@ function onMouseleave() {
   img.classList.remove('image');
 }
 
-const items = ref(phones2);
+const items = ref(phones);
 
 //sakın buraya dokunma
 const filteredItems = computed(() => {

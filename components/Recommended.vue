@@ -7,20 +7,19 @@
       @wheel="handleMouseWheel"
       style="scroll-behavior: smooth">
       <div v-for="(item, index) in items" :key="index" class="flex-box rounded-xl relative item-background cursor-pointer">
-        <div
-          class="z-[2] absolute top-0 left-0 w-full h-full purchase-background transition-all duration-500 rounded-xl pointer-events-none"></div>
-        <div class="absolute top-0 left-0 w-full h-full purchase-layer transition-all duration-500 z-[2] rounded-xl">
-          <div class="w-full h-full flex justify-center items-center">
-            <NuxtLink to="/shop/name">
+        <NuxtLink to="/shop/phones">
+          <div
+            class="z-[2] absolute top-0 left-0 w-full h-full purchase-background transition-all duration-500 rounded-xl pointer-events-none"></div>
+          <div class="absolute top-0 left-0 w-full h-full purchase-layer transition-all duration-500 z-[2] rounded-xl">
+            <div class="w-full h-full flex justify-center items-center">
               <div
                 class="w-36 h-10 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg"
-                style="border-radius: 35px"
-                @click="deneme(index)">
+                style="border-radius: 35px">
                 Inspect
               </div>
-            </NuxtLink>
+            </div>
           </div>
-        </div>
+        </NuxtLink>
         <img
           class="w-full h-full object-cover object-center"
           src="https://www.pngmart.com/files/13/Apple-Airpods-PNG-Image.png"
