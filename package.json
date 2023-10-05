@@ -18,6 +18,7 @@
     "tailwindcss": "^3.3.3"
   },
   "dependencies": {
+    "@ballcat/vue-cropper": "^1.0.5",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
@@ -32,7 +33,6 @@
     "gsap": "^3.12.2",
     "pinia": "^2.1.4",
     "sass": "^1.64.2",
-    "v-wave": "^1.5.1",
     "vue-chart-3": "^3.1.8",
     "vue-typical": "^2.1.0",
     "vue3-lottie": "^3.0.0"

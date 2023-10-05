@@ -1,12 +1,8 @@
 <template>
   <div class="w-full h-[100vh]" style="color: var(--text-color)">
     <v-typical :steps="item"></v-typical>
-    <button @click="deneme">Deneme</button>
-    <div class="w-36">
-      <category :category-icon="['fas', 'shopping-cart']" :back-ground-color="'rgba(150, 67, 67, 0.4)'">
-        <div class="h-52 w-full bg-red-500"></div>
-      </category>
-    </div>
+
+    <ImageCropper></ImageCropper>
   </div>
 </template>
 
