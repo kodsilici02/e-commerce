@@ -18,7 +18,16 @@
           <div class="flex-1 flex justify-center"></div>
         </div>
       </NuxtLink>
-      <Category :category-icon="route.icon" :title="route.name" :open="route.subRoutesOpen" v-if="route.subRoutes">
+      <Category
+        @handle-click="
+          () => {
+            route.subRoutesOpen = !route.subRoutesOpen;
+          }
+        "
+        :category-icon="route.icon"
+        :title="route.name"
+        :open="route.subRoutesOpen"
+        v-if="route.subRoutes">
         <div v-for="(child, subCatindex) in route.subRoutes" class="w-full flex gap-1 justify-center text-base h-8 items-center">
           <NuxtLink :to="child.link" class="flex-1 text-center text-lg transition-colors duration-200 cursor-pointer child-route">
             {{ child.name }}

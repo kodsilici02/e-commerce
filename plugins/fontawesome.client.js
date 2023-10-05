@@ -38,7 +38,9 @@ import {
   faChevronRight,
   faGears,
   faHome,
-  faChevronUp
+  faChevronUp,
+  faPen,
+  faRightFromBracket
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
@@ -80,7 +82,9 @@ library.add(
   faEnvelope,
   faPhone,
   faGears,
-  faHome
+  faHome,
+  faPen,
+  faRightFromBracket
 );
 
 // This is important, we are going to let Nuxt worry about the CSS

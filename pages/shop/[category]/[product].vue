@@ -110,7 +110,6 @@ const route = useRoute();
 const router = useRouter();
 
 const product = getProduct(route.params.product);
-console.log(product.about);
 
 router.beforeEach((to, from, next) => {
   if (to.fullPath == '/shop/' + route.params.category) {
