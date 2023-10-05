@@ -1,6 +1,6 @@
 <template>
   <div v-if="categories" class="w-full h-full">
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-3 pb-4">
       <div class="w-full h-14 text-2xl flex justify-center items-center">Filters</div>
       <div v-for="(category, index) in categories" class="flex flex-col justify-center items-center">
         <div v-if="category.rangeSlider" class="w-full flex flex-wrap">
@@ -18,6 +18,11 @@
         </div>
         <Category
           v-else
+          @handle-click="
+            () => {
+              findCategory(category.type).categoryOpen = !findCategory(category.type).categoryOpen;
+            }
+          "
           :title="category.name"
           :height="400"
           :bold="true"

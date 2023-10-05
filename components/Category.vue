@@ -19,7 +19,7 @@
               :icon="['fas', 'chevron-down']"
               style="pointer-events: none"
               class="transition-transform duration-300"
-              :style="{ transform: subCategoryOpen ? 'rotate(-90deg)' : 'rotate(0)' }"></font-awesome>
+              :style="{ transform: open ? 'rotate(-90deg)' : 'rotate(0)' }"></font-awesome>
           </ClientOnly>
         </div>
       </div>
@@ -46,20 +46,38 @@ const props = defineProps({
   },
   height: Number
 });
-const subCategoryOpen = ref(props.open);
 
+const emits = defineEmits(['handleClick']);
 const sub_category = ref();
 
-function toggleCategory() {
+onMounted(() => {
   const element = sub_category.value;
   const height = element.querySelector('.sub-category').offsetHeight;
-
-  if (subCategoryOpen.value) {
+  if (!props.open) {
     element.style.maxHeight = 0;
-    subCategoryOpen.value = !subCategoryOpen.value;
+  } else {
+    element.style.maxHeight = height + 15 + 'px';
+  }
+});
+
+function computeHeight() {
+  const element = sub_category.value;
+  const height = element.querySelector('.sub-category').offsetHeight;
+  if (props.open) {
+    element.style.maxHeight = 0;
   } else {
     element.style.maxHeight = height + 'px';
-    subCategoryOpen.value = !subCategoryOpen.value;
+  }
+}
+
+function toggleCategory() {
+  emits('handleClick');
+  const element = sub_category.value;
+  const height = element.querySelector('.sub-category').offsetHeight;
+  if (props.open) {
+    element.style.maxHeight = 0;
+  } else {
+    element.style.maxHeight = height + 'px';
   }
 }
 </script>
