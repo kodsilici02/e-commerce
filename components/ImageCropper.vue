@@ -10,15 +10,7 @@
           <font-awesome :icon="['fas', 'image']" />
         </ClientOnly>
       </button>
-      <button
-        class="p-3 rounded-full font-bold flex gap-2 items-center justify-center"
-        @click="clearFile"
-        style="background-color: var(--danger)">
-        Clear Image
-        <ClientOnly>
-          <font-awesome :icon="['fas', 'trash']" />
-        </ClientOnly>
-      </button>
+
       <input type="file" ref="imageInput" accept=".jpg,.jpeg,.png" @change="fileChanged" class="hidden" />
     </div>
     <div class="w-full">

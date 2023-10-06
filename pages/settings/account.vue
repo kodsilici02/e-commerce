@@ -24,7 +24,7 @@
                 class="group-hover:-translate-y-1 group-hover:text-[var(--secondary)] transition-all duration-200"
             /></ClientOnly>
           </button>
-          <img src="@/assets/mcTonight.jpg" class="w-full h-full rounded-full object-cover object-center" />
+          <img :src="store.profilePhoto" class="w-full h-full rounded-full object-cover object-center" />
         </div>
         <div class="w-full flex flex-wrap">
           <div class="w-full text-xl flex font-bold justify-center items-center">Mc Tonight</div>
@@ -65,10 +65,16 @@
           <div class="w-full flex justify-center items-center font-bold">17</div>
         </div>
       </div>
-      <div class="flex-1 border rounded-lg" style="background-color: var(--background)"></div>
+      <!--General Info-->
+      <div class="flex-1 w-full border rounded-lg flex flex-wrap gap-1 p-2" style="background-color: var(--background)">
+        <div class="w-full flex gap-1">
+          <div>Name:</div>
+          <div>Ananas Okan</div>
+        </div>
+      </div>
       <Transition name="modal">
         <ModalWrapper v-if="cropperOpen" :height="400" :width="700" @closeModal="toggleCropperModal">
-          <ImageCropper @image-cropped="toggleCropperModal" :image-src="store.profilePhoto"></ImageCropper>
+          <ImageCropper @image-cropped="handleCroppedImage" :image-src="store.profilePhoto"></ImageCropper>
         </ModalWrapper>
       </Transition>
       <Transition name="component_space">
@@ -86,6 +92,28 @@ const cropperOpen = ref(false);
 
 function toggleCropperModal() {
   cropperOpen.value = !cropperOpen.value;
+}
+
+function handleCroppedImage(blob) {
+  toggleCropperModal();
+  let fileReader = new FileReader();
+  fileReader.onload = function () {
+    // 'result' contains the Base64-encoded data
+    let base64String = fileReader.result;
+
+    // Now, you can use 'base64String' as needed
+    store.profilePhoto = base64String;
+  };
+
+  fileReader.readAsDataURL(blob);
+}
+
+function downloadPhoto(base64String) {
+  const a = document.createElement('a');
+  a.href = base64String; // Set the href to the Base64 data
+  a.download = 'image.jpg'; // Set the download filename
+  // Trigger a click event on the anchor element to initiate the download
+  a.click();
 }
 </script>
 

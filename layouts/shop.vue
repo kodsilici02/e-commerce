@@ -21,7 +21,7 @@
       </div>
       <div class="h-full flex gap-3 md:gap-4 items-center flex-1 justify-end">
         <div class="h-full cursor-pointer flex items-center">
-          <NuxtLink to="/homeprofile">
+          <NuxtLink to="/settings/account">
             <ClientOnly><font-awesome :icon="['fas', 'circle-user']" class="" /></ClientOnly>
           </NuxtLink>
         </div>

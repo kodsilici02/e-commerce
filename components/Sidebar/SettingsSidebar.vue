@@ -14,14 +14,14 @@
 <script setup>
 const items = [
   {
-    name: 'Orders',
-    icon: ['fas', 'cart-shopping'],
-    link: '/settings/orders'
-  },
-  {
     name: 'Account and Security',
     icon: ['fas', 'circle-user'],
     link: '/settings/account'
+  },
+  {
+    name: 'Orders',
+    icon: ['fas', 'cart-shopping'],
+    link: '/settings/orders'
   },
   {
     name: 'Adresses',
