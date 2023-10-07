@@ -30,8 +30,7 @@
         </div>
         <div
           v-for="(item, index) in filteredItems"
-          @pointerenter="onMouseenter(item.img)"
-          @pointerleave="onMouseleave()"
+          @click="deneme(item.img)"
           :key="item.name"
           ref="element"
           class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-200 cursor-pointer hover:scale-[1.02] overflow-hidden">
@@ -57,7 +56,7 @@
               <img
                 :key="item.name"
                 :src="item.img"
-                :class="{ image: item.img == hero_image }"
+                :class="{ image: products.hero_image == item.img }"
                 class="object-contain object-center image-selector" />
             </div>
             <div
@@ -97,23 +96,8 @@ function findOptions() {
 }
 const products = useProductStore();
 
-const hero_image = ref(products.hero_image);
-
-onMounted(() => {
-  setTimeout(() => {
-    hero_image.value = '';
-  }, 0);
-});
-
-function onMouseenter(image) {
-  hero_image.value = image;
-  let img = event.target.querySelector('.image-selector');
-  img.classList.add('image');
-}
-function onMouseleave() {
-  hero_image.value = '';
-  let img = event.target.querySelector('.image-selector');
-  img.classList.remove('image');
+function deneme(image) {
+  products.hero_image = image;
 }
 
 const items = ref(phones);

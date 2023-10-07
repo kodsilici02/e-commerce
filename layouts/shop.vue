@@ -2,7 +2,7 @@
   <div class="w-full h-auto" style="color: var(--text-white)">
     <!--SideBar-->
     <Transition name="sidebar">
-      <SideBar v-if="sidebar_Open"></SideBar>
+      <SideBar v-show="sidebar_Open"></SideBar>
     </Transition>
     <Transition name="component_space">
       <SideBarSpace v-if="sidebar_Open" @handleClick="toggleSidebar"></SideBarSpace>
@@ -70,7 +70,10 @@
       style="color: rgb(255, 255, 255); background-color: rgb(57, 102, 215); box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.6)">
       <div class="h-full col-span-1 flex justify-start items-center gap-1">
         <Transition name="fade">
-          <div v-if="sideNavButtonState" class="flex gap-1 items-center cursor-pointer md:hidden" @click="toggleFilterSidebar()">
+          <div
+            v-show="sideNavButtonRoutes.includes(route.fullPath)"
+            class="flex gap-1 items-center cursor-pointer md:hidden"
+            @click="toggleFilterSidebar()">
             <ClientOnly><font-awesome :icon="['fas', 'filter']" /></ClientOnly>Filters
           </div>
         </Transition>
@@ -87,7 +90,7 @@
       </TransitionGroup>
       <Transition name="fade">
         <div
-          v-if="$route.fullPath == '/shop/' + route.params.category + '/' + route.params.product"
+          v-show="$route.fullPath == '/shop/' + route.params.category + '/' + route.params.product"
           class="flex gap-1 items-center justify-end cursor-pointer md:hidden"
           @click="toggleOrderSidebar()">
           <ClientOnly><font-awesome :icon="['fas', 'cart-shopping']" /></ClientOnly>Order
@@ -104,8 +107,7 @@
 </template>
 
 <script setup>
-import VTypical from 'vue-typical';
-import { ref, onMounted, watchEffect, nextTick } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useSidebarStore } from '@/stores/sidebar.js';
 
 const route = useRoute();
@@ -138,18 +140,13 @@ function updateBreadcrumb() {
   ];
 }
 
-const sideNavButtonRoutes = ['/shop', '/profile', '/shop/' + route.params.category];
+const sideNavButtonRoutes = ['/shop/' + route.params.category];
 const sideNavButtonState = ref();
 router.beforeEach((to, from) => {
   if (sideNavButtonRoutes.includes(to.fullPath)) {
     sideNavButtonState.value = true;
   } else {
     sideNavButtonState.value = false;
-  }
-});
-onMounted(() => {
-  if (sideNavButtonRoutes.includes(route.fullPath)) {
-    sideNavButtonState.value = true;
   }
 });
 

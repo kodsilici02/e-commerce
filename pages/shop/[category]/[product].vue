@@ -13,7 +13,7 @@
         <div class="flex-1 h-[40vh] lg:h-[70vh] overflow-hidden flex justify-center items-center z-0">
           <div class="h-full overflow-hidden">
             <Transition :name="transitionName" mode="out-in"
-              ><img class="h-full w-full object-center object-contain image actual-image" :key="activeImage" :src="activeImage"
+              ><img ref="actual_image" class="object-center object-contain image" :key="activeImage" :src="activeImage"
             /></Transition>
           </div>
         </div>
@@ -102,7 +102,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
+import { useRoute, useRouter, onBeforeRouteLeave } from 'vue-router';
 import { useProductStore } from '@/stores/products.js';
 import getProduct from '@/plugins/getProduct';
 
@@ -111,19 +111,16 @@ const router = useRouter();
 
 const product = getProduct(route.params.product);
 
-router.beforeEach((to, from, next) => {
-  if (to.fullPath == '/shop/' + route.params.category) {
-    document.querySelector('.actual-image').classList.add('image');
+const actual_image = ref();
+onBeforeRouteLeave((to, from) => {
+  if (to.fullPath != '/shop/' + route.params.category) {
+    actual_image.value.classList.remove('image');
   }
-  next();
 });
 const products = useProductStore();
 const image_url = 'https://www.kvk.com/images/Product/23092022151344_ip14promdeeppurple.png';
 onMounted(() => {
   products.hero_image = image_url;
-  setTimeout(() => {
-    document.querySelector('.actual-image').classList.remove('image');
-  }, 10);
 });
 
 const generalInfo = [

@@ -4,9 +4,8 @@ export const useSidebarStore = defineStore({
   id: 'Sidebar',
   state: () => {
     return {
-      SideBarOpen: true,
+      SideBarOpen: false,
       orderSidebarOpen: false,
-
       isWindowSmall: false
     };
   },
