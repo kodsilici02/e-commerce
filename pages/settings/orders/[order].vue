@@ -27,7 +27,7 @@
 import gsap from 'gsap';
 import { useProductStore } from '@/stores/products.js';
 import { useOrderImage } from '@/stores/orders.js';
-import { useRoute, useRouter, onBeforeRouteLeave } from 'vue-router';
+import { useRoute, onBeforeRouteLeave } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();

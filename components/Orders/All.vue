@@ -72,8 +72,16 @@
 
 <script setup>
 import { useOrderImage } from '@/stores/orders.js';
+import { useRoute, onBeforeRouteLeave } from 'vue-router';
 const deneme = false;
 const orderImage = useOrderImage();
+
+onBeforeRouteLeave((to, from) => {
+  if (!to.fullPath.includes('/settings/orders')) {
+    document.querySelector('.image').classList.remove('image');
+  }
+});
+
 const items = ref([
   {
     date: 'Aug 18, 2023',

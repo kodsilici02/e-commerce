@@ -81,7 +81,7 @@
 
 <script setup>
 import { ref, onMounted, watch, watchEffect } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter, onBeforeRouteLeave } from 'vue-router';
 import { useProductStore } from '@/stores/products.js';
 import { useFilterOptions } from '@/stores/filterOptions';
 import { storeToRefs } from 'pinia';
@@ -99,6 +99,12 @@ const products = useProductStore();
 function deneme(image) {
   products.hero_image = image;
 }
+
+onBeforeRouteLeave((to, from) => {
+  if (!to.fullPath.includes('/shop/')) {
+    document.querySelector('.image').classList.remove('image');
+  }
+});
 
 const items = ref(phones);
 
