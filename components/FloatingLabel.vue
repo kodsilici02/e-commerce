@@ -28,6 +28,10 @@ const props = defineProps({
   },
   value: {
     default: null
+  },
+  error: {
+    type: Boolean,
+    default: false
   }
 });
 </script>

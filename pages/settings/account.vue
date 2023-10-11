@@ -3,9 +3,14 @@
     <!--Main Content-->
     <div class="basis-3/4 h-full flex flex-wrap content-start justify-center gap-3 p-2">
       <div class="w-full p-3 ml-3 text-xl font-bold">User Informations</div>
-      <div class="w-full flex justify-center p-3">
+      <div class="w-full flex flex-wrap justify-center p-3">
         <div class="basis-1/2 p-2"><FloatingLabel :type="'Text'" :label="'Name'" :value="'Ananas'"></FloatingLabel></div>
         <div class="basis-1/2 p-2"><FloatingLabel :type="'Text'" :label="'Surname'" :value="'Okan'"></FloatingLabel></div>
+        <div class="w-full p-2"><FloatingLabel :type="'date'" :label="'Birth Date'"></FloatingLabel></div>
+        <div class="w-24 p-2">
+          <SelectOption :back-ground-color="'#dcdcdc'"></SelectOption>
+        </div>
+        <div class="h-6 w-full bg-orange-400"></div>
       </div>
     </div>
     <!--profile Section-->
