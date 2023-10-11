@@ -81,13 +81,14 @@ const routes = ref([
     subRoutesOpen: false,
     subRoutes: [
       {
-        name: 'Orders',
-        link: '/settings/orders'
-      },
-      {
         name: 'Account',
         link: '/settings/account'
       },
+      {
+        name: 'Orders',
+        link: '/settings/orders'
+      },
+
       {
         name: 'Adresses',
         link: '/settings/adresses'

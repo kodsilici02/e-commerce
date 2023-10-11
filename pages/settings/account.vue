@@ -1,6 +1,12 @@
 <template>
   <div class="w-full h-full flex flex-row-reverse md:flex-row flex-wrap p-1" style="color: var(--text-color)">
-    <div class="basis-3/4 h-full flex flex-wrap"></div>
+    <!--Main Content-->
+    <div class="basis-3/4 h-full flex flex-wrap gap-3 p-2">
+      <div class="w-full flex gap-2 p-2">
+        <div class="w-64 mt-10"><FloatingLabel :type="'number'" :label="'Name'" :value="111"></FloatingLabel></div>
+        <div class="flex-1"></div>
+      </div>
+    </div>
     <!--profile Section-->
     <div
       class="flex-1 h-full flex flex-col p-4 content-start justify-center gap-3 overflow-hidden rounded-lg border border-gray-300"

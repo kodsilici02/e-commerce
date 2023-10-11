@@ -54,7 +54,7 @@
                 <ClientOnly>
                   <font-awesome :icon="['fas', 'location-dot']"></font-awesome>
                 </ClientOnly>
-                <div>Ananın amı</div>
+                <div>Bla Bla</div>
               </div>
               <div class="w-full flex gap-2 items-center">
                 <ClientOnly>

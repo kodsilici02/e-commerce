@@ -1,12 +1,3 @@
-.ha-screen-reader {
-  width: var(--ha-screen-reader-width, 1px);
-  height: var(--ha-screen-reader-height, 1px);
-  padding: var(--ha-screen-reader-padding, 0);
-  border: var(--ha-screen-reader-border, none);
-  position: var(--ha-screen-reader-position, absolute);
-  clip: var(--ha-screen-reader-clip, rect(1px, 1px, 1px, 1px));
-  overflow: var(--ha-screen-reader-overflow, hidden);
-}
 .field__input {
   --uiFieldPlaceholderColor: var(--fieldPlaceholderColor, #767676);
   background-color: transparent;
