@@ -77,7 +77,7 @@ const deneme = false;
 const orderImage = useOrderImage();
 
 onBeforeRouteLeave((to, from) => {
-  if (!to.fullPath.includes('/settings/orders')) {
+  if (!to.fullPath.includes('/settings/orders') && document.querySelector('.image')) {
     document.querySelector('.image').classList.remove('image');
   }
 });

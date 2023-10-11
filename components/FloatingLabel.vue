@@ -8,7 +8,9 @@
       name="name"
       id="name"
       required />
-    <label for="name" class="form_label transition-all duration-200 px-2 top-[10px] absolute left-2 text-xl block bg-[var(--background)]">
+    <label
+      for="name"
+      class="form_label pointer-events-none transition-all duration-200 px-2 top-[10px] absolute left-2 text-xl block bg-[var(--background)]">
       {{ label }}</label
     >
   </div>

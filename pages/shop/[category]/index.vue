@@ -101,7 +101,7 @@ function deneme(image) {
 }
 
 onBeforeRouteLeave((to, from) => {
-  if (!to.fullPath.includes('/shop/')) {
+  if (!to.fullPath.includes('/shop/') && document.querySelector('.image')) {
     document.querySelector('.image').classList.remove('image');
   }
 });

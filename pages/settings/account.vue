@@ -1,10 +1,11 @@
 <template>
   <div class="w-full h-full flex flex-row-reverse md:flex-row flex-wrap p-1" style="color: var(--text-color)">
     <!--Main Content-->
-    <div class="basis-3/4 h-full flex flex-wrap gap-3 p-2">
-      <div class="w-full flex gap-2 p-2">
-        <div class="w-64 mt-10"><FloatingLabel :type="'number'" :label="'Name'" :value="111"></FloatingLabel></div>
-        <div class="flex-1"></div>
+    <div class="basis-3/4 h-full flex flex-wrap content-start justify-center gap-3 p-2">
+      <div class="w-full p-3 ml-3 text-xl font-bold">User Informations</div>
+      <div class="w-full flex justify-center p-3">
+        <div class="basis-1/2 p-2"><FloatingLabel :type="'Text'" :label="'Name'" :value="'Ananas'"></FloatingLabel></div>
+        <div class="basis-1/2 p-2"><FloatingLabel :type="'Text'" :label="'Surname'" :value="'Okan'"></FloatingLabel></div>
       </div>
     </div>
     <!--profile Section-->
