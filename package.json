@@ -33,6 +33,7 @@
     "gsap": "^3.12.2",
     "pinia": "^2.1.4",
     "sass": "^1.64.2",
+    "validator": "^13.11.0",
     "vue-chart-3": "^3.1.8",
     "vue-typical": "^2.1.0",
     "vue3-lottie": "^3.0.0"

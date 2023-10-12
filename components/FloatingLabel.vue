@@ -2,7 +2,8 @@
   <div class="w-full relative">
     <input
       :type="type"
-      class="form_field p-3 rounded-lg w-full bg-transparent placeholder:text-transparent transition-all duration-200"
+      class="form_field form_border p-3 rounded-lg w-full bg-transparent placeholder:text-transparent transition-all duration-200"
+      :class="{ form_error_border: checkError() }"
       :placeholder="label"
       :value="value"
       name="name"
@@ -29,18 +30,32 @@ const props = defineProps({
   value: {
     default: null
   },
-  error: {
-    type: Boolean,
-    default: false
-  }
+  errorMessages: {
+    type: Array,
+    default: []
+  },
+  max: Number
 });
+
+function checkError() {
+  if (props.errorMessages.length > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
 </script>
 
 <style scoped lang="scss">
+.form_border {
+  border: 1px solid var(--text-gray);
+}
+.form_error_border {
+  border: 1px solid var(--danger);
+}
 .form_field {
   color: var(--text-color);
   outline: none;
-  border: 1px solid var(--text-gray);
 }
 
 .form_field::-webkit-inner-spin-button,

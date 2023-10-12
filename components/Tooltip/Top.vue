@@ -45,18 +45,18 @@ const showTooltip = ref(false);
   border-radius: 6px;
   position: absolute;
   z-index: 1;
-  top: 150%;
+  bottom: 150%;
   transition: all ease-in-out 0.2s;
 }
 
 .tooltip .tooltiptext::after {
   content: '';
   position: absolute;
-  bottom: 100%;
+  top: 100%;
   left: 50%;
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent transparent black transparent;
+  border-color: black transparent transparent transparent;
 }
 </style>
