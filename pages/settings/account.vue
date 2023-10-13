@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full flex flex-col-reverse md:flex-row flex-wrap p-1" style="color: var(--text-color)">
+  <div class="w-full h-full flex flex-col-reverse lg:flex-row lg:flex-wrap lg:p-1" style="color: var(--text-color)">
     <!--Main Content-->
     <div class="basis-3/4 h-full flex flex-wrap content-start justify-center gap-1 p-2 relative">
       <div class="w-full p-3 ml-3 text-xl font-bold">User Informations</div>
@@ -19,9 +19,9 @@
           <FloatingLabel :type="'text'" :label="'E-mail Adress'" :value="'yazilimpanteri@gmail.com'"></FloatingLabel>
         </div>
       </div>
-      <div class="w-full p-3 ml-3 text-xl font-bold">Change Password</div>
-      <div class="w-full flex flex-wrap justify-center gap-y-5 p-3">
-        <div class="flex-1 p-2">
+      <div class="w-full px-5 text-xl font-bold">Change Password</div>
+      <div class="w-full flex flex-wrap justify-center lg:gap-y-3 p-3">
+        <div class="w-full lg:flex-1 p-2">
           <FloatingLabel :type="'text'" :label="'Current Password'" :value="''"></FloatingLabel>
         </div>
         <div class="flex-1 p-2">
@@ -29,7 +29,9 @@
         </div>
       </div>
       <!--Save and Reset Buttons-->
-      <div class="w-full h-14 absolute bottom-10 left-0 flex justify-center items-center gap-8">
+      <div
+        class="w-full h-14 sticky bottom-0 left-0 flex justify-center items-center gap-8 z-10"
+        style="background-color: var(--background)">
         <TooltipTop :text="'Reset'"
           ><ClientOnly><font-awesome :icon="['fas', 'rotate-right']" class="text-2xl" /></ClientOnly
         ></TooltipTop>
@@ -40,7 +42,7 @@
     </div>
     <!--profile Section-->
     <div
-      class="w-full md:flex-1 h-full flex flex-col p-4 content-start justify-center gap-3 overflow-hidden rounded-lg border border-gray-300"
+      class="w-full lg:flex-1 h-full flex flex-col p-4 content-start justify-center gap-3 overflow-hidden rounded-lg border border-gray-300"
       style="background-color: var(--background-hover)">
       <!--Logout-->
       <div class="w-full flex justify-end pr-2">

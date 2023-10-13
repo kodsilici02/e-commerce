@@ -66,6 +66,7 @@
       Everything You are Looking For is Here
     </div>
     <div
+      v-if="!store.isWindowSmall"
       class="w-full grid grid-cols-5 text-xs md:text-xl font-fester left-0 sticky top-12 md:top-16 h-12 z-[995] purple-background px-3 main-header-3"
       style="color: rgb(255, 255, 255); background-color: rgb(57, 102, 215); box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.6)">
       <div class="h-full col-span-1 flex justify-start items-center gap-1">
