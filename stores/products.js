@@ -30,6 +30,10 @@ export const useProductStore = defineStore({
     getImageByName: state => name => {
       const matchedItem = state.items.find(item => item.url_name == name);
       return matchedItem ? matchedItem.img : null;
+    },
+    getProduct: state => name => {
+      const matchedItem = state.items.find(item => item.url_name == name);
+      return matchedItem ? matchedItem : null;
     }
   }
 });

@@ -1,11 +1,13 @@
 <template>
   <div class="w-full relative">
     <input
+      @input="handleInput()"
       :type="type"
       class="form_field form_border p-3 rounded-lg w-full bg-transparent placeholder:text-transparent transition-all duration-200"
       :class="{ form_error_border: checkError() }"
       :placeholder="label"
       :value="value"
+      ref="input"
       name="name"
       id="name"
       required />
@@ -18,6 +20,7 @@
 </template>
 
 <script setup>
+const emits = defineEmits(['handleType']);
 const props = defineProps({
   type: {
     type: String,
@@ -36,6 +39,13 @@ const props = defineProps({
   },
   max: Number
 });
+
+const input = ref();
+
+function handleInput() {
+  let target = event.target.value;
+  emits('handleType', target);
+}
 
 function checkError() {
   if (props.errorMessages.length > 0) {
