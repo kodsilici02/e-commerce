@@ -3,6 +3,7 @@ export const phones = [
     id: 'samsung-galaxy-s22',
     name: 'Samsung Galaxy S22',
     brand: 'Samsung',
+    img: 'https://assets.getmobil.com/uploads/41726/getmobil-samsung-s225g-phantomgreen-00webp.png',
     price: 1099,
     screensize: 6.7,
     memory: [128, 256, 512],
@@ -39,12 +40,53 @@ export const phones = [
       {
         type: 'ram',
         number: true,
-        value: 64
+        value: 6
       },
+      {
+        type: 'memory',
+        number: true,
+        value: 128
+      },
+
       {
         type: 'fast_charge',
         bool: true,
         value: true
+      },
+      {
+        type: 'release_date',
+        number: true,
+        value: 2021
+      },
+      {
+        type: 'battery',
+        number: true,
+        value: 4000
+      },
+      {
+        type: 'screen_size',
+        number: true,
+        value: 6.7
+      },
+      {
+        type: 'screen_technology',
+        string: true,
+        value: 'OLED'
+      },
+      {
+        type: 'camera_resolution',
+        number: true,
+        value: 48
+      },
+      {
+        type: 'front_camera_resolution',
+        number: true,
+        value: 12
+      },
+      {
+        type: 'cellular_connection',
+        array: true,
+        value: [3, 4, 4.5, 5]
       }
     ]
   },
@@ -95,6 +137,11 @@ export const phones = [
         type: 'fast_charge',
         bool: true,
         value: true
+      },
+      {
+        type: 'cellular_connection',
+        array: true,
+        value: [2, 3]
       }
     ]
   }

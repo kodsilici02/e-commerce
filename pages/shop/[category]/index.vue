@@ -128,7 +128,7 @@ function checkFilter(details, filters) {
       } else {
         conditionArray.push(false);
       }
-    } else if (option.selectedCategories.length > 0) {
+    } else if (option.selectedCategories.length > 0 && option.single_choice) {
       if (option.include) {
         if (option.selectedCategories.includes(detail.value)) {
           conditionArray.push(true);
@@ -142,6 +142,20 @@ function checkFilter(details, filters) {
           conditionArray.push(true);
         }
       }
+    } else if (option.selectedCategories.length > 0 && option.multi_choice) {
+      if (option.include) {
+        if (containsAny(detail.value, option.selectedCategories)) {
+          conditionArray.push(true);
+        } else {
+          conditionArray.push(false);
+        }
+      } else {
+        if (containsAny(detail.value, option.selectedCategories)) {
+          conditionArray.push(false);
+        } else {
+          conditionArray.push(true);
+        }
+      }
     }
   });
   if (conditionArray.includes(false)) {
@@ -150,6 +164,11 @@ function checkFilter(details, filters) {
     return true;
   }
 }
+
+function containsAny(arr1, arr2) {
+  return arr2.some(item => arr1.includes(item));
+}
+
 function convertName(name) {
   return name.toLowerCase().replace(/ /g, '-');
 }

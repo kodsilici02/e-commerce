@@ -16,6 +16,7 @@ export const useFilterOptions = defineStore({
               { name: 'Samsung', value: 'Samsung' },
               { name: 'Xiaomi', value: 'Xiaomi' }
             ],
+            single_choice: true,
             selectedCategories: [],
             filter_text: '',
             include: null
@@ -61,20 +62,21 @@ export const useFilterOptions = defineStore({
             type: 'screen_technology',
             categoryOpen: false,
             subCategory: [
-              { name: 'Super LCD 5 ', value: 'Super LCD 5 ' },
-              { name: 'Dynamic AMOLED ', value: 'Dynamic AMOLED ' },
-              { name: 'Super AMOLED ', value: 'Super AMOLED ' },
-              { name: 'AMOLED ', value: 'AMOLED ' },
-              { name: 'OLED ', value: 'OLED ' },
-              { name: 'P-OLED ', value: 'P-OLED ' },
-              { name: 'IPS LCD ', value: 'IPS LCD ' },
-              { name: 'PLS ', value: 'PLS ' },
-              { name: 'Super LCD ', value: 'Super LCD ' },
-              { name: 'Super LCD 2 ', value: 'Super LCD 2 ' },
-              { name: 'Super LCD 3 ', value: 'Super LCD 3 ' },
-              { name: 'Super LCD 6 ', value: 'Super LCD 6 ' },
-              { name: 'TFT LCD ', value: 'TFT LCD ' }
+              { name: 'Super LCD 5', value: 'Super LCD 5' },
+              { name: 'Dynamic AMOLED', value: 'Dynamic AMOLED' },
+              { name: 'Super AMOLED', value: 'Super AMOLED' },
+              { name: 'AMOLED', value: 'AMOLED' },
+              { name: 'OLED', value: 'OLED' },
+              { name: 'P-OLED', value: 'P-OLED' },
+              { name: 'IPS LCD', value: 'IPS LCD ' },
+              { name: 'PLS', value: 'PLS' },
+              { name: 'Super LCD ', value: 'Super LCD' },
+              { name: 'Super LCD 2 ', value: 'Super LCD 2' },
+              { name: 'Super LCD 3 ', value: 'Super LCD 3' },
+              { name: 'Super LCD 6 ', value: 'Super LCD 6' },
+              { name: 'TFT LCD ', value: 'TFT LCD' }
             ],
+            single_choice: true,
             selectedCategories: [],
             filter_text: '',
 
@@ -92,7 +94,7 @@ export const useFilterOptions = defineStore({
           },
           {
             name: 'Front Camera Resolution',
-            type: 'fron_camera_resolution',
+            type: 'front_camera_resolution',
             currentMin: 2,
             currentMax: 64,
             min: 2,
@@ -110,6 +112,7 @@ export const useFilterOptions = defineStore({
               { name: '4.5G', value: 4.5 },
               { name: '5G', value: 5 }
             ],
+            multi_choice: true,
             selectedCategories: [],
             filter_text: '',
             include: null
@@ -123,6 +126,7 @@ export const useFilterOptions = defineStore({
               { name: 'Yes', value: true },
               { name: 'No', value: false }
             ],
+            single_choice: true,
             selectedCategories: [],
             filter_text: '',
             include: null

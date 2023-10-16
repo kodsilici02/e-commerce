@@ -1,8 +1,9 @@
 <template>
   <div class="w-full flex flex-wrap gap-2 p-4" style="color: var(--text-color)">
     <div class="w-full lg:basis-1/4 h-[350px] flex justify-center items-center 2xl:mt-10">
-      <img :src="image_url" class="object-center w-[70%] object-contain image" ref="image_element" />
+      <img :src="image_url" class="object-center object-contain image" ref="image_element" />
     </div>
+    <!--Progress Bar and order details-->
     <div class="w-full lg:basis-2/3 flex flex-wrap content-start lg:mt-10 gap-3">
       <div class="w-full px-10">
         <ProgressBar
@@ -53,8 +54,13 @@
         </div>
       </div>
     </div>
-    <div class="w-full flex justify-center">
+    <!--Rate-->
+    <div class="w-full flex flex-wrap justify-center">
+      <div class="w-full flex justify-center font-bold text-2xl">Rate This Product</div>
       <Rate></Rate>
+    </div>
+    <div class="w-full">
+      <Details></Details>
     </div>
   </div>
 </template>

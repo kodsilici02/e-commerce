@@ -1,5 +1,6 @@
 <template>
   <div class="w-full h-[100vh]" style="color: var(--text-color)">
+    <button @click="deneme">deneme</button>
     <v-typical :steps="item"></v-typical>
 
     <ImageCropper></ImageCropper>
@@ -15,7 +16,8 @@ const min = 0;
 const max = 10;
 
 function deneme() {
-  item.value = ['he', 1000];
+  item.value.push('he', 1000);
+  console.log(item.value);
 }
 
 const value = ref(1);
