@@ -17,7 +17,7 @@
         <ClientOnly> <font-awesome :icon="['fas', 'bars']" class="cursor-pointer" @click="toggleSidebar"></font-awesome></ClientOnly>
       </div>
       <div class="h-full flex items-center justify-center flex-1">
-        <SearchBar @updateValue="updateSearchValue"></SearchBar>
+        <SearchBarAnimated @updateValue="updateSearchValue"></SearchBarAnimated>
       </div>
       <div class="h-full flex gap-3 md:gap-4 items-center flex-1 justify-end">
         <div class="h-full cursor-pointer flex items-center">

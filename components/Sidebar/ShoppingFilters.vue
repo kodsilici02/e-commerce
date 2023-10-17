@@ -1,21 +1,42 @@
 <template>
   <div v-if="categories" class="w-full h-full">
     <div class="flex flex-col gap-3 pb-4">
-      <div class="w-full h-14 text-2xl flex justify-center items-center">Filters</div>
-      <div v-for="(category, index) in categories" class="flex flex-col justify-center items-center">
-        <div v-if="category.rangeSlider" class="w-full flex flex-wrap">
-          <div ref="sub_category" class="w-full flex justify-center text-center text-lg font-bold">{{ category.name }}</div>
-          <div class="w-full px-2">
-            <RangeSlider
-              :max="category.max"
-              :min="category.min"
-              :minValue="category.currentMin"
-              :maxValue="category.currentMax"
-              :unit="category.unit"
-              :step="category.step"
-              @update="sliderValues => updateSlider(category.type, sliderValues)"></RangeSlider>
-          </div>
+      <div class="w-full h-14 text-2xl flex justify-center items-center">
+        <div class="flex-1"></div>
+        <div>Filters</div>
+        <div class="flex-1 flex justify-end pr-5">
+          <TooltipBottom :text="'Reset'" @handle-click="resetFilters()">
+            <ClientOnly><font-awesome :icon="['fas', 'rotate-right']" class="text-2xl" /></ClientOnly>
+          </TooltipBottom>
         </div>
+      </div>
+      <div v-for="(category, index) in categories" class="flex flex-col justify-center items-center">
+        <Category
+          v-if="category.rangeSlider"
+          @handle-click="
+            () => {
+              findCategory(category.type).categoryOpen = !findCategory(category.type).categoryOpen;
+            }
+          "
+          :title="category.name"
+          :height="400"
+          :bold="true"
+          :open="category.categoryOpen"
+          :backGroundColor="'rgba(0, 0, 0, 0.1)'">
+          <div class="w-full flex flex-wrap">
+            <div ref="sub_category" class="w-full flex justify-center text-center text-lg font-bold">{{ category.name }}</div>
+            <div class="w-full px-2">
+              <RangeSlider
+                :max="category.max"
+                :min="category.min"
+                :minValue="category.currentMin"
+                :maxValue="category.currentMax"
+                :unit="category.unit"
+                :step="category.step"
+                @update="sliderValues => updateSlider(category.type, sliderValues)"></RangeSlider>
+            </div>
+          </div>
+        </Category>
         <Category
           v-else
           @handle-click="
@@ -29,19 +50,14 @@
           :open="category.categoryOpen"
           :backGroundColor="'rgba(0, 0, 0, 0.1)'">
           <div class="w-full px-3 sticky top-0 left-0">
-            <div class="field field_v2" style="background-color: rgb(216, 216, 216)">
-              <input id="last-name" class="field__input" placeholder="Type" autocomplete="off" @input="deneme(category.type, index)" />
-              <span class="field__label-wrap" aria-hidden="true">
-                <span class="field__label">Search in Category</span>
-              </span>
-            </div>
+            <SearchBarLabel :text="'Search in Category'" @handleType="deneme(category.type, index)"></SearchBarLabel>
           </div>
-          <TransitionGroup name="list" tag="div" class="w-full flex flex-col overflow-x-hidden">
+          <TransitionGroup name="list" tag="div" class="w-full flex flex-col overflow-x-hidden gap-1">
             <div
               v-for="(subCategory, subCatindex) in filteredCategory(category.subCategory, category.type)"
               :key="subCategory.name"
-              class="w-full flex gap-1 justify-center text-base items-center">
-              <div class="flex-1 flex justify-center items-center">
+              class="w-full flex gap-2 justify-center text-base items-center px-8">
+              <div class="w-fit flex justify-center items-center">
                 <button @click="excludeSubCategoryFilter(category.type, subCategory.value)">
                   <ClientOnly
                     ><font-awesome :icon="['fas', 'xmark']" class="cursor-pointer" style="color: var(--danger)"></font-awesome
@@ -53,7 +69,7 @@
                 :style="{ color: toggleColor(category.type, subCategory.value) }">
                 {{ subCategory.name }}
               </div>
-              <div class="flex-1 flex justify-center items-center">
+              <div class="w-fit flex justify-center items-center">
                 <button @click="includeSubCategoryFilter(category.type, subCategory.value)">
                   <ClientOnly
                     ><font-awesome :icon="['fas', 'check']" class="cursor-pointer" style="color: var(--success)"></font-awesome
@@ -172,6 +188,10 @@ function excludeSubCategoryFilter(type, subCategory) {
   }
   findCategory(type).include = category.include;
   findCategory(type).selectedCategories = category.selectedCategories;
+}
+
+function resetFilters() {
+  useFilterOptions().resetFilters(route.params.category);
 }
 </script>
 

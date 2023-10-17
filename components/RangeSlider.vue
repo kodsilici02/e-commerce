@@ -2,8 +2,8 @@
   <div class="w-full flex flex-wrap">
     <div ref="slider" class="custom-slider minmax w-full">
       <div class="minmax-indicator"></div>
-      <input ref="inputMin" type="range" name="min" id="min" :min="min" :max="max" :value="sliderMinValue" :step="step" @input="onInput" />
-      <input ref="inputMax" type="range" name="max" id="max" :min="min" :max="max" :value="sliderMaxValue" :step="step" @input="onInput" />
+      <input ref="inputMin" type="range" name="min" id="min" :min="min" :max="max" :value="minValue" :step="step" @input="onInput" />
+      <input ref="inputMax" type="range" name="max" id="max" :min="min" :max="max" :value="maxValue" :step="step" @input="onInput" />
     </div>
     <div class="w-full flex justify-between items-center">
       <NumberInput
@@ -69,7 +69,7 @@
 import { computed, ref, watchEffect } from 'vue';
 
 // define component props for the slider component
-const { min, max, step, minValue, maxValue, unit } = defineProps({
+const props = defineProps({
   min: {
     type: Number,
     default: 0
@@ -91,6 +91,19 @@ function isFloat(number) {
   return Number(number) === number && number % 1 !== 0;
 }
 
+watch(
+  () => props.minValue,
+  newVal => {
+    sliderMinValue.value = newVal;
+  }
+);
+watch(
+  () => props.maxValue,
+  newVal => {
+    sliderMaxValue.value = newVal;
+  }
+);
+
 // define emits for the slider component
 const emit = defineEmits(['update']);
 
@@ -98,8 +111,9 @@ const emit = defineEmits(['update']);
 const slider = ref(null);
 const inputMin = ref(null);
 const inputMax = ref(null);
-const sliderMinValue = ref(minValue);
-const sliderMaxValue = ref(maxValue);
+const sliderMinValue = ref(props.minValue);
+const sliderMaxValue = ref(props.maxValue);
+
 function changeMax(value) {
   sliderMaxValue.value = value;
 }
@@ -131,8 +145,8 @@ watchEffect(() => {
     emit('update', { min: sliderMinValue.value, max: sliderMaxValue.value });
 
     // calculate values in percentages
-    const leftPercent = getPercent(sliderMinValue.value, min, max);
-    const rightPercent = 100 - getPercent(sliderMaxValue.value, min, max);
+    const leftPercent = getPercent(sliderMinValue.value, props.min, props.max);
+    const rightPercent = 100 - getPercent(sliderMaxValue.value, props.min, props.max);
 
     // set the CSS variables
     setCSSProps(leftPercent, rightPercent);

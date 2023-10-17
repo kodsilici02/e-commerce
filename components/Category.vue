@@ -2,18 +2,18 @@
   <div class="w-full flex flex-wrap justify-center items-center">
     <button
       @click="toggleCategory()"
-      class="w-full flex justify-center items-center gap-2 text-xl cursor-pointer transition-all duration-300 category-button">
-      <div class="flex basis-1/2 items-center justify-between gap-2">
+      class="w-full flex justify-center items-center gap-2 cursor-pointer transition-all duration-300 category-button">
+      <div class="flex basis-2/3 items-center justify-between gap-2 px-2">
         <div v-if="categoryIcon" class="flex-1 flex justify-start items-center">
           <ClientOnly>
             <font-awesome :icon="categoryIcon" style="pointer-events: none" class="transition-transform duration-300"></font-awesome>
           </ClientOnly>
         </div>
-        <div class="flex-1 flex justify-start" :class="{ 'font-bold': bold }">
+        <div class="flex-1 flex justify-center text-lg" :class="{ 'font-bold': bold }">
           <!-- Use ml-2 for adding left margin to create space between icon and text -->
           {{ title }}
         </div>
-        <div class="flex-1 flex justify-center">
+        <div class="flex justify-center text-xl">
           <ClientOnly>
             <font-awesome
               :icon="['fas', 'chevron-down']"
@@ -51,13 +51,15 @@ const emits = defineEmits(['handleClick']);
 const sub_category = ref();
 
 onMounted(() => {
-  const element = sub_category.value;
-  const height = element.querySelector('.sub-category').offsetHeight;
-  if (!props.open) {
-    element.style.maxHeight = 0;
-  } else {
-    element.style.maxHeight = height + 15 + 'px';
-  }
+  setTimeout(() => {
+    const element = sub_category.value;
+    const height = element.querySelector('.sub-category').offsetHeight;
+    if (!props.open) {
+      element.style.maxHeight = 0;
+    } else {
+      element.style.maxHeight = height + 15 + 'px';
+    }
+  }, 10);
 });
 
 function computeHeight() {

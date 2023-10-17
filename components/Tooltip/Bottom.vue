@@ -15,7 +15,7 @@
       <slot></slot>
     </div>
     <Transition name="fade">
-      <span v-if="showTooltip" class="tooltiptext">{{ text }}</span>
+      <span v-if="showTooltip" class="tooltiptext text-lg">{{ text }}</span>
     </Transition>
   </button>
 </template>
@@ -38,7 +38,7 @@ const showTooltip = ref(false);
 }
 
 .tooltip .tooltiptext {
-  padding: 0.5em;
+  padding: 0.4em;
   background-color: var(--text-color);
   color: var(--text-white);
   text-align: center;

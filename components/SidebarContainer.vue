@@ -15,7 +15,7 @@
     <div
       v-if="!isWindowSmall"
       ref="sidebar"
-      class="w-72 md:w-52 fixed top-0 left-0 z-[989] md:sticky md:top-28 overflow-y-auto filter-box-shadow filter-height background-color transition-transform duration-200"
+      class="w-72 md:w-64 fixed top-0 left-0 z-[989] md:sticky md:top-28 overflow-y-auto filter-box-shadow filter-height background-color transition-transform duration-200"
       style="color: var(--text-color)">
       <slot></slot>
     </div>

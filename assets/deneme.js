@@ -28,6 +28,11 @@ export const phones = [
     ],
     details: [
       {
+        type: 'score',
+        number: true,
+        value: 4.5
+      },
+      {
         type: 'price',
         number: true,
         value: 1099
@@ -47,9 +52,13 @@ export const phones = [
         number: true,
         value: 128
       },
-
       {
         type: 'fast_charge',
+        bool: true,
+        value: true
+      },
+      {
+        type: 'wireless_charge',
         bool: true,
         value: true
       },
@@ -74,6 +83,16 @@ export const phones = [
         value: 'OLED'
       },
       {
+        type: 'screen_refresh_rate',
+        number: true,
+        value: 120
+      },
+      {
+        type: 'pixel_density',
+        number: true,
+        value: 425
+      },
+      {
         type: 'camera_resolution',
         number: true,
         value: 48
@@ -84,9 +103,74 @@ export const phones = [
         value: 12
       },
       {
+        type: 'video_record_resolution',
+        string: true,
+        value: '4320p(Ultra HD)8K'
+      },
+      {
+        type: 'video_fps_value',
+        number: true,
+        value: 60
+      },
+      {
+        type: 'cpu_brand',
+        string: true,
+        value: 'qualcomm'
+      },
+      {
+        type: 'cpu_frequency',
+        number: true,
+        value: 3.0
+      },
+      {
+        type: 'cpu_cores',
+        number: true,
+        value: 8
+      },
+      {
+        type: 'transistor_size',
+        number: true,
+        value: 4
+      },
+      {
+        type: 'usb_type',
+        string: true,
+        value: 'type_c'
+      },
+      {
+        type: 'color',
+        array: true,
+        value: ['black', 'white', 'green', 'purple', 'pink']
+      },
+      {
+        type: 'headphone_jack',
+        string: true,
+        value: '3.5mm'
+      },
+      {
         type: 'cellular_connection',
         array: true,
         value: [3, 4, 4.5, 5]
+      },
+      {
+        type: 'nfc',
+        bool: true,
+        value: true
+      },
+      {
+        type: 'fingerprint_scanner',
+        bool: true,
+        value: false
+      },
+      {
+        type: 'dual_sim',
+        bool: true,
+        value: true
+      },
+      {
+        type: 'face_recognition',
+        bool: true,
+        value: true
       }
     ]
   },
@@ -137,11 +221,6 @@ export const phones = [
         type: 'fast_charge',
         bool: true,
         value: true
-      },
-      {
-        type: 'cellular_connection',
-        array: true,
-        value: [2, 3]
       }
     ]
   }

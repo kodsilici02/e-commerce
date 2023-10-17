@@ -42,7 +42,7 @@ const text = computed(() => {
   }
 });
 
-const emits = defineEmits('handleClick');
+const emits = defineEmits(['handleClick']);
 
 onMounted(() => {
   const tl = gsap.timeline();

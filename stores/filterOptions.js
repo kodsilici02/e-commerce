@@ -8,6 +8,17 @@ export const useFilterOptions = defineStore({
         name: 'phones',
         filters: [
           {
+            name: 'Evaluation Score',
+            type: 'score',
+            currentMin: 0,
+            currentMax: 5,
+            min: 0,
+            max: 5,
+            step: 0.1,
+            rangeSlider: true,
+            unit: 'point'
+          },
+          {
             name: 'Brands',
             type: 'brand',
             categoryOpen: false,
@@ -58,6 +69,17 @@ export const useFilterOptions = defineStore({
             unit: 'inch'
           },
           {
+            name: 'Screen Refresh Rate ',
+            type: 'screen_refresh_rate',
+            currentMin: 60,
+            currentMax: 144,
+            min: 60,
+            max: 144,
+            step: 1,
+            rangeSlider: true,
+            unit: 'hz'
+          },
+          {
             name: 'Screen Technology',
             type: 'screen_technology',
             categoryOpen: false,
@@ -83,6 +105,17 @@ export const useFilterOptions = defineStore({
             include: null
           },
           {
+            name: 'Pixel Density ',
+            type: 'pixel_density',
+            currentMin: 200,
+            currentMax: 600,
+            min: 200,
+            max: 600,
+            step: 1,
+            rangeSlider: true,
+            unit: 'PPI'
+          },
+          {
             name: 'Camera Resolution',
             type: 'camera_resolution',
             currentMin: 2,
@@ -103,6 +136,108 @@ export const useFilterOptions = defineStore({
             unit: 'mp'
           },
           {
+            name: 'Video Record Resolution',
+            type: 'video_record_resolution',
+            categoryOpen: false,
+            subCategory: [
+              { name: '480p', value: '480p' },
+              { name: '720p(HD)', value: '720p(HD)' },
+              { name: '1080p(Full HD)', value: '1080p(Full HD)' },
+              { name: '1440p(Quad HD)', value: '1440p(Quad HD)' },
+              { name: '2160p(Ultra HD)4K', value: '2160p(Ultra HD)4K' },
+              { name: '3384p(Ultra HD)6K', value: '3384p(Ultra HD)6K' },
+              { name: '4320p(Ultra HD)8K', value: '4320p(Ultra HD)8K' }
+            ],
+            single_choice: true,
+            selectedCategories: [],
+            filter_text: '',
+            include: null
+          },
+          {
+            name: 'Video FPS Value ',
+            type: 'video_fps_value',
+            currentMin: 10,
+            currentMax: 60,
+            min: 10,
+            max: 60,
+            step: 1,
+            rangeSlider: true,
+            unit: ''
+          },
+          {
+            name: 'CPU Brand',
+            type: 'cpu_brand',
+            categoryOpen: false,
+            subCategory: [
+              { name: 'Qualcomm', value: 'qualcomm' },
+              { name: 'MediaTek', value: 'mediatek' },
+              { name: 'Xiaomi', value: 'xiaomi' }
+            ],
+            single_choice: true,
+            selectedCategories: [],
+            filter_text: '',
+            include: null
+          },
+          {
+            name: 'CPU Cores ',
+            type: 'cpu_cores',
+            currentMin: 1,
+            currentMax: 12,
+            min: 1,
+            max: 12,
+            step: 1,
+            rangeSlider: true,
+            unit: ''
+          },
+          {
+            name: 'CPU Frequency',
+            type: 'cpu_frequency',
+            currentMin: 1,
+            currentMax: 4,
+            min: 1,
+            max: 4,
+            step: 0.1,
+            rangeSlider: true,
+            unit: 'GHz'
+          },
+          {
+            name: 'Transistor Size ',
+            type: 'transistor_size',
+            currentMin: 4,
+            currentMax: 28,
+            min: 4,
+            max: 28,
+            step: 1,
+            rangeSlider: true,
+            unit: 'nm'
+          },
+          {
+            name: 'USB Type',
+            type: 'usb_type',
+            categoryOpen: false,
+            subCategory: [
+              { name: 'Micro-USB', value: 'micro_usb' },
+              { name: 'USB Type-C', value: 'type_c' }
+            ],
+            single_choice: true,
+            selectedCategories: [],
+            filter_text: '',
+            include: null
+          },
+          {
+            name: 'Headphone Jack',
+            type: 'headphone_jack',
+            categoryOpen: false,
+            subCategory: [
+              { name: '3.5mm', value: '3.5mm' },
+              { name: 'USB Type-C', value: 'type_c' }
+            ],
+            single_choice: true,
+            selectedCategories: [],
+            filter_text: '',
+            include: null
+          },
+          {
             name: 'Cellular Connection',
             type: 'cellular_connection',
             categoryOpen: false,
@@ -117,10 +252,94 @@ export const useFilterOptions = defineStore({
             filter_text: '',
             include: null
           },
-
+          {
+            name: 'Color',
+            type: 'color',
+            categoryOpen: false,
+            subCategory: [
+              { name: 'Black', value: 'black' },
+              { name: 'White', value: 'White' },
+              { name: 'Red', value: 'red' },
+              { name: 'Yellow', value: 'yellow' },
+              { name: 'Silver', value: 'silver' },
+              { name: 'Gray', value: 'gray' },
+              { name: 'Green', value: 'green' },
+              { name: 'Purple', value: 'purple' },
+              { name: 'Pink', value: 'pink' }
+            ],
+            multi_choice: true,
+            selectedCategories: [],
+            filter_text: '',
+            include: null
+          },
           {
             name: 'Fast Charge',
             type: 'fast_charge',
+            categoryOpen: false,
+            subCategory: [
+              { name: 'Yes', value: true },
+              { name: 'No', value: false }
+            ],
+            single_choice: true,
+            selectedCategories: [],
+            filter_text: '',
+            include: null
+          },
+          {
+            name: 'Wireless Charge',
+            type: 'wireless_charge',
+            categoryOpen: false,
+            subCategory: [
+              { name: 'Yes', value: true },
+              { name: 'No', value: false }
+            ],
+            single_choice: true,
+            selectedCategories: [],
+            filter_text: '',
+            include: null
+          },
+          {
+            name: 'NFC',
+            type: 'nfc',
+            categoryOpen: false,
+            subCategory: [
+              { name: 'Yes', value: true },
+              { name: 'No', value: false }
+            ],
+            single_choice: true,
+            selectedCategories: [],
+            filter_text: '',
+            include: null
+          },
+          {
+            name: 'Fingerprint Scanner',
+            type: 'fingerprint_scanner',
+            categoryOpen: false,
+            subCategory: [
+              { name: 'Yes', value: true },
+              { name: 'No', value: false }
+            ],
+            single_choice: true,
+            selectedCategories: [],
+            filter_text: '',
+            include: null
+          },
+          {
+            name: 'Dual SIM',
+            type: 'dual_sim',
+            categoryOpen: false,
+            subCategory: [
+              { name: 'Yes', value: true },
+              { name: 'No', value: false }
+            ],
+            single_choice: true,
+            selectedCategories: [],
+            filter_text: '',
+            include: null
+          },
+          {
+            name: 'Face Recognition',
+            type: 'face_recognition',
             categoryOpen: false,
             subCategory: [
               { name: 'Yes', value: true },
@@ -234,6 +453,18 @@ export const useFilterOptions = defineStore({
   actions: {
     updateFilters(newFilters, type) {
       this.options.find(item => item.name == type).filters = newFilters;
+    },
+    resetFilters(type) {
+      let options = this.options.find(item => item.name == type);
+      options.filters.forEach(filter => {
+        if (filter.rangeSlider) {
+          filter.currentMin = filter.min;
+          filter.currentMax = filter.max;
+        }
+        if (filter.selectedCategories) {
+          filter.selectedCategories = [];
+        }
+      });
     }
   }
 });
