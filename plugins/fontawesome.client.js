@@ -47,7 +47,8 @@ import {
   faRotateRight,
   faFloppyDisk,
   faStar,
-  faStarHalfAlt
+  faStarHalfAlt,
+  faCircleXmark
 } from '@fortawesome/free-solid-svg-icons';
 import { faCcVisa, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
@@ -99,7 +100,8 @@ library.add(
   faFloppyDisk,
   faCcVisa,
   faStar,
-  faStarHalfAlt
+  faStarHalfAlt,
+  faCircleXmark
 );
 
 // This is important, we are going to let Nuxt worry about the CSS

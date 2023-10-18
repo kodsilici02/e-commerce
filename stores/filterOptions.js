@@ -8,7 +8,7 @@ export const useFilterOptions = defineStore({
         name: 'phones',
         filters: [
           {
-            name: 'Evaluation Score',
+            name: 'Score',
             type: 'score',
             currentMin: 0,
             currentMax: 5,

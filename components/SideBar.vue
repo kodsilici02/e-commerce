@@ -5,20 +5,21 @@
         v-if="!route.subRoutes"
         :to="route.link"
         class="w-full h-9 flex justify-center items-center gap-2 text-xl cursor-pointer transition-all duration-300 category-button">
-        <div class="flex basis-1/2 items-center justify-between gap-2">
-          <div class="flex-1 flex justify-start items-center">
+        <div class="flex basis-2/3 items-center justify-between gap-2 px-2">
+          <div class="flex-1 flex justify-start items-center text-xl">
             <ClientOnly>
               <font-awesome :icon="route.icon" style="pointer-events: none" class="transition-transform duration-300"></font-awesome>
             </ClientOnly>
           </div>
-          <div class="flex-1 flex justify-start">
+          <div class="flex-1 flex justify-center text-xl">
             <!-- Use ml-2 for adding left margin to create space between icon and text -->
             {{ route.name }}
           </div>
-          <div class="flex-1 flex justify-center"></div>
+          <div class="flex-1 justify-center text-xl"></div>
         </div>
       </NuxtLink>
       <Category
+        v-if="route.subRoutes"
         @handle-click="
           () => {
             route.subRoutesOpen = !route.subRoutesOpen;
@@ -26,8 +27,7 @@
         "
         :category-icon="route.icon"
         :title="route.name"
-        :open="route.subRoutesOpen"
-        v-if="route.subRoutes">
+        :open="route.subRoutesOpen">
         <div v-for="(child, subCatindex) in route.subRoutes" class="w-full flex gap-1 justify-center text-base h-8 items-center">
           <NuxtLink :to="child.link" class="flex-1 text-center text-lg transition-colors duration-200 cursor-pointer child-route">
             {{ child.name }}

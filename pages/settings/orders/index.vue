@@ -3,7 +3,7 @@
     <div class="w-full text-2xl flex justify-between mt-2">
       <div class="flex-1" style="font-weight: 600">Your Orders</div>
       <div class="flex-1 flex justify-center">
-        <SearchBar :placeholder="'Search in Orders'" :cancel_btn_color="'#000'"></SearchBar>
+        <SearchBarAnimated :placeholder="'Search in Orders'" :cancel_btn_color="'#000'"></SearchBarAnimated>
       </div>
       <div class="flex-1"></div>
     </div>
