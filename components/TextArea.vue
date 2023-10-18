@@ -4,7 +4,7 @@
       @input="autoResize"
       ref="textarea"
       v-model="comment"
-      placeholder="Type a comment"
+      :placeholder="placeholder"
       class="w-full outline-none resize-none overflow-hidden block"
       style="background-color: var(--background); height: 2rem"></textarea>
     <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gray-400"></div>
@@ -13,6 +13,13 @@
 </template>
 
 <script setup>
+const props = defineProps({
+  placeholder: {
+    type: String,
+    default: 'Type a comment'
+  }
+});
+
 const textarea = ref();
 const comment = ref();
 

@@ -48,7 +48,7 @@ onMounted(() => {
   const tl = gsap.timeline();
   container.value.forEach((value, index) => {
     gsap.set(container.value[index], { scale: 0 });
-    tl.to(container.value[index], { scale: 1.3, duration: 0.3 }, '<').to(container.value[index], { scale: 1, duration: 0.4 });
+    tl.to(container.value[index], { scale: 1.3, duration: 0.15 }, '<').to(container.value[index], { scale: 1, duration: 0.25 });
   });
   tl.delay(1);
   tl.play();
@@ -61,6 +61,7 @@ function fillStars(index) {
   rate.value = index;
 
   lottie.value.forEach((lot, i) => {
+    lot.setSpeed(2);
     if (i <= index && !stars[i]) {
       setTimeout(() => {
         lot.playSegments([0, 120], true);
