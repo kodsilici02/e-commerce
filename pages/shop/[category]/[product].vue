@@ -104,12 +104,11 @@
 import { ref, onMounted } from 'vue';
 import { useRoute, useRouter, onBeforeRouteLeave } from 'vue-router';
 import { useProductStore } from '@/stores/products.js';
-import getProduct from '@/plugins/getProduct';
 
 const route = useRoute();
 const router = useRouter();
 
-const product = getProduct(route.params.product);
+const product = useNuxtApp().$getProduct(route.params.product);
 
 const actual_image = ref();
 onBeforeRouteLeave((to, from) => {

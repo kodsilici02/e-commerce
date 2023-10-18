@@ -62,6 +62,9 @@
     <div class="w-full">
       <Details></Details>
     </div>
+    <div class="w-full mt-10">
+      <Comment></Comment>
+    </div>
     <div class="h-64"></div>
   </div>
 </template>
