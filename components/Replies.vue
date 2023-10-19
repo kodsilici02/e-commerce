@@ -17,7 +17,7 @@
         </ClientOnly>
       </div>
     </button>
-    <div class="w-full overflow-hidden transition-all duration-300 rounded-xl" style="max-height: 0" ref="sub_category">
+    <div class="w-full overflow-hidden transition-all duration-300" style="max-height: 0" ref="sub_category">
       <div class="sub-category">
         <!--Replies-->
         <div class="w-full flex gap-1 items-center">
