@@ -1,6 +1,6 @@
 <template>
   <div class="w-fit flex flex-wrap justify-center gap-1">
-    <div @click="fillStars(index)" ref="container" class="w-fit cursor-pointer hover:scale-[1.1]" v-for="(star, index) in stars">
+    <div @click="handleClick(index)" ref="container" class="w-fit cursor-pointer hover:scale-[1.1]" v-for="(star, index) in stars">
       <Vue3Lottie
         ref="lottie"
         :height="120"
@@ -21,6 +21,7 @@
 import { gsap } from 'gsap';
 
 const stars = [false, false, false, false, false];
+const filled = ref(0);
 const lottie = ref();
 const container = ref();
 const rate = ref(null);
@@ -54,28 +55,44 @@ onMounted(() => {
   tl.play();
 });
 
+function handleClick(index) {
+  filled.value = index;
+  emits('handleClick', index);
+}
+watch(filled, (newVal, oldVal) => {
+  rate.value = newVal;
+  if (newVal > oldVal) {
+    fillStars(newVal);
+  } else {
+    empty(newVal, oldVal);
+  }
+});
+
 function fillStars(index) {
   let delay_fill = 0;
-  let delay_empty = index;
   emits('handleClick', index);
-  rate.value = index;
 
   lottie.value.forEach((lot, i) => {
-    lot.setSpeed(2);
+    lot.setSpeed(2.5);
     if (i <= index && !stars[i]) {
       setTimeout(() => {
         lot.playSegments([0, 120], true);
-      }, delay_fill * 200); // Decrease delay to 200ms
+      }, delay_fill * 100); // Decrease delay to 200ms
       stars[i] = true;
       delay_fill++;
     }
+  });
+}
 
+function empty(index, old) {
+  let delay_empty = index;
+  lottie.value.forEach((lot, i) => {
+    lot.setSpeed(2.5);
     if (i > index && stars[i]) {
       setTimeout(() => {
         lot.playSegments([120, 0], true);
-      }, delay_empty * 200); // Decrease delay to 200ms
+      }, (4 - i) * 200); // Decrease delay to 200ms
       stars[i] = false;
-      delay_empty--;
     }
   });
 }
