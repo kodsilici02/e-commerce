@@ -1,5 +1,7 @@
 <template>
-  <div class="fixed w-80 h-full bg-gray-900 z-[1001] flex flex-wrap p-2 gap-2 content-start sidebar" style="color: var(--text-white)">
+  <div
+    class="fixed w-64 lg:w-80 h-full bg-gray-900 z-[1001] flex flex-wrap p-2 gap-2 content-start sidebar"
+    style="color: var(--text-white)">
     <div v-for="(route, index) in routes" class="w-full flex flex-col justify-center items-center" ref="route_items">
       <NuxtLink
         v-if="!route.subRoutes"

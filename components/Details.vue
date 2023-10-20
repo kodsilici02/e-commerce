@@ -1,11 +1,15 @@
 <template>
-  <div ref="wrapper" class="w-full overflow-hidden p-2 transition-all duration-500 relative">
+  <div ref="wrapper" class="w-full overflow-hidden p-0 md:p-2 transition-all duration-500 relative">
     <div ref="container" class="flex justify-center flex-wrap">
-      <div ref="item" v-for="detail in product.details" class="basis-1/2 px-3 py-2">
-        <div class="w-full rounded-lg p-3 flex justify-between items-center" style="background-color: var(--background-hover)">
+      <div ref="item" v-for="detail in product.details" class="basis-1/2 px-1 md:px-3 py-2 overflow-hidden">
+        <div
+          class="w-full text-xs md:text-sm lg:text-base rounded-lg p-3 flex justify-between items-center gap-1"
+          style="background-color: var(--background-hover)">
           <div class="font-bold">{{ formatType(detail.type) }}</div>
-          <div class="flex-shrink-0 font-[700]" v-if="detail.number || detail.string">{{ detail.value }}</div>
-          <div class="flex-shrink-0 font-[700]" v-if="detail.array">{{ detail.value[0] }}</div>
+          <div class="flex-shrink-1 md:flex-shrink-0 font-[500] md:font-[600]" v-if="detail.number || detail.string">
+            {{ detail.value }}
+          </div>
+          <div class="flex-shrink-1 md:flex-shrink-0 font-[500] md:font-[600]" v-if="detail.array">{{ detail.value[0] }}</div>
           <div v-if="detail.bool">
             <ClientOnly>
               <font-awesome v-if="detail.value" :icon="['fas', 'circle-check']"></font-awesome>

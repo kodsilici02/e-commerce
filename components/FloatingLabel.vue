@@ -3,7 +3,8 @@
     <input
       @input="handleInput()"
       :type="type"
-      class="form_field form_border p-3 rounded-lg w-full bg-transparent placeholder:text-transparent transition-all duration-200"
+      :readonly="readOnly"
+      class="form_field form_border p-2 md:p-3 text-xs md:text-base rounded-lg w-full bg-transparent placeholder:text-transparent transition-all duration-200"
       :class="{ form_error_border: checkError() }"
       :placeholder="label"
       :value="value"
@@ -36,6 +37,10 @@ const props = defineProps({
   errorMessages: {
     type: Array,
     default: []
+  },
+  readOnly: {
+    type: Boolean,
+    default: false
   },
   max: Number
 });

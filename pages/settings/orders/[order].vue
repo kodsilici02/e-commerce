@@ -1,11 +1,12 @@
 <template>
-  <div class="w-full flex flex-wrap gap-2 p-4" style="color: var(--text-color)">
+  <div class="w-full flex flex-wrap gap-2 p-2 lg:p-4" style="color: var(--text-color)">
+    <div class="w-full text-2xl font-bold flex justify-center mt-3">{{ product.name }}</div>
     <div class="w-full lg:basis-1/4 h-[350px] flex justify-center items-center 2xl:mt-10">
-      <img :src="image_url" class="object-center object-contain image" ref="image_element" />
+      <img :src="image_url" class="w-full h-full object-center object-contain image" ref="image_element" />
     </div>
     <!--Progress Bar and order details-->
-    <div class="w-full lg:basis-2/3 flex flex-wrap content-start lg:mt-10 gap-3">
-      <div class="w-full px-10">
+    <div class="w-full flex-1 flex flex-wrap content-start lg:mt-10 gap-3">
+      <div class="w-full px-5 md:px-10">
         <ProgressBar
           :states="[
             {
@@ -21,36 +22,38 @@
             { name: 'Delivered', progress: 20, success: true }
           ]"></ProgressBar>
       </div>
-      <div class="w-full flex flex-wrap p-2 gap-2 mt-12">
-        <div class="flex-1 flex flex-wrap gap-2">
-          <div class="w-full text-2xl font-bold">Order Summary</div>
+      <div class="w-full flex justify-center flex-wrap p-2 gap-5 mt-12">
+        <div class="basis-1/2 md:basis-2/3 flex flex-wrap gap-4">
+          <div class="w-full text-xl md:text-2xl font-bold ml-1">Order Summary</div>
           <div v-for="info in infos" class="w-full flex items-center gap-2">
-            <div class="text-lg font-[700]">{{ info.title }}:</div>
-            <div class="text-lg font-[500]">{{ info.value }}</div>
-            <ClientOnly v-if="info.icon">
-              <font-awesome :icon="info.icon"></font-awesome>
-            </ClientOnly>
+            <FloatingLabel :read-only="true" :error-messages="[]" :type="'text'" :label="info.title" :value="info.value"></FloatingLabel>
           </div>
         </div>
-        <div class="flex-1 content-start flex flex-wrap gap-2">
-          <div class="w-full text-2xl font-bold">{{ product.name }}</div>
-          <div v-for="summary in summaries" class="w-full flex items-center gap-2">
-            <div class="text-lg font-[700]">{{ summary.title }}:</div>
-            <div class="text-lg">{{ summary.value }}</div>
+        <div class="h-fit flex-1 flex justify-center flex-wrap items-center gap-1 font-bold">
+          <div class="w-full flex gap-1 items-center justify-center text-xl md:text-2xl">
             <ClientOnly>
               <font-awesome :icon="['fas', 'dollar-sign']"></font-awesome>
             </ClientOnly>
+            <div>999</div>
           </div>
-          <div class="w-full flex items-center gap-2">
-            <div class="text-lg font-[700]">Total:</div>
-            <div class="text-lg">{{ Total() }}</div>
+          <div class="flex-1 content-start flex flex-wrap gap-2">
+            <div v-for="summary in summaries" class="w-full text-sm md:text-lg font-[500] flex content-start items-center gap-2">
+              <div class="font-[600] flex-shrink-1 w-fit">{{ summary.title }}:</div>
+              <div class="flex-1 flex justify-end">{{ summary.value }}</div>
+              <ClientOnly>
+                <font-awesome :icon="['fas', 'dollar-sign']"></font-awesome>
+              </ClientOnly>
+            </div>
+            <div class="w-full flex items-center gap-2">
+              <div class="text-sm md:text-lgfont-[600]">Total:</div>
+              <div class="text-sm md:text-lg font-[500] flex-1 flex justify-end items-center gap-1">
+                {{ Total() }}
+                <ClientOnly>
+                  <font-awesome :icon="['fas', 'dollar-sign']"></font-awesome>
+                </ClientOnly>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="h-fit w-28 flex items-center gap-1 text-xl font-bold">
-          <ClientOnly>
-            <font-awesome :icon="['fas', 'dollar-sign']"></font-awesome>
-          </ClientOnly>
-          <div>999</div>
         </div>
       </div>
     </div>
@@ -93,10 +96,6 @@ const infos = ref([
   {
     title: 'Dealer',
     value: 'He?'
-  },
-  {
-    title: 'Payment Method',
-    icon: ['fab', 'cc-visa']
   },
   {
     title: 'Card Number',

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex">
+  <div class="w-full flex text-xs md:text-sm lg:text-base">
     <div class="w-full relative flex h-fit items-center">
       <div class="h-[13px] w-[13px] rounded-full thumb transition-colors duration-200" style="background-color: var(--secondary)">
         <div class="relative w-full h-full flex justify-center">

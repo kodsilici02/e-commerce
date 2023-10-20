@@ -37,17 +37,14 @@
             @click="addClass(orderindex, order.img)"
             v-for="(order, orderindex) in item.items"
             class="w-full flex flex-wrap cursor-pointer rounded-lg transition-colors duration-300 item-background">
-            <div class="h-28 flex flex-wrap gap-2 overflow-hidden">
-              <div class="w-32 h-full p-1 flex justify-center items-center overflow-hidden">
-                <div class="flex-1 h-full flex justify-center overflow-hidden">
-                  <img
-                    ref="images"
-                    :src="order.img"
-                    :class="{ image: orderImage.hero_image == order.img }"
-                    class="object-center object-contain h-full" />
-                </div>
-              </div>
+            <div class="w-32 h-28 flex justify-center">
+              <img
+                ref="images"
+                :src="order.img"
+                :class="{ image: orderImage.hero_image == order.img }"
+                class="w-full h-full object-center object-contain" />
             </div>
+
             <div class="flex-1 h-full flex flex-wrap content-start">
               <div class="w-full font-bold text-lg">{{ order.name }}</div>
               <div class="w-full flex gap-2 items-center">
