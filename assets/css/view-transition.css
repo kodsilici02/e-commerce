@@ -43,6 +43,7 @@
 ::view-transition-old(view-image),
 ::view-transition-new(view-image) {
   animation: none;
+
   mix-blend-mode: normal;
 }
 ::view-transition-old(main-sidenav),

@@ -52,7 +52,7 @@
               </div>
             </div>
             <div class="text-xs sm:text-2xl text-center h-14 w-full flex justify-center items-center px-2 mt-4">{{ item.name }}</div>
-            <div class="flex-1 flex justify-center overflow-hidden">
+            <div class="flex-1 w-full flex justify-center overflow-hidden">
               <img
                 :key="item.name"
                 :src="item.img"

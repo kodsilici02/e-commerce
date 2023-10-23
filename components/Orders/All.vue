@@ -42,7 +42,7 @@
                 ref="images"
                 :src="order.img"
                 :class="{ image: orderImage.hero_image == order.img }"
-                class="w-full h-full object-center object-contain" />
+                class="object-center object-contain" />
             </div>
 
             <div class="flex-1 h-full flex flex-wrap content-start">

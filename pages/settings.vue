@@ -7,6 +7,10 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+definePageMeta({
+  middleware: ['setting']
+});
+</script>
 
 <style scoped></style>

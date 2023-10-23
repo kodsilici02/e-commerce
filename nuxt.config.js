@@ -10,6 +10,9 @@ export default defineNuxtConfig({
   experimental: {
     viewTransition: true
   },
+  router: {
+    redirect: [{ from: '/settings', to: '/settings/account' }]
+  },
 
   buildModules: ['@nuxtjs/tailwindcss'],
   postcss: {
