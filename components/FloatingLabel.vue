@@ -7,7 +7,7 @@
       class="form_field form_border p-2 md:p-3 text-xs md:text-base rounded-lg w-full bg-transparent placeholder:text-transparent transition-all duration-200"
       :class="{ form_error_border: checkError() }"
       :placeholder="label"
-      :value="value"
+      v-model="internalValue"
       ref="input"
       name="name"
       id="name"
@@ -46,6 +46,7 @@ const props = defineProps({
 });
 
 const input = ref();
+const internalValue = ref(props.value);
 
 function handleInput() {
   let target = event.target.value;

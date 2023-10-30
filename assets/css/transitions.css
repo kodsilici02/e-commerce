@@ -155,3 +155,24 @@
 .down-leave-to {
   transform: translateY(-100%);
 }
+
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  translate: 0px -100%;
+}
+.list-leave-active {
+  --width: 380px;
+  width: var(--width);
+  position: absolute;
+}
+
+.list-enter-active {
+  position: relative;
+}
