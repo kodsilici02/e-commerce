@@ -10,7 +10,7 @@
         <div class="basis-1/2 p-2"><FloatingLabel :type="'Text'" :label="'Surname'" :value="'Okan'"></FloatingLabel></div>
         <div class="w-full p-2"><FloatingLabel :type="'date'" :label="'Birth Date'"></FloatingLabel></div>
         <div class="w-24 p-2">
-          <SelectOption :back-ground-color="'#dcdcdc'"></SelectOption>
+          <SelectOption :back-ground-color="'#dcdcdc'" :prop_value="90" :before="'+'" :options="[90, 49, 43, 994]"></SelectOption>
         </div>
         <div class="flex-1 p-2">
           <FloatingLabel :type="'number'" :label="'Number'" :max="10"></FloatingLabel>

@@ -1,7 +1,7 @@
 <template>
   <div ref="container" class="w-full h-full flex flex-wrap items-center border rounded-lg border-[var(--text-gray)] p-2 relative">
     <button @click="handleClick" class="w-full flex items-center">
-      <div class="flex items-center">+{{ value }}</div>
+      <div class="flex items-center">{{ before }} {{ value }}</div>
       <div class="flex-1 flex justify-end">
         <ClientOnly>
           <font-awesome
@@ -26,7 +26,7 @@
               @click="select(option)"
               class="w-full flex justify-center items-center hover:bg-[--background-hover] transition-colors duration-300"
               v-for="option in options">
-              +{{ option }}
+              {{ before }} {{ option }}
             </button>
           </div>
         </div>
@@ -36,6 +36,8 @@
 </template>
 
 <script setup>
+const emits = defineEmits(['handleSelect']);
+
 const props = defineProps({
   categoryIcon: Array,
   title: String,
@@ -44,17 +46,26 @@ const props = defineProps({
     type: String,
     default: 'rgba(67, 67, 67, 0.4)'
   },
-  height: Number
+  height: Number,
+  options: Array,
+  prop_value: {
+    default: null
+  },
+  before: {
+    type: String,
+    default: ''
+  }
 });
 
-const options = [90, 49, 43, 994];
-const value = ref(90);
+const options = ref(props.options);
+const value = ref(props.prop_value);
 const open = ref(false);
 const sub_category = ref();
 const container = ref();
 
 function select(option) {
   value.value = option;
+  emits('handleSelect', option);
   handleClick();
 }
 

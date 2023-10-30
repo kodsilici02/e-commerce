@@ -4,6 +4,7 @@
       @input="handleInput()"
       :type="type"
       :readonly="readOnly"
+      :max="max"
       class="form_field form_border p-2 md:p-3 text-xs md:text-base rounded-lg w-full bg-transparent placeholder:text-transparent transition-all duration-200"
       :class="{ form_error_border: checkError() }"
       :placeholder="label"
