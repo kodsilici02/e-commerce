@@ -8,6 +8,7 @@ body {
   --text-white: aliceblue;
   --text-gray: rgb(155, 155, 155);
   --background: #f0f0f0;
+  --background-secondary: #ccc;
   --background-hover: #dcdcdc;
   --primary: #6a6bcf;
   --secondary: #4470da;

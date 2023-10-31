@@ -15,7 +15,7 @@
       required />
     <label
       for="name"
-      class="form_label pointer-events-none transition-all duration-200 px-2 top-[10px] absolute left-2 text-base lg:text-xl block bg-[var(--background)]">
+      class="form_label pointer-events-none transition-all duration-200 px-2 top-[4px] md:top-[10px] absolute left-2 text-base lg:text-xl block bg-[var(--background)]">
       {{ label }}</label
     >
   </div>

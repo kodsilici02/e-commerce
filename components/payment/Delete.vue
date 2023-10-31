@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-col items-center justify-center gap-4 p-5">
-    <div class="w-full text-2xl font-bold flex justify-center">Are you sure you want to delete?</div>
+    <div class="w-full text-2xl font-bold flex justify-center text-center">Are you sure you want to delete?</div>
     <div @click="handleClick" class="w-full cursor-pointer">
       <Vue3Lottie
         ref="lottie"
