@@ -4,7 +4,10 @@
       <div
         v-for="(info, index) in infos"
         :key="info.address"
-        class="h-[350px] w-full lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-200 hover:scale-[1.02] overflow-hidden">
+        class="h-[350px] w-full lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-200 hover:scale-[1.02] overflow-hidden relative">
+        <div class="absolute z-[2] cursor-pointer -top-3 right-2">
+          <Bookmark @handle-click="toggleBookmark(index)" :active="info.default"></Bookmark>
+        </div>
         <div
           class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative overflow-hidden">
           <div class="h-full w-full flex flex-col p-3 gap-2">
@@ -95,7 +98,8 @@ const infos = ref([
     province: 'Kocaeli',
     county: 'Gebze',
     district: 'Adem Yavuz Mahallesi',
-    phone: '0500 500 50 00'
+    phone: '0500 500 50 00',
+    default: true
   },
   {
     title: 'Ev',
@@ -104,28 +108,15 @@ const infos = ref([
     province: 'Kocaeli',
     county: 'Gebze',
     district: 'Adem Yavuz Mahallesi',
-    phone: '0500 500 50 00'
-  },
-  {
-    title: 'Ev',
-    name: 'Şafak 3',
-    address: 'adem yavuz mah. 2323 sk. Bla Bla',
-    province: 'Kocaeli',
-    county: 'Gebze',
-    district: 'Adem Yavuz Mahallesi',
-    phone: '0500 500 50 00'
-  },
-  {
-    title: 'Ev',
-    name: 'Şafak 4',
-    surname: 'Dinç',
-    address: 'adem yavuz mah. 2323 sk. Bla Bla',
-    province: 'Kocaeli',
-    county: 'Gebze',
-    district: 'Adem Yavuz Mahallesi',
-    phone: '0500 500 50 00'
+    phone: '0500 500 50 00',
+    default: false
   }
 ]);
+
+function toggleBookmark(index) {
+  infos.value.find(info => info.default == true).default = false;
+  infos.value[index].default = true;
+}
 
 function addInfo(obj) {
   console.log(obj);
@@ -156,6 +147,17 @@ function closeModals() {
 </script>
 
 <style scoped>
+.bookmark {
+  position: relative;
+  height: 70px;
+  width: 50px;
+  padding: 0px;
+  -webkit-transform: rotate(0deg) skew(0deg);
+  transform: rotate(0deg) skew(0deg);
+  border-left: 25px solid red;
+  border-right: 25px solid red;
+  border-bottom: 25px solid transparent;
+}
 .add-new {
   border: 3px dashed var(--text-color);
 }

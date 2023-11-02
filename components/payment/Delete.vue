@@ -27,20 +27,26 @@
 const emits = defineEmits(['handleCancel', 'handleDelete']);
 
 const lottie = ref();
+const delete_var = ref(false);
 
 function handleClick() {
   lottie.value.play();
+  delete_var.value = true;
 }
 function complete() {
   console.log('completed');
   emits('handleDelete');
 }
+onBeforeUnmount(() => {
+  if (delete_var.value) {
+    emits('handleDelete');
+  }
+});
 
 function cancel() {
   emits('handleCancel');
 }
 </script>
-
 <style scoped>
 .delete-button {
   background-color: #b50c0c;

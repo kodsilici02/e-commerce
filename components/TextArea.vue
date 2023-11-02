@@ -36,11 +36,13 @@ function autoResize() {
 <style scoped>
 .bottom-line {
   background: linear-gradient(90deg, var(--accent) 0%, var(--secondary-light) 100%);
-  transition: width 300ms ease-in-out;
-  width: 0;
-  transform-origin: left;
+  transition: transform 500ms ease-in-out;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: bottom right;
 }
 textarea:focus ~ .bottom-line {
-  width: 100%;
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 </style>

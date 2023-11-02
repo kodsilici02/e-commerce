@@ -17,7 +17,7 @@
         <NavigateButton :to="'/shop'" :text="'Start Shopping'"></NavigateButton>
       </div>
     </div>
-    <div v-for="(item, index) in items" class="w-full flex flex-wrap gap-1 px-10 relative">
+    <div v-for="(item, index) in items" class="w-full flex flex-wrap gap-1 px-5 relative">
       <div class="absolute left-0 top-0 h-full flex items-center flex-col">
         <div
           class="mt-[6px] z-10 cursor-pointer transition-transform duration-200"
@@ -37,7 +37,7 @@
             @click="addClass(orderindex, order.img)"
             v-for="(order, orderindex) in item.items"
             class="w-full flex flex-wrap cursor-pointer rounded-lg transition-colors duration-300 item-background">
-            <div class="w-32 h-28 flex justify-center">
+            <div class="w-32 h-28 flex justify-center p-1">
               <img
                 ref="images"
                 :src="order.img"
@@ -45,8 +45,8 @@
                 class="object-center object-contain" />
             </div>
 
-            <div class="flex-1 h-full flex flex-wrap content-start">
-              <div class="w-full font-bold text-lg">{{ order.name }}</div>
+            <div class="flex-1 h-full flex flex-wrap content-start gap-2 md:gap-1 text-xs md:text-base mt-2 md:mt-0">
+              <div class="w-full font-bold text-sm md:text-lg">{{ order.name }}</div>
               <div class="w-full flex gap-2 items-center">
                 <ClientOnly>
                   <font-awesome :icon="['fas', 'location-dot']"></font-awesome>

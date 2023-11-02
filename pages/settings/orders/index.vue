@@ -1,19 +1,25 @@
 <template>
   <div class="w-full flex flex-wrap gap-2 overflow-hidden" style="color: var(--text-color)">
-    <div class="w-full text-2xl flex justify-between mt-2">
+    <div class="w-full text-2xl flex flex-col items-center justify-center gap-3 mt-2">
       <div class="flex-1" style="font-weight: 600">Your Orders</div>
       <div class="flex-1 flex justify-center">
         <SearchBarAnimated :placeholder="'Search in Orders'" :cancel_btn_color="'#000'"></SearchBarAnimated>
       </div>
       <div class="flex-1"></div>
     </div>
-    <div class="w-full flex gap-2 flex-wrap">
-      <div
-        @click="activate(index)"
-        v-for="(item, index) in items"
-        :style="{ color: activeState == index ? 'var(--success)' : '' }"
-        class="filter-button cursor-pointer flex justify-center items-center p-4 transition-colors duration-300">
-        {{ item.name }}
+    <div class="w-full flex">
+      <div class="flex-1 w-0">
+        <div class="overflow-x-auto">
+          <div class="flex overflow-y-hidden gap-1">
+            <div
+              @click="activate(index)"
+              v-for="(item, index) in items"
+              :style="{ color: activeState == index ? 'var(--success)' : '' }"
+              class="filter-button px-3 py-2 mb-2 flex-shrink-0 cursor-pointer flex justify-center items-center p-4 transition-colors duration-300">
+              {{ item.name }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="w-full p-2">
@@ -66,7 +72,6 @@ function activate(index) {
 .filter-button {
   background-color: #fff;
   border: 1px solid #dddddd;
-  height: 32px;
   border-radius: 32px;
   font-weight: 600;
   font-size: 12px;
