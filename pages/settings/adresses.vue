@@ -1,9 +1,10 @@
 <template>
-  <div class="w-full h-full flex flex-wrap" style="color: var(--text-white)">
+  <div class="w-full h-full flex flex-wrap" style="color: var(--text-color)">
     <TransitionGroup name="list" tag="div" class="w-full h-full p-2 flex flex-wrap content-start">
       <div
         v-for="(info, index) in infos"
         :key="info.address"
+        style="color: var(--text-white)"
         class="h-[350px] w-full lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-200 hover:scale-[1.02] overflow-hidden relative">
         <div class="absolute z-[2] cursor-pointer -top-3 right-2">
           <Bookmark @handle-click="toggleBookmark(index)" :active="info.default"></Bookmark>
@@ -66,6 +67,9 @@
             direction="alternate" />
         </div>
       </div>
+      <div key="heeee?" class="w-full text-black">
+        <button @click="deneme">deneme</button>
+      </div>
     </TransitionGroup>
     <Transition name="modal">
       <Modal v-if="edit_modal">
@@ -89,48 +93,29 @@
 </template>
 
 <script setup>
-const infos = ref([
-  {
-    title: 'Ev',
-    name: 'Şafak 1',
-    surname: 'Dinç',
-    address: 'adem yavuz mah. 2323 sk. Bla Bla',
-    province: 'Kocaeli',
-    county: 'Gebze',
-    district: 'Adem Yavuz Mahallesi',
-    phone: '0500 500 50 00',
-    default: true
-  },
-  {
-    title: 'Ev',
-    name: 'Şafak 2',
-    address: 'adem yavuz mah. 2323 sk. Bla Bla',
-    province: 'Kocaeli',
-    county: 'Gebze',
-    district: 'Adem Yavuz Mahallesi',
-    phone: '0500 500 50 00',
-    default: false
-  }
-]);
+import { useAddressesStore } from '@/stores/addresses';
+import { storeToRefs } from 'pinia';
+
+const store = storeToRefs(useAddressesStore());
+
+const infos = ref(store.addresses.value);
 
 function toggleBookmark(index) {
-  infos.value.find(info => info.default == true).default = false;
-  infos.value[index].default = true;
+  store.addresses.value.find(info => info.default == true).default = false;
+  store.addresses.value[index].default = true;
 }
 
 function addInfo(obj) {
-  console.log(obj);
-  infos.value.push(obj);
+  store.addresses.value.push(obj);
   closeModals();
 }
 
 function saveInfo(obj) {
-  console.log(obj);
-  infos.value[selectedItem.value] = obj;
+  store.addresses.value[selectedItem.value] = obj;
   closeModals();
 }
 function deleteInfo() {
-  infos.value.splice(selectedItem.value, 1);
+  store.addresses.value.splice(selectedItem.value, 1);
   closeModals();
 }
 
