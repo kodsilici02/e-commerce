@@ -14,13 +14,16 @@
       <div class="w-full flex items-center gap-x-1 text-lg font-bold">
         <ClientOnly><font-awesome :icon="['fas', 'calendar-days']" /></ClientOnly>Delivery Date
       </div>
-      <div class="w-full">{{ getDate() }}</div>
+      <div class="w-full font-[600]">{{ getDate() }}</div>
     </div>
     <div class="w-full flex flex-wrap items-center gap-x-1">
       <div class="w-full flex items-center gap-x-1 text-lg font-bold">
         <ClientOnly><font-awesome :icon="['fas', 'location-dot']" /></ClientOnly>Delivery Location
       </div>
-      <div class="cursor-pointer w-full location-button" @click="toggleModal">Select a Location</div>
+      <div class="w-full flex items-center gap-x-1 text-lg font-[600]">
+        {{ address.address }}/{{ address.county }}/{{ address.province }}
+      </div>
+      <div class="cursor-pointer w-full location-button font-bold" @click="toggleModal">Select a Location</div>
     </div>
     <div class="w-full flex flex-col gap-2 items-center justify-center">
       <div class=""></div>
@@ -31,6 +34,13 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue';
 import { useSidebarStore } from '@/stores/sidebar.js';
+
+const props = defineProps({
+  address: {
+    type: Object,
+    default: {}
+  }
+});
 
 const emits = defineEmits(['toggleLocationModal']);
 

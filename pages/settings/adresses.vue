@@ -2,7 +2,7 @@
   <div class="w-full h-full flex flex-wrap" style="color: var(--text-color)">
     <TransitionGroup name="list" tag="div" class="w-full h-full p-2 flex flex-wrap content-start">
       <div
-        v-for="(info, index) in infos"
+        v-for="(info, index) in addresses"
         :key="info.address"
         style="color: var(--text-white)"
         class="h-[350px] w-full lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-200 hover:scale-[1.02] overflow-hidden relative">
@@ -98,7 +98,7 @@ import { storeToRefs } from 'pinia';
 
 const store = storeToRefs(useAddressesStore());
 
-const infos = ref(store.addresses.value);
+const addresses = ref(store.addresses.value);
 
 function toggleBookmark(index) {
   store.addresses.value.find(info => info.default == true).default = false;

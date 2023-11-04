@@ -14,17 +14,17 @@ export const useAddressesStore = defineStore({
           county: 'Gebze',
           district: 'Adem Yavuz Mahallesi',
           phone: '0500 500 50 00',
-          default: true
+          default: false
         },
         {
           title: 'Ev',
           name: 'Şafak 2',
-          address: 'adem yavuz mah. 2323 sk. Bla Bla',
+          address: 'adem yavuz mah. 2323 sk. Bla Bla 2',
           province: 'Kocaeli',
           county: 'Gebze',
           district: 'Adem Yavuz Mahallesi',
           phone: '0500 500 50 00',
-          default: false
+          default: true
         }
       ]
     };

@@ -89,10 +89,12 @@
       <div class="w-full h-20"></div>
     </div>
     <!--SideNav-->
-    <SidebarOrderSidebar @toggleLocationModal="toggleLocationModal"></SidebarOrderSidebar>
+    <SidebarOrderSidebar :address="getAddress" @toggleLocationModal="toggleLocationModal"></SidebarOrderSidebar>
     <!--Modals-->
     <Transition name="modal">
-      <SelectLocation v-if="isLocationModalOpen" @toggleModal="toggleLocationModal"></SelectLocation>
+      <Modal v-if="isLocationModalOpen" :max_width="calculateWidth()" :width="calculateWidth()">
+        <SelectLocation @select="changeAddress"></SelectLocation>
+      </Modal>
     </Transition>
     <Transition name="component_space">
       <SideBarSpace v-if="isLocationModalOpen" @handleClick="toggleLocationModal"></SideBarSpace>
@@ -104,9 +106,27 @@
 import { ref, onMounted } from 'vue';
 import { useRoute, useRouter, onBeforeRouteLeave } from 'vue-router';
 import { useProductStore } from '@/stores/products.js';
+import { useAddressesStore } from '@/stores/addresses';
+import { storeToRefs } from 'pinia';
+
+const addresses_store = storeToRefs(useAddressesStore());
+
+function calculateWidth() {
+  if (window.innerWidth <= 768) {
+    return 350;
+  }
+  if (window.innerWidth <= 1024) {
+    return 500;
+  }
+  if (window.innerWidth <= 1280) {
+    return 750;
+  }
+  if (window.innerWidth <= 1536) {
+    return 1000;
+  }
+}
 
 const route = useRoute();
-const router = useRouter();
 const product = useNuxtApp().$getProduct(route.params.product);
 
 const actual_image = ref();
@@ -183,10 +203,24 @@ function changeImage(image, index) {
   activeImageIndex.value = index;
 }
 
+const selectedAddressIndex = ref(null);
 const isLocationModalOpen = ref(false);
 function toggleLocationModal() {
   isLocationModalOpen.value = !isLocationModalOpen.value;
 }
+
+function changeAddress(index) {
+  selectedAddressIndex.value = index;
+  toggleLocationModal();
+}
+
+const getAddress = computed(() => {
+  if (selectedAddressIndex.value == null) {
+    return addresses_store.addresses.value.find(address => address.default == true);
+  } else {
+    return addresses_store.addresses.value[selectedAddressIndex.value];
+  }
+});
 </script>
 
 <style scoped>
