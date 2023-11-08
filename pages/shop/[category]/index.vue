@@ -30,7 +30,7 @@
         </div>
         <div
           v-for="(item, index) in filteredItems"
-          @click="deneme(item.img)"
+          @click="deneme(item.images[0])"
           :key="item.name"
           ref="element"
           class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-200 cursor-pointer hover:scale-[1.02] overflow-hidden">
@@ -55,8 +55,8 @@
             <div class="flex-1 w-full flex justify-center overflow-hidden">
               <img
                 :key="item.name"
-                :src="item.img"
-                :class="{ image: products.hero_image == item.img }"
+                :src="item.images[0]"
+                :class="{ image: products.hero_image == item.images[0] }"
                 class="object-contain object-center image-selector" />
             </div>
             <div

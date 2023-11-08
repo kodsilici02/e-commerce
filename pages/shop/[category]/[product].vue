@@ -3,15 +3,15 @@
     <div class="flex-1 flex flex-wrap p-2 gap-2">
       <div class="flex w-full lg:basis-2/4" id="images">
         <div class="hidden lg:flex flex-col gap-2 h-[70vh] overflow-hidden">
-          <div v-for="(image, index) in images" class="flex-1 w-40 cursor-pointer" @click="changeImage(image, index)">
-            <div class="w-full h-full">
+          <div v-for="(image, index) in product.images" class="h-auto w-40 cursor-pointer" @click="changeImage(image, index)">
+            <div class="w-full h-auto">
               <img class="object-center object-contain" :src="image" />
             </div>
           </div>
         </div>
         <!--Actual Image-->
         <div class="flex-1 h-[40vh] lg:h-[70vh] overflow-hidden flex justify-center items-center z-0">
-          <div class="h-full w-full flex items-center overflow-hidden">
+          <div class="h-auto w-full flex items-center overflow-hidden">
             <Transition :name="transitionName" mode="out-in"
               ><img ref="actual_image" class="object-center object-contain image" :key="activeImage" :src="activeImage"
             /></Transition>
@@ -79,13 +79,18 @@
         <div class="">Price History</div>
         <VueChart></VueChart>
       </div>
+      <div class="w-full">
+        <Details></Details>
+      </div>
       <!--Recommendeds-->
       <div class="w-full mt-10">
         <div class="flex text-2xl w-full">Recommended</div>
         <Recommended></Recommended>
       </div>
+      <div class="w-full flex flex-col mt-14">
+        <Comments></Comments>
+      </div>
       <!--Rest of the Content-->
-
       <div class="w-full h-20"></div>
     </div>
     <!--SideNav-->
@@ -129,16 +134,15 @@ function calculateWidth() {
 const route = useRoute();
 const product = useNuxtApp().$getProduct(route.params.product);
 
-const actual_image = ref();
 onBeforeRouteLeave((to, from) => {
   if (to.fullPath != '/shop/' + route.params.category) {
     actual_image.value.classList.remove('image');
   }
 });
+
 const products = useProductStore();
-const image_url = 'https://assets.getmobil.com/uploads/41726/getmobil-samsung-s225g-phantomgreen-00webp.png';
 onMounted(() => {
-  products.hero_image = image_url;
+  products.hero_image = product.images[0];
 });
 
 const generalInfo = [
@@ -183,12 +187,7 @@ const generalInfo = [
     value: '1170x2532 (FHD+) Piksel'
   }
 ];
-const images = ref([
-  product.img,
-  '../../assets/deneme.png',
-  'https://store.ite.net/wp-content/uploads/2022/11/iPhone_14_Pro_Max_Deep_Purple_PDP_Image_Position-2__en-US.png',
-  'https://w7.pngwing.com/pngs/60/414/png-transparent-iphone-14.png'
-]);
+const images = ref(product.images);
 const activeImage = ref(images.value[0]);
 const activeImageIndex = ref(0);
 const transitionName = ref('up');
