@@ -3,7 +3,7 @@
     <div class="w-full">
       <SendComment></SendComment>
     </div>
-    <div v-for="(comment, index) in comments" :key="index" class="w-full flex gap-2 relative">
+    <div v-for="(comment, index) in comments" :key="index" class="w-full flex gap-4 relative">
       <div class="h-10 w-10 md:h-14 md:w-14 rounded-full relative self-start">
         <img :src="auth.profilePhoto" class="w-full h-full rounded-full object-cover object-center" />
       </div>
@@ -53,6 +53,7 @@
         </div>
       </div>
     </div>
+    <div ref="target" class="w-full"></div>
   </div>
 </template>
 
@@ -71,6 +72,22 @@ onMounted(() => {
 
 function toggleReply(index) {
   replyOpen.value[index] = !replyOpen.value[index];
+}
+
+const target = ref();
+const loading = ref(false);
+
+onMounted(() => {
+  let observer = new IntersectionObserver(intersect, {
+    root: null,
+    rootMargin: '0px',
+    threshold: 1.0
+  });
+  observer.observe(target.value);
+});
+
+function intersect(entries) {
+  console.log(entries);
 }
 </script>
 
