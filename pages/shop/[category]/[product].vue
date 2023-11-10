@@ -134,6 +134,7 @@ function calculateWidth() {
 const route = useRoute();
 const product = useNuxtApp().$getProduct(route.params.product);
 
+const actual_image = ref();
 onBeforeRouteLeave((to, from) => {
   if (to.fullPath != '/shop/' + route.params.category) {
     actual_image.value.classList.remove('image');
