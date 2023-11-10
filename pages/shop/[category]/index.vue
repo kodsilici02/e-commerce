@@ -34,45 +34,61 @@
           :key="item.name"
           ref="element"
           class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-200 cursor-pointer hover:scale-[1.02] overflow-hidden">
-          <NuxtLink
-            :to="'/shop/' + $route.params.category + '/' + convertName(item.name)"
-            class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative">
-            <div class="absolute top-0 left-0 w-full h-full purchase-layer rounded-lg transition-[background-color] duration-500 z-[2]">
-              <div class="w-full h-full flex justify-center items-center">
-                <div
-                  class="w-36 h-10 bg-slate-400 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg"
-                  style="border-radius: 35px">
-                  Purchase Now
+          <div class="item-background transition-[background-color] w-full duration-500 rounded-lg">
+            <div v-if="!isLoaded(item.name)" class="h-full w-full flex flex-col relative">
+              <div class="text-xs sm:text-2xl text-center h-14 px-3 py-2 w-full flex justify-center items-center mt-4">
+                <SkeletonLoader class="w-full h-full"></SkeletonLoader>
+              </div>
+              <div class="flex-1 w-full flex justify-center overflow-hidden p-3">
+                <SkeletonLoader class="w-full h-full"></SkeletonLoader>
+              </div>
+              <div
+                class="h-12 w-full text-xs md:text-base font-bold flex flex-wrap px-3 py-1 justify-center items-center gap-1 md:gap-2 sm:gap-x-3 mb-2">
+                <SkeletonLoader class="w-full h-full"></SkeletonLoader>
+              </div>
+            </div>
+            <NuxtLink
+              v-show="isLoaded(item.name)"
+              :to="'/shop/' + $route.params.category + '/' + convertName(item.name)"
+              class="h-full w-full flex flex-col relative">
+              <div class="absolute top-0 left-0 w-full h-full purchase-layer rounded-lg transition-[background-color] duration-500 z-[2]">
+                <div class="w-full h-full flex justify-center items-center">
+                  <div
+                    class="w-36 h-10 bg-slate-400 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg"
+                    style="border-radius: 35px">
+                    Purchase Now
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="absolute top-1 right-4">
-              <div class="flex gap-1 items-center text-xs sm:text-lg">
-                <ClientOnly><font-awesome :icon="['fas', 'dollar-sign']" /></ClientOnly>{{ item.price }}
+              <div class="absolute top-1 right-4">
+                <div class="flex gap-1 items-center text-xs sm:text-lg">
+                  <ClientOnly><font-awesome :icon="['fas', 'dollar-sign']" /></ClientOnly>{{ item.price }}
+                </div>
               </div>
-            </div>
-            <div class="text-xs sm:text-2xl text-center h-14 w-full flex justify-center items-center px-2 mt-4">{{ item.name }}</div>
-            <div class="flex-1 w-full flex justify-center overflow-hidden">
-              <img
-                :key="item.name"
-                :src="item.images[0]"
-                :class="{ image: products.hero_image == item.images[0] }"
-                class="object-contain object-center image-selector" />
-            </div>
-            <div
-              class="h-12 w-full text-xs md:text-base font-bold flex flex-wrap px-2 justify-center items-center gap-1 md:gap-2 sm:gap-x-3 mb-2">
-              <div class="flex gap-1 items-center">
-                <ClientOnly><font-awesome :icon="['fas', 'battery-full']" /></ClientOnly>{{ item.battery }} mAh
+              <div class="text-xs sm:text-2xl text-center h-14 w-full flex justify-center items-center px-2 mt-4">{{ item.name }}</div>
+              <div class="flex-1 w-full flex justify-center overflow-hidden">
+                <img
+                  @load="image_loaded(item.name)"
+                  :key="item.name"
+                  :src="item.images[0]"
+                  :class="{ image: products.hero_image == item.images[0] }"
+                  class="object-contain object-center image-selector" />
               </div>
-              <div class="flex gap-1 items-center">
-                <ClientOnly><font-awesome :icon="['fas', 'compact-disc']" /></ClientOnly>{{ item.memory[0] }} GB
+              <div
+                class="h-12 w-full text-xs md:text-base font-bold flex flex-wrap px-2 justify-center items-center gap-1 md:gap-2 sm:gap-x-3 mb-2">
+                <div class="flex gap-1 items-center">
+                  <ClientOnly><font-awesome :icon="['fas', 'battery-full']" /></ClientOnly>{{ item.battery }} mAh
+                </div>
+                <div class="flex gap-1 items-center">
+                  <ClientOnly><font-awesome :icon="['fas', 'compact-disc']" /></ClientOnly>{{ item.memory[0] }} GB
+                </div>
+                <div class="flex gap-1 items-center">
+                  <IconsScreenSize :height="20" :width="20" :color="'aliceblue'"></IconsScreenSize>
+                  {{ item.screensize }} Inch
+                </div>
               </div>
-              <div class="flex gap-1 items-center">
-                <IconsScreenSize :height="20" :width="20" :color="'aliceblue'"></IconsScreenSize>
-                {{ item.screensize }} Inch
-              </div>
-            </div>
-          </NuxtLink>
+            </NuxtLink>
+          </div>
         </div>
       </TransitionGroup>
     </div>
@@ -80,15 +96,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, watchEffect } from 'vue';
-import { useRoute, useRouter, onBeforeRouteLeave } from 'vue-router';
+import { ref, onMounted } from 'vue';
+import { useRoute, onBeforeRouteLeave } from 'vue-router';
 import { useProductStore } from '@/stores/products.js';
 import { useFilterOptions } from '@/stores/filterOptions';
 import { storeToRefs } from 'pinia';
 import { phones } from '@/assets/deneme.js';
 
 const route = useRoute();
-const router = useRouter();
 
 const filterOptions = storeToRefs(useFilterOptions());
 function findOptions() {
@@ -107,6 +122,22 @@ onBeforeRouteLeave((to, from) => {
 });
 
 const items = ref(phones);
+
+onMounted(() => {
+  items.value = items.value.map(item => {
+    return { ...item, loaded: false };
+  });
+});
+
+function isLoaded(name) {
+  return filteredItems.value.find(item => item.name == name).loaded;
+}
+
+function image_loaded(name) {
+  setTimeout(() => {
+    filteredItems.value.find(item => item.name == name).loaded = true;
+  }, 1000);
+}
 
 //sakın buraya dokunma
 const filteredItems = computed(() => {
