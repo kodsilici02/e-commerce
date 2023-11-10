@@ -135,9 +135,7 @@ onMounted(() => {
   order_image_state.hero_image = image_url;
 });
 onBeforeRouteLeave((to, from) => {
-  if (to.fullPath != '/settings/orders') {
-    image_element.value.classList.remove('image');
-  }
+  image_element.value.classList.remove('image');
 });
 
 const states = ref([

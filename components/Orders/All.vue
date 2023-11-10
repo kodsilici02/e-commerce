@@ -32,35 +32,50 @@
       </div>
       <div class="w-full flex flex-wrap gap-1 overflow-hidden transition-all duration-200" ref="container">
         <div class="w-full flex flex-wrap gap-1 item-container">
-          <NuxtLink
-            :to="'/settings/orders/' + useNuxtApp().$convertName(order.name)"
-            @click="addClass(orderindex, order.img)"
-            v-for="(order, orderindex) in item.items"
-            class="w-full flex flex-wrap cursor-pointer rounded-lg transition-colors duration-300 item-background">
-            <div class="w-32 h-28 flex justify-center p-1">
-              <img
-                ref="images"
-                :src="order.img"
-                :class="{ image: orderImage.hero_image == order.img }"
-                class="object-center object-contain" />
-            </div>
-
-            <div class="flex-1 h-full flex flex-wrap content-start gap-2 md:gap-1 text-xs md:text-base mt-2 md:mt-0">
-              <div class="w-full font-bold text-sm md:text-lg">{{ order.name }}</div>
-              <div class="w-full flex gap-2 items-center">
-                <ClientOnly>
-                  <font-awesome :icon="['fas', 'location-dot']"></font-awesome>
-                </ClientOnly>
-                <div>Bla Bla</div>
+          <div @click="addClass(orderindex, order.img)" v-for="(order, orderindex) in item.items" class="w-full flex flex-wrap">
+            <div v-if="!isLoaded(index, order.name)" class="w-full flex lfex-wrap rounded-lg">
+              <div class="w-32 h-28 flex justify-center p-1">
+                <SkeletonLoader class="w-full h-full"></SkeletonLoader>
               </div>
-              <div class="w-full flex gap-2 items-center">
-                <ClientOnly>
-                  <font-awesome :icon="['fas', 'calendar-days']"></font-awesome>
-                </ClientOnly>
-                <div>Delivered on Aug 21, 2023</div>
+              <div class="flex-1 h-full flex flex-wrap content-start gap-2 md:gap-1 text-xs md:text-base mt-2 md:mt-1">
+                <div class="w-full font-bold text-sm md:text-lg"><SkeletonLoader class="w-36 h-5"></SkeletonLoader></div>
+                <div class="w-full flex gap-2 items-center">
+                  <SkeletonLoader class="w-52 h-5"></SkeletonLoader>
+                </div>
+                <div class="w-full flex gap-2 items-center">
+                  <SkeletonLoader class="w-56 h-5"></SkeletonLoader>
+                </div>
               </div>
             </div>
-          </NuxtLink>
+            <NuxtLink
+              v-show="isLoaded(index, order.name)"
+              :to="'/settings/orders/' + useNuxtApp().$convertName(order.name)"
+              class="w-full flex flex-wrap cursor-pointer rounded-lg transition-colors duration-300 item-background">
+              <div class="w-32 h-28 flex justify-center p-1">
+                <img
+                  @load="image_loaded(index, order.name)"
+                  ref="images"
+                  :src="order.img"
+                  :class="{ image: orderImage.hero_image == order.img }"
+                  class="object-center object-contain" />
+              </div>
+              <div class="flex-1 h-full flex flex-wrap content-start gap-2 md:gap-1 text-xs md:text-base mt-2 md:mt-0">
+                <div class="w-full font-bold text-sm md:text-lg">{{ order.name }}</div>
+                <div class="w-full flex gap-2 items-center">
+                  <ClientOnly>
+                    <font-awesome :icon="['fas', 'location-dot']"></font-awesome>
+                  </ClientOnly>
+                  <div>Bla Bla</div>
+                </div>
+                <div class="w-full flex gap-2 items-center">
+                  <ClientOnly>
+                    <font-awesome :icon="['fas', 'calendar-days']"></font-awesome>
+                  </ClientOnly>
+                  <div>Delivered on Aug 21, 2023</div>
+                </div>
+              </div>
+            </NuxtLink>
+          </div>
         </div>
       </div>
     </div>
@@ -89,6 +104,25 @@ const items = ref([
     ]
   }
 ]);
+
+onMounted(() => {
+  items.value.forEach(item => {
+    item.items.map(order => {
+      return { ...order, loaded: false };
+    });
+  });
+});
+
+function isLoaded(index, name) {
+  return items.value[index].items.find(item => item.name == name).loaded;
+}
+
+function image_loaded(index, name) {
+  setTimeout(() => {
+    items.value[index].items.find(item => item.name == name).loaded = true;
+  }, 1000);
+}
+
 onMounted(() => {
   items.value.forEach((item, index) => {
     let element = container.value[index].querySelector('.item-container').offsetHeight;

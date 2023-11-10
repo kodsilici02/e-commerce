@@ -63,7 +63,6 @@ const shimmerStyle = computed(() => {
 });
 
 const loaderClass = computed(() => (cssClass.value ? cssClass.value : LOADER_CSS_CLASSES[type.value]));
-console.log(loaderClass.value);
 </script>
 
 <style lang="css" scoped>
