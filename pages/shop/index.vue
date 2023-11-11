@@ -4,7 +4,7 @@
       <div
         v-for="item in items"
         :key="item.name"
-        class="h-[200px] md:h-[250px] lg:h-[400px] basis-1/3 lg:basis-1/4 flex p-1 transition-transform duration-500 cursor-pointer hover:scale-[1.02] overflow-hidden">
+        class="h-[200px] md:h-[250px] lg:h-[400px] basis-1/3 lg:basis-1/4 flex p-3 transition-transform duration-500 cursor-pointer hover:scale-[1.02]">
         <NuxtLink
           :to="'/shop/' + useNuxtApp().$convertName(item.name)"
           class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative">
@@ -59,6 +59,11 @@ const items = ref([
 <style scoped>
 .item-background {
   background-color: var(--primary);
+  box-shadow: 0px 6px 18px 2px rgba(0, 0, 0, 0.7);
+  transition: box-shadow 200ms linear;
+}
+.item-background:hover {
+  box-shadow: 0px 10px 18px 2px rgba(0, 0, 0, 0.8);
 }
 .purchase-layer {
   background-color: #6a6ccf00;

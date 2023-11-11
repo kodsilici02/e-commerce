@@ -5,12 +5,11 @@
         v-for="(info, index) in addresses"
         :key="info.address"
         style="color: var(--text-white)"
-        class="h-[350px] w-full lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-200 hover:scale-[1.02] overflow-hidden relative">
-        <div class="absolute z-[2] cursor-pointer -top-3 right-2">
+        class="h-[350px] w-full lg:basis-1/3 2xl:basis-1/4 flex p-4 transition-transform duration-200 hover:scale-[1.02] relative">
+        <div class="absolute z-[2] cursor-pointer -top-1 right-2">
           <Bookmark @handle-click="toggleBookmark(index)" :active="info.default"></Bookmark>
         </div>
-        <div
-          class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative overflow-hidden">
+        <div class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative">
           <div class="h-full w-full flex flex-col p-3 gap-2">
             <div class="w-full text-2xl text-center">{{ info.title }}</div>
             <div class="w-full tetx-lg font-[600]">{{ info.name }}</div>
@@ -146,8 +145,12 @@ function closeModals() {
 
 .item-background {
   background-color: var(--primary);
+  box-shadow: 0px 6px 18px 2px rgba(0, 0, 0, 0.7);
+  transition: box-shadow 200ms linear;
 }
-
+.item-background:hover {
+  box-shadow: 0px 10px 18px 2px rgba(0, 0, 0, 0.8);
+}
 .edit-button {
   background-color: #3bc1e2;
 }

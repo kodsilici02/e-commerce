@@ -1,7 +1,7 @@
 <template>
   <div ref="container" class="w-full h-full flex flex-wrap items-center border rounded-lg border-[var(--text-gray)] p-2 relative">
     <button @click="handleClick" class="w-full flex items-center">
-      <div class="flex items-center">{{ before }} {{ value }}</div>
+      <div class="flex w-full items-center justify-center">{{ before }}{{ value }}</div>
       <div class="flex-1 flex justify-end">
         <ClientOnly>
           <font-awesome

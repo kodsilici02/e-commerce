@@ -34,7 +34,7 @@ const emits = defineEmits(['handleClick']);
 const lottie = ref(null);
 onMounted(() => {
   setTimeout(() => {
-    if (props.active) {
+    if (props.active && lottie.value) {
       lottie.value.playSegments([1, 160], true);
     }
   }, 100);

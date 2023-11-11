@@ -33,7 +33,7 @@
           @click="deneme(item.images[0])"
           :key="item.name"
           ref="element"
-          class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-200 cursor-pointer hover:scale-[1.02] overflow-hidden">
+          class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-4 transition-transform duration-200 cursor-pointer hover:scale-[1.02]">
           <div class="item-background transition-[background-color] w-full duration-500 rounded-lg">
             <div v-if="!isLoaded(item.name)" class="h-full w-full flex flex-col relative">
               <div class="text-xs sm:text-2xl text-center h-14 px-3 py-2 w-full flex justify-center items-center mt-4">
@@ -217,6 +217,11 @@ function itemLeave(el) {
 
 .item-background {
   background-color: var(--primary);
+  box-shadow: 0px 6px 18px 2px rgba(0, 0, 0, 0.7);
+  transition: box-shadow 200ms linear;
+}
+.item-background:hover {
+  box-shadow: 0px 10px 18px 2px rgba(0, 0, 0, 0.8);
 }
 .purchase-layer {
   background-color: #6a6ccf00;
