@@ -67,9 +67,6 @@
             direction="alternate" />
         </div>
       </div>
-      <div key="heeee?" class="w-full text-black">
-        <button @click="deneme">deneme</button>
-      </div>
     </TransitionGroup>
     <Transition name="modal">
       <Modal v-if="edit_modal">

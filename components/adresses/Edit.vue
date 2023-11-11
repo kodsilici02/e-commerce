@@ -94,7 +94,7 @@ import { title } from 'process'; import { info } from 'console';
         @click="edit"
         class="w-36 h-10 bg-slate-400 z-[3] edit-button transition-all duration-500 flex justify-center gap-2 items-center text-base md:text-lg"
         style="border-radius: 35px">
-        Edit<ClientOnly><font-awesome :icon="['fas', 'check']"></font-awesome></ClientOnly>
+        Save<ClientOnly><font-awesome :icon="['fas', 'check']"></font-awesome></ClientOnly>
       </button>
     </div>
   </div>
