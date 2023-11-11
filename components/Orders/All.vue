@@ -50,7 +50,7 @@
             <NuxtLink
               v-show="isLoaded(index, order.name)"
               :to="'/settings/orders/' + useNuxtApp().$convertName(order.name)"
-              class="w-full flex flex-wrap cursor-pointer rounded-lg transition-colors duration-300 item-background">
+              class="w-full flex flex-wrap cursor-pointer rounded-lg transition-colors duration-300 background">
               <div class="w-32 h-28 flex justify-center p-1">
                 <img
                   @load="image_loaded(index, order.name)"
@@ -153,7 +153,7 @@ function addClass(index, image) {
   view-transition-name: view-image;
   contain: paint;
 }
-.item-background:hover {
+.background:hover {
   background-color: var(--background-hover);
 }
 .date:hover {

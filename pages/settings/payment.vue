@@ -1,10 +1,7 @@
 <template>
   <div class="w-full h-full flex flex-wrap" style="color: var(--text-white)">
     <TransitionGroup name="list" tag="div" class="w-full h-full p-2 flex flex-wrap content-start">
-      <div
-        v-for="(info, index) in infos"
-        :key="info.number"
-        class="h-[350px] w-full lg:basis-1/3 2xl:basis-1/4 flex p-4 transition-transform duration-200 hover:scale-[1.02]">
+      <div v-for="(info, index) in infos" :key="info.number" class="h-[350px] w-full lg:basis-1/3 2xl:basis-1/4 flex p-4">
         <div
           class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative overflow-hidden">
           <div class="h-full w-full flex flex-col p-3 gap-2">
@@ -179,15 +176,6 @@ function closeModals() {
 <style scoped>
 .add-new {
   border: 3px dashed var(--text-color);
-}
-
-.item-background {
-  background-color: var(--primary);
-  box-shadow: 0px 6px 18px 2px rgba(0, 0, 0, 0.7);
-  transition: box-shadow 200ms linear;
-}
-.item-background:hover {
-  box-shadow: 0px 10px 18px 2px rgba(0, 0, 0, 0.8);
 }
 .edit-button {
   background-color: #3bc1e2;
