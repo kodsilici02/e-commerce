@@ -117,6 +117,7 @@ const route_items = ref();
 <style scoped>
 .sidebar {
   view-transition-name: main-sidenav;
+  box-shadow: 0px 0px 20px 15px rgba(0, 0, 0, 0.8);
 }
 .router-link-active {
   color: var(--secondary);

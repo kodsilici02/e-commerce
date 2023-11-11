@@ -1,5 +1,7 @@
 <template>
-  <div class="p-2 w-52 relative rounded-md" style="color: var(--text-white); background-color: var(--secondary-light)">
+  <div
+    class="p-2 w-52 relative rounded-md"
+    style="color: var(--text-white); background-color: var(--secondary-light); box-shadow: 0px 6px 18px 2px rgba(0, 0, 0, 0.7)">
     <div
       class="absolute right-[1px] top-[-9px]"
       style="
