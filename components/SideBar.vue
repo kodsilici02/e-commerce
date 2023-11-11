@@ -27,6 +27,7 @@
             route.subRoutesOpen = !route.subRoutesOpen;
           }
         "
+        :hover="true"
         :category-icon="route.icon"
         :title="route.name"
         :open="route.subRoutesOpen">

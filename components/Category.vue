@@ -2,7 +2,8 @@
   <div class="w-full flex flex-wrap justify-center items-center">
     <button
       @click="toggleCategory()"
-      class="w-full flex justify-center items-center gap-2 cursor-pointer transition-all duration-300 category-button">
+      class="w-full flex justify-center items-center gap-2 cursor-pointer transition-all duration-300"
+      :class="{ 'category-button': hover }">
       <div class="flex basis-2/3 items-center justify-center gap-2 px-2">
         <div v-if="categoryIcon" class="flex-1 flex justify-start items-center text-xl">
           <ClientOnly>
@@ -44,7 +45,11 @@ const props = defineProps({
     type: String,
     default: 'rgba(67, 67, 67, 0.4)'
   },
-  height: Number
+  height: Number,
+  hover: {
+    type: Boolean,
+    default: false
+  }
 });
 
 const emits = defineEmits(['handleClick']);
@@ -88,4 +93,8 @@ function toggleCategory() {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.category-button:hover {
+  color: var(--primary);
+}
+</style>
