@@ -45,39 +45,40 @@
             }
           "
           :title="category.name"
-          :height="400"
           :bold="true"
           :open="category.categoryOpen"
           :backGroundColor="'rgba(0, 0, 0, 0.1)'">
           <div class="w-full px-3 sticky top-0 left-0">
-            <SearchBarLabel :text="'Search in Category'" @handleType="deneme(category.type, index)"></SearchBarLabel>
+            <SearchBarLabel text="Search in Category" @handleType="deneme(category.type, index)"></SearchBarLabel>
           </div>
-          <TransitionGroup name="list" tag="div" class="w-full flex flex-col overflow-x-hidden gap-1">
-            <div
-              v-for="(subCategory, subCatindex) in filteredCategory(category.subCategory, category.type)"
-              :key="subCategory.name"
-              class="w-full flex gap-2 justify-center text-base items-center px-8">
-              <div class="w-fit flex justify-center items-center">
-                <button @click="excludeSubCategoryFilter(category.type, subCategory.value)">
-                  <ClientOnly
-                    ><font-awesome :icon="['fas', 'xmark']" class="cursor-pointer" style="color: var(--danger)"></font-awesome
-                  ></ClientOnly>
-                </button>
-              </div>
+          <div class="py-4 w-full flex overflow-y-auto" style="max-height: 400px">
+            <div v-auto-animate class="w-full flex flex-col overflow-x-hidden gap-1">
               <div
-                class="flex-1 text-center transition-colors duration-200 text-sm"
-                :style="{ color: toggleColor(category.type, subCategory.value) }">
-                {{ subCategory.name }}
-              </div>
-              <div class="w-fit flex justify-center items-center">
-                <button @click="includeSubCategoryFilter(category.type, subCategory.value)">
-                  <ClientOnly
-                    ><font-awesome :icon="['fas', 'check']" class="cursor-pointer" style="color: var(--success)"></font-awesome
-                  ></ClientOnly>
-                </button>
+                v-for="(subCategory, subCatindex) in filteredCategory(category.subCategory, category.type)"
+                :key="subCategory.name"
+                class="w-full flex gap-2 justify-center text-base items-center px-8">
+                <div class="w-fit flex justify-center items-center">
+                  <button @click="excludeSubCategoryFilter(category.type, subCategory.value)">
+                    <ClientOnly
+                      ><font-awesome :icon="['fas', 'xmark']" class="cursor-pointer" style="color: var(--danger)"></font-awesome
+                    ></ClientOnly>
+                  </button>
+                </div>
+                <div
+                  class="flex-1 text-center transition-colors duration-200 text-sm"
+                  :style="{ color: toggleColor(category.type, subCategory.value) }">
+                  {{ subCategory.name }}
+                </div>
+                <div class="w-fit flex justify-center items-center">
+                  <button @click="includeSubCategoryFilter(category.type, subCategory.value)">
+                    <ClientOnly
+                      ><font-awesome :icon="['fas', 'check']" class="cursor-pointer" style="color: var(--success)"></font-awesome
+                    ></ClientOnly>
+                  </button>
+                </div>
               </div>
             </div>
-          </TransitionGroup>
+          </div>
         </Category>
       </div>
     </div>
@@ -196,23 +197,6 @@ function resetFilters() {
 </script>
 
 <style scoped>
-.list-move, /* apply transition to moving elements */
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease;
-}
-
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-
-/* ensure leaving items are taken out of layout flow so that moving
-   animations can be calculated correctly. */
-.list-leave-active {
-  position: absolute;
-}
 .category-button {
   color: var(--text-color);
 }

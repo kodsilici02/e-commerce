@@ -25,7 +25,7 @@ export default defineNuxtConfig({
     transpile: ['gsap']
   },
   css: ['@/assets/css/main.css', '@fortawesome/fontawesome-svg-core/styles.css', '@/assets/css/transitions.css'],
-  modules: ['@vueuse/motion/nuxt', '@pinia/nuxt', '@nuxtjs/color-mode', '@nuxt/image'],
+  modules: ['@vueuse/motion/nuxt', '@pinia/nuxt', '@nuxtjs/color-mode', '@nuxt/image', '@formkit/auto-animate/nuxt'],
   imports: {
     dirs: ['stores']
   },

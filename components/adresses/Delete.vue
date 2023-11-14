@@ -31,14 +31,13 @@ const delete_var = ref(false);
 
 function handleClick() {
   lottie.value.play();
-  delete_var.value = true;
 }
 function complete() {
-  console.log('completed');
   emits('handleDelete');
+  delete_var.value = true;
 }
 onBeforeUnmount(() => {
-  if (delete_var.value) {
+  if (!delete_var.value) {
     emits('handleDelete');
   }
 });

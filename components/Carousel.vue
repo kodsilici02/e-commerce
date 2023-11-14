@@ -13,7 +13,7 @@
       </div>
       <NuxtLink
         :to="'/shop/' + useNuxtApp().$convertName(images[activeImage].name)"
-        class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative">
+        class="h-full w-full rounded-lg flex flex-col background transition-[background-color] duration-500 relative">
         <div class="absolute top-0 left-0 w-full h-full purchase-layer rounded-lg transition-[background-color] duration-500">
           <div class="w-full h-full flex justify-center items-center">
             <div
@@ -113,7 +113,7 @@ watch(activeImage, () => {
 .purchase-layer {
   background-color: #6a6ccf00;
 }
-.item-background:hover .purchase-layer {
+.background:hover .purchase-layer {
   background-color: #ffffffb4;
 }
 
@@ -128,7 +128,7 @@ watch(activeImage, () => {
   transition: background-color 0s ease;
   background-color: #648bed;
 }
-.item-background:hover .purchase-button {
+.background:hover .purchase-button {
   opacity: 1;
 }
 </style>

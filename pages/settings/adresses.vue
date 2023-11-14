@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-wrap" style="color: var(--text-color)">
-    <TransitionGroup name="list" tag="div" class="w-full h-full p-2 flex flex-wrap content-start">
+    <div v-auto-animate class="w-full h-full p-2 flex flex-wrap content-start">
       <div
         v-for="(info, index) in addresses"
         :key="info.address"
@@ -66,7 +66,7 @@
             direction="alternate" />
         </div>
       </div>
-    </TransitionGroup>
+    </div>
     <Transition name="modal">
       <Modal v-if="edit_modal">
         <AdressesEdit :info="infos[selectedItem]" @handleCancel="closeModals" @handle-edit="saveInfo"></AdressesEdit>
@@ -111,6 +111,7 @@ function saveInfo(obj) {
   closeModals();
 }
 function deleteInfo() {
+  console.log('Deleting');
   store.addresses.value.splice(selectedItem.value, 1);
   closeModals();
 }

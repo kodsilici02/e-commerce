@@ -13,7 +13,7 @@
               <font-awesome :icon="route.icon" style="pointer-events: none" class="transition-transform duration-300"></font-awesome>
             </ClientOnly>
           </div>
-          <div class="flex-1 flex justify-center text-xl">
+          <div class="flex-1 flex justify-center text-xl font-bold">
             <!-- Use ml-2 for adding left margin to create space between icon and text -->
             {{ route.name }}
           </div>
@@ -30,9 +30,12 @@
         :hover="true"
         :category-icon="route.icon"
         :title="route.name"
+        :bold="true"
         :open="route.subRoutesOpen">
         <div v-for="(child, subCatindex) in route.subRoutes" class="w-full flex gap-1 justify-center text-base h-8 items-center">
-          <NuxtLink :to="child.link" class="flex-1 text-center text-lg transition-colors duration-200 cursor-pointer child-route">
+          <NuxtLink
+            :to="child.link"
+            class="flex-1 text-center text-lg transition-colors duration-200 cursor-pointer child-route font-[500]">
             {{ child.name }}
           </NuxtLink>
         </div>

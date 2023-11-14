@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@ballcat/vue-cropper": "^1.0.5",
+    "@formkit/auto-animate": "^0.8.1",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",

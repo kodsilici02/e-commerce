@@ -6,9 +6,8 @@
       </SidebarContainer>
     </div>
     <div id="content" class="flex-1 flex flex-wrap items-start justify-start bg-green-300] mt-1 p-1" style="color: var(--text-white)">
-      <TransitionGroup
-        name="list"
-        tag="div"
+      <div
+        v-auto-animate
         class="flex-1 flex flex-wrap items-start justify-start mt-1 p-1"
         style="color: var(--text-white)"
         @before-leave="itemLeave">
@@ -35,7 +34,7 @@
           ref="element"
           class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-4 cursor-pointer">
           <div class="item-background transition-[background-color] w-full duration-500 rounded-lg">
-            <div v-if="!isLoaded(item.name)" class="h-full w-full flex flex-col relative">
+            <div v-if="false" class="h-full w-full flex flex-col relative">
               <div class="text-xs sm:text-2xl text-center h-14 px-3 py-2 w-full flex justify-center items-center mt-4">
                 <SkeletonLoader class="w-full h-full"></SkeletonLoader>
               </div>
@@ -47,10 +46,7 @@
                 <SkeletonLoader class="w-full h-full"></SkeletonLoader>
               </div>
             </div>
-            <NuxtLink
-              v-show="isLoaded(item.name)"
-              :to="'/shop/' + $route.params.category + '/' + convertName(item.name)"
-              class="h-full w-full flex flex-col relative">
+            <NuxtLink :to="'/shop/' + $route.params.category + '/' + convertName(item.name)" class="h-full w-full flex flex-col relative">
               <div class="absolute top-0 left-0 w-full h-full purchase-layer rounded-lg transition-[background-color] duration-500 z-[2]">
                 <div class="w-full h-full flex justify-center items-center">
                   <div
@@ -68,7 +64,6 @@
               <div class="text-xs sm:text-2xl text-center h-14 w-full flex justify-center items-center px-2 mt-4">{{ item.name }}</div>
               <div class="flex-1 w-full flex justify-center overflow-hidden">
                 <img
-                  @load="image_loaded(item.name)"
                   :key="item.name"
                   :src="item.images[0]"
                   :class="{ image: products.hero_image == item.images[0] }"
@@ -90,7 +85,7 @@
             </NuxtLink>
           </div>
         </div>
-      </TransitionGroup>
+      </div>
     </div>
   </div>
 </template>

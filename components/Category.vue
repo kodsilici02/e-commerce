@@ -1,7 +1,12 @@
 <template>
   <div class="w-full flex flex-wrap justify-center items-center">
     <button
-      @click="toggleCategory()"
+      v-if="title"
+      @click="
+        () => {
+          emits('handleClick');
+        }
+      "
       class="w-full flex justify-center items-center gap-2 cursor-pointer transition-all duration-300"
       :class="{ 'category-button': hover }">
       <div class="flex basis-2/3 items-center justify-center gap-2 px-2">
@@ -25,13 +30,13 @@
         </div>
       </div>
     </button>
-    <div class="w-full overflow-hidden transition-all duration-300 rounded-xl" style="max-height: 0" ref="sub_category">
-      <div class="sub-category">
-        <div class="mr-[3px] overflow-y-auto" :style="{ 'background-color': backGroundColor, 'max-height': height + 'px' }">
-          <slot></slot>
-        </div>
+    <Accordeon :open="open">
+      <div
+        class="mr-[3px] mt-2 overflow-y-auto rounded-lg box-shadow"
+        :style="{ 'background-color': backGroundColor, 'max-height': height + 'px' }">
+        <slot></slot>
       </div>
-    </div>
+    </Accordeon>
   </div>
 </template>
 
@@ -53,48 +58,16 @@ const props = defineProps({
 });
 
 const emits = defineEmits(['handleClick']);
-const sub_category = ref();
-
-onMounted(() => {
-  setTimeout(() => {
-    const element = sub_category.value;
-    const height = element.querySelector('.sub-category').offsetHeight;
-    if (!props.open) {
-      element.style.maxHeight = 0;
-      element.style.marginTop = 0;
-    } else {
-      element.style.maxHeight = height + 15 + 'px';
-      element.style.marginTop = 10 + 'px';
-    }
-  }, 10);
-});
-
-function computeHeight() {
-  const element = sub_category.value;
-  const height = element.querySelector('.sub-category').offsetHeight;
-  if (props.open) {
-    element.style.maxHeight = 0;
-  } else {
-    element.style.maxHeight = height + 'px';
-  }
-}
-
-function toggleCategory() {
-  emits('handleClick');
-  const element = sub_category.value;
-  const height = element.querySelector('.sub-category').offsetHeight;
-  if (props.open) {
-    element.style.maxHeight = 0;
-    element.style.marginTop = 0;
-  } else {
-    element.style.maxHeight = height + 'px';
-    element.style.marginTop = 10 + 'px';
-  }
-}
 </script>
 
 <style scoped>
 .category-button:hover {
   color: var(--primary);
+}
+
+.box-shadow {
+  box-shadow: 0px 0px 23px 1px rgba(0, 0, 0, 0.6) inset;
+  -webkit-box-shadow: 0px 0px 23px 1px rgba(0, 0, 0, 0.6) inset;
+  -moz-box-shadow: 0px 0px 23px 1px rgba(0, 0, 0, 0.6) inset;
 }
 </style>

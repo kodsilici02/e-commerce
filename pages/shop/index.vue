@@ -57,14 +57,6 @@ const items = ref([
 </script>
 
 <style scoped>
-.item-background {
-  background-color: var(--primary);
-  box-shadow: 0px 6px 18px 2px rgba(0, 0, 0, 0.7);
-  transition: box-shadow 200ms linear;
-}
-.item-background:hover {
-  box-shadow: 0px 10px 18px 2px rgba(0, 0, 0, 0.8);
-}
 .purchase-layer {
   background-color: #6a6ccf00;
 }

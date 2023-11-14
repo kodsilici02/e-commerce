@@ -10,6 +10,7 @@ export const useFilterOptions = defineStore({
           {
             name: 'Score',
             type: 'score',
+            categoryOpen: false,
             currentMin: 0,
             currentMax: 5,
             min: 0,
@@ -32,12 +33,45 @@ export const useFilterOptions = defineStore({
             filter_text: '',
             include: null
           },
-          { name: 'Price ', type: 'price', currentMin: 65, currentMax: 3000, min: 65, max: 3000, rangeSlider: true, unit: '$' },
-          { name: 'Ram ', type: 'ram', currentMin: 2, currentMax: 128, min: 2, max: 128, step: 1, rangeSlider: true, unit: 'gb' },
-          { name: 'Memory ', type: 'memory', currentMin: 1, currentMax: 1024, min: 1, max: 1024, step: 1, rangeSlider: true, unit: 'gb' },
+          {
+            name: 'Price ',
+            type: 'price',
+            categoryOpen: false,
+            currentMin: 65,
+            currentMax: 3000,
+            min: 65,
+            max: 3000,
+            rangeSlider: true,
+            unit: '$'
+          },
+          {
+            name: 'Ram ',
+            type: 'ram',
+            categoryOpen: false,
+            currentMin: 2,
+            currentMax: 128,
+            min: 2,
+            max: 128,
+            step: 1,
+            rangeSlider: true,
+            unit: 'gb'
+          },
+          {
+            name: 'Memory ',
+            type: 'memory',
+            categoryOpen: false,
+            currentMin: 1,
+            currentMax: 1024,
+            min: 1,
+            max: 1024,
+            step: 1,
+            rangeSlider: true,
+            unit: 'gb'
+          },
           {
             name: 'Release Date ',
             type: 'release_date',
+            categoryOpen: false,
             currentMin: 2009,
             currentMax: 2023,
             min: 2009,
@@ -49,6 +83,7 @@ export const useFilterOptions = defineStore({
           {
             name: 'Battery',
             type: 'battery',
+            categoryOpen: false,
             currentMin: 500,
             currentMax: 15000,
             min: 500,
@@ -60,6 +95,7 @@ export const useFilterOptions = defineStore({
           {
             name: 'Screen Size',
             type: 'screen_size',
+            categoryOpen: false,
             currentMin: 2.3,
             currentMax: 10,
             min: 2.3,
@@ -71,6 +107,7 @@ export const useFilterOptions = defineStore({
           {
             name: 'Screen Refresh Rate ',
             type: 'screen_refresh_rate',
+            categoryOpen: false,
             currentMin: 60,
             currentMax: 144,
             min: 60,
@@ -107,6 +144,7 @@ export const useFilterOptions = defineStore({
           {
             name: 'Pixel Density ',
             type: 'pixel_density',
+            categoryOpen: false,
             currentMin: 200,
             currentMax: 600,
             min: 200,
@@ -118,6 +156,7 @@ export const useFilterOptions = defineStore({
           {
             name: 'Camera Resolution',
             type: 'camera_resolution',
+            categoryOpen: false,
             currentMin: 2,
             currentMax: 200,
             min: 2,
@@ -128,6 +167,7 @@ export const useFilterOptions = defineStore({
           {
             name: 'Front Camera Resolution',
             type: 'front_camera_resolution',
+            categoryOpen: false,
             currentMin: 2,
             currentMax: 64,
             min: 2,
@@ -156,6 +196,7 @@ export const useFilterOptions = defineStore({
           {
             name: 'Video FPS Value ',
             type: 'video_fps_value',
+            categoryOpen: false,
             currentMin: 10,
             currentMax: 60,
             min: 10,
@@ -181,6 +222,7 @@ export const useFilterOptions = defineStore({
           {
             name: 'CPU Cores ',
             type: 'cpu_cores',
+            categoryOpen: false,
             currentMin: 1,
             currentMax: 12,
             min: 1,
@@ -192,6 +234,7 @@ export const useFilterOptions = defineStore({
           {
             name: 'CPU Frequency',
             type: 'cpu_frequency',
+            categoryOpen: false,
             currentMin: 1,
             currentMax: 4,
             min: 1,
@@ -203,6 +246,7 @@ export const useFilterOptions = defineStore({
           {
             name: 'Transistor Size ',
             type: 'transistor_size',
+            categoryOpen: false,
             currentMin: 4,
             currentMax: 28,
             min: 4,

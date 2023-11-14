@@ -28,54 +28,55 @@
         <div class="h-full w-[2px] bg-black absolute z-0 top-0"></div>
       </div>
       <div class="w-full mt-2 flex">
-        <div class="cursor-pointer date transition-colors duration-300" @click="toggleCategory(index)">Orders in {{ item.date }}</div>
+        <button class="cursor-pointer date transition-colors duration-300" @click="toggleCategory(index)">Orders in {{ item.date }}</button>
       </div>
       <div class="w-full flex flex-wrap gap-1 overflow-hidden transition-all duration-200" ref="container">
         <div class="w-full flex flex-wrap gap-1 item-container">
-          <div @click="addClass(orderindex, order.img)" v-for="(order, orderindex) in item.items" class="w-full flex flex-wrap">
-            <div v-if="!isLoaded(index, order.name)" class="w-full flex lfex-wrap rounded-lg">
-              <div class="w-32 h-28 flex justify-center p-1">
-                <SkeletonLoader class="w-full h-full"></SkeletonLoader>
-              </div>
-              <div class="flex-1 h-full flex flex-wrap content-start gap-2 md:gap-1 text-xs md:text-base mt-2 md:mt-1">
-                <div class="w-full font-bold text-sm md:text-lg"><SkeletonLoader class="w-36 h-5"></SkeletonLoader></div>
-                <div class="w-full flex gap-2 items-center">
-                  <SkeletonLoader class="w-52 h-5"></SkeletonLoader>
+          <Accordeon :open="item.isOpen">
+            <div @click="addClass(orderindex, order.img)" v-for="(order, orderindex) in item.items" class="w-full flex flex-wrap">
+              <div v-if="false" class="w-full flex lfex-wrap rounded-lg">
+                <div class="w-32 h-28 flex justify-center p-1">
+                  <SkeletonLoader class="w-full h-full"></SkeletonLoader>
                 </div>
-                <div class="w-full flex gap-2 items-center">
-                  <SkeletonLoader class="w-56 h-5"></SkeletonLoader>
+                <div class="flex-1 h-full flex flex-wrap content-start gap-2 md:gap-1 text-xs md:text-base mt-2 md:mt-1">
+                  <div class="w-full font-bold text-sm md:text-lg"><SkeletonLoader class="w-36 h-5"></SkeletonLoader></div>
+                  <div class="w-full flex gap-2 items-center">
+                    <SkeletonLoader class="w-52 h-5"></SkeletonLoader>
+                  </div>
+                  <div class="w-full flex gap-2 items-center">
+                    <SkeletonLoader class="w-56 h-5"></SkeletonLoader>
+                  </div>
                 </div>
               </div>
+              <NuxtLink
+                :to="'/settings/orders/' + useNuxtApp().$convertName(order.name)"
+                class="w-full flex flex-wrap cursor-pointer rounded-lg transition-colors duration-300 background">
+                <div @loadeddata="deneme2" class="w-32 h-28 flex justify-center p-1">
+                  <img
+                    @load="image_loaded(index, order.name)"
+                    ref="images"
+                    :src="order.img"
+                    :class="{ image: orderImage.hero_image == order.img }"
+                    class="object-center object-contain" />
+                </div>
+                <div class="flex-1 h-full flex flex-wrap content-start gap-2 md:gap-1 text-xs md:text-base mt-2 md:mt-0">
+                  <div class="w-full font-bold text-sm md:text-lg">{{ order.name }}</div>
+                  <div class="w-full flex gap-2 items-center">
+                    <ClientOnly>
+                      <font-awesome :icon="['fas', 'location-dot']"></font-awesome>
+                    </ClientOnly>
+                    <div>Bla Bla</div>
+                  </div>
+                  <div class="w-full flex gap-2 items-center">
+                    <ClientOnly>
+                      <font-awesome :icon="['fas', 'calendar-days']"></font-awesome>
+                    </ClientOnly>
+                    <div>Delivered on Aug 21, 2023</div>
+                  </div>
+                </div>
+              </NuxtLink>
             </div>
-            <NuxtLink
-              v-show="isLoaded(index, order.name)"
-              :to="'/settings/orders/' + useNuxtApp().$convertName(order.name)"
-              class="w-full flex flex-wrap cursor-pointer rounded-lg transition-colors duration-300 background">
-              <div class="w-32 h-28 flex justify-center p-1">
-                <img
-                  @load="image_loaded(index, order.name)"
-                  ref="images"
-                  :src="order.img"
-                  :class="{ image: orderImage.hero_image == order.img }"
-                  class="object-center object-contain" />
-              </div>
-              <div class="flex-1 h-full flex flex-wrap content-start gap-2 md:gap-1 text-xs md:text-base mt-2 md:mt-0">
-                <div class="w-full font-bold text-sm md:text-lg">{{ order.name }}</div>
-                <div class="w-full flex gap-2 items-center">
-                  <ClientOnly>
-                    <font-awesome :icon="['fas', 'location-dot']"></font-awesome>
-                  </ClientOnly>
-                  <div>Bla Bla</div>
-                </div>
-                <div class="w-full flex gap-2 items-center">
-                  <ClientOnly>
-                    <font-awesome :icon="['fas', 'calendar-days']"></font-awesome>
-                  </ClientOnly>
-                  <div>Delivered on Aug 21, 2023</div>
-                </div>
-              </div>
-            </NuxtLink>
-          </div>
+          </Accordeon>
         </div>
       </div>
     </div>
@@ -84,7 +85,7 @@
 
 <script setup>
 import { useOrderImage } from '@/stores/orders.js';
-import { useRoute, onBeforeRouteLeave } from 'vue-router';
+import { onBeforeRouteLeave } from 'vue-router';
 const deneme = false;
 const orderImage = useOrderImage();
 
@@ -105,11 +106,9 @@ const items = ref([
   }
 ]);
 
-onMounted(() => {
-  items.value.forEach(item => {
-    item.items.map(order => {
-      return { ...order, loaded: false };
-    });
+items.value.forEach(item => {
+  item.items.map(order => {
+    return { ...order, loaded: false };
   });
 });
 
@@ -117,27 +116,34 @@ function isLoaded(index, name) {
   return items.value[index].items.find(item => item.name == name).loaded;
 }
 
+onUpdated(() => {
+  console.log('a');
+});
+
 function image_loaded(index, name) {
-  setTimeout(() => {
-    items.value[index].items.find(item => item.name == name).loaded = true;
-  }, 1000);
+  console.log('image_loaded');
+  items.value[index].items.find(item => item.name == name).loaded = true;
 }
 
-onMounted(() => {
+/* onMounted(() => {
   items.value.forEach((item, index) => {
     let element = container.value[index].querySelector('.item-container').offsetHeight;
     container.value[index].style.maxHeight = element + 'px';
   });
 });
-const container = ref();
+const container = ref(); */
 
-function toggleCategory(index) {
+/* function toggleCategory(index) {
   if (items.value[index].isOpen) {
     container.value[index].style.maxHeight = 0;
   } else {
     let element = container.value[index].querySelector('.item-container').offsetHeight;
     container.value[index].style.maxHeight = element + 'px';
   }
+  items.value[index].isOpen = !items.value[index].isOpen;
+} */
+
+function toggleCategory(index) {
   items.value[index].isOpen = !items.value[index].isOpen;
 }
 const images = ref();

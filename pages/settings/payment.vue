@@ -1,6 +1,7 @@
 <template>
   <div class="w-full h-full flex flex-wrap" style="color: var(--text-white)">
-    <TransitionGroup name="list" tag="div" class="w-full h-full p-2 flex flex-wrap content-start">
+    {{ selectedItem }}
+    <div v-auto-animate class="w-full h-full p-2 flex flex-wrap content-start">
       <div v-for="(info, index) in infos" :key="info.number" class="h-[350px] w-full lg:basis-1/3 2xl:basis-1/4 flex p-4">
         <div
           class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative overflow-hidden">
@@ -61,7 +62,7 @@
             direction="alternate" />
         </div>
       </div>
-    </TransitionGroup>
+    </div>
     <Transition name="modal">
       <Modal v-if="edit_modal">
         <PaymentEdit :info="infos[selectedItem]" @handleCancel="closeModals" @handle-edit="saveInfo"></PaymentEdit>
@@ -86,7 +87,7 @@
 <script setup>
 const infos = ref([
   {
-    title: 'Ev',
+    title: 'Ev 1',
     name: 'Şafak ',
     surname: 'Dinç',
     number: 1234567890123456,
@@ -95,7 +96,7 @@ const infos = ref([
     type: 'visa'
   },
   {
-    title: 'Ev',
+    title: 'Ev 2',
     name: 'Şafak ',
     surname: 'Dinç',
     number: 1234567890123456,
@@ -104,7 +105,7 @@ const infos = ref([
     type: 'visa'
   },
   {
-    title: 'Ev',
+    title: 'Ev 3',
     name: 'Şafak ',
     surname: 'Dinç',
     number: 1234567890123456,
