@@ -39,13 +39,12 @@
 ::view-transition-new(root) {
   animation-name: fade-in;
 }
-
 ::view-transition-old(view-image),
 ::view-transition-new(view-image) {
   animation: none;
-
   mix-blend-mode: normal;
 }
+
 ::view-transition-old(main-sidenav),
 ::view-transition-new(main-sidenav) {
   z-index: 1100;

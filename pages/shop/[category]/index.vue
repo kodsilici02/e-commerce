@@ -62,12 +62,11 @@
                 </div>
               </div>
               <div class="text-xs sm:text-2xl text-center h-14 w-full flex justify-center items-center px-2 mt-4">{{ item.name }}</div>
-              <div class="flex-1 w-full flex justify-center overflow-hidden">
+              <div class="flex-1 w-full flex justify-center items-center overflow-hidden">
                 <SkeletonImg
                   :src="item.images[0]"
-                  class="flex-1 w-full flex justify-center overflow-hidden"
-                  img-class="object-contain object-center "
-                  :hero="products.hero_image == item.images[0] ? 'image' : ''"></SkeletonImg>
+                  class="flex-1 flex justify-center h-full rounded-lg overflow-hidden"
+                  :hero="hero == item.images[0] ? 'deneme2' : ''"></SkeletonImg>
               </div>
               <div
                 class="h-12 w-full text-xs md:text-base font-bold flex flex-wrap px-2 justify-center items-center gap-1 md:gap-2 sm:gap-x-3 mb-2">
@@ -100,6 +99,8 @@ import { phones } from '@/assets/deneme.js';
 
 const route = useRoute();
 
+const hero = ref('');
+
 const filterOptions = storeToRefs(useFilterOptions());
 function findOptions() {
   return filterOptions.options.value.find(item => item.name == route.params.category).filters;
@@ -107,7 +108,7 @@ function findOptions() {
 const products = useProductStore();
 
 function deneme(image) {
-  products.hero_image = image;
+  hero.value = image;
 }
 
 onBeforeRouteLeave((to, from) => {
@@ -123,16 +124,6 @@ onMounted(() => {
     return { ...item, loaded: false };
   });
 });
-
-function isLoaded(name) {
-  return filteredItems.value.find(item => item.name == name).loaded;
-}
-
-function image_loaded(name) {
-  setTimeout(() => {
-    filteredItems.value.find(item => item.name == name).loaded = true;
-  }, 1000);
-}
 
 //sakın buraya dokunma
 const filteredItems = computed(() => {
@@ -229,8 +220,7 @@ function itemLeave(el) {
 </style>
 
 <style>
-.image {
+.deneme2 {
   view-transition-name: view-image;
-  contain: paint;
 }
 </style>

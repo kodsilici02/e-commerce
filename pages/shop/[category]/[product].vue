@@ -3,17 +3,15 @@
     <div class="flex-1 flex flex-wrap p-2 gap-2">
       <div class="flex w-full lg:basis-2/4" id="images">
         <div class="hidden lg:flex flex-col gap-2 h-[70vh] overflow-hidden">
-          <div v-for="(image, index) in product.images" class="h-auto w-40 cursor-pointer" @click="changeImage(image, index)">
-            <div class="w-full h-auto">
-              <img class="object-center object-contain" :src="image" />
-            </div>
+          <div v-for="(image, index) in product.images" class="w-40 basis-1/6 cursor-pointer" @click="changeImage(image, index)">
+            <SkeletonImg :src="image" class="w-full h-full flex-1" img-class="object-contain object-center "></SkeletonImg>
           </div>
         </div>
         <!--Actual Image-->
         <div class="flex-1 h-[40vh] lg:h-[70vh] overflow-hidden flex justify-center items-center z-0">
-          <div class="h-auto w-full flex items-center overflow-hidden">
-            <Transition :name="transitionName" mode="out-in"
-              ><img ref="actual_image" class="object-center object-contain image" :key="activeImage" :src="activeImage"
+          <div class="h-fit w-full overflow-hidden">
+            <Transition :name="transitionName" mode="out-in">
+              <img :class="{ deneme2: hero_active }" :key="activeImage" :src="activeImage"
             /></Transition>
           </div>
         </div>
@@ -134,9 +132,9 @@ function calculateWidth() {
 const route = useRoute();
 const product = useNuxtApp().$getProduct(route.params.product);
 
-const actual_image = ref();
+const hero_active = ref(true);
 onBeforeRouteLeave((to, from) => {
-  actual_image.value.classList.remove('image');
+  hero_active.value = false;
 });
 
 const products = useProductStore();
@@ -222,10 +220,6 @@ const getAddress = computed(() => {
 </script>
 
 <style scoped>
-.image {
-  view-transition-name: view-image;
-  contain: paint;
-}
 .options-button {
   background-color: var(--secondary);
 }

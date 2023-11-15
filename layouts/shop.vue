@@ -177,8 +177,6 @@ function closeNotifications() {
   isNotificationsOpen.value = false;
 }
 
-const items = ref(['Bilgisayara', 'Telefon', 'Televizyon', 'Aksesuarlar', 'Harici Parçalar']);
-
 const sidebar_Open = ref(false);
 function toggleSidebar() {
   sidebar_Open.value = !sidebar_Open.value;

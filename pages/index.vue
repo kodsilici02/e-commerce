@@ -1,10 +1,11 @@
 <template>
   <div class="w-full h-auto flex flex-wrap p-5" style="color: var(--text-color)"></div>
+  <NuxtLink style="color: black" to="/deneme">deneme</NuxtLink>
 
-  <div class="w-64 h-64">
+  <div class="w-32 h-32 flex">
     <SkeletonImg
-      class="w-full h-full rounded-lg overflow-hidden"
-      :hero="deneme ? 'hero' : ''"
+      class="flex-1 h-full rounded-lg overflow-hidden"
+      hero="deneme"
       src="https://assets.getmobil.com/uploads/41726/getmobil-samsung-s225g-phantomgreen-00webp.png"></SkeletonImg>
   </div>
 </template>
@@ -18,4 +19,8 @@ const deneme = ref(true);
 const open = ref(true);
 </script>
 
-<style scoped></style>
+<style>
+.deneme {
+  view-transition-name: deneme;
+}
+</style>
