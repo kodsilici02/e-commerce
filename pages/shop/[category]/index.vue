@@ -63,11 +63,11 @@
               </div>
               <div class="text-xs sm:text-2xl text-center h-14 w-full flex justify-center items-center px-2 mt-4">{{ item.name }}</div>
               <div class="flex-1 w-full flex justify-center overflow-hidden">
-                <img
-                  :key="item.name"
+                <SkeletonImg
                   :src="item.images[0]"
-                  :class="{ image: products.hero_image == item.images[0] }"
-                  class="object-contain object-center image-selector" />
+                  class="flex-1 w-full flex justify-center overflow-hidden"
+                  img-class="object-contain object-center "
+                  :hero="products.hero_image == item.images[0] ? 'image' : ''"></SkeletonImg>
               </div>
               <div
                 class="h-12 w-full text-xs md:text-base font-bold flex flex-wrap px-2 justify-center items-center gap-1 md:gap-2 sm:gap-x-3 mb-2">
@@ -205,11 +205,6 @@ function itemLeave(el) {
 </script>
 
 <style scoped>
-.image {
-  view-transition-name: view-image;
-  contain: paint;
-}
-
 .purchase-layer {
   background-color: #6a6ccf00;
 }
@@ -230,5 +225,12 @@ function itemLeave(el) {
 }
 .item-background:hover .purchase-button {
   opacity: 1;
+}
+</style>
+
+<style>
+.image {
+  view-transition-name: view-image;
+  contain: paint;
 }
 </style>

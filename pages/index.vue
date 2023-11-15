@@ -1,27 +1,11 @@
 <template>
-  <div class="w-full h-auto flex flex-wrap p-5" style="color: var(--text-color)">
-    <button
-      @click="
-        () => {
-          open = !open;
-        }
-      ">
-      deneme
-    </button>
-    <button
-      @click="
-        () => {
-          items++;
-        }
-      ">
-      deneme
-    </button>
-  </div>
+  <div class="w-full h-auto flex flex-wrap p-5" style="color: var(--text-color)"></div>
 
-  <div class="w-64 h-auto">
-    <Accordeon :open="open" class="w-full h-full flex flex-col gap-3">
-      <div v-for="item in items" class="w-full h-20 bg-green-700"></div>
-    </Accordeon>
+  <div class="w-64 h-64">
+    <SkeletonImg
+      class="w-full h-full rounded-lg overflow-hidden"
+      :hero="deneme ? 'hero' : ''"
+      src="https://assets.getmobil.com/uploads/41726/getmobil-samsung-s225g-phantomgreen-00webp.png"></SkeletonImg>
   </div>
 </template>
 
@@ -29,10 +13,7 @@
 import { onMounted } from 'vue';
 
 const items = ref(5);
-
-function deneme() {
-  console.log(event.target);
-}
+const deneme = ref(true);
 
 const open = ref(true);
 </script>
