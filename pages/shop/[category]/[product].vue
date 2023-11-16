@@ -95,7 +95,7 @@
     <SidebarOrderSidebar :address="getAddress" @toggleLocationModal="toggleLocationModal"></SidebarOrderSidebar>
     <!--Modals-->
     <Transition name="modal">
-      <Modal v-if="isLocationModalOpen" :max_width="calculateWidth()" :width="calculateWidth()">
+      <Modal v-if="isLocationModalOpen">
         <SelectLocation @select="changeAddress"></SelectLocation>
       </Modal>
     </Transition>
@@ -113,21 +113,6 @@ import { useAddressesStore } from '@/stores/addresses';
 import { storeToRefs } from 'pinia';
 
 const addresses_store = storeToRefs(useAddressesStore());
-
-function calculateWidth() {
-  if (window.innerWidth <= 768) {
-    return 350;
-  }
-  if (window.innerWidth <= 1024) {
-    return 500;
-  }
-  if (window.innerWidth <= 1280) {
-    return 750;
-  }
-  if (window.innerWidth <= 1536) {
-    return 1000;
-  }
-}
 
 const route = useRoute();
 const product = useNuxtApp().$getProduct(route.params.product);

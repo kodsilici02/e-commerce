@@ -1,61 +1,43 @@
 <template>
-  <div class="w-full flex">
+  <div class="w-full flex flex-wrap">
     <div id="sidebar">
       <SidebarContainer>
         <SidebarShoppingFilters></SidebarShoppingFilters>
       </SidebarContainer>
     </div>
-    <div id="content" class="flex-1 flex flex-wrap items-start justify-start bg-green-300] mt-1 p-1" style="color: var(--text-white)">
-      <div
-        v-auto-animate
-        class="flex-1 flex flex-wrap items-start justify-start mt-1 p-1"
-        style="color: var(--text-white)"
-        @before-leave="itemLeave">
-        <div class="w-full h-full relative" :key="'aaaa'">
-          <Transition name="fade">
-            <div v-if="filteredItems.length == 0" class="w-full flex flex-col items-center justify-center">
-              <Vue3Lottie
-                ref="lottie"
-                :height="480"
-                animationLink="https://lottie.host/25a75051-6b06-44b2-a75d-037f747f83c2/p6eHupD7HS.json"
-                :autoPlay="true"
-                :loop="true"
-                direction="alternate" />
-              <div class="text-xl md:text-2xl font-bold text-center" style="color: var(--text-color)">
-                There is no product with the features you are looking for
-              </div>
-            </div></Transition
-          >
+    <div class="flex-1 flex flex-wrap items-start justify-start bg-green-300] mt-1 p-1" style="color: var(--text-white)">
+      <div v-auto-animate class="flex-1 flex flex-wrap items-start justify-start mt-1 p-1" style="color: var(--text-white)">
+        <div v-if="filteredItems.length == 0" :key="'no_product'" class="w-full flex flex-col items-center justify-center">
+          <Vue3Lottie
+            ref="lottie"
+            :height="480"
+            animationLink="https://lottie.host/25a75051-6b06-44b2-a75d-037f747f83c2/p6eHupD7HS.json"
+            :autoPlay="true"
+            :loop="true"
+            direction="alternate" />
+          <div class="text-xl md:text-2xl font-bold text-center" style="color: var(--text-color)">
+            There is no product with the features you are looking for
+          </div>
         </div>
-        <div
-          v-for="(item, index) in filteredItems"
-          @click="deneme(item.images[0])"
+        <Card
           :key="item.name"
-          ref="element"
-          class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-4 cursor-pointer">
-          <div class="item-background transition-[background-color] w-full duration-500 rounded-lg">
-            <div v-if="false" class="h-full w-full flex flex-col relative">
-              <div class="text-xs sm:text-2xl text-center h-14 px-3 py-2 w-full flex justify-center items-center mt-4">
-                <SkeletonLoader class="w-full h-full"></SkeletonLoader>
-              </div>
-              <div class="flex-1 w-full flex justify-center overflow-hidden p-3">
-                <SkeletonLoader class="w-full h-full"></SkeletonLoader>
-              </div>
-              <div
-                class="h-12 w-full text-xs md:text-base font-bold flex flex-wrap px-3 py-1 justify-center items-center gap-1 md:gap-2 sm:gap-x-3 mb-2">
-                <SkeletonLoader class="w-full h-full"></SkeletonLoader>
-              </div>
-            </div>
-            <NuxtLink :to="'/shop/' + $route.params.category + '/' + convertName(item.name)" class="h-full w-full flex flex-col relative">
-              <div class="absolute top-0 left-0 w-full h-full purchase-layer rounded-lg transition-[background-color] duration-500 z-[2]">
-                <div class="w-full h-full flex justify-center items-center">
-                  <div
-                    class="w-36 h-10 bg-slate-400 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg"
-                    style="border-radius: 35px">
-                    Purchase Now
-                  </div>
-                </div>
-              </div>
+          v-for="(item, index) in filteredItems"
+          @click="setHeroImage(item.images[0])"
+          class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-4 cursor-pointer"
+          background_color="var(--primary)">
+          <template v-slot:layer>
+            <NuxtLink
+              :to="'/shop/' + $route.params.category + '/' + convertName(item.name)"
+              class="w-full h-full flex justify-center items-center">
+              <button
+                class="w-36 h-10 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg"
+                style="border-radius: 35px">
+                Purchase Now
+              </button>
+            </NuxtLink>
+          </template>
+          <template v-slot:main>
+            <NuxtLink :to="'/shop/' + $route.params.category + '/' + convertName(item.name)" class="w-full h-full flex flex-col">
               <div class="absolute top-1 right-4">
                 <div class="flex gap-1 items-center text-xs sm:text-lg">
                   <ClientOnly><font-awesome :icon="['fas', 'dollar-sign']" /></ClientOnly>{{ item.price }}
@@ -82,8 +64,8 @@
                 </div>
               </div>
             </NuxtLink>
-          </div>
-        </div>
+          </template>
+        </Card>
       </div>
     </div>
   </div>
@@ -91,31 +73,27 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRoute, onBeforeRouteLeave } from 'vue-router';
-import { useProductStore } from '@/stores/products.js';
+import { useRoute, useRouter } from 'vue-router';
 import { useFilterOptions } from '@/stores/filterOptions';
 import { storeToRefs } from 'pinia';
 import { phones } from '@/assets/deneme.js';
 
-const route = useRoute();
+function redirect(name) {
+  router.push('/shop');
+}
 
+const route = useRoute();
+const router = useRouter();
 const hero = ref('');
 
 const filterOptions = storeToRefs(useFilterOptions());
 function findOptions() {
   return filterOptions.options.value.find(item => item.name == route.params.category).filters;
 }
-const products = useProductStore();
 
-function deneme(image) {
+function setHeroImage(image) {
   hero.value = image;
 }
-
-onBeforeRouteLeave((to, from) => {
-  if (!to.fullPath.includes('/shop/') && document.querySelector('.image')) {
-    document.querySelector('.image').classList.remove('image');
-  }
-});
 
 const items = ref(phones);
 

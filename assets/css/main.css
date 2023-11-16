@@ -75,17 +75,14 @@ body {
   background-color: #6a6ccfa0;
 }
 
-.item-background .purchase-button {
-  opacity: 0;
-  background-color: #3bc1e2;
+.purchase-button {
+  background-color: var(--secondary);
+  transition: 200ms ease-in-out;
 }
-.item-background .purchase-button:hover {
-  background-color: #64d2ed;
+.purchase-button:hover {
+  background-color: var(--secondary-light);
 }
-.item-background .purchase-button:active {
+.purchase-button:active {
   transition: background-color 0s ease;
-  background-color: #648bed;
-}
-.item-background:hover .purchase-button {
-  opacity: 1;
+  background-color: var(--primary);
 }

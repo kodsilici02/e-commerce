@@ -37,6 +37,24 @@
 import { ref } from 'vue';
 const items = ['1', '2', '3', '4', '5', '6', '7'];
 
+function calculateWidth() {
+  if (window.innerWidth <= 768) {
+    return 350;
+  }
+  if (window.innerWidth <= 1024) {
+    return 500;
+  }
+  if (window.innerWidth <= 1280) {
+    return 750;
+  }
+  if (window.innerWidth <= 1536) {
+    return 1000;
+  }
+  if (window.innerWidth > 1536) {
+    return 1250;
+  }
+}
+
 const scrollContainer = ref(null);
 
 function handleMouseWheel(event) {
