@@ -108,7 +108,7 @@ export const phones = [
         value: 12
       },
       {
-        type: 'video_record_resolution',
+        type: 'video_resolution',
         string: true,
         value: '4320p(Ultra HD)8K'
       },

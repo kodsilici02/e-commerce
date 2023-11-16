@@ -1,9 +1,12 @@
 <template>
   <div ref="wrapper" class="w-full overflow-hidden p-0 md:p-2 transition-all duration-500 relative">
     <div ref="container" class="flex justify-center flex-wrap">
-      <div ref="item" v-for="detail in product.details" class="basis-1/2 px-1 md:px-3 py-2 overflow-hidden">
+      <div
+        ref="item"
+        v-for="detail in product.details"
+        class="basis-1/2 sm:basis-1/3 xl:basis-1/4 h-full px-1 md:px-3 py-2 overflow-hidden">
         <div
-          class="w-full text-xs md:text-sm lg:text-base rounded-lg p-3 flex justify-between items-center gap-1"
+          class="w-full h-full text-xs md:text-sm lg:text-base rounded-lg p-3 flex justify-between items-center gap-1"
           style="background-color: var(--background-hover)">
           <div class="font-bold">{{ formatType(detail.type) }}</div>
           <div class="flex-shrink-1 md:flex-shrink-0 font-[500] md:font-[600]" v-if="detail.number || detail.string">

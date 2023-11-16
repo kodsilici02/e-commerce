@@ -176,8 +176,8 @@ export const useFilterOptions = defineStore({
             unit: 'mp'
           },
           {
-            name: 'Video Record Resolution',
-            type: 'video_record_resolution',
+            name: 'Video Resolution',
+            type: 'video_resolution',
             categoryOpen: false,
             subCategory: [
               { name: '480p', value: '480p' },
