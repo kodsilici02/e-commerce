@@ -4,19 +4,20 @@
 @tailwind utilities;
 
 body {
-  --text-color: #212121;
-  --text-white: aliceblue;
+  --text-color: rgb(33, 33, 33);
+  --text-white: aliceblue; /* This is already in a named color format */
   --text-gray: rgb(155, 155, 155);
-  --background: #f0f0f0;
-  --background-secondary: #ccc;
-  --background-hover: #dcdcdc;
-  --primary: #6a6bcf;
-  --secondary: #4470da;
-  --secondary-light: #6d92e7;
-  --accent: #a66ced;
-  --danger: red;
+  --background: rgb(240, 240, 240);
+  --background-secondary: rgb(204, 204, 204);
+  --background-hover: rgb(220, 220, 220);
+  --primary: rgb(106, 107, 207);
+  --secondary: rgb(68, 112, 218);
+  --secondary-light: rgb(109, 146, 231);
+  --accent: rgb(166, 108, 237);
+  --danger: red; /* This is already in a named color format */
   --success: rgb(14, 154, 14);
 }
+
 /* .dark-mode body {
   --text-color: aliceblue;
   --background: #3d3962;
@@ -65,4 +66,26 @@ body {
 }
 .item-background:hover {
   transform: scale(1.02);
+}
+
+.purchase-layer {
+  background-color: #6a6ccf00;
+}
+.item-background:hover .purchase-layer {
+  background-color: #6a6ccfa0;
+}
+
+.item-background .purchase-button {
+  opacity: 0;
+  background-color: #3bc1e2;
+}
+.item-background .purchase-button:hover {
+  background-color: #64d2ed;
+}
+.item-background .purchase-button:active {
+  transition: background-color 0s ease;
+  background-color: #648bed;
+}
+.item-background:hover .purchase-button {
+  opacity: 1;
 }

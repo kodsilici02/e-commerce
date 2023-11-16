@@ -1,12 +1,16 @@
 <template>
   <div class="w-full" style="color: var(--text-white)">
     <div
-      class="w-full flex gap-2 overflow-x-auto p-2"
+      class="w-full flex gap-5 overflow-x-auto p-5"
       ref="scrollContainer"
       @wheel.prevent
       @wheel="handleMouseWheel"
       style="scroll-behavior: smooth">
-      <div v-for="(item, index) in items" :key="index" class="flex-box rounded-xl relative item-background cursor-pointer">
+      <div
+        v-for="(item, index) in items"
+        :key="index"
+        class="flex-box rounded-xl relative item-background cursor-pointer"
+        style="background-color: var(--secondary)">
         <NuxtLink to="/shop/phones">
           <div
             class="z-[2] absolute top-0 left-0 w-full h-full purchase-background transition-all duration-500 rounded-xl pointer-events-none"></div>
@@ -59,31 +63,20 @@ function handleMouseWheel(event) {
   }
 }
 
-.purchase-layer {
-  background-color: #6a6ccf00;
-  opacity: 0;
-}
 .item-background {
   background-color: var(--secondary);
+  box-shadow: 0px 6px 18px 2px rgba(0, 0, 0, 0.7);
+  transition: box-shadow 200ms linear, transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(1);
 }
-.purchase-background {
-  opacity: 0;
+.item-background:hover {
+  transform: scale(1.02);
 }
-.item-background:hover .purchase-background {
-  background-color: var(--secondary);
-  opacity: 0.5;
+
+.purchase-layer {
+  background-color: #6a6ccf00;
 }
 .item-background:hover .purchase-layer {
-  opacity: 1;
-}
-.purchase-button {
-  background-color: #3bc1e2;
-}
-.purchase-button:hover {
-  background-color: #64d2ed;
-}
-.purchase-button:active {
-  transition: background-color 0s ease;
-  background-color: #648bed;
+  background-color: rgba(68, 112, 218, 0.5); /* Adjust the alpha value as needed */
 }
 </style>

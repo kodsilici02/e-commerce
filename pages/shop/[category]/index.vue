@@ -194,31 +194,6 @@ function itemLeave(el) {
   el.style.setProperty('--width', `${el.offsetWidth}px`);
 }
 </script>
-
-<style scoped>
-.purchase-layer {
-  background-color: #6a6ccf00;
-}
-.item-background:hover .purchase-layer {
-  background-color: #6a6ccfa0;
-}
-
-.purchase-button {
-  opacity: 0;
-  background-color: #3bc1e2;
-}
-.purchase-button:hover {
-  background-color: #64d2ed;
-}
-.purchase-button:active {
-  transition: background-color 0s ease;
-  background-color: #648bed;
-}
-.item-background:hover .purchase-button {
-  opacity: 1;
-}
-</style>
-
 <style>
 .deneme2 {
   view-transition-name: view-image;
