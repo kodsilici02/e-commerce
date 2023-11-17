@@ -1,7 +1,6 @@
 <template>
   <div class="w-full h-full flex p-5">
     <Card class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-4 cursor-pointer" background_color="var(--primary)">
-      <template v-slot:layer> </template>
       <template v-slot:main>
         <div class="w-full h-full relative">
           <div class="absolute top-1 right-4">

@@ -7,6 +7,7 @@
       class="h-full w-full rounded-lg card-background transition-[background-color] duration-200 relative overflow-hidden"
       :style="{ backgroundColor: props.background_color }">
       <div
+        v-if="$slots.layer"
         class="absolute top-0 left-0 w-full h-full layer pointer-events-none z-10"
         :style="{ backgroundColor: props.background_color }"></div>
       <div class="absolute top-0 left-0 w-full h-full layer-content z-10">
