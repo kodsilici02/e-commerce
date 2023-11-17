@@ -44,6 +44,11 @@
   animation: none;
   mix-blend-mode: normal;
 }
+::view-transition-old(deneme),
+::view-transition-new(deneme) {
+  animation: none;
+  mix-blend-mode: normal;
+}
 
 ::view-transition-old(main-sidenav),
 ::view-transition-new(main-sidenav) {

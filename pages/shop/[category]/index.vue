@@ -19,53 +19,53 @@
             There is no product with the features you are looking for
           </div>
         </div>
-        <Card
+        <NuxtLink
+          :to="'/shop/' + $route.params.category + '/' + convertName(item.name)"
           :key="item.name"
           v-for="(item, index) in filteredItems"
           @click="setHeroImage(item.images[0])"
-          class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-4 cursor-pointer"
-          background_color="var(--primary)">
-          <template v-slot:layer>
-            <NuxtLink
-              :to="'/shop/' + $route.params.category + '/' + convertName(item.name)"
-              class="w-full h-full flex justify-center items-center">
-              <button
-                class="w-36 h-10 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg"
-                style="border-radius: 35px">
-                Purchase Now
-              </button>
-            </NuxtLink>
-          </template>
-          <template v-slot:main>
-            <NuxtLink :to="'/shop/' + $route.params.category + '/' + convertName(item.name)" class="w-full h-full flex flex-col">
-              <div class="absolute top-1 right-4">
-                <div class="flex gap-1 items-center text-xs sm:text-lg">
-                  <ClientOnly><font-awesome :icon="['fas', 'dollar-sign']" /></ClientOnly>{{ item.price }}
+          class="h-[300px] md:h-[400px] basis-1/2 lg:basis-1/3 2xl:basis-1/4 flex p-4 cursor-pointer">
+          <Card class="h-full w-full flex cursor-pointer" background_color="var(--primary)">
+            <template v-slot:layer>
+              <div class="w-full h-full flex justify-center items-center">
+                <button
+                  class="w-36 h-10 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg"
+                  style="border-radius: 35px">
+                  Purchase Now
+                </button>
+              </div>
+            </template>
+            <template v-slot:main>
+              <div class="w-full h-full flex flex-col">
+                <div class="absolute top-1 right-4">
+                  <div class="flex gap-1 items-center text-xs sm:text-lg">
+                    <ClientOnly><font-awesome :icon="['fas', 'dollar-sign']" /></ClientOnly>{{ item.price }}
+                  </div>
+                </div>
+                <div class="text-xs sm:text-2xl text-center h-14 w-full flex justify-center items-center px-2 mt-4">{{ item.name }}</div>
+                <div class="flex-1 w-full flex justify-center items-center overflow-hidden">
+                  <SkeletonImg
+                    :src="item.images[0]"
+                    class="flex-1 flex justify-center h-full rounded-lg overflow-hidden"
+                    :hero="hero == item.images[0] ? 'deneme2' : ''"></SkeletonImg>
+                </div>
+                <div
+                  class="h-12 w-full text-xs md:text-base font-bold flex flex-wrap px-2 justify-center items-center gap-1 md:gap-2 sm:gap-x-3 mb-2">
+                  <div class="flex gap-1 items-center">
+                    <ClientOnly><font-awesome :icon="['fas', 'battery-full']" /></ClientOnly>{{ item.battery }} mAh
+                  </div>
+                  <div class="flex gap-1 items-center">
+                    <ClientOnly><font-awesome :icon="['fas', 'compact-disc']" /></ClientOnly>{{ item.memory[0] }} GB
+                  </div>
+                  <div class="flex gap-1 items-center">
+                    <IconsScreenSize :height="20" :width="20" :color="'aliceblue'"></IconsScreenSize>
+                    {{ item.screensize }} Inch
+                  </div>
                 </div>
               </div>
-              <div class="text-xs sm:text-2xl text-center h-14 w-full flex justify-center items-center px-2 mt-4">{{ item.name }}</div>
-              <div class="flex-1 w-full flex justify-center items-center overflow-hidden">
-                <SkeletonImg
-                  :src="item.images[0]"
-                  class="flex-1 flex justify-center h-full rounded-lg overflow-hidden"
-                  :hero="hero == item.images[0] ? 'deneme2' : ''"></SkeletonImg>
-              </div>
-              <div
-                class="h-12 w-full text-xs md:text-base font-bold flex flex-wrap px-2 justify-center items-center gap-1 md:gap-2 sm:gap-x-3 mb-2">
-                <div class="flex gap-1 items-center">
-                  <ClientOnly><font-awesome :icon="['fas', 'battery-full']" /></ClientOnly>{{ item.battery }} mAh
-                </div>
-                <div class="flex gap-1 items-center">
-                  <ClientOnly><font-awesome :icon="['fas', 'compact-disc']" /></ClientOnly>{{ item.memory[0] }} GB
-                </div>
-                <div class="flex gap-1 items-center">
-                  <IconsScreenSize :height="20" :width="20" :color="'aliceblue'"></IconsScreenSize>
-                  {{ item.screensize }} Inch
-                </div>
-              </div>
-            </NuxtLink>
-          </template>
-        </Card>
+            </template>
+          </Card>
+        </NuxtLink>
       </div>
     </div>
   </div>
