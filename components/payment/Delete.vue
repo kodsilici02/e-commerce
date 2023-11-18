@@ -28,16 +28,18 @@ const emits = defineEmits(['handleCancel', 'handleDelete']);
 
 const lottie = ref();
 const delete_var = ref(false);
+const deleted = ref(false);
 
 function handleClick() {
   lottie.value.play();
-}
-function complete() {
-  emits('handleDelete');
   delete_var.value = true;
 }
+function complete() {
+  deleted.value = true;
+  emits('handleDelete');
+}
 onBeforeUnmount(() => {
-  if (!delete_var.value) {
+  if (!deleted.value && delete_var.value) {
     emits('handleDelete');
   }
 });
