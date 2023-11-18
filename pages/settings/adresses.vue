@@ -69,7 +69,7 @@
     </div>
     <Transition name="modal">
       <Modal v-if="edit_modal">
-        <AdressesEdit :info="infos[selectedItem]" @handleCancel="closeModals" @handle-edit="saveInfo"></AdressesEdit>
+        <AdressesEdit :info="addresses[selectedItem]" @handleCancel="closeModals" @handle-edit="saveInfo"></AdressesEdit>
       </Modal>
     </Transition>
     <Transition name="modal">
@@ -93,8 +93,12 @@ import { useAddressesStore } from '@/stores/addresses';
 import { storeToRefs } from 'pinia';
 
 const store = storeToRefs(useAddressesStore());
-
 const addresses = ref(store.addresses.value);
+
+const edit_modal = ref(false);
+const delete_modal = ref(false);
+const add_modal = ref(false);
+const selectedItem = ref();
 
 function toggleBookmark(index) {
   store.addresses.value.find(info => info.default == true).default = false;
@@ -115,11 +119,6 @@ function deleteInfo() {
   store.addresses.value.splice(selectedItem.value, 1);
   closeModals();
 }
-
-const edit_modal = ref(false);
-const delete_modal = ref(false);
-const add_modal = ref(false);
-const selectedItem = ref(0);
 
 function closeModals() {
   edit_modal.value = false;

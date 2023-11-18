@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full flex content-start flex-wrap justify-center p-5">
+  <div class="h-full w-full flex content-start flex-wrap justify-center p-5" :style="{ 'max-width': calculateWidth() + 'px' }">
     <div class="w-full p-2 px-3">
       <FloatingLabel
         :label="'Title'"
@@ -83,6 +83,18 @@
 
 <script setup>
 const emits = defineEmits(['handleSave', 'handleCancel']);
+
+function calculateWidth() {
+  if (window.innerWidth <= 768) {
+    return 350;
+  }
+  if (window.innerWidth <= 1024) {
+    return 500;
+  }
+  if (window.innerWidth >= 1280) {
+    return 750;
+  }
+}
 
 const title = ref();
 const name = ref();

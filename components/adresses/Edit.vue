@@ -1,6 +1,5 @@
-import { title } from 'process'; import { info } from 'console';
 <template>
-  <div class="h-full w-full flex content-start flex-wrap p-3">
+  <div class="h-full w-full flex content-start flex-wrap p-3" :style="{ 'max-width': calculateWidth() + 'px' }">
     <div class="w-full p-2 px-3">
       <FloatingLabel
         :label="'Title'"
@@ -107,6 +106,18 @@ const props = defineProps({
     default: {}
   }
 });
+
+function calculateWidth() {
+  if (window.innerWidth <= 768) {
+    return 350;
+  }
+  if (window.innerWidth <= 1024) {
+    return 500;
+  }
+  if (window.innerWidth >= 1280) {
+    return 750;
+  }
+}
 
 const emits = defineEmits(['handleEdit', 'handleCancel']);
 
