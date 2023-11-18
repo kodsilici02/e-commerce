@@ -33,49 +33,33 @@
       <div class="w-full flex flex-wrap gap-1 overflow-hidden transition-all duration-200" ref="container">
         <div class="w-full flex flex-wrap gap-1 item-container">
           <Accordeon :open="item.isOpen">
-            <div @click="addClass(orderindex, order.img)" v-for="(order, orderindex) in item.items" class="w-full flex flex-wrap">
-              <div v-if="false" class="w-full flex lfex-wrap rounded-lg">
-                <div class="w-32 h-28 flex justify-center p-1">
-                  <SkeletonLoader class="w-full h-full"></SkeletonLoader>
+            <NuxtLink
+              :to="'/settings/orders/' + useNuxtApp().$convertName(order.name)"
+              @click="addClass(order.img)"
+              v-for="(order, orderindex) in item.items"
+              class="w-full flex cursor-pointer rounded-lg transition-colors duration-300 background">
+              <div class="w-32 h-32 flex justify-center p-1">
+                <SkeletonImg
+                  :hero="hero_image == order.img ? 'hero_image' : ''"
+                  :src="order.img"
+                  class="flex-1 flex justify-center h-full rounded-lg overflow-hidden p-1"></SkeletonImg>
+              </div>
+              <div class="flex-1 h-full flex flex-wrap content-start gap-2 md:gap-1 text-xs md:text-base mt-2 md:mt-0">
+                <div class="w-full font-bold text-sm md:text-lg">{{ order.name }}</div>
+                <div class="w-full flex gap-2 items-center">
+                  <ClientOnly>
+                    <font-awesome :icon="['fas', 'location-dot']"></font-awesome>
+                  </ClientOnly>
+                  <div>Bla Bla</div>
                 </div>
-                <div class="flex-1 h-full flex flex-wrap content-start gap-2 md:gap-1 text-xs md:text-base mt-2 md:mt-1">
-                  <div class="w-full font-bold text-sm md:text-lg"><SkeletonLoader class="w-36 h-5"></SkeletonLoader></div>
-                  <div class="w-full flex gap-2 items-center">
-                    <SkeletonLoader class="w-52 h-5"></SkeletonLoader>
-                  </div>
-                  <div class="w-full flex gap-2 items-center">
-                    <SkeletonLoader class="w-56 h-5"></SkeletonLoader>
-                  </div>
+                <div class="w-full flex gap-2 items-center">
+                  <ClientOnly>
+                    <font-awesome :icon="['fas', 'calendar-days']"></font-awesome>
+                  </ClientOnly>
+                  <div>Delivered on Aug 21, 2023</div>
                 </div>
               </div>
-              <NuxtLink
-                :to="'/settings/orders/' + useNuxtApp().$convertName(order.name)"
-                class="w-full flex flex-wrap cursor-pointer rounded-lg transition-colors duration-300 background">
-                <div @loadeddata="deneme2" class="w-32 h-28 flex justify-center p-1">
-                  <img
-                    @load="image_loaded(index, order.name)"
-                    ref="images"
-                    :src="order.img"
-                    :class="{ image: orderImage.hero_image == order.img }"
-                    class="object-center object-contain" />
-                </div>
-                <div class="flex-1 h-full flex flex-wrap content-start gap-2 md:gap-1 text-xs md:text-base mt-2 md:mt-0">
-                  <div class="w-full font-bold text-sm md:text-lg">{{ order.name }}</div>
-                  <div class="w-full flex gap-2 items-center">
-                    <ClientOnly>
-                      <font-awesome :icon="['fas', 'location-dot']"></font-awesome>
-                    </ClientOnly>
-                    <div>Bla Bla</div>
-                  </div>
-                  <div class="w-full flex gap-2 items-center">
-                    <ClientOnly>
-                      <font-awesome :icon="['fas', 'calendar-days']"></font-awesome>
-                    </ClientOnly>
-                    <div>Delivered on Aug 21, 2023</div>
-                  </div>
-                </div>
-              </NuxtLink>
-            </div>
+            </NuxtLink>
           </Accordeon>
         </div>
       </div>
@@ -85,15 +69,12 @@
 
 <script setup>
 import { useOrderImage } from '@/stores/orders.js';
-import { onBeforeRouteLeave } from 'vue-router';
 const deneme = false;
-const orderImage = useOrderImage();
 
-onBeforeRouteLeave((to, from) => {
-  if (!to.fullPath.includes('/settings/orders') && document.querySelector('.image')) {
-    document.querySelector('.image').classList.remove('image');
-  }
-});
+const hero_image = ref('');
+function addClass(image) {
+  hero_image.value = image;
+}
 
 const items = ref([
   {
@@ -112,53 +93,17 @@ items.value.forEach(item => {
   });
 });
 
-function isLoaded(index, name) {
-  return items.value[index].items.find(item => item.name == name).loaded;
-}
-
-onUpdated(() => {
-  console.log('a');
-});
-
-function image_loaded(index, name) {
-  console.log('image_loaded');
-  items.value[index].items.find(item => item.name == name).loaded = true;
-}
-
-/* onMounted(() => {
-  items.value.forEach((item, index) => {
-    let element = container.value[index].querySelector('.item-container').offsetHeight;
-    container.value[index].style.maxHeight = element + 'px';
-  });
-});
-const container = ref(); */
-
-/* function toggleCategory(index) {
-  if (items.value[index].isOpen) {
-    container.value[index].style.maxHeight = 0;
-  } else {
-    let element = container.value[index].querySelector('.item-container').offsetHeight;
-    container.value[index].style.maxHeight = element + 'px';
-  }
-  items.value[index].isOpen = !items.value[index].isOpen;
-} */
-
 function toggleCategory(index) {
   items.value[index].isOpen = !items.value[index].isOpen;
 }
-const images = ref();
-function addClass(index, image) {
-  const img = images.value[index];
-  img.classList.add('image');
-  orderImage.hero_image = image;
-}
 </script>
+<style>
+.hero_image {
+  view-transition-name: deneme;
+}
+</style>
 
 <style scoped>
-.image {
-  view-transition-name: view-image;
-  contain: paint;
-}
 .background:hover {
   background-color: var(--background-hover);
 }

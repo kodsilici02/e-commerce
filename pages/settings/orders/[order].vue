@@ -2,7 +2,7 @@
   <div class="w-full flex flex-wrap gap-2 p-2 lg:p-4" style="color: var(--text-color)">
     <div class="w-full text-2xl font-bold flex justify-center mt-3">{{ product.name }}</div>
     <div class="w-full lg:basis-1/4 h-[350px] flex justify-center items-center 2xl:mt-10">
-      <img :src="image_url" class="object-center object-contain image" ref="image_element" />
+      <img :src="image_url" :class="{ hero_image: hero_active }" ref="image_element" />
     </div>
     <!--Progress Bar and order details-->
     <div class="w-full flex-1 flex flex-wrap content-start lg:mt-10 gap-3">
@@ -75,8 +75,13 @@
 
 <script setup>
 import { useProductStore } from '@/stores/products.js';
-import { useOrderImage } from '@/stores/orders.js';
 import { useRoute, onBeforeRouteLeave } from 'vue-router';
+
+const hero_active = ref(true);
+
+onBeforeRouteLeave(() => {
+  hero_active.value = false;
+});
 
 const route = useRoute();
 
@@ -125,18 +130,9 @@ function Total() {
   return total;
 }
 
-const order_image_state = useOrderImage();
 const products = useProductStore();
 const image_url = products.getImageByName(route.params.order);
-const image_element = ref();
 const product = ref(products.getProduct(route.params.order));
-
-onMounted(() => {
-  order_image_state.hero_image = image_url;
-});
-onBeforeRouteLeave((to, from) => {
-  image_element.value.classList.remove('image');
-});
 
 const states = ref([
   {
@@ -152,10 +148,6 @@ const states = ref([
 </script>
 
 <style scoped>
-.image {
-  view-transition-name: view-image;
-  contain: paint;
-}
 .progress-bar {
   background-color: var(--secondary);
 }
