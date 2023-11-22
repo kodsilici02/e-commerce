@@ -40,8 +40,4 @@ const deneme = ref(true);
 const open = ref(true);
 </script>
 
-<style>
-.deneme {
-  view-transition-name: deneme;
-}
-</style>
+<style></style>

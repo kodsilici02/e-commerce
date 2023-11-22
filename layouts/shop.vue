@@ -109,8 +109,8 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import { useSidebarStore } from '@/stores/sidebar.js';
-
 const route = useRoute();
 const router = useRouter();
 
@@ -120,13 +120,13 @@ onMounted(() => {
   updateBreadcrumb();
 });
 watch(
-  () => route.fullPath,
+  () => route.path,
   () => {
     updateBreadcrumb();
   }
 );
 function updateBreadcrumb() {
-  const pathSegments = route.fullPath.split('/').filter(segment => segment !== '');
+  const pathSegments = route.path.split('/').filter(segment => segment !== '');
   breadcrumbSegments.value = [
     {
       name: 'Home',
@@ -187,6 +187,26 @@ function updateSearchValue(value) {}
 </script>
 
 <style scoped>
+.cover {
+  opacity: 0;
+  background-color: var(--primary);
+  transition: all 0.2s ease-in-out;
+}
+
+.item:hover .cover {
+  opacity: 0.5;
+}
+
+.cover-button {
+  opacity: 0;
+  z-index: 1001;
+  transition: all 0.2s ease-in-out;
+}
+
+.item:hover .cover-button {
+  opacity: 1;
+}
+
 .header-shadow {
   view-transition-name: header-shadow;
 }

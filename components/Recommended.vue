@@ -9,7 +9,7 @@
       <div
         v-for="(item, index) in items"
         :key="index"
-        class="flex-box rounded-xl relative item-background cursor-pointer"
+        class="flex-box rounded-xl relative item-background cursor-pointer flex-shrink-0"
         style="background-color: var(--secondary)">
         <NuxtLink to="/shop/phones">
           <div
@@ -65,18 +65,18 @@ function handleMouseWheel(event) {
 
 <style scoped>
 .flex-box {
-  flex: 0 0 100px;
+  flex-basis: 100px;
   height: 100px;
 }
 @media only screen and (min-width: 768px) {
   .flex-box {
-    flex: 0 0 200px;
+    flex-basis: 200px;
     height: 200px;
   }
 }
 @media only screen and (min-width: 1024px) {
   .flex-box {
-    flex: 0 0 250px;
+    flex-basis: 300px;
     height: 250px;
   }
 }

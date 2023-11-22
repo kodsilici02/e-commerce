@@ -34,10 +34,12 @@
 
 ::view-transition-old(root) {
   animation-name: fade-out;
+  animation-duration: 200ms;
 }
 
 ::view-transition-new(root) {
   animation-name: fade-in;
+  animation-duration: 200ms;
 }
 ::view-transition-old(view-image),
 ::view-transition-new(view-image) {

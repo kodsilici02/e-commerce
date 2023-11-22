@@ -4,15 +4,17 @@
     :class="[props.class]"
     class="transition-transform duration-200 hover:scale-[1.02] relative cursor-pointer">
     <div
-      class="h-full w-full rounded-lg card-background transition-[background-color] duration-200 relative overflow-hidden"
+      class="h-full w-full rounded-lg card-background transition-[background-color] duration-200 relative"
       :style="{ backgroundColor: props.background_color }">
       <div
         v-if="$slots.layer"
+        @click.prevent
         class="absolute top-0 left-0 w-full h-full layer pointer-events-none z-10"
         :style="{ backgroundColor: props.background_color }"></div>
-      <div class="absolute top-0 left-0 w-full h-full layer-content z-10">
+      <div class="absolute top-0 left-0 w-full h-full layer-content z-10 pointer-events-none">
         <slot name="layer"> </slot>
       </div>
+
       <div class="w-full h-full">
         <slot name="main"></slot>
       </div>
@@ -27,6 +29,10 @@ const props = defineProps({
     default: ''
   },
   background_color: {
+    type: String,
+    default: ''
+  },
+  link: {
     type: String,
     default: ''
   }

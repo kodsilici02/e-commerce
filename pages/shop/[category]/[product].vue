@@ -11,7 +11,7 @@
         <div class="flex-1 h-[40vh] lg:h-[70vh] overflow-hidden flex justify-center items-center z-0">
           <div class="h-fit w-full overflow-hidden">
             <Transition :name="transitionName" mode="out-in">
-              <img :class="{ deneme2: hero_active }" :key="activeImage" :src="activeImage"
+              <img :class="{ deneme: hero_active }" :key="activeImage" :src="activeImage"
             /></Transition>
           </div>
         </div>
@@ -75,7 +75,7 @@
       <!--VueChart-->
       <div class="w-full flex flex-col mt-10">
         <div class="">Price History</div>
-        <VueChart></VueChart>
+        <Chart></Chart>
       </div>
       <div class="w-full">
         <Details></Details>

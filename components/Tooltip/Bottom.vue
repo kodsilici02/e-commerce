@@ -44,7 +44,7 @@ const showTooltip = ref(false);
   text-align: center;
   border-radius: 6px;
   position: absolute;
-  z-index: 1;
+  z-index: 100;
   top: 150%;
   transition: all ease-in-out 0.2s;
 }

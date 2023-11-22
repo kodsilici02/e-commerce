@@ -11,7 +11,7 @@ export const phones = [
 
     price: 1099,
     screensize: 6.7,
-    memory: [128, 256, 512],
+    memory: 128,
     ram: 8,
     battery: 4000,
     cpu: {
@@ -190,7 +190,8 @@ export const phones = [
     ],
     price: 1099,
     screensize: 6.7,
-    memory: [128, 256, 512],
+    memory: 128,
+    memory_options: [128, 256, 512],
     ram: 8,
     battery: 4000,
     cpu: {
@@ -225,6 +226,61 @@ export const phones = [
         type: 'ram',
         number: true,
         value: 128
+      },
+      {
+        type: 'fast_charge',
+        bool: true,
+        value: true
+      }
+    ]
+  },
+  {
+    id: 'google-pixel-6-pro',
+    name: 'Google Pixel 6 Pro',
+    brand: 'Google',
+    images: [
+      'https://www.clove.co.uk/cdn/shop/products/google-pixel-6-pro-stormy-black-back_1200x.png',
+      'https://example.com/google-pixel-6-pro-image2.png',
+      'https://example.com/google-pixel-6-pro-image3.png'
+    ],
+    price: 899,
+    screensize: 6.7,
+    memory: 256,
+    memory_options: [128, 256, 512],
+    ram: 8,
+    battery: 5000,
+    cpu: {
+      speed: 2.9,
+      core: 'Octa-core'
+    },
+    fast_charge: true,
+    camera: 50,
+    screen_resolution: 'OLED QHD+',
+    memory_options: [128, 256, 512],
+    color_options: [{ color: '#4caf50', img: 'https://example.com/google-pixel-6-pro-green.png' }],
+    about: [
+      '6.7 inch OLED QHD+ display with 120Hz refresh rate',
+      'High-quality 50MP main camera for exceptional photography',
+      'Advanced AI features for enhanced user experience',
+      'Large 5000mAh battery for all-day usage',
+      'Fast charging support for quick replenishment',
+      'Stock Android experience with timely updates.'
+    ],
+    details: [
+      {
+        type: 'price',
+        number: true,
+        value: 899
+      },
+      {
+        type: 'brand',
+        string: true,
+        value: 'Google'
+      },
+      {
+        type: 'ram',
+        number: true,
+        value: 8
       },
       {
         type: 'fast_charge',

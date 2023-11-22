@@ -3,7 +3,7 @@
     <div v-if="!isLoaded" class="w-full h-full p-4">
       <skeleton-loader class="w-full h-full"></skeleton-loader>
     </div>
-    <img v-show="isLoaded" ref="img" @load="loaded" :class="[hero, imgClass]" />
+    <img v-show="isLoaded" :src="props.src" ref="img" @load="loaded" :class="[hero, imgClass]" />
   </div>
 </template>
 
