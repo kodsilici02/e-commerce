@@ -104,7 +104,7 @@
           <button
             @click="compareItems"
             class="w-28 sm:w-36 h-10 z-[3] purchase-button transition-all duration-500 flex justify-center items-center pointer-events-auto"
-            style="border-radius: 35px">
+            style="border-radius: 35px; background-color: var(--secondary-light)">
             Compare Items
           </button>
         </div>

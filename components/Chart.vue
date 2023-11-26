@@ -23,6 +23,11 @@ onMounted(() => {
     myChart.value.height = myChart.value.width;
   });
 });
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', () => {
+    myChart.value.height = myChart.value.width;
+  });
+});
 
 const myChart = ref();
 const config = {

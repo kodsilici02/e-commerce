@@ -71,6 +71,11 @@ onMounted(() => {
     calculateWindowSize();
   });
 });
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', () => {
+    calculateWindowSize();
+  });
+});
 
 function toggleOrderSidebar() {
   store.toggleOrderSidebar();

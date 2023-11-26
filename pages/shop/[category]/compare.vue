@@ -1,9 +1,26 @@
 <template>
   <div ref="main_container" class="w-full h-full overflow-x-auto" style="color: var(--text-color)">
     <div class="w-fit mx-auto mt-3">
-      <div class="flex">
-        <div :style="{ width: width }" v-for="(item, index) in items" class="p-1">
+      <SortableContainer
+        :options="{
+          handle: '.handle',
+          animation: 200,
+          swapThreshold: 0.5,
+          dragClass: 'sortable-drag',
+          ghostClass: 'sortable-ghost',
+
+          onStart: evt => onStart(evt),
+
+          onEnd: evt => onEnd(evt)
+        }"
+        class="flex">
+        <div :key="item.name" :style="{ width: width }" v-for="(item, index) in items" class="p-1">
           <div class="w-full flex flex-wrap justify-center gap-2 rounded-xl relative">
+            <div class="w-full p-3 flex justify-center">
+              <ClientOnly
+                ><font-awesome class="cursor-pointer text-xl handle" :icon="['fas', 'up-down-left-right']"></font-awesome
+              ></ClientOnly>
+            </div>
             <div
               class="w-full h-9 sticky top-0 flex font-[600] text-sm text-center lg:text-xl justify-center items-center z-[-1]"
               style="background-color: var(--background)">
@@ -17,7 +34,11 @@
                 v-if="item.details.find(detail => detail.type === 'score')"
                 class="w-full px-3 flex justify-center items-center flex-wrap gap-2">
                 <div class="w-full h-[4px] rounded-full overflow-hidden" style="background-color: var(--background-hover)">
-                  <div ref="score_container" class="h-full w-0" style="background-color: var(--success)"></div>
+                  <div
+                    ref="score_container"
+                    class="h-full"
+                    :style="{ width: (item.details.find(detail => detail.type === 'score').value / 5) * 100 + '%' }"
+                    style="background-color: var(--success)"></div>
                 </div>
                 <div class="w-full flex gap-2 text-center justify-center">
                   {{ item.details.find(detail => detail.type === 'score').value }}
@@ -32,7 +53,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </SortableContainer>
     </div>
   </div>
 </template>
@@ -40,6 +61,14 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import { gsap } from 'gsap';
+
+function onStart(event) {
+  event.item.style.opacity = '0';
+}
+
+function onEnd(event) {
+  event.item.style.opacity = '1';
+}
 
 function viewTransitionName(index) {
   return 'compareTransition' + index;
@@ -78,7 +107,6 @@ function calculateWith() {
   } else {
     width.value = window.innerWidth / 4 - 24 + 'px';
   }
-  console.log(width.value);
 }
 
 onMounted(() => {
@@ -100,6 +128,12 @@ function handleMouseWheel(event) {
 </script>
 
 <style scoped>
+.sortable-drag {
+  opacity: 1;
+}
+.sortable-ghost {
+  opacity: 0;
+}
 .item {
   width: 125px;
 }

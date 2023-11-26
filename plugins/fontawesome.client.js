@@ -53,7 +53,8 @@ import {
   faThumbsUp,
   faThumbsDown,
   faReply,
-  faCodeCompare
+  faCodeCompare,
+  faUpDownLeftRight
 } from '@fortawesome/free-solid-svg-icons';
 import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons';
 import { faCcVisa, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
@@ -113,7 +114,8 @@ library.add(
   faThumbsDown,
   faReply,
   faCodeCompare,
-  faCircleQuestion
+  faCircleQuestion,
+  faUpDownLeftRight
 );
 
 // This is important, we are going to let Nuxt worry about the CSS
