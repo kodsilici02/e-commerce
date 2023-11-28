@@ -73,8 +73,7 @@
         </div>
       </div>
       <!--VueChart-->
-      <div class="w-full flex flex-col mt-10">
-        <div class="">Price History</div>
+      <div class="w-full h-72 px-2 mt-10">
         <Chart></Chart>
       </div>
       <div class="w-full">
@@ -82,7 +81,7 @@
       </div>
       <!--Recommendeds-->
       <div class="w-full mt-10">
-        <div class="flex text-2xl w-full">Recommended</div>
+        <div class="flex text-2xl w-full text-center justify-center font-[600]">Recommendeds</div>
         <Recommended></Recommended>
       </div>
       <div class="w-full flex flex-col mt-14">

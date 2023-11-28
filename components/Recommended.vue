@@ -1,35 +1,41 @@
 <template>
-  <div class="w-full" style="color: var(--text-white)">
+  <div class="w-full relative" style="color: var(--text-white)">
     <div
-      class="w-full flex gap-5 overflow-x-auto p-5"
+      class="w-full flex overflow-x-auto p-4"
       ref="scrollContainer"
       @wheel.prevent
       @wheel="handleMouseWheel"
       style="scroll-behavior: smooth">
-      <div
-        v-for="(item, index) in items"
-        :key="index"
-        class="flex-box rounded-xl relative item-background cursor-pointer flex-shrink-0"
-        style="background-color: var(--secondary)">
-        <NuxtLink to="/shop/phones">
-          <div
-            class="z-[2] absolute top-0 left-0 w-full h-full purchase-background transition-all duration-500 rounded-xl pointer-events-none"></div>
-          <div class="absolute top-0 left-0 w-full h-full purchase-layer transition-all duration-500 z-[2] rounded-xl">
-            <div class="w-full h-full flex justify-center items-center">
-              <div
-                class="w-36 h-10 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg"
-                style="border-radius: 35px">
-                Inspect
-              </div>
-            </div>
+      <Card
+        v-for="item in items"
+        :key="items"
+        class="flex-box rounded-xl relative cursor-pointer flex-shrink-0 p-3"
+        background_color="var(--secondary)">
+        <template v-slot:layer>
+          <div class="w-full h-full flex flex-col gap-4 justify-center items-center pointer-events-none text-sm sm:text-ba">
+            <NuxtLink
+              :to="'/shop/phones'"
+              class="w-28 sm:w-36 h-10 z-[3] purchase-button transition-all duration-500 flex justify-center items-center pointer-events-auto"
+              style="border-radius: 35px">
+              Inspect
+            </NuxtLink>
           </div>
-        </NuxtLink>
-        <img
-          class="w-full h-full object-cover object-center"
-          src="https://www.pngmart.com/files/13/Apple-Airpods-PNG-Image.png"
-          loading="lazy" />
-      </div>
+        </template>
+        <template v-slot:main>
+          <NuxtLink :to="'/shop/phones'" class="w-full h-full flex flex-col">
+            <div class="flex-1 w-full flex justify-center items-center overflow-hidden">
+              <SkeletonImg
+                src="https://www.pngmart.com/files/13/Apple-Airpods-PNG-Image.png"
+                class="flex-1 flex justify-center h-full rounded-lg overflow-hidden"
+                :img-class="'w-full h-full object-cover object-center'"></SkeletonImg>
+            </div>
+          </NuxtLink>
+        </template>
+      </Card>
     </div>
+    <div
+      class="h-full w-14 absolute top-0 right-0 z-10"
+      style="background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, var(--background) 100%)"></div>
   </div>
 </template>
 
