@@ -2,6 +2,7 @@ export const phones = [
   {
     id: 'samsung-galaxy-s22',
     name: 'Samsung Galaxy S22',
+    score: 4.5,
     brand: 'Samsung',
     images: [
       'https://images.samsung.com/is/image/samsung/p6pim/tr/2202/gallery/tr-galaxy-s22-ultra-s908-sm-s908edrdtur-530980041?$624_624_PNG$',
@@ -230,7 +231,7 @@ export const phones = [
       {
         type: 'fast_charge',
         bool: true,
-        value: true
+        value: false
       }
     ]
   },

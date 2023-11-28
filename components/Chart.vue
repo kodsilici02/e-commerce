@@ -7,9 +7,12 @@ import { Chart, registerables } from 'chart.js';
 
 const testData = {
   labels: ['Paris', 'Nîmes', 'Toulon', 'Perpignan', 'Autre'],
+
   datasets: [
     {
       data: [30, 40, 60, 20, 5],
+      type: 'line',
+
       backgroundColor: ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED'],
       borderColor: '#4470da', // Change the line color to black
       color: '#4470da' // Change the data point and label color to black
@@ -31,11 +34,16 @@ onBeforeUnmount(() => {
 
 const myChart = ref();
 const config = {
-  type: 'line',
   data: testData,
   options: {
+    plugins: {
+      legend: {
+        display: false
+      }
+    },
     responsive: true,
     maintainAspectRatio: false,
+
     scales: {
       x: {
         display: true,
@@ -50,15 +58,14 @@ const config = {
       },
       y: {
         display: true,
-        title: {
-          display: true,
 
-          color: '#212121' // Change the y-axis label color to black
-        },
         ticks: {
           color: '#212121' // Change the y-axis tick color to black
         }
       }
+    },
+    legend: {
+      display: false // Hide the legend
     }
   }
 };

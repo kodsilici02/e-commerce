@@ -8,9 +8,7 @@
           swapThreshold: 0.5,
           dragClass: 'sortable-drag',
           ghostClass: 'sortable-ghost',
-
           onStart: evt => onStart(evt),
-
           onEnd: evt => onEnd(evt)
         }"
         class="flex">
@@ -29,16 +27,10 @@
             <div class="h-[350px] py-4 w-full flex gap-3 items-center justify-center">
               <img :src="item.images[0]" :style="{ 'view-transition-name': viewTransitionName(index) }" class="h-full object-contain" />
             </div>
-            <div class="w-full h-9 flex flex-wrap items-center justify-center text-sm md:text-lg">
-              <div
-                v-if="item.details.find(detail => detail.type === 'score')"
-                class="w-full px-3 flex justify-center items-center flex-wrap gap-2">
+            <div class="w-full h-9 flex flex-wrap items-center justify-center mt-2 text-sm md:text-lg">
+              <div v-if="item.score" class="w-full px-3 flex justify-center items-center flex-wrap gap-2">
                 <div class="w-full h-[4px] rounded-full overflow-hidden" style="background-color: var(--background-hover)">
-                  <div
-                    ref="score_container"
-                    class="h-full"
-                    :style="{ width: (item.details.find(detail => detail.type === 'score').value / 5) * 100 + '%' }"
-                    style="background-color: var(--success)"></div>
+                  <div ref="score_container" class="h-full" style="background-color: var(--success)"></div>
                 </div>
                 <div class="w-full flex gap-2 text-center justify-center">
                   {{ item.details.find(detail => detail.type === 'score').value }}
@@ -48,8 +40,37 @@
                 <font-awesome :icon="['far', 'circle-question']" />
               </ClientOnly>
             </div>
-            <div class="w-full h-72">
+            <div class="w-full h-72 mt-2">
               <Chart></Chart>
+            </div>
+            <div class="w-full flex flex-col mt-2">
+              <div
+                v-for="(filter, filterIndex) in filters()"
+                class="flex flex-col content-start justify-center w-full border-b"
+                :class="filter.type"
+                style="border-color: var(--secondary)">
+                <div class="w-full flex h-fit justify-center text-sm md:text-xl font-[600]">{{ formatText(filter.type) }}</div>
+                <div class="w-full flex-1 items-center flex justify-center text-xs md:text-base font-[500] mb-2">
+                  <div v-if="item.details.find(detail => detail.type === filter.type)">
+                    <div v-if="item.details.find(detail => detail.type === filter.type).bool">
+                      <ClientOnly v-if="item.details.find(detail => detail.type === filter.type).value">
+                        <font-awesome :icon="['fas', 'circle-check']" />
+                      </ClientOnly>
+
+                      <ClientOnly v-else>
+                        <font-awesome :icon="['fas', 'circle-xmark']" />
+                      </ClientOnly>
+                    </div>
+
+                    <div v-else>
+                      {{ item.details.find(detail => detail.type === filter.type).value }}
+                    </div>
+                  </div>
+                  <ClientOnly v-else ref="score_container">
+                    <font-awesome :icon="['far', 'circle-question']" />
+                  </ClientOnly>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -60,14 +81,51 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
+import { useFilterOptions } from '@/stores/filterOptions';
 import { gsap } from 'gsap';
 
-function onStart(event) {
-  event.item.style.opacity = '0';
+function filters() {
+  return useFilterOptions().options.find(item => item.name == route.params.category).filters;
 }
+
+function formatText(inputText) {
+  let words = inputText.split('_');
+  words = words.map(word => word.charAt(0).toUpperCase() + word.slice(1));
+  let formattedText = words.join(' ');
+  return formattedText;
+}
+
+function rowHeight(name) {
+  let elements = document.querySelectorAll('.' + name);
+  let heights = [];
+  elements.forEach(element => {
+    heights.push(element.offsetHeight);
+  });
+  elements.forEach(element => {
+    element.style.height = Math.max(...heights) + 'px';
+  });
+}
+
+onMounted(async () => {
+  setTimeout(() => {
+    filters().forEach(filter => {
+      rowHeight(filter.type);
+    });
+  }, 0);
+}),
+  function onStart(event) {
+    event.item.style.opacity = '0';
+  };
 
 function onEnd(event) {
   event.item.style.opacity = '1';
+  switchItems(event.oldIndex, event.newIndex);
+}
+
+function switchItems(one, two) {
+  let temporary = items.value[one];
+  items.value[one] = items.value[two];
+  items.value[two] = temporary;
 }
 
 function viewTransitionName(index) {
@@ -91,8 +149,8 @@ function setScore(index, value) {
 
 onMounted(() => {
   items.value.forEach((item, index) => {
-    if (item.details.find(detail => detail.type === 'score')) {
-      setScore(index, item.details.find(detail => detail.type === 'score').value);
+    if (item.score) {
+      setScore(index, item.score);
     }
   });
 });
@@ -105,7 +163,7 @@ function calculateWith() {
   } else if (window.innerWidth <= 1280) {
     width.value = window.innerWidth / 3 - 24 + 'px';
   } else {
-    width.value = window.innerWidth / 4 - 24 + 'px';
+    width.value = window.innerWidth / 3 - 24 + 'px';
   }
 }
 
