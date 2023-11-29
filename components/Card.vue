@@ -1,8 +1,5 @@
 <template>
-  <div
-    style="color: var(--text-white)"
-    :class="[props.class]"
-    class="transition-transform duration-200 hover:scale-[1.02] relative cursor-pointer">
+  <div style="color: var(--text-white)" :class="[props.class]" class="transition-transform duration-200 hover:scale-[1.02] relative">
     <div
       class="h-full w-full rounded-lg card-background transition-[background-color] duration-200 relative"
       :style="{ backgroundColor: props.background_color }">

@@ -1,52 +1,55 @@
 <template>
   <div class="w-full h-full flex flex-wrap" style="color: var(--text-color)">
     <div v-auto-animate class="w-full h-full p-2 flex flex-wrap content-start">
-      <div
-        v-for="(info, index) in addresses"
+      <Card
+        :background_color="'var(--primary)'"
+        class="h-[350px] w-full lg:basis-1/3 2xl:basis-1/4 flex p-4 relative group"
         :key="info.address"
-        style="color: var(--text-white)"
-        class="h-[350px] w-full lg:basis-1/3 2xl:basis-1/4 flex p-4 relative">
-        <div class="absolute z-[2] cursor-pointer -top-1 right-2">
-          <Bookmark @handle-click="toggleBookmark(index)" :active="info.default"></Bookmark>
-        </div>
-        <div class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative">
-          <div class="h-full w-full flex flex-col p-3 gap-2">
-            <div class="w-full text-2xl text-center">{{ info.title }}</div>
-            <div class="w-full tetx-lg font-[600]">{{ info.name }}</div>
-            <div class="w-full">{{ info.address }}</div>
-            <div class="w-full">{{ info.province }}</div>
-            <div class="w-full">{{ info.county }}</div>
-            <div class="w-full">{{ info.district }}</div>
-            <div class="w-full">{{ info.phone }}</div>
-            <div class="w-full flex-1 flex gap-2 items-end justify-center">
-              <button
-                @click="
-                  () => {
-                    selectedItem = index;
-                    delete_modal = true;
-                  }
-                "
-                class="w-36 h-10 bg-slate-400 z-[3] cursor-pointer delete-button transition-all duration-500 flex justify-center gap-2 items-center text-base md:text-lg"
-                style="border-radius: 35px">
-                Delete<ClientOnly>
-                  <font-awesome :icon="['fas', 'trash']"></font-awesome>
-                </ClientOnly>
-              </button>
-              <button
-                @click="
-                  () => {
-                    selectedItem = index;
-                    edit_modal = true;
-                  }
-                "
-                class="w-36 h-10 bg-slate-400 z-[3] edit-button transition-all duration-500 flex justify-center gap-2 items-center text-base md:text-lg"
-                style="border-radius: 35px">
-                Edit<ClientOnly><font-awesome :icon="['fas', 'pen']"></font-awesome></ClientOnly>
-              </button>
+        v-for="(info, index) in addresses">
+        <template v-slot:main>
+          <div class="w-full h-full rounded-lg flex flex-col relative">
+            <div class="absolute z-[2] cursor-pointer -top-5 right-0">
+              <Bookmark class="" @handle-click="toggleBookmark(index)" :active="info.default"></Bookmark>
+            </div>
+            <div class="h-full w-full flex flex-col p-3 gap-2">
+              <div class="w-full text-2xl text-center">{{ info.title }}</div>
+              <div class="w-full tetx-lg font-[600]">{{ info.name }}</div>
+              <div class="w-full">{{ info.address }}</div>
+              <div class="w-full">{{ info.province }}</div>
+              <div class="w-full">{{ info.county }}</div>
+              <div class="w-full">{{ info.district }}</div>
+              <div class="w-full">{{ info.phone }}</div>
+              <div class="w-full flex-1 flex gap-2 items-end justify-center">
+                <button
+                  @click="
+                    () => {
+                      selectedItem = index;
+                      delete_modal = true;
+                    }
+                  "
+                  class="w-36 h-10 bg-slate-400 z-[3] cursor-pointer delete-button transition-all duration-500 flex justify-center gap-2 items-center text-base md:text-lg"
+                  style="border-radius: 35px">
+                  Delete<ClientOnly>
+                    <font-awesome :icon="['fas', 'trash']"></font-awesome>
+                  </ClientOnly>
+                </button>
+                <button
+                  @click="
+                    () => {
+                      selectedItem = index;
+                      edit_modal = true;
+                    }
+                  "
+                  class="w-36 h-10 bg-slate-400 z-[3] edit-button transition-all duration-500 flex justify-center gap-2 items-center text-base md:text-lg"
+                  style="border-radius: 35px">
+                  Edit<ClientOnly><font-awesome :icon="['fas', 'pen']"></font-awesome></ClientOnly>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </template>
+      </Card>
+
       <div
         :key="'addNew'"
         class="h-[350px] w-full lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-200 hover:scale-[1.02] overflow-hidden">

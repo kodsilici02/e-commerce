@@ -1,7 +1,7 @@
 <template>
   <div class="w-full relative" style="color: var(--text-white)">
     <div
-      class="w-full flex overflow-x-auto p-4"
+      class="w-full flex overflow-x-auto p-3"
       ref="scrollContainer"
       @wheel.prevent
       @wheel="handleMouseWheel"

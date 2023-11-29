@@ -1,5 +1,5 @@
 <template>
-  <div @click="click" class="w-full">
+  <div @click="click" class="w-full relative">
     <Vue3Lottie
       ref="lottie"
       :height="height"

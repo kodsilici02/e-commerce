@@ -180,61 +180,7 @@ export const phones = [
       }
     ]
   },
-  {
-    id: 'iphone-14-pro',
-    name: 'IPhone 14 Pro',
-    brand: 'Iphone',
-    images: [
-      'https://assets.getmobil.com/uploads/41726/getmobil-samsung-s225g-phantomgreen-00webp.png',
-      'https://netrinoimages.s3.eu-west-2.amazonaws.com/2022/12/08/1373191/426752/iphone_14_pro_max_3d_model_c4d_max_obj_fbx_ma_lwo_3ds_3dm_stl_4402727_o.png',
-      'https://cepmarketavm.com/cdn/shop/files/replika-iphone-14-pro-max-5-akillicepmarket.com_dd951276-ecac-4e31-b835-196bcc19f9c9_1445x.png?v=1691762675'
-    ],
-    price: 1099,
-    screensize: 6.7,
-    memory: 128,
-    memory_options: [128, 256, 512],
-    ram: 8,
-    battery: 4000,
-    cpu: {
-      speed: 3.0,
-      core: 'Octa-core'
-    },
-    fast_charge: true,
-    camera: 48,
-    screen_resolution: 'Super Retina XDR',
-    memory_options: [128, 256, 512],
-    color_options: [{ color: '#fc34a5', img: 'colored image url' }],
-    about: [
-      '6.7 inch Super Retina XDR display with Always On and ProMotion',
-      'Dynamic Island, a magical way to experience your Iphone',
-      '48MP Main camera with up to 4x the resolution',
-      'Cinematic mode shooting 4K Dolby Vision at up to 30 frames per second',
-      'Motion mode for smooth, jitter-free videos',
-      'All-day battery life and up to 23 hours of video playback.'
-    ],
-    details: [
-      {
-        type: 'price',
-        number: true,
-        value: 1599
-      },
-      {
-        type: 'brand',
-        string: true,
-        value: 'Iphone'
-      },
-      {
-        type: 'ram',
-        number: true,
-        value: 128
-      },
-      {
-        type: 'fast_charge',
-        bool: true,
-        value: false
-      }
-    ]
-  },
+
   {
     id: 'xiaomi-redmi-note-10',
     name: 'Xiaomi Redmi Note 10',
