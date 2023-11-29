@@ -52,7 +52,7 @@
 
       <div
         :key="'addNew'"
-        class="h-[350px] w-full lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-200 hover:scale-[1.02] overflow-hidden">
+        class="h-[350px] w-full lg:basis-1/3 2xl:basis-1/4 flex p-4 transition-transform duration-200 hover:scale-[1.02] group overflow-hidden">
         <div
           @click="
             () => {
@@ -61,6 +61,7 @@
           "
           class="w-full h-full rounded-lg flex justify-center items-center add-new cursor-pointer">
           <Vue3Lottie
+            class="group-hover:scale-[1.10] transition-transform duration-200"
             ref="lottie"
             :height="70"
             animationLink="https://lottie.host/c61be757-e3d7-4e15-97b8-789a034f4a7b/1EQ2o67xyj.json"

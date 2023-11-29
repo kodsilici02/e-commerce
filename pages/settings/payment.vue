@@ -1,6 +1,5 @@
 <template>
   <div class="w-full h-full flex flex-wrap" style="color: var(--text-white)">
-    {{ selectedItem }}
     <div v-auto-animate class="w-full h-full p-2 flex flex-wrap content-start">
       <Card
         :background_color="'var(--primary)'"
@@ -51,7 +50,7 @@
 
       <div
         :key="'addNew'"
-        class="h-[350px] w-full lg:basis-1/3 2xl:basis-1/4 flex p-2 transition-transform duration-200 hover:scale-[1.02] group overflow-hidden">
+        class="h-[350px] w-full lg:basis-1/3 2xl:basis-1/4 flex p-4 transition-transform duration-200 hover:scale-[1.02] group overflow-hidden">
         <div
           @click="
             () => {
