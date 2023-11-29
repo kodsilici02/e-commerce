@@ -9,10 +9,10 @@
       <Card
         v-for="item in items"
         :key="items"
-        class="flex-box rounded-xl relative cursor-pointer flex-shrink-0 p-3"
+        class="flex-box rounded-lg relative cursor-pointer flex-shrink-0 p-3"
         background_color="var(--secondary)">
         <template v-slot:layer>
-          <div class="w-full h-full flex flex-col gap-4 justify-center items-center pointer-events-none text-sm sm:text-ba">
+          <div class="w-full h-full flex flex-col gap-4 justify-center items-center pointer-events-none text-sm sm:text-base">
             <NuxtLink
               :to="'/shop/phones'"
               class="w-28 sm:w-36 h-10 z-[3] purchase-button transition-all duration-500 flex justify-center items-center pointer-events-auto"

@@ -9,7 +9,7 @@
       <div
         v-if="$slots.layer"
         @click.prevent
-        class="absolute top-0 left-0 w-full h-full layer pointer-events-none z-10"
+        class="absolute top-0 left-0 w-full h-full layer pointer-events-none z-10 rounded-lg"
         :style="{ backgroundColor: props.background_color }"></div>
       <div class="absolute top-0 left-0 w-full h-full layer-content z-10 pointer-events-none">
         <slot name="layer"> </slot>
