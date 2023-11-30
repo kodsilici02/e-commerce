@@ -25,39 +25,36 @@
             <ClientOnly><font-awesome :icon="['fas', 'circle-user']" class="" /></ClientOnly>
           </NuxtLink>
         </div>
-        <div
-          class="relative h-full flex items-center cursor-pointer z-[999]"
-          @mouseenter="openNotifications"
-          @mouseleave="closeNotifications">
-          <NuxtLink to="/notifications">
-            <ClientOnly><font-awesome :icon="['fas', 'bell']" class="" /></ClientOnly>
-          </NuxtLink>
-          <div
-            class="absolute top-[-5px] right-[-5px] w-4 h-4 rounded-full text-xs flex justify-center items-center"
-            style="background-color: var(--secondary-light)">
-            0
-          </div>
-          <div class="absolute top-10 right-0">
-            <Transition name="modal-Transition">
-              <Notifications v-if="isNotificationsOpen"></Notifications>
-            </Transition>
-          </div>
-        </div>
-        <div class="relative h-full flex items-center cursor-pointer" @mouseenter="openShoppingList" @mouseleave="closeShoppingList">
-          <NuxtLink to="/cart"
-            ><ClientOnly><font-awesome :icon="['fas', 'basket-shopping']" class="" /></ClientOnly
-          ></NuxtLink>
-          <div
-            class="absolute top-[-5px] right-[-5px] w-4 h-4 rounded-full text-xs flex justify-center items-center"
-            style="background-color: var(--secondary-light)">
-            0
-          </div>
-          <div class="absolute top-10 right-0">
-            <Transition name="modal-Transition">
-              <ShoppingList v-if="isShoppingListOpen"></ShoppingList>
-            </Transition>
-          </div>
-        </div>
+        <Popover class="w-fit" :arrow-border-color="'var(--secondary-light)'" :arrow-color="'var(--secondary-light)'">
+          <template v-slot:popover>
+            <NuxtLink to="/notifications" class="relative">
+              <div
+                class="absolute top-[-5px] right-[-5px] w-4 h-4 rounded-full text-xs flex justify-center items-center"
+                style="background-color: var(--secondary-light)">
+                0
+              </div>
+              <ClientOnly><font-awesome :icon="['fas', 'bell']" class="cursor-pointer" /></ClientOnly>
+            </NuxtLink>
+          </template>
+          <template v-slot:content>
+            <Notifications></Notifications>
+          </template>
+        </Popover>
+        <Popover class="w-fit" :arrow-border-color="'var(--secondary-light)'" :arrow-color="'var(--secondary-light)'">
+          <template v-slot:popover>
+            <NuxtLink to="/cart" class="relative">
+              <div
+                class="absolute top-[-5px] right-[-5px] w-4 h-4 rounded-full text-xs flex justify-center items-center"
+                style="background-color: var(--secondary-light)">
+                0
+              </div>
+              <ClientOnly><font-awesome :icon="['fas', 'basket-shopping']" class="" /></ClientOnly
+            ></NuxtLink>
+          </template>
+          <template v-slot:content>
+            <ShoppingList></ShoppingList>
+          </template>
+        </Popover>
       </div>
     </div>
     <div

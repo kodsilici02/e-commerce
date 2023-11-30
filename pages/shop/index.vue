@@ -1,30 +1,35 @@
 <template>
   <div class="w-full flex flex-wrap gap-2 p-2 sm:px-10" style="color: var(--text-white)">
     <div class="w-full justify-center flex flex-wrap">
-      <div
+      <Card
         v-for="item in items"
         :key="item.name"
-        class="h-[200px] md:h-[250px] lg:h-[400px] basis-1/3 lg:basis-1/4 flex p-3 transition-transform duration-500 cursor-pointer hover:scale-[1.02]">
-        <NuxtLink
-          :to="'/shop/' + useNuxtApp().$convertName(item.name)"
-          class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative">
-          <div class="absolute top-0 left-0 w-full h-full purchase-layer rounded-lg transition-[background-color] duration-500 z-[2]">
-            <div class="w-full h-full flex justify-center items-center">
-              <div
-                class="w-36 h-10 bg-slate-400 z-[3] purchase-button transition-all duration-500 flex justify-center items-center text-base md:text-lg"
-                style="border-radius: 35px">
-                Inspect
-              </div>
-            </div>
-          </div>
-          <div class="absolute top-1 right-4"></div>
-          <div class="text-lg md:text-2xl h-14 w-full flex justify-center items-center font-code-next px-2 mt-4">{{ item.name }}</div>
-          <div
-            class="flex-1 p-2"
-            :style="{ 'background-image': `url(${item.img})` }"
-            style="background-size: contain; background-repeat: no-repeat; background-position: center"></div>
-        </NuxtLink>
-      </div>
+        :background_color="'var(--primary)'"
+        class="h-[200px] md:h-[250px] lg:h-[400px] basis-1/3 lg:basis-1/4 flex p-3">
+        <template v-slot:layer>
+          <NuxtLink
+            :to="'/shop/' + useNuxtApp().$convertName(item.name)"
+            class="w-full h-full flex flex-col gap-4 justify-center items-center pointer-events-none text-sm sm:text-base">
+            <button
+              class="w-28 sm:w-36 h-10 purchase-button transition-all duration-500 flex justify-center items-center pointer-events-auto"
+              style="border-radius: 35px">
+              Inspect
+            </button>
+          </NuxtLink>
+        </template>
+        <template v-slot:main>
+          <NuxtLink
+            :to="'/shop/' + useNuxtApp().$convertName(item.name)"
+            class="h-full w-full rounded-lg flex flex-col transition-[background-color] duration-500 relative">
+            <div class="absolute top-1 right-4"></div>
+            <div class="text-lg md:text-2xl h-14 w-full flex justify-center items-center font-code-next px-2 mt-4">{{ item.name }}</div>
+            <div
+              class="flex-1 p-2"
+              :style="{ 'background-image': `url(${item.img})` }"
+              style="background-size: contain; background-repeat: no-repeat; background-position: center"></div>
+          </NuxtLink>
+        </template>
+      </Card>
     </div>
     <div class="w-full h-auto flex flex-wrap">
       <div class="basis-1/2">
@@ -56,26 +61,4 @@ const items = ref([
 ]);
 </script>
 
-<style scoped>
-.purchase-layer {
-  background-color: #6a6ccf00;
-}
-.item-background:hover .purchase-layer {
-  background-color: #6a6ccfa0;
-}
-
-.purchase-button {
-  opacity: 0;
-  background-color: #3bc1e2;
-}
-.purchase-button:hover {
-  background-color: #64d2ed;
-}
-.purchase-button:active {
-  transition: background-color 0s ease;
-  background-color: #648bed;
-}
-.item-background:hover .purchase-button {
-  opacity: 1;
-}
-</style>
+<style scoped></style>
