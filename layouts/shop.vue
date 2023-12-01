@@ -14,7 +14,7 @@
     <div
       class="sticky top-0 left-0 w-full h-12 md:h-16 flex justify-between p-3 gap-2 flex-grow-0 z-[999] purple-background sm:text-2xl main-header-1">
       <div class="h-full flex items-center flex-1 justify-start">
-        <ClientOnly> <font-awesome :icon="['fas', 'bars']" class="cursor-pointer" @click="toggleSidebar"></font-awesome></ClientOnly>
+        <ClientOnly> <font-awesome :icon="['fas', 'bars']" class="cursor-pointer icon" @click="toggleSidebar"></font-awesome></ClientOnly>
       </div>
       <div class="h-full flex items-center justify-center flex-1">
         <SearchBarAnimated @updateValue="updateSearchValue"></SearchBarAnimated>
@@ -179,6 +179,12 @@ function updateSearchValue(value) {}
 </script>
 
 <style scoped>
+.icon {
+  transition: transform 0.2s ease-in-out;
+}
+.icon:hover {
+  transform: scale(1.15);
+}
 .cover {
   opacity: 0;
   background-color: var(--primary);

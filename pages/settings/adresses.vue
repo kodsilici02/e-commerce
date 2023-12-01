@@ -49,7 +49,6 @@
           </div>
         </template>
       </Card>
-
       <div
         :key="'addNew'"
         class="h-[350px] w-full lg:basis-1/3 2xl:basis-1/4 flex p-4 transition-transform duration-200 hover:scale-[1.02] group overflow-hidden">
@@ -105,7 +104,9 @@ const add_modal = ref(false);
 const selectedItem = ref();
 
 function toggleBookmark(index) {
-  store.addresses.value.find(info => info.default == true).default = false;
+  if (store.addresses.value.find(info => info.default == true)) {
+    store.addresses.value.find(info => info.default == true).default = false;
+  }
   store.addresses.value[index].default = true;
 }
 

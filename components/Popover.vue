@@ -2,13 +2,13 @@
   <div @mouseover="openPopover" @mouseleave="closePopover" class="container" ref="container">
     <div>
       <div ref="popover" class="relative">
-        <slot name="popover"></slot>
+        <div class="popover transition-[scale] duration-150"><slot name="popover"></slot></div>
         <Transition name="modal-Transition">
           <div v-if="open" class="up-arrow top-2 z-[1011]"></div>
         </Transition>
       </div>
       <Transition name="modal-Transition">
-        <div v-if="open" class="absolute z-[1010] pt-2" ref="content" style="view-transition-name: popover">
+        <div v-if="open" class="absolute z-[1010] pt-2 content" ref="content" style="view-transition-name: popover">
           {{ calculatePosition() }}
           <slot name="content"></slot></div
       ></Transition>
@@ -69,9 +69,11 @@ onMounted(() => {
 
 function openPopover() {
   open.value = true;
+  popover.value.querySelector('.popover').style.scale = 1.15;
 }
 function closePopover() {
   open.value = false;
+  popover.value.querySelector('.popover').style.scale = 1;
 }
 </script>
 
