@@ -185,7 +185,7 @@ export const phones = [
     name: 'Xiaomi Redmi Note 10',
     score: 4.0,
     brand: 'Xiaomi',
-    images: ['https://i.gadgets360cdn.com/products/large/1614193161_635_redmi_note_10.jpg', 'image_url_2'],
+    images: ['https://i01.appmifile.com/v1/MI_18455B3E4DA706226CF7535A58E875F0267/pms_1620459275.16251957.png', 'image_url_2'],
     price: 229,
     screensize: 6.43,
     memory: 128,

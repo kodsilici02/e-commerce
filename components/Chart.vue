@@ -1,5 +1,7 @@
 <template>
-  <canvas ref="myChart" width="full" height="full"></canvas>
+  <div class="w-full h-full">
+    <canvas ref="myChart" width="full" height="full"></canvas>
+  </div>
 </template>
 
 <script setup>
@@ -71,7 +73,9 @@ const config = {
 };
 
 onMounted(() => {
-  const chart = new Chart(myChart.value, config);
+  setTimeout(() => {
+    const chart = new Chart(myChart.value, config);
+  }, 10);
 });
 
 Chart.register(...registerables);

@@ -23,7 +23,7 @@
         <Popover class="w-fit text-base" :arrow-border-color="'var(--secondary-light)'" :arrow-color="'var(--secondary-light)'">
           <template v-slot:popover>
             <NuxtLink to="/settings/account">
-              <ClientOnly><font-awesome :icon="['fas', 'circle-user']" class="text-2xl" /></ClientOnly>
+              <ClientOnly><font-awesome :icon="['fas', 'circle-user']" class="" /></ClientOnly>
             </NuxtLink>
           </template>
           <template v-slot:content>
@@ -36,7 +36,7 @@
           <template v-slot:popover>
             <NuxtLink to="/notifications" class="relative">
               <div
-                class="absolute top-[-5px] right-[-5px] w-4 h-4 rounded-full text-xs flex justify-center items-center"
+                class="absolute top-[-5px] right-[-5px] w-2 h-2 sm:w-4 sm:h-4 rounded-full text-xs flex justify-center items-center"
                 style="background-color: var(--secondary-light)">
                 0
               </div>
@@ -53,7 +53,7 @@
           <template v-slot:popover>
             <NuxtLink to="/cart" class="relative">
               <div
-                class="absolute top-[-5px] right-[-5px] w-4 h-4 rounded-full text-xs flex justify-center items-center"
+                class="absolute top-[-5px] right-[-5px] w-2 h-2 sm:w-4 sm:h-4 rounded-full text-xs flex justify-center items-center"
                 style="background-color: var(--secondary-light)">
                 0
               </div>

@@ -22,7 +22,7 @@
         <div class="w-full flex flex-wrap gap-y-3 border-b-2 pb-4 items-center justify-center">
           <div
             v-for="(info, index) in generalInfo"
-            class="flex text-xs text-center lg:text-base basis-1/4 flex-col items-center justify-center">
+            class="flex text-xs text-center lg:text-base basis-1/2 lg:basis-1/4 flex-col items-center justify-center">
             <div class="flex gap-1 items-center justify-center">
               <IconsResolution v-if="info.resolution"></IconsResolution>
               <IconsScreenSize v-if="info.exceptional" :width="20"></IconsScreenSize>
@@ -73,7 +73,7 @@
         </div>
       </div>
       <!--VueChart-->
-      <div class="w-full h-72 px-2 mt-10">
+      <div class="h-72 px-2 mt-10 overflow-hidden flex justify-center" style="width: calc(100% - 1px)">
         <Chart></Chart>
       </div>
       <div class="w-full">
