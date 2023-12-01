@@ -20,11 +20,18 @@
         <SearchBarAnimated @updateValue="updateSearchValue"></SearchBarAnimated>
       </div>
       <div class="h-full flex gap-3 md:gap-4 items-center flex-1 justify-end">
-        <div class="h-full cursor-pointer flex items-center">
-          <NuxtLink to="/settings/account">
-            <ClientOnly><font-awesome :icon="['fas', 'circle-user']" class="" /></ClientOnly>
-          </NuxtLink>
-        </div>
+        <Popover class="w-fit text-base" :arrow-border-color="'var(--secondary-light)'" :arrow-color="'var(--secondary-light)'">
+          <template v-slot:popover>
+            <NuxtLink to="/settings/account">
+              <ClientOnly><font-awesome :icon="['fas', 'circle-user']" class="text-2xl" /></ClientOnly>
+            </NuxtLink>
+          </template>
+          <template v-slot:content>
+            <div class="w-52">
+              <Account></Account>
+            </div>
+          </template>
+        </Popover>
         <Popover class="w-fit" :arrow-border-color="'var(--secondary-light)'" :arrow-color="'var(--secondary-light)'">
           <template v-slot:popover>
             <NuxtLink to="/notifications" class="relative">
@@ -37,7 +44,9 @@
             </NuxtLink>
           </template>
           <template v-slot:content>
-            <Notifications></Notifications>
+            <div class="w-52">
+              <Notifications></Notifications>
+            </div>
           </template>
         </Popover>
         <Popover class="w-fit" :arrow-border-color="'var(--secondary-light)'" :arrow-color="'var(--secondary-light)'">
@@ -52,13 +61,15 @@
             ></NuxtLink>
           </template>
           <template v-slot:content>
-            <ShoppingList></ShoppingList>
+            <div class="w-52">
+              <ShoppingList></ShoppingList>
+            </div>
           </template>
         </Popover>
       </div>
     </div>
     <div
-      v-if="route.fullPath == '/'"
+      v-if="route.fullPath == '/' && !store.isWindowSmall"
       class="w-full flex z-[97] justify-center items-center text-base lg:text-4xl font-yolk h-16 md:h-28 reverse-background purple-background px-4 text-center main-header-2">
       Everything You are Looking For is Here
     </div>
@@ -156,22 +167,6 @@ function toggleFilterSidebar() {
 
 function toggleOrderSidebar() {
   store.toggleOrderSidebar();
-}
-
-const isShoppingListOpen = ref(false);
-function openShoppingList() {
-  isShoppingListOpen.value = true;
-}
-function closeShoppingList() {
-  isShoppingListOpen.value = false;
-}
-
-const isNotificationsOpen = ref(false);
-function openNotifications() {
-  isNotificationsOpen.value = true;
-}
-function closeNotifications() {
-  isNotificationsOpen.value = false;
 }
 
 const sidebar_Open = ref(false);

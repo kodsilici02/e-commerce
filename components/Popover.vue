@@ -1,14 +1,14 @@
 <template>
-  <div class="container" ref="container">
-    <div @mouseenter="togglePopover" @mouseleave="togglePopover">
+  <div @mouseover="openPopover" @mouseleave="closePopover" class="container" ref="container">
+    <div>
       <div ref="popover" class="relative">
         <slot name="popover"></slot>
         <Transition name="modal-Transition">
-          <div v-if="open" class="up-arrow top-2 z-[1001]"></div>
+          <div v-if="open" class="up-arrow top-2 z-[1011]"></div>
         </Transition>
       </div>
       <Transition name="modal-Transition">
-        <div v-if="open" class="absolute z-[1000] pt-2" ref="content">
+        <div v-if="open" class="absolute z-[1010] pt-2" ref="content" style="view-transition-name: popover">
           {{ calculatePosition() }}
           <slot name="content"></slot></div
       ></Transition>
@@ -67,8 +67,11 @@ onMounted(() => {
   }, 10);
 });
 
-function togglePopover() {
-  open.value = !open.value;
+function openPopover() {
+  open.value = true;
+}
+function closePopover() {
+  open.value = false;
 }
 </script>
 
@@ -117,6 +120,6 @@ function togglePopover() {
 }
 .modal-Transition-enter-active,
 .modal-Transition-leave-active {
-  transition: all 0.2s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 </style>
