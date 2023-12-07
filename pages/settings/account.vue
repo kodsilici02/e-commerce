@@ -5,27 +5,27 @@
       <div class="w-full p-3 ml-3 text-xl font-bold">User Informations</div>
       <div class="w-full flex flex-wrap justify-center gap-y-5 p-3">
         <div class="basis-1/2 p-2">
-          <FloatingLabel :error-messages="[]" :type="'Text'" :label="'Name'" :value="'Ananas'"></FloatingLabel>
+          <InputFloatingLabel :error-messages="[]" :type="'Text'" :label="'Name'" :value="'Şafak'"></InputFloatingLabel>
         </div>
-        <div class="basis-1/2 p-2"><FloatingLabel :type="'Text'" :label="'Surname'" :value="'Okan'"></FloatingLabel></div>
-        <div class="w-full p-2"><FloatingLabel :type="'date'" :label="'Birth Date'"></FloatingLabel></div>
+        <div class="basis-1/2 p-2"><InputFloatingLabel :type="'Text'" :label="'Surname'" :value="'Dinç'"></InputFloatingLabel></div>
+        <div class="w-full p-2"><InputFloatingLabel :type="'date'" :label="'Birth Date'"></InputFloatingLabel></div>
         <div class="w-24 p-2">
           <SelectOption :back-ground-color="'#dcdcdc'" :prop_value="90" :before="'+'" :options="[90, 49, 43, 994]"></SelectOption>
         </div>
         <div class="flex-1 p-2">
-          <FloatingLabel :type="'number'" :label="'Number'" :max="10"></FloatingLabel>
+          <InputFloatingLabel :type="'number'" :label="'Number'" :max="10"></InputFloatingLabel>
         </div>
         <div class="w-full p-2">
-          <FloatingLabel :type="'text'" :label="'E-mail Adress'" :value="'yazilimpanteri@gmail.com'"></FloatingLabel>
+          <InputFloatingLabel :type="'text'" :label="'E-mail Adress'" :value="'yazilimpanteri@gmail.com'"></InputFloatingLabel>
         </div>
       </div>
       <div class="w-full px-5 text-xl font-bold">Change Password</div>
       <div class="w-full flex flex-wrap justify-center lg:gap-y-3 p-3">
         <div class="w-full lg:flex-1 p-2">
-          <FloatingLabel :type="'text'" :label="'Current Password'" :value="''"></FloatingLabel>
+          <InputFloatingLabel :type="'text'" :label="'Current Password'" :value="''"></InputFloatingLabel>
         </div>
         <div class="flex-1 p-2">
-          <FloatingLabel :type="'text'" :label="'New Password'" :value="''"></FloatingLabel>
+          <InputFloatingLabel :type="'text'" :label="'New Password'" :value="''"></InputFloatingLabel>
         </div>
       </div>
       <!--Save and Reset Buttons-->
@@ -53,16 +53,26 @@
       <!--Profile Photo-->
       <div class="w-full gap-0 flex flex-wrap justify-center items-center p-2">
         <div class="h-36 w-36 rounded-full relative">
-          <button
-            @click="toggleCropperModal"
+          <div
             class="absolute group -top-1 cursor-pointer right-3 w-7 h-7 rounded-full flex justify-center items-center"
             style="background-color: var(--background-hover); color: var(--text-color)">
-            <ClientOnly
-              ><font-awesome
-                :icon="['fas', 'pen']"
-                class="group-hover:-translate-y-1 group-hover:text-[var(--secondary)] transition-all duration-200"
-            /></ClientOnly>
-          </button>
+            <ModalButton v-model:open="cropperOpen">
+              <template v-slot:button>
+                <button class="w-full h-full flex justify-center items-center">
+                  <ClientOnly
+                    ><font-awesome
+                      :icon="['fas', 'pen']"
+                      class="group-hover:-translate-y-1 group-hover:text-[var(--secondary)] transition-all duration-200"
+                  /></ClientOnly>
+                </button>
+              </template>
+              <template v-slot:modal>
+                <div class="bg-white">
+                  <ImageCropper @image-cropped="handleCroppedImage" :image-src="store.profilePhoto"></ImageCropper>
+                </div>
+              </template>
+            </ModalButton>
+          </div>
           <img :src="store.profilePhoto" class="w-full h-full rounded-full object-cover object-center" />
         </div>
         <div class="w-full flex flex-wrap">
@@ -111,14 +121,6 @@
           <div>Ananas Okan</div>
         </div>
       </div>
-      <Transition name="modal">
-        <ModalWrapper v-if="cropperOpen" :height="400" :width="700" @closeModal="toggleCropperModal">
-          <ImageCropper @image-cropped="handleCroppedImage" :image-src="store.profilePhoto"></ImageCropper>
-        </ModalWrapper>
-      </Transition>
-      <Transition name="component_space">
-        <SideBarSpace v-if="cropperOpen" @handleClick="toggleCropperModal"></SideBarSpace>
-      </Transition>
     </div>
   </div>
 </template>

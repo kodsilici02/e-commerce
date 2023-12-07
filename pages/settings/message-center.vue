@@ -6,7 +6,7 @@
         <div class="w-full text-lg font-[600]">{{ item.title }}</div>
         <div class="w-full flex gap-3">
           <div class="flex-1">{{ item.text }}</div>
-          <div class="w-fit"><Switch :checked="item.checked"></Switch></div>
+          <div class="w-fit"><InputSwitch :checked="item.checked"></InputSwitch></div>
         </div>
       </div>
     </div>

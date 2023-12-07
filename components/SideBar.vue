@@ -56,6 +56,11 @@ const routes = ref([
     icon: ['fas', 'home']
   },
   {
+    name: 'Products',
+    link: '/products',
+    icon: ['fas', 'boxes-stacked']
+  },
+  {
     name: 'Shop',
     link: '/shop',
     icon: ['fas', 'cart-shopping'],

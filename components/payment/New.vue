@@ -1,41 +1,44 @@
 <template>
-  <div class="h-full w-full flex content-start flex-wrap justify-center p-5" :style="{ 'max-width': calculateWidth() + 'px' }">
+  <div
+    class="h-full w-full flex content-start flex-wrap justify-center p-5 overflow-auto"
+    style="background-color: var(--background); color: var(--text-color)"
+    :style="{ 'max-width': calculateWidth() + 'px' }">
     <div class="w-full p-2 px-3">
-      <FloatingLabel
+      <InputFloatingLabel
         :label="'Title'"
         @handle-type="
           value => {
             title = value;
           }
-        "></FloatingLabel>
+        "></InputFloatingLabel>
     </div>
     <div class="basis-1/2 p-2 px-3">
-      <FloatingLabel
+      <InputFloatingLabel
         :label="'Name'"
         @handle-type="
           value => {
             name = value;
           }
-        "></FloatingLabel>
+        "></InputFloatingLabel>
     </div>
     <div class="basis-1/2 p-2 px-3">
-      <FloatingLabel
+      <InputFloatingLabel
         :label="'Surname'"
         @handle-type="
           value => {
             surname = value;
           }
-        "></FloatingLabel>
+        "></InputFloatingLabel>
     </div>
     <div class="w-full p-2 px-3">
-      <FloatingLabel
+      <InputFloatingLabel
         :label="'Card Number'"
         :type="'number'"
         @handle-type="
           value => {
             number = value;
           }
-        "></FloatingLabel>
+        "></InputFloatingLabel>
     </div>
     <div class="w-full flex justify-center gap-y-3 py-3 flex-wrap">
       <div class="w-full text-xl font-bold text-center">Expiration Date</div>

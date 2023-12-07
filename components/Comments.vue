@@ -9,7 +9,7 @@
       </div>
       <div class="flex-1 flex flex-col">
         <div class="w-full flex justify-start gap-3">
-          <div class="text-sm md:text-lg font-bold" style="color: var(--text-color)">Ananas Okan</div>
+          <div class="text-sm md:text-lg font-bold" style="color: var(--text-color)">Deneme</div>
           <div class="flex gap-1 items-center" style="color: #fdd80d">
             <ClientOnly>
               <font-awesome v-for="n in stars" :key="n" :icon="['fas', 'star']"></font-awesome>
@@ -78,17 +78,17 @@ const target = ref();
 const loading = ref(false);
 
 onMounted(() => {
-  let observer = new IntersectionObserver(intersect, {
-    root: null,
-    rootMargin: '0px',
-    threshold: 1.0
-  });
-  observer.observe(target.value);
+  setTimeout(() => {
+    let observer = new IntersectionObserver(intersect, {
+      root: null,
+      rootMargin: '0px',
+      threshold: 1.0
+    });
+    observer.observe(target.value);
+  }, 100);
 });
 
-function intersect(entries) {
-  console.log(entries);
-}
+function intersect(entries) {}
 </script>
 
 <style scoped>

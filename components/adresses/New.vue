@@ -1,78 +1,81 @@
 <template>
-  <div class="h-full w-full flex content-start flex-wrap p-5" :style="{ 'max-width': calculateWidth() + 'px' }">
+  <div
+    class="h-full w-full flex content-start flex-wrap p-5"
+    style="background-color: var(--background)"
+    :style="{ 'max-width': calculateWidth() + 'px' }">
     <div class="w-full p-2 px-3">
-      <FloatingLabel
+      <InputFloatingLabel
         :label="'Title'"
         @handle-type="
           value => {
             title = value;
           }
-        "></FloatingLabel>
+        "></InputFloatingLabel>
     </div>
     <div class="basis-1/2 p-2 px-3">
-      <FloatingLabel
+      <InputFloatingLabel
         :label="'Name'"
         @handle-type="
           value => {
             name = value;
           }
-        "></FloatingLabel>
+        "></InputFloatingLabel>
     </div>
     <div class="basis-1/2 p-2 px-3">
-      <FloatingLabel
+      <InputFloatingLabel
         :label="'Surname'"
         @handle-type="
           value => {
             surname = value;
           }
-        "></FloatingLabel>
+        "></InputFloatingLabel>
     </div>
     <div class="basis-1/2 p-2 px-3">
-      <FloatingLabel
+      <InputFloatingLabel
         :label="'Phone Number'"
         @handle-type="
           value => {
             phone = value;
           }
-        "></FloatingLabel>
+        "></InputFloatingLabel>
     </div>
     <div class="basis-1/2 p-2 px-3">
-      <FloatingLabel
+      <InputFloatingLabel
         :label="'Province'"
         @handle-type="
           value => {
             province = value;
           }
-        "></FloatingLabel>
+        "></InputFloatingLabel>
     </div>
     <div class="basis-1/2 p-2 px-3">
-      <FloatingLabel
+      <InputFloatingLabel
         :label="'County'"
         @handle-type="
           value => {
             county = value;
           }
-        "></FloatingLabel>
+        "></InputFloatingLabel>
     </div>
     <div class="basis-1/2 p-2 px-3">
-      <FloatingLabel
+      <InputFloatingLabel
         :label="'District'"
         @handle-type="
           value => {
             district = value;
           }
-        "></FloatingLabel>
+        "></InputFloatingLabel>
     </div>
     <div class="w-full p-2 px-3">
-      <FloatingLabel
+      <InputFloatingLabel
         :label="'Adress'"
         @handle-type="
           value => {
             address = value;
           }
-        "></FloatingLabel>
+        "></InputFloatingLabel>
     </div>
-    <div class="w-full flex-1 flex gap-2 mt-2 items-end self-end justify-center">
+    <div class="w-full flex-1 flex gap-2 mt-2 items-end self-end justify-center" style="color: var(--text-white)">
       <button
         @click="cancel"
         class="w-36 h-10 bg-slate-400 z-[3] cursor-pointer delete-button transition-all duration-500 flex justify-center gap-2 items-center text-base md:text-lg"

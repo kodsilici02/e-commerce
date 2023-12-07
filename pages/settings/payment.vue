@@ -69,24 +69,15 @@
         </div>
       </div>
     </div>
-    <Transition name="modal">
-      <Modal v-if="edit_modal">
-        <PaymentEdit :info="infos[selectedItem]" @handleCancel="closeModals" @handle-edit="saveInfo"></PaymentEdit>
-      </Modal>
-    </Transition>
-    <Transition name="modal">
-      <Modal v-if="delete_modal">
-        <PaymentDelete @handleCancel="closeModals" @handleDelete="deleteInfo"></PaymentDelete>
-      </Modal>
-    </Transition>
-    <Transition name="modal">
-      <Modal v-if="add_modal">
-        <PaymentNew @handleCancel="closeModals" @handleSave="addInfo"></PaymentNew>
-      </Modal>
-    </Transition>
-    <Transition name="component_space">
-      <SideBarSpace v-if="edit_modal || delete_modal || add_modal" @handleClick="closeModals"></SideBarSpace>
-    </Transition>
+    <ModalDefault :open="edit_modal" @update:open="value => (edit_modal = value)">
+      <PaymentEdit :info="infos[selectedItem]" @handleCancel="closeModals" @handle-edit="saveInfo"></PaymentEdit>
+    </ModalDefault>
+    <ModalDefault :open="delete_modal" @update:open="value => (delete_modal = value)">
+      <PaymentDelete @handleCancel="closeModals" @handleDelete="deleteInfo"></PaymentDelete>
+    </ModalDefault>
+    <ModalDefault :open="add_modal" @update:open="value => (add_modal = value)">
+      <PaymentNew @handleCancel="closeModals" @handleSave="addInfo"></PaymentNew>
+    </ModalDefault>
   </div>
 </template>
 

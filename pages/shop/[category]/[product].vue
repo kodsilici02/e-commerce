@@ -1,7 +1,7 @@
 <template>
   <div class="w-full flex p-2 gap-2" style="color: var(--text-color)">
-    <div class="flex-1 flex flex-wrap p-2 gap-2">
-      <div class="flex w-full lg:basis-2/4" id="images">
+    <div class="flex-1 flex flex-wrap p-2 gap-4">
+      <div class="flex w-full lg:basis-2/4 gap-2" id="images">
         <div class="hidden lg:flex flex-col gap-2 h-[70vh] overflow-hidden">
           <div v-for="(image, index) in product.images" class="w-40 basis-1/6 cursor-pointer" @click="changeImage(image, index)">
             <SkeletonImg :src="image" class="w-full h-full flex-1" img-class="object-contain object-center "></SkeletonImg>
@@ -22,7 +22,7 @@
         <div class="w-full flex flex-wrap gap-y-3 border-b-2 pb-4 items-center justify-center">
           <div
             v-for="(info, index) in generalInfo"
-            class="flex text-xs text-center lg:text-base basis-1/2 lg:basis-1/4 flex-col items-center justify-center">
+            class="flex text-xs text-center lg:text-base basis-1/4 flex-col items-center justify-center">
             <div class="flex gap-1 items-center justify-center">
               <IconsResolution v-if="info.resolution"></IconsResolution>
               <IconsScreenSize v-if="info.exceptional" :width="20"></IconsScreenSize>
@@ -73,7 +73,7 @@
         </div>
       </div>
       <!--VueChart-->
-      <div class="h-72 px-2 mt-10 overflow-hidden flex justify-center" style="width: calc(100% - 1px)">
+      <div class="h-72 px-2 mt-10 overflow-hidden flex justify-center" style="width: calc(100% - 10px)">
         <Chart></Chart>
       </div>
       <div class="w-full">
@@ -90,17 +90,18 @@
       <!--Rest of the Content-->
       <div class="w-full h-20"></div>
     </div>
+
     <!--SideNav-->
-    <SidebarOrderSidebar :address="getAddress" @toggleLocationModal="toggleLocationModal"></SidebarOrderSidebar>
+    <Transition name="slide-left">
+      <SidebarOrderSidebar v-if="isOrderSideBarOpen" :address="getAddress" @change-address="changeAddress"></SidebarOrderSidebar>
+    </Transition>
+    <Transition name="fade">
+      <SideBarSpace
+        v-if="sidebarStore.orderSidebarOpen.value && sidebarStore.isWindowSmall.value"
+        @handleClick="() => (sidebarStore.orderSidebarOpen.value = false)"></SideBarSpace>
+    </Transition>
+
     <!--Modals-->
-    <Transition name="modal">
-      <Modal v-if="isLocationModalOpen">
-        <SelectLocation @select="changeAddress"></SelectLocation>
-      </Modal>
-    </Transition>
-    <Transition name="component_space">
-      <SideBarSpace v-if="isLocationModalOpen" @handleClick="toggleLocationModal"></SideBarSpace>
-    </Transition>
   </div>
 </template>
 
@@ -109,10 +110,20 @@ import { ref, onMounted } from 'vue';
 import { useRoute, useRouter, onBeforeRouteLeave } from 'vue-router';
 import { useProductStore } from '@/stores/products.js';
 import { useAddressesStore } from '@/stores/addresses';
+import { useSidebarStore } from '@/stores/sidebar';
 import { storeToRefs } from 'pinia';
 
-const addresses_store = storeToRefs(useAddressesStore());
+const sidebarStore = storeToRefs(useSidebarStore());
 
+const isOrderSideBarOpen = computed(() => {
+  if (sidebarStore.isWindowSmall.value) {
+    return sidebarStore.orderSidebarOpen.value;
+  } else {
+    return true;
+  }
+});
+
+const addresses_store = storeToRefs(useAddressesStore());
 const route = useRoute();
 const product = useNuxtApp().$getProduct(route.params.product);
 
@@ -184,14 +195,9 @@ function changeImage(image, index) {
 }
 
 const selectedAddressIndex = ref(null);
-const isLocationModalOpen = ref(false);
-function toggleLocationModal() {
-  isLocationModalOpen.value = !isLocationModalOpen.value;
-}
 
 function changeAddress(index) {
   selectedAddressIndex.value = index;
-  toggleLocationModal();
 }
 
 const getAddress = computed(() => {

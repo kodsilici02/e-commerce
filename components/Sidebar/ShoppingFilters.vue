@@ -26,14 +26,14 @@
           <div class="w-full flex flex-wrap">
             <div ref="sub_category" class="w-full flex justify-center text-center text-lg font-bold">{{ category.name }}</div>
             <div class="w-full px-2">
-              <RangeSlider
+              <InputRangeSlider
                 :max="category.max"
                 :min="category.min"
                 :minValue="category.currentMin"
                 :maxValue="category.currentMax"
                 :unit="category.unit"
                 :step="category.step"
-                @update="sliderValues => updateSlider(category.type, sliderValues)"></RangeSlider>
+                @update="sliderValues => updateSlider(category.type, sliderValues)"></InputRangeSlider>
             </div>
           </div>
         </Category>

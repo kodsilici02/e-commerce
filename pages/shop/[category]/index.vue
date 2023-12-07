@@ -239,10 +239,6 @@ function containsAny(arr1, arr2) {
 function convertName(name) {
   return name.toLowerCase().replace(/ /g, '-');
 }
-
-function itemLeave(el) {
-  el.style.setProperty('--width', `${el.offsetWidth}px`);
-}
 </script>
 <style>
 .deneme {

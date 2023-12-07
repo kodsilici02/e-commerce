@@ -1,6 +1,8 @@
 <template>
-  <div class="w-full h-full flex flex-col items-center justify-center gap-4 p-5">
-    <div class="w-full text-2xl font-bold flex justify-center text-center">Are you sure you want to delete?</div>
+  <div class="w-full h-full flex flex-col items-center justify-center gap-4 p-5" style="background-color: var(--background)">
+    <div class="w-full text-2xl font-bold flex justify-center text-center" style="color: var(--text-color)">
+      Are you sure you want to delete?
+    </div>
     <div @click="handleClick" class="w-full cursor-pointer">
       <Vue3Lottie
         ref="lottie"
@@ -10,7 +12,7 @@
         @onComplete="complete"
         animationLink="https://lottie.host/da71f814-2ba0-4119-86a0-cb7af338a8a4/MO6PwQnAeA.json" />
     </div>
-    <div class="w-full justify-center flex">
+    <div class="w-full justify-center flex" style="color: var(--text-white)">
       <button
         @click="cancel"
         class="w-36 h-10 bg-slate-400 z-[3] cursor-pointer delete-button transition-all duration-500 flex justify-center gap-2 items-center text-base md:text-lg"

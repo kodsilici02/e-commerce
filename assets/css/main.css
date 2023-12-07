@@ -6,7 +6,7 @@
 body {
   --text-color: rgb(33, 33, 33);
   --text-white: aliceblue; /* This is already in a named color format */
-  --text-gray: rgb(155, 155, 155);
+  --text-gray: rgb(130, 130, 130);
   --background: rgb(240, 240, 240);
   --background-secondary: rgb(204, 204, 204);
   --background-hover: rgb(220, 220, 220);
@@ -16,6 +16,7 @@ body {
   --accent: rgb(166, 108, 237);
   --danger: red; /* This is already in a named color format */
   --success: rgb(14, 154, 14);
+  --border-gray: rgb(194, 194, 194);
 }
 
 /* .dark-mode body {

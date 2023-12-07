@@ -1,8 +1,18 @@
 <template>
   <div class="search-box" ref="search_box">
-    <input type="text" style="color: var(--text-color)" ref="search_input" v-model="inputValue" :placeholder="placeholder" />
-    <div class="search-btn flex items-center justify-center" @click="searchBoxOpen" ref="search_btn">
-      <ClientOnly><font-awesome :icon="['fas', 'search']"></font-awesome></ClientOnly>
+    <input
+      type="text"
+      :style="{ backgroundColor: background, color: text_color }"
+      ref="search_input"
+      class="input placeholder:text-red-500]"
+      v-model="inputValue"
+      :placeholder="placeholder" />
+    <div
+      class="search-btn flex items-center justify-center"
+      :style="{ backgroundColor: background }"
+      @click="searchBoxOpen"
+      ref="search_btn">
+      <ClientOnly><font-awesome :icon="['fas', 'search']" :style="{ color: search_btn_color }"></font-awesome></ClientOnly>
     </div>
     <div class="cancel-btn" :style="{ color: cancel_btn_color }" ref="cancel_btn" @click="searchBoxClose">
       <ClientOnly> <font-awesome :icon="['fas', 'times']"></font-awesome></ClientOnly>
@@ -22,7 +32,24 @@ const props = defineProps({
   cancel_btn_color: {
     type: String,
     default: '#fff'
+  },
+  search_btn_color: {
+    type: String,
+    default: 'var(--primary)'
+  },
+
+  background: {
+    type: String,
+    default: '#fff'
+  },
+  text_color: {
+    type: String,
+    default: 'var(--text-color)'
   }
+});
+
+onMounted(() => {
+  search_input.value.style.setProperty('--placeholder-color', props.text_color);
 });
 
 const inputValue = ref('');
@@ -50,6 +77,9 @@ watchEffect(() => {
 </script>
 
 <style scoped>
+.input::placeholder {
+  color: var(--placeholder-color);
+}
 .search-box {
   height: 45px;
   width: 45px;
@@ -84,7 +114,6 @@ watchEffect(() => {
   width: 45px;
   color: #664aff;
   transform: translateY(-50%);
-  background: #fff;
   line-height: 50px;
   font-size: 20px;
   text-align: center;

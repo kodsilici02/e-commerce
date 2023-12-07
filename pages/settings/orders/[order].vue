@@ -26,7 +26,12 @@
         <div class="basis-1/2 md:basis-2/3 flex flex-wrap gap-4">
           <div class="w-full text-xl md:text-2xl font-bold ml-1">Order Summary</div>
           <div v-for="info in infos" class="w-full flex items-center gap-2">
-            <FloatingLabel :read-only="true" :error-messages="[]" :type="'text'" :label="info.title" :value="info.value"></FloatingLabel>
+            <InputFloatingLabel
+              :read-only="true"
+              :error-messages="[]"
+              :type="'text'"
+              :label="info.title"
+              :value="info.value"></InputFloatingLabel>
           </div>
         </div>
         <div class="h-fit flex-1 flex justify-center flex-wrap items-center gap-1 font-bold mt-2">

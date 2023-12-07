@@ -6,7 +6,7 @@
       <input ref="inputMax" type="range" name="max" id="max" :min="min" :max="max" :value="maxValue" :step="step" @input="onInput" />
     </div>
     <div class="w-full flex justify-between items-center">
-      <NumberInput
+      <InputNumber
         :value="sliderMinValue"
         :max="sliderMaxValue"
         :min="min"
@@ -32,9 +32,9 @@
             }
           }
         "
-        @onInput="value => changeMin(value)"></NumberInput>
+        @onInput="value => changeMin(value)"></InputNumber>
       <div class="flex-1 flex justify-center items-center text-xl font-bold">{{ unit }}</div>
-      <NumberInput
+      <InputNumber
         :value="sliderMaxValue"
         :max="max"
         :min="sliderMinValue"
@@ -60,7 +60,7 @@
             }
           }
         "
-        @onInput="value => changeMax(value)"></NumberInput>
+        @onInput="value => changeMax(value)"></InputNumber>
     </div>
   </div>
 </template>

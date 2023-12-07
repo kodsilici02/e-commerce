@@ -70,24 +70,15 @@
         </div>
       </div>
     </div>
-    <Transition name="modal">
-      <Modal v-if="edit_modal">
-        <AdressesEdit :info="addresses[selectedItem]" @handleCancel="closeModals" @handle-edit="saveInfo"></AdressesEdit>
-      </Modal>
-    </Transition>
-    <Transition name="modal">
-      <Modal v-if="delete_modal">
-        <AdressesDelete @handleCancel="closeModals" @handleDelete="deleteInfo"></AdressesDelete>
-      </Modal>
-    </Transition>
-    <Transition name="modal">
-      <Modal v-if="add_modal">
-        <AdressesNew @handleCancel="closeModals" @handleSave="addInfo"></AdressesNew>
-      </Modal>
-    </Transition>
-    <Transition name="component_space">
-      <SideBarSpace v-if="edit_modal || delete_modal || add_modal" @handleClick="closeModals"></SideBarSpace>
-    </Transition>
+    <ModalDefault :open="edit_modal" @update:open="value => (edit_modal = value)">
+      <AdressesEdit :info="addresses[selectedItem]" @handleCancel="closeModals" @handle-edit="saveInfo"></AdressesEdit>
+    </ModalDefault>
+    <ModalDefault :open="delete_modal" @update:open="value => (delete_modal = value)">
+      <AdressesDelete :info="addresses[selectedItem]" @handleCancel="closeModals" @handle-edit="saveInfo"></AdressesDelete>
+    </ModalDefault>
+    <ModalDefault :open="add_modal" @update:open="value => (add_modal = value)">
+      <AdressesNew :info="addresses[selectedItem]" @handleCancel="closeModals" @handle-edit="saveInfo"></AdressesNew>
+    </ModalDefault>
   </div>
 </template>
 
