@@ -2,10 +2,10 @@
   <div class="w-full h-auto" style="color: var(--text-white)">
     <!--SideBar-->
     <Transition name="slide-right">
-      <SideBar v-show="store.SideBarOpen"></SideBar>
+      <SideBar v-show="store.MainSideBarOpen"></SideBar>
     </Transition>
     <Transition name="component_space">
-      <SideBarSpace v-if="store.SideBarOpen" @handleClick="store.toggleSidebar"></SideBarSpace>
+      <SideBarSpace v-if="store.MainSideBarOpen" @handleClick="store.toggleMainSidebar"></SideBarSpace>
     </Transition>
     <TopBar></TopBar>
 

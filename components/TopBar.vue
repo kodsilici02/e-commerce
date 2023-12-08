@@ -5,7 +5,9 @@
   <div
     class="sticky top-0 left-0 w-full h-12 md:h-16 flex justify-between p-3 gap-2 flex-grow-0 z-[999] sm:text-xl lg:text-2xl purple-background main-header-1">
     <div class="h-full flex items-center flex-1 justify-start">
-      <ClientOnly> <font-awesome :icon="['fas', 'bars']" class="cursor-pointer icon" @click="toggleSidebar"></font-awesome></ClientOnly>
+      <ClientOnly>
+        <font-awesome :icon="['fas', 'bars']" class="cursor-pointer icon" @click="store.toggleMainSidebar"></font-awesome
+      ></ClientOnly>
     </div>
     <div class="h-full flex items-center justify-center flex-1">
       <SearchBarAnimated @updateValue="updateSearchValue"></SearchBarAnimated>
