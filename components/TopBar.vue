@@ -84,7 +84,7 @@
         :to="segment.link"
         v-for="(segment, index) in breadcrumbSegments"
         :key="segment.name"
-        class="h-full col-span-1 flex justify-start items-center gap-1">
+        class="h-full col-span-1 text-[10px] transition-colors duration-200 hover:text-[var(--primary)] sm:text-sm md:text-lg lg:text-xl flex justify-start items-center gap-1">
         {{ segment.name }}
         <span v-if="index !== breadcrumbSegments.length - 1"> > </span>
       </NuxtLink>

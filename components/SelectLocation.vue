@@ -1,13 +1,13 @@
 <template>
-  <div class="h-full w-fit flex flex-wrap items-center justify-center gap-4 p-3" :style="{ 'max-width': calculateWidth() + 'px' }">
+  <div class="h-full w-fit flex flex-wrap items-center justify-center p-2" :style="{ 'max-width': calculateWidth() + 'px' }">
     <div
       @click="select(index)"
       v-for="(info, index) in addresses"
       :key="info.address"
-      style="color: var(--text-white)"
-      class="h-[350px] w-[300px] flex p-2 transition-transform duration-200 hover:scale-[1.02] relative cursor-pointer">
+      style="color: var(--text-white); aspect-ratio: 5/7"
+      class="basis-1/2 flex p-2 transition-transform duration-200 hover:scale-[1.02] relative cursor-pointer">
       <div
-        class="h-full w-full rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative overflow-hidden">
+        class="h-full w-full text-xs sm:text-sm rounded-lg flex flex-col item-background transition-[background-color] duration-500 relative overflow-hidden">
         <div class="h-full w-full flex flex-col p-3 gap-2">
           <div class="w-full text-2xl text-center">{{ info.title }}</div>
           <div class="w-full tetx-lg font-[600]">{{ info.name }}</div>

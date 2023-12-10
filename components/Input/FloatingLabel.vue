@@ -7,7 +7,7 @@
       :max="max"
       class="form_field form_border p-2 md:p-3 text-xs md:text-base rounded-lg w-full bg-transparent placeholder:text-transparent transition-all duration-200"
       :class="{ form_error_border: checkError() }"
-      :placeholder="label"
+      :placeholder="props.label"
       v-model="internalValue"
       ref="input"
       name="name"
@@ -16,7 +16,7 @@
     <label
       for="name"
       class="form_label pointer-events-none transition-all duration-200 px-2 top-[4px] md:top-[10px] absolute left-2 text-base lg:text-xl block bg-[var(--background)]">
-      {{ label }}</label
+      {{ props.label }}</label
     >
   </div>
 </template>

@@ -118,7 +118,7 @@
   transition: all 0.4s ease-in-out;
 }
 .left-enter-from {
-  transform: translateX(-100%);
+  transform: translateX(-105%);
 }
 .left-enter-to {
   transform: translateX(0);
@@ -127,7 +127,7 @@
   transform: translateX(0);
 }
 .left-leave-to {
-  transform: translateX(100%);
+  transform: translateX(105%);
 }
 
 .right-enter-active,

@@ -56,9 +56,9 @@ const emits = defineEmits(['changeAddress']);
 
 const z_index = computed(() => {
   if (store.isWindowSmall.value) {
-    return 1000;
+    return 1001;
   } else if (!store.isWindowSmall.value && open.value) {
-    return 1000;
+    return 1001;
   } else {
     return 10;
   }

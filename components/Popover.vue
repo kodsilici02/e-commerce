@@ -4,11 +4,11 @@
       <div ref="popover" class="relative">
         <div class="popover transition-[scale] duration-150"><slot name="popover"></slot></div>
         <Transition name="modal-Transition">
-          <div v-if="open" class="up-arrow top-2 z-[1011]"></div>
+          <div v-if="open" class="up-arrow top-3 z-[1011]"></div>
         </Transition>
       </div>
       <Transition name="modal-Transition">
-        <div v-if="open" class="absolute z-[1010] pt-2 content" ref="content" style="view-transition-name: popover">
+        <div v-if="open" class="absolute z-[1010] pt-2 mt-1 content" ref="content" style="view-transition-name: popover">
           {{ calculatePosition() }}
           <slot name="content"></slot></div
       ></Transition>
