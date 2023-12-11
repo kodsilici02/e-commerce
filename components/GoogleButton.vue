@@ -29,14 +29,15 @@ const emits = defineEmits(['handleClick']);
   border-radius: 9999px;
   width: calc(100% + var(--width));
   height: calc(100% + var(--width));
-  transform: translateX(-50%) translateY(-50%) scaleX(1) scaleY(1);
-  transition: all 500ms linear;
+  translate: -50% -50%;
+  scale: 1 1;
+  transition: scale 500ms linear;
 }
 .conic-border:hover {
   --width: 2px;
 }
 .conic-border:hover .background {
-  transform: translateX(-50%) translateY(-50%) scaleX(1.025) scaleY(1.1);
+  scale: 1.025 1.1;
 }
 
 @property --a {

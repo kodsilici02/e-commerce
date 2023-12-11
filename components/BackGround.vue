@@ -18,8 +18,6 @@
 <script setup></script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
-
 .area {
   position: fixed;
   background: linear-gradient(to left, var(--secondary), var(--primary));
